@@ -31,9 +31,16 @@ public class MapTile {
 	 *
 	 * @return
 	 */
-	private TileCell[][] createQuad() {
+	public TileCell[][] createQuad() {
+		TileCell[][] quadGrid = createBlankGrid();
 		
-		return null;
+		quadGrid[0][1].setAcessible(true);	//Top Middle
+		quadGrid[1][0].setAcessible(true);	//Middle Left
+		quadGrid[1][1].setAcessible(true);	//Middle Middle
+		quadGrid[1][2].setAcessible(true);	//Middle Right
+		quadGrid[2][1].setAcessible(true);	//Bottom Middle
+		
+		return quadGrid;
 	}
 
 	/**
@@ -41,9 +48,14 @@ public class MapTile {
 	 *
 	 * @return
 	 */
-	private TileCell[][] createL() {
-		// TODO Auto-generated method stub.
-		return null;
+	public TileCell[][] createL() {
+		TileCell[][] LGrid = createBlankGrid();
+		
+		LGrid[1][1].setAcessible(true);	//Middle Middle
+		LGrid[1][2].setAcessible(true);	//Middle Right
+		LGrid[2][1].setAcessible(true);	//Bottom Middle
+		
+		return LGrid;
 	}
 
 	/**
@@ -51,9 +63,14 @@ public class MapTile {
 	 *
 	 * @return
 	 */
-	private TileCell[][] createStraight() {
-	//	TileCell[][] 
-		return null;
+	public TileCell[][] createStraight() {
+		TileCell[][] straightGrid = createBlankGrid();
+		
+		straightGrid[1][0].setAcessible(true);	//Middle Left
+		straightGrid[1][1].setAcessible(true);	//Middle Middle
+		straightGrid[1][2].setAcessible(true);	//Middle Right
+		
+		return straightGrid;
 	}
 
 	/**
@@ -61,20 +78,68 @@ public class MapTile {
 	 *
 	 * @return
 	 */
-	private TileCell[][] createTetris() {
-		// TODO Auto-generated method stub.
-		return null;
+	public TileCell[][] createTetris() {
+		TileCell[][] tetrisGrid = createBlankGrid();
+		
+		tetrisGrid[1][0].setAcessible(true);	//Middle Left
+		tetrisGrid[1][1].setAcessible(true);	//Middle Middle
+		tetrisGrid[1][2].setAcessible(true);	//Middle Right
+		tetrisGrid[2][1].setAcessible(true);	//Bottom Middle
+		
+		return tetrisGrid;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public static TileCell[][] createBlankGrid() {
 		TileCell[][] toReturn = new TileCell[3][3];
 		
-		for (int i = 0; i <= 3; i++) {
-			for (int j = 0; j <= 3; j++) {
+		for (int i = 0; i < 3; i++) {
+			for (int j = 0; j < 3; j++) {
 				toReturn[i][j] = new TileCell(false, false);
 			}
 		}
 		return toReturn;
+	}
+	
+	/**
+	 * Rotates a tile counter-clockwise 90 degrees
+	 */
+	public void rotateTile(){
+		TileCell bottomLeftCorner = this.grid[2][0];
+		
+		this.grid[2][0] = this.grid[0][0];
+		this.grid[0][0] = this.grid[0][2];
+		this.grid[0][2] = this.grid[2][2];
+		this.grid[2][2] = bottomLeftCorner;
+		
+		TileCell middleLeftEdge = this.grid[1][0];
+		
+		this.grid[1][0] = this.grid[0][1];
+		this.grid[0][1] = this.grid[1][2];
+		this.grid[1][2] = this.grid[2][1];
+		this.grid[2][1] = middleLeftEdge;
+	}
+	
+	@Override
+	public String toString(){
+		String result = "";
+		
+		result += this.grid[0][0].getAcessible() + " ";
+		result += this.grid[0][1].getAcessible() + " ";
+		result += this.grid[0][2].getAcessible() + "\n";
+		
+		result += this.grid[1][0].getAcessible() + " ";
+		result += this.grid[1][1].getAcessible() + " ";
+		result += this.grid[1][2].getAcessible() + "\n";
+		
+		result += this.grid[2][0].getAcessible() + " ";
+		result += this.grid[2][1].getAcessible() + " ";
+		result += this.grid[2][2].getAcessible() + "\n";
+		
+		return result;
 	}
 	
 }
