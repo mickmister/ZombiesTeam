@@ -3,6 +3,9 @@ import gui.BottomPanel;
 import gui.RightPanel;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Point;
+import java.awt.Rectangle;
 
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
@@ -26,9 +29,16 @@ public class Window extends JFrame
 		
 		add(new BottomPanel(this), BorderLayout.PAGE_END);
 		add(new RightPanel(this), BorderLayout.LINE_END);
-		add(new JScrollPane(new Map()), BorderLayout.CENTER);
+		JScrollPane scrollPane = new JScrollPane(new Map());
+		add(scrollPane, BorderLayout.CENTER);
 		
 		setVisible(true);
+		
+		Rectangle bounds = scrollPane.getViewport().getViewRect();
+		Dimension size = scrollPane.getViewport().getViewSize();
+		int x = (size.width - bounds.width) / 2;
+		int y = (size.height - bounds.height) / 2;
+		scrollPane.getViewport().setViewPosition(new Point(x, y));
 	}
 	
 	public Player getPlayer()
