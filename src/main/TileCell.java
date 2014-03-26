@@ -49,4 +49,12 @@ public class TileCell {
 		this.hasZombie = zombie;
 	}
 	
+	public boolean getAcessible(){
+		return this.isAccessible;
+	}
+	
+	public void setAcessible(boolean accessible){
+		this.isAccessible = accessible;
+	}
+	
 }
