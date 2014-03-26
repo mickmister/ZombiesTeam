@@ -3,7 +3,6 @@ package main;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 
-import javax.swing.JButton;
 import javax.swing.JPanel;
 
 public class Map extends JPanel
@@ -21,9 +20,8 @@ public class Map extends JPanel
 		{
 			for (int x = 0; x < 11; x += 1)
 			{
-				//this.mapTiles[x][y] = new MapTile();
-				//add(this.mapTiles[x][y]);
-				add(new JButton("Blah"));
+				this.mapTiles[y][x] = new MapTile("tetris", null);
+				add(this.mapTiles[y][x]);
 			}
 		}
 	}

@@ -1,13 +1,18 @@
 package main;
 
+import java.awt.GridLayout;
+
+import javax.swing.JPanel;
+
 /**
  * TODO Put here a description of what this class does.
  *
  * @author watersdr.
  *         Created Mar 26, 2014.
  */
-public class MapTile {
-	
+public class MapTile extends JPanel
+{
+	// 2D array organized as [row, column].
 	private TileCell[][] grid;
 	
 	public MapTile(String shape, String special) {
@@ -23,6 +28,16 @@ public class MapTile {
 			break;
 		case "quad":
 			this.grid = createQuad();
+			break;
+		}
+		
+		setLayout(new GridLayout(3, 3));
+		for (int y = 0; y < this.grid.length; y += 1)
+		{
+			for (int x = 0; x < this.grid[y].length; x += 1)
+			{
+				add(this.grid[y][x]);
+			}
 		}
 	}
 
