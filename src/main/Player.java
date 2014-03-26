@@ -26,4 +26,9 @@ public class Player {
 	{
 		return this.bullets;
 	}
+	
+	public int getZombiesCaptured()
+	{
+		return this.zombiesCaptured;
+	}
 }

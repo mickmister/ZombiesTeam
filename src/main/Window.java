@@ -18,7 +18,7 @@ public class Window extends JFrame
 		this.number = number;
 		this.player = new Player();
 		
-		setSize(1024, 768);
+		setSize(1600, 900);
 		setLocation(this.number * 50, this.number * 50);
 		setTitle("Zombies!!! (Player " + (this.number + 1) + ")");
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

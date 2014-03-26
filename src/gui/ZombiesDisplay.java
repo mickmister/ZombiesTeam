@@ -10,17 +10,17 @@ import javax.swing.SwingConstants;
 
 import main.Player;
 
-public class BulletTokensDisplay extends JLabel implements Runnable
+public class ZombiesDisplay extends JLabel implements Runnable
 {
 	private Player player;
 	
-	public BulletTokensDisplay(Player player)
+	public ZombiesDisplay(Player player)
 	{
 		try
 		{
 			this.player = player;
-			BufferedImage bulletPicture = ImageIO.read(this.getClass().getResourceAsStream("../Resources/Bullet Picture.png"));
-			setIcon(new ImageIcon(bulletPicture));
+			BufferedImage zombiePicture = ImageIO.read(this.getClass().getResourceAsStream("../Resources/Zombie Picture.png"));
+			setIcon(new ImageIcon(zombiePicture));
 			setHorizontalAlignment(SwingConstants.CENTER);
 			setText("");
 			
@@ -40,7 +40,7 @@ public class BulletTokensDisplay extends JLabel implements Runnable
 		{
 			while (true)
 			{
-				setText(" " + this.player.getBulletTokens());
+				setText(" " + this.player.getZombiesCaptured());
 				Thread.sleep(1000);
 			}
 		}

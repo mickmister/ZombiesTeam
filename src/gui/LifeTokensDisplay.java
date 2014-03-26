@@ -6,6 +6,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 import main.Player;
 
@@ -20,6 +21,7 @@ public class LifeTokensDisplay extends JLabel implements Runnable
 			this.player = player;
 			BufferedImage heartPicture = ImageIO.read(this.getClass().getResourceAsStream("../Resources/Heart Picture.png"));
 			setIcon(new ImageIcon(heartPicture));
+			setHorizontalAlignment(SwingConstants.CENTER);
 			setText("");
 			
 			Thread thread = new Thread(this);
