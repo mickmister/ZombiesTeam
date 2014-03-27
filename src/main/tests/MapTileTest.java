@@ -3,6 +3,7 @@ package main.tests;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import main.MapTile;
+import main.MapTile.Shape;
 import main.TileCell;
 
 import org.junit.Test;
@@ -33,7 +34,7 @@ public class MapTileTest
 	@Test
 	public void testCreateQuad()
 	{
-		MapTile mapTile = new MapTile("quad", null);
+		MapTile mapTile = new MapTile(Shape.quad, null);
 		String quadFormation = "false true false\ntrue true true\nfalse true false\n";
 		
 		assertEquals(quadFormation, mapTile.toString());
@@ -42,7 +43,7 @@ public class MapTileTest
 	@Test
 	public void testCreateAndRotateL()
 	{
-		MapTile mapTile = new MapTile("L", null);
+		MapTile mapTile = new MapTile(Shape.L, null);
 		String originalLFormation = "false false false\nfalse true true\nfalse true false\n";
 		String firstRotateLFormation = "false true false\nfalse true true\nfalse false false\n";
 		String secondRotateLFormation = "false true false\ntrue true false\nfalse false false\n";
@@ -68,7 +69,7 @@ public class MapTileTest
 	@Test
 	public void testCreateandRotateTetris()
 	{
-		MapTile mapTile = new MapTile("tetris", null);
+		MapTile mapTile = new MapTile(Shape.T, null);
 		String originalTetrisFormation = "false false false\ntrue true true\nfalse true false\n";
 		String firstRotateTetrisFormation = "false true false\nfalse true true\nfalse true false\n";
 		String secondRotateTetrisFormation = "false true false\ntrue true true\nfalse false false\n";
@@ -93,7 +94,7 @@ public class MapTileTest
 	@Test
 	public void testCreateAndRotateStraight()
 	{
-		MapTile mapTile = new MapTile("straight", null);
+		MapTile mapTile = new MapTile(Shape.straight, null);
 		String originalStraightFormation = "false false false\ntrue true true\nfalse false false\n";
 		String firstRotateStraightFormation = "false true false\nfalse true false\nfalse true false\n";
 		String secondRotateStraightFormation = originalStraightFormation;
