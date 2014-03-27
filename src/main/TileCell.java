@@ -1,7 +1,6 @@
 package main;
 import java.awt.BorderLayout;
 import java.awt.Font;
-import java.awt.GridLayout;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -23,7 +22,8 @@ public class TileCell extends JButton
 	private boolean bulletToken;
 	private ArrayList<Player> playersOccupying;
 	
-	public TileCell(boolean accessible, boolean specialBuilding) {
+	public TileCell(boolean accessible, boolean specialBuilding) 
+	{
 		this.isAccessible = accessible;
 		this.specialBuilding = specialBuilding;
 		this.playersOccupying = new ArrayList<Player>();
@@ -41,38 +41,61 @@ public class TileCell extends JButton
 		add(humanLabel, BorderLayout.LINE_END);
 	}
 	
-	public boolean hasLifeToken() {
+	public boolean hasLifeToken() 
+	{
 		return this.lifeToken;
 	}
 	
-	public boolean hasBulletToken() {
+	public boolean hasBulletToken() 
+	{
 		return this.bulletToken;
 	}
 	
-	public boolean hasZombie() {
+	public boolean hasZombie() 
+	{
 		return this.hasZombie;
 	}
 	
-	public void setLifeToken(boolean life) {
+	public void setLifeToken(boolean life)
+	{
 		this.lifeToken = life;
 	}
 	
-	public void setBulletToken(boolean bullet) {
+	public void setBulletToken(boolean bullet)
+	{
 		this.bulletToken = bullet;
 	}
 	
-	public void setZombie(boolean zombie) {
+	public void setZombie(boolean zombie)
+	{
 		this.hasZombie = zombie;
 	}
 	
-	public boolean getAcessible(){
+	public boolean getAcessible()
+	{
 		return this.isAccessible;
 	}
 	
-	public void setAcessible(boolean accessible){
+	public void setAcessible(boolean accessible)
+	{
 		this.isAccessible = accessible;
 		
 		setEnabled(this.isAccessible);
+	}
+	
+	public void playerEntered(Player player)
+	{
+		this.playersOccupying.add(player);
+	}
+	
+	public void playerLeft(Player player)
+	{
+		this.playersOccupying.remove(player);
+	}
+	
+	public ArrayList<Player> getOccupyingPlayers()
+	{
+		return this.playersOccupying;
 	}
 	
 }
