@@ -8,9 +8,11 @@ import java.util.Collections;
 import javax.swing.JButton;
 
 import main.MapTile;
+import main.MapTile.Shape;
 
 public class MapTileDeckButton extends JButton implements ActionListener
 {
+	private int NUM_CARDS = 10; //Number of each kind of Map Tile
 	private ArrayList<MapTile> deck;
 	
 	public MapTileDeckButton()
@@ -36,6 +38,12 @@ public class MapTileDeckButton extends JButton implements ActionListener
 	
 	private void addMapTiles()
 	{
-		
+		for (int i = 0; i < NUM_CARDS; i++)
+		{
+			this.deck.add(new MapTile(Shape.L, null));
+			this.deck.add(new MapTile(Shape.quad, null));
+			this.deck.add(new MapTile(Shape.straight, null));
+			this.deck.add(new MapTile(Shape.T, null));
+		}
 	}
 }
