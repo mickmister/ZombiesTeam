@@ -4,19 +4,40 @@ import java.util.ArrayList;
 
 public class GameHandler
 {
+	public static GameHandler instance;
 	private int numberOfPlayers;
-	private ArrayList<Window> windows;
+	private Map map;
+	private MapTileDeck deck;
 	private int turn;
+	private ArrayList<Window> windows;
 	
 	public GameHandler(int numberOfPlayers)
 	{
+		GameHandler.instance = this;
 		this.numberOfPlayers = numberOfPlayers;
+		this.map = new Map();
+		this.deck = new MapTileDeck();
+		this.turn = 0;
 		this.windows = new ArrayList<Window>();
 		for (int i = 0; i < this.numberOfPlayers; i += 1)
 		{
 			this.windows.add(new Window(i));
 		}
-		this.turn = 0;
+	}
+	
+	public Player getPlayer(int i)
+	{
+		return this.windows.get(i).getPlayer();
+	}
+	
+	public Map getMap()
+	{
+		return this.map;
+	}
+	
+	public MapTileDeck getDeck()
+	{
+		return this.deck;
 	}
 	
 	public int getTurn()

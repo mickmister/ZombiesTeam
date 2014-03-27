@@ -1,5 +1,6 @@
 package main;
 import gui.BottomPanel;
+import gui.MapView;
 import gui.RightPanel;
 
 import java.awt.BorderLayout;
@@ -29,7 +30,7 @@ public class Window extends JFrame
 		
 		add(new BottomPanel(this), BorderLayout.PAGE_END);
 		add(new RightPanel(this), BorderLayout.LINE_END);
-		JScrollPane scrollPane = new JScrollPane(new Map());
+		JScrollPane scrollPane = new JScrollPane(new MapView());
 		add(scrollPane, BorderLayout.CENTER);
 		
 		setVisible(true);
