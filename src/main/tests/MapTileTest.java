@@ -36,7 +36,7 @@ public class MapTileTest
 		MapTile mapTile = new MapTile("quad", null);
 		String quadFormation = "false true false\ntrue true true\nfalse true false\n";
 		
-		assertEquals(mapTile.toString(), quadFormation);
+		assertEquals(quadFormation, mapTile.toString());
 	}
 	
 	@Test
@@ -49,19 +49,19 @@ public class MapTileTest
 		String thirdRotateLFormation = "false false false\ntrue true false\nfalse true false\n";
 		String fourthRotateLFormation = originalLFormation;
 		
-		assertEquals(mapTile.toString(), originalLFormation);
+		assertEquals(originalLFormation, mapTile.toString());
 		
 		mapTile.rotateTile();
-		assertEquals(mapTile.toString(), firstRotateLFormation);
+		assertEquals(firstRotateLFormation, mapTile.toString());
 		
 		mapTile.rotateTile();
-		assertEquals(mapTile.toString(), secondRotateLFormation);
+		assertEquals(secondRotateLFormation, mapTile.toString());
 		
 		mapTile.rotateTile();
-		assertEquals(mapTile.toString(), thirdRotateLFormation);
+		assertEquals(thirdRotateLFormation, mapTile.toString());
 		
 		mapTile.rotateTile();
-		assertEquals(mapTile.toString(), fourthRotateLFormation);
+		assertEquals(fourthRotateLFormation, mapTile.toString());
 		
 	}
 	
@@ -75,19 +75,19 @@ public class MapTileTest
 		String thirdRotateTetrisFormation = "false true false\ntrue true false\nfalse true false\n";
 		String fourthRotateTetrisFormation = originalTetrisFormation;
 		
-		assertEquals(mapTile.toString(), originalTetrisFormation);
+		assertEquals(originalTetrisFormation, mapTile.toString());
 		
 		mapTile.rotateTile();
-		assertEquals(mapTile.toString(), firstRotateTetrisFormation);
+		assertEquals(firstRotateTetrisFormation, mapTile.toString());
 		
 		mapTile.rotateTile();
-		assertEquals(mapTile.toString(), secondRotateTetrisFormation);
+		assertEquals(secondRotateTetrisFormation, mapTile.toString());
 		
 		mapTile.rotateTile();
-		assertEquals(mapTile.toString(), thirdRotateTetrisFormation);
+		assertEquals(thirdRotateTetrisFormation, mapTile.toString());
 		
 		mapTile.rotateTile();
-		assertEquals(mapTile.toString(), fourthRotateTetrisFormation);
+		assertEquals(fourthRotateTetrisFormation, mapTile.toString());
 	}
 	
 	@Test
@@ -100,19 +100,19 @@ public class MapTileTest
 		String thirdRotateStraightFormation = firstRotateStraightFormation;
 		String fourthRotateStraightFormation = originalStraightFormation;
 		
-		assertEquals(mapTile.toString(), originalStraightFormation);
+		assertEquals(originalStraightFormation, mapTile.toString());
 		
 		mapTile.rotateTile();
-		assertEquals(mapTile.toString(), firstRotateStraightFormation);
+		assertEquals(firstRotateStraightFormation, mapTile.toString());
 		
 		mapTile.rotateTile();
-		assertEquals(mapTile.toString(), secondRotateStraightFormation);
+		assertEquals(secondRotateStraightFormation, mapTile.toString());
 		
 		mapTile.rotateTile();
-		assertEquals(mapTile.toString(), thirdRotateStraightFormation);
+		assertEquals(thirdRotateStraightFormation, mapTile.toString());
 		
 		mapTile.rotateTile();
-		assertEquals(mapTile.toString(), fourthRotateStraightFormation);
+		assertEquals(fourthRotateStraightFormation, mapTile.toString());
 	}
 	
 }
