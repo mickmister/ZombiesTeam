@@ -19,6 +19,14 @@ public class GameHandler
 		this.turn = 0;
 	}
 	
+	public int getTurn()
+	{
+		return this.turn;
+	}
+	
+	/**
+	 * Increments the current turn, and automatically wraps back to 0 after the last player.
+	 */
 	public void nextTurn()
 	{
 		this.turn = (this.turn + 1) % this.numberOfPlayers;

@@ -8,18 +8,14 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 public class Main
 {
+	/**
+	 * Initiates the Zombies program and asks the user how many players there will be.  Does not take any command-line arguments.
+	 *
+	 * @param args
+	 */
 	public static void main(String[] args)
 	{
-		try
-		{
-			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-			UIManager.getDefaults().put("Label.font", new Font("Segoe UI", Font.PLAIN, 50));
-			UIManager.getDefaults().put("Button.font", new Font("Segoe UI", Font.PLAIN, 16));
-		}
-		catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e)
-		{
-			e.printStackTrace();
-		}
+		setWindowsLaF();
 		
 		String[] choices = {"2 players", "3 players", "4 players"};
 		Object result = JOptionPane.showInputDialog(null, "Select the number of players.", "Choice", JOptionPane.PLAIN_MESSAGE, null, choices, "2 players");
@@ -38,5 +34,19 @@ public class Main
 		}
 		
 		new GameHandler(numberOfPlayers);
+	}
+	
+	private static void setWindowsLaF()
+	{
+		try
+		{
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+			UIManager.getDefaults().put("Label.font", new Font("Segoe UI", Font.PLAIN, 50));
+			UIManager.getDefaults().put("Button.font", new Font("Segoe UI", Font.PLAIN, 16));
+		}
+		catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e)
+		{
+			e.printStackTrace();
+		}
 	}
 }

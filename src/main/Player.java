@@ -1,17 +1,19 @@
 package main;
 
 /**
- * TODO Put here a description of what this class does.
- *
- * @author watersdr.
- *         Created Mar 26, 2014.
+ * This class will hold the given player's status such as life tokens, bullet tokens, and zombies
+ * captured.
+ * 
+ * @author watersdr. Created Mar 26, 2014.
  */
-public class Player {
+public class Player
+{
 	private int life;
 	private int bullets;
 	private int zombiesCaptured;
 	
-	public Player() {
+	public Player()
+	{
 		this.life = 3;
 		this.bullets = 3;
 		this.zombiesCaptured = 0;
