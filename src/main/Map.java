@@ -5,6 +5,8 @@ import java.awt.GridLayout;
 
 import javax.swing.JPanel;
 
+import main.MapTile.Shape;
+
 public class Map extends JPanel
 {
 	private MapTile[][] mapTiles;
@@ -20,7 +22,7 @@ public class Map extends JPanel
 		{
 			for (int x = 0; x < 11; x += 1)
 			{
-				this.mapTiles[y][x] = new MapTile("tetris", null);
+				this.mapTiles[y][x] = new MapTile(Shape.quad, null);
 				add(this.mapTiles[y][x]);
 			}
 		}
