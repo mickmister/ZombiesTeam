@@ -1,10 +1,14 @@
 package main;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.GridLayout;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 
 /**
@@ -32,13 +36,33 @@ public class TileCell extends JButton
 		this.bulletToken = false;
 		
 		setEnabled(this.isAccessible);
-		setLayout(new BorderLayout());
-		JLabel zombieLabel = new JLabel("Z");
-		zombieLabel.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-		JLabel humanLabel = new JLabel("H");
-		humanLabel.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-		add(zombieLabel, BorderLayout.LINE_START);
-		add(humanLabel, BorderLayout.LINE_END);
+	}
+	
+	@Override
+	public void paintComponent(Graphics g)
+	{
+		if (this.isAccessible)
+		{
+			if (this.specialBuilding)
+			{
+				g.setColor(Color.RED);
+			}
+			else
+			{
+				g.setColor(Color.GRAY);
+			}
+		}
+		else
+		{
+			g.setColor(new Color(0, 200, 0));
+		}
+		g.fillRect(0, 0, getWidth(), getHeight());
+		
+		if (this.hasZombie)
+		{
+			g.setColor(Color.BLACK);
+			g.fillOval(0, 10, 20, getHeight() - 20);
+		}
 	}
 	
 	public boolean hasLifeToken() 

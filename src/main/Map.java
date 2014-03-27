@@ -22,8 +22,15 @@ public class Map extends JPanel
 		{
 			for (int x = 0; x < 11; x += 1)
 			{
-				this.mapTiles[y][x] = new MapTile(Shape.quad, null);
-				add(this.mapTiles[y][x]);
+/*				if (x == 5 && y == 5)
+				{
+					
+				}
+				else*/
+				{
+					this.mapTiles[y][x] = new MapTile(Shape.quad, null);
+					add(this.mapTiles[y][x]);
+				}
 			}
 		}
 	}
