@@ -1,27 +1,30 @@
-package main;
-import static org.junit.Assert.*;
+package main.tests;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import main.MapTile;
+import main.TileCell;
 
 import org.junit.Test;
 
-
 /**
  * Tests the functionality of creating and rotating different map tile types.
- *
- * @author watersdr, kochelmj.
- *         Created Mar 26, 2014.
+ * 
+ * @author watersdr, kochelmj. Created Mar 26, 2014.
  */
-public class MapTileTest {
-
+public class MapTileTest
+{
+	
 	@Test
-	public void testBlankTileCreation() 
+	public void testBlankTileCreation()
 	{
 		TileCell[][] grid = MapTile.createBlankGrid();
 		
-		for(int i = 0; i < grid.length; i++)
+		for (TileCell[] element : grid)
 		{
-			for (int j = 0; j < grid[i].length; j++)
+			for (int j = 0; j < element.length; j++)
 			{
-				assertFalse(grid[i][j].getAcessible());
+				assertFalse(element[j].getAcessible());
 			}
 		}
 		
@@ -33,7 +36,7 @@ public class MapTileTest {
 		MapTile mapTile = new MapTile("quad", null);
 		String quadFormation = "false true false\ntrue true true\nfalse true false\n";
 		
-		assertEquals(mapTile.toString(), quadFormation);		
+		assertEquals(mapTile.toString(), quadFormation);
 	}
 	
 	@Test
@@ -59,7 +62,6 @@ public class MapTileTest {
 		
 		mapTile.rotateTile();
 		assertEquals(mapTile.toString(), fourthRotateLFormation);
-		
 		
 	}
 	
