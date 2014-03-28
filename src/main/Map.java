@@ -63,7 +63,7 @@ public class Map
 	
 	public boolean checkValidPosition(MapTile newTile, int xPos, int yPos)
 	{
-		
+		int emptyCount = 0;
 		//Check if not hovering over empty
 		MapTile current = this.mapTiles[yPos][xPos];
 		if(!current.getShape().equals(Shape.empty))
@@ -75,6 +75,7 @@ public class Map
 		if(xPos > 0)
 		{
 			MapTile left = this.mapTiles[yPos][xPos - 1];
+			if(left.getShape().equals(Shape.empty)) emptyCount++;
 			if(left.getRightCell().getAcessible() != newTile.getLeftCell().getAcessible() || !left.getShape().equals(Shape.empty))
 			{
 				return false;
@@ -85,6 +86,7 @@ public class Map
 		if(xPos < SIZE -1)
 		{
 			MapTile right = this.mapTiles[yPos][xPos + 1];
+			if(right.getShape().equals(Shape.empty)) emptyCount++;
 			if(right.getLeftCell().getAcessible() != newTile.getRightCell().getAcessible() || !right.getShape().equals(Shape.empty))
 			{
 				return false;
@@ -95,6 +97,7 @@ public class Map
 		if(yPos > 0)
 		{
 			MapTile top = this.mapTiles[yPos - 1][xPos];
+			if(top.getShape().equals(Shape.empty)) emptyCount++;
 			if(top.getBottomCell().getAcessible() != newTile.getTopCell().getAcessible() || !top.getShape().equals(Shape.empty))
 			{
 				return false;
@@ -105,6 +108,7 @@ public class Map
 		if(yPos < SIZE -1)
 		{
 			MapTile bottom = this.mapTiles[yPos + 1][xPos];
+			if(bottom.getShape().equals(Shape.empty)) emptyCount++;
 			if(bottom.getTopCell().getAcessible() != newTile.getBottomCell().getAcessible() || !bottom.getShape().equals(Shape.empty))
 			{
 				return false;
@@ -112,6 +116,7 @@ public class Map
 		}
 		
 		
-		return true;
+		
+		return emptyCount != 4;
 	}
 }
