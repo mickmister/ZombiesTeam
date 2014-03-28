@@ -65,9 +65,9 @@ public class Map
 	public void setTempPos(Point point)
 	{
 		point.x = Math.max(0, point.x);
-		point.x = Math.min(SIZE - 1, point.x);
+		point.x = Math.min(SIZE - 2, point.x);
 		point.y = Math.max(0, point.y);
-		point.y = Math.min(SIZE - 1, point.y);
+		point.y = Math.min(SIZE - 2, point.y);
 		this.tempPos = point;
 	}
 	
@@ -78,6 +78,7 @@ public class Map
 		MapTile current = this.mapTiles[yPos][xPos];
 		if(!current.getShape().equals(Shape.empty))
 		{
+			System.out.println("Not on an empty space.");
 			return false;
 		}
 		
@@ -86,8 +87,9 @@ public class Map
 		{
 			MapTile left = this.mapTiles[yPos][xPos - 1];
 			if(left.getShape().equals(Shape.empty)) emptyCount++;
-			if(left.getRightCell().getAcessible() != newTile.getLeftCell().getAcessible() || !left.getShape().equals(Shape.empty))
+			if(left.getRightCell().getAcessible() != newTile.getLeftCell().getAcessible() && !left.getShape().equals(Shape.empty))
 			{
+				System.out.println("Left side not valid.");
 				return false;
 			}
 		}
@@ -97,8 +99,9 @@ public class Map
 		{
 			MapTile right = this.mapTiles[yPos][xPos + 1];
 			if(right.getShape().equals(Shape.empty)) emptyCount++;
-			if(right.getLeftCell().getAcessible() != newTile.getRightCell().getAcessible() || !right.getShape().equals(Shape.empty))
+			if(right.getLeftCell().getAcessible() != newTile.getRightCell().getAcessible() && !right.getShape().equals(Shape.empty))
 			{
+				System.out.println("Right side not valid.");
 				return false;
 			}
 		}
@@ -108,8 +111,9 @@ public class Map
 		{
 			MapTile top = this.mapTiles[yPos - 1][xPos];
 			if(top.getShape().equals(Shape.empty)) emptyCount++;
-			if(top.getBottomCell().getAcessible() != newTile.getTopCell().getAcessible() || !top.getShape().equals(Shape.empty))
+			if(top.getBottomCell().getAcessible() != newTile.getTopCell().getAcessible() && !top.getShape().equals(Shape.empty))
 			{
+				System.out.println("Top side not valid.");
 				return false;
 			}	
 		}
@@ -119,14 +123,21 @@ public class Map
 		{
 			MapTile bottom = this.mapTiles[yPos + 1][xPos];
 			if(bottom.getShape().equals(Shape.empty)) emptyCount++;
-			if(bottom.getTopCell().getAcessible() != newTile.getBottomCell().getAcessible() || !bottom.getShape().equals(Shape.empty))
+			if(bottom.getTopCell().getAcessible() != newTile.getBottomCell().getAcessible() && !bottom.getShape().equals(Shape.empty))
 			{
+				System.out.println("Bottom side not valid.");
 				return false;
 			}
 		}
 		
-		
-		
-		return emptyCount != 4;
+		if (emptyCount < 4)
+		{
+			return true;
+		}
+		else
+		{
+			System.out.println("All sides empty.");
+			return false;
+		}
 	}
 }

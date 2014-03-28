@@ -47,7 +47,7 @@ public class TileCell
 		}
 		else
 		{
-			g.setColor(new Color(0, 200, 0));
+			g.setColor(new Color(0, 100, 0));
 		}
 		g.fillRect(x, y, 80, 80);
 		

@@ -36,7 +36,7 @@ public class MapView extends JPanel implements Runnable, KeyListener
 	@Override
 	public void paintComponent(Graphics g)
 	{
-		this.requestFocusInWindow();
+		requestFocusInWindow();
 		for (int y = 0; y < this.SIZE; y += 1)
 		{
 			for (int x = 0; x < this.SIZE; x += 1)
