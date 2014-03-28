@@ -36,6 +36,12 @@ public class Map
 		this.tempPos = new Point(SIZE / 2, SIZE / 2);
 	}
 	
+	public void placeTempTile()
+	{
+		this.mapTiles[this.tempPos.y][this.tempPos.x] = tempTile;
+		this.tempTile = null;
+	}
+	
 	public MapTile getTempTile()
 	{
 		return this.tempTile;
@@ -48,6 +54,64 @@ public class Map
 	
 	public void setTempPos(Point point)
 	{
+		point.x = Math.max(0, point.x);
+		point.x = Math.min(SIZE - 1, point.x);
+		point.y = Math.max(0, point.y);
+		point.y = Math.min(SIZE - 1, point.y);
 		this.tempPos = point;
+	}
+	
+	public boolean checkValidPosition(MapTile newTile, int xPos, int yPos)
+	{
+		
+		//Check if not hovering over empty
+		MapTile current = this.mapTiles[yPos][xPos];
+		if(!current.getShape().equals(Shape.empty))
+		{
+			return false;
+		}
+		
+		//Check left
+		if(xPos > 0)
+		{
+			MapTile left = this.mapTiles[yPos][xPos - 1];
+			if(left.getRightCell().getAcessible() != newTile.getLeftCell().getAcessible() || !left.getShape().equals(Shape.empty))
+			{
+				return false;
+			}
+		}
+		
+		//Check right
+		if(xPos < SIZE -1)
+		{
+			MapTile right = this.mapTiles[yPos][xPos + 1];
+			if(right.getLeftCell().getAcessible() != newTile.getRightCell().getAcessible() || !right.getShape().equals(Shape.empty))
+			{
+				return false;
+			}
+		}
+		
+		//Check top
+		if(yPos > 0)
+		{
+			MapTile top = this.mapTiles[yPos - 1][xPos];
+			if(top.getBottomCell().getAcessible() != newTile.getTopCell().getAcessible() || !top.getShape().equals(Shape.empty))
+			{
+				return false;
+			}	
+		}
+		
+		//Check bottom
+		if(yPos < SIZE -1)
+		{
+			MapTile bottom = this.mapTiles[yPos + 1][xPos];
+			if(bottom.getTopCell().getAcessible() != newTile.getBottomCell().getAcessible() || !bottom.getShape().equals(Shape.empty))
+			{
+				return false;
+			}
+		}
+		
+		
+		return true;
 	}
 }
