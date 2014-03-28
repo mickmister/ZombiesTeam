@@ -19,7 +19,7 @@ public class MapTileTest
 	@Test
 	public void testBlankTileCreation()
 	{
-		TileCell[][] grid = MapTile.createBlankGrid();
+		TileCell[][] grid = new MapTile(Shape.empty, null).createBlankGrid();
 		
 		for (TileCell[] element : grid)
 		{

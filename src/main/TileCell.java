@@ -1,15 +1,9 @@
 package main;
-import java.awt.BorderLayout;
+import java.awt.AlphaComposite;
 import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.GridLayout;
+import java.awt.Composite;
+import java.awt.Graphics2D;
 import java.util.ArrayList;
-
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-
 
 /**
  * TODO Put here a description of what this class does.
@@ -17,8 +11,9 @@ import javax.swing.JPanel;
  * @author watersdr.
  *         Created Mar 26, 2014.
  */
-public class TileCell extends JButton
+public class TileCell
 {
+	private MapTile mapTile;
 	private boolean isAccessible;
 	private boolean hasZombie;
 	private boolean specialBuilding;
@@ -26,20 +21,18 @@ public class TileCell extends JButton
 	private boolean bulletToken;
 	private ArrayList<Player> playersOccupying;
 	
-	public TileCell(boolean accessible, boolean specialBuilding) 
+	public TileCell(MapTile mapTile, boolean accessible, boolean specialBuilding) 
 	{
+		this.mapTile = mapTile;
 		this.isAccessible = accessible;
 		this.specialBuilding = specialBuilding;
 		this.playersOccupying = new ArrayList<Player>();
 		this.hasZombie = false;
 		this.lifeToken = false;
 		this.bulletToken = false;
-		
-		setEnabled(this.isAccessible);
 	}
 	
-	@Override
-	public void paintComponent(Graphics g)
+	public void draw(Graphics2D g, int x, int y, boolean isTemp)
 	{
 		if (this.isAccessible)
 		{
@@ -56,12 +49,26 @@ public class TileCell extends JButton
 		{
 			g.setColor(new Color(0, 200, 0));
 		}
-		g.fillRect(0, 0, getWidth(), getHeight());
+		g.fillRect(x, y, 80, 80);
 		
 		if (this.hasZombie)
 		{
 			g.setColor(Color.BLACK);
-			g.fillOval(0, 10, 20, getHeight() - 20);
+			g.fillOval(0, 10, 20, 80 - 20);
+		}
+		
+		if (isTemp)
+		{
+			Composite old = g.getComposite();
+			float alpha = 0.25f;
+			int type = AlphaComposite.SRC_OVER;
+			AlphaComposite composite = AlphaComposite.getInstance(type, alpha);
+			g.setComposite(composite);
+			
+			g.setColor(Color.RED);
+			g.fillRect(x, y, 80, 80);
+			
+			g.setComposite(old);
 		}
 	}
 	
@@ -103,8 +110,6 @@ public class TileCell extends JButton
 	public void setAcessible(boolean accessible)
 	{
 		this.isAccessible = accessible;
-		
-		setEnabled(this.isAccessible);
 	}
 	
 	public void playerEntered(Player player)

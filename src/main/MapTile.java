@@ -1,15 +1,13 @@
 package main;
 
-import java.awt.GridLayout;
-
-import javax.swing.JPanel;
+import java.awt.Graphics2D;
 
 /**
  * TODO Put here a description of what this class does.
  * 
  * @author watersdr. Created Mar 26, 2014.
  */
-public class MapTile extends JPanel
+public class MapTile
 {
 	public enum Shape
 	{
@@ -39,13 +37,17 @@ public class MapTile extends JPanel
 				this.grid = createBlankGrid();
 				break;
 		}
-		
-		setLayout(new GridLayout(3, 3));
-		for (int y = 0; y < this.grid.length; y += 1)
+	}
+	
+	public void draw(Graphics2D graphics, int xPos, int yPos, boolean isTemp)
+	{
+		for (int y = 0; y < 3; y += 1)
 		{
-			for (int x = 0; x < this.grid[y].length; x += 1)
+			for (int x = 0; x < 3; x += 1)
 			{
-				add(this.grid[y][x]);
+				int cellX = xPos * 240 + 80 * x;
+				int cellY = yPos * 240 + 80 * y;
+				this.grid[y][x].draw(graphics, cellX, cellY, isTemp);
 			}
 		}
 	}
@@ -120,7 +122,7 @@ public class MapTile extends JPanel
 	/**
 	 * @return
 	 */
-	public static TileCell[][] createBlankGrid()
+	public TileCell[][] createBlankGrid()
 	{
 		TileCell[][] toReturn = new TileCell[3][3];
 		
@@ -128,7 +130,7 @@ public class MapTile extends JPanel
 		{
 			for (int j = 0; j < 3; j++)
 			{
-				toReturn[i][j] = new TileCell(false, false);
+				toReturn[i][j] = new TileCell(this, false, false);
 			}
 		}
 		return toReturn;
