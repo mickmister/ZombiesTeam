@@ -60,7 +60,7 @@ public class TileCell
 		if (isTemp)
 		{
 			Composite old = g.getComposite();
-			float alpha = 0.25f;
+			float alpha = (float) ((Math.sin(System.currentTimeMillis() / 1000) + 1.0) / 2.0);
 			int type = AlphaComposite.SRC_OVER;
 			AlphaComposite composite = AlphaComposite.getInstance(type, alpha);
 			g.setComposite(composite);

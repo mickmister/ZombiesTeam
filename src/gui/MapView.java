@@ -48,6 +48,7 @@ public class MapView extends JPanel implements Runnable, KeyListener
 		}
 		
 		g.drawImage(image, 0, 0, null);
+		image.flush();
 	}
 	
 	@Override
@@ -57,7 +58,7 @@ public class MapView extends JPanel implements Runnable, KeyListener
 		{
 			while (true)
 			{
-				Thread.sleep(100);
+				Thread.sleep(10);
 				repaint();
 			}
 		}

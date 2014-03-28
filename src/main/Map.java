@@ -2,6 +2,8 @@ package main;
 
 import java.awt.Point;
 
+import javax.swing.JOptionPane;
+
 import main.MapTile.Shape;
 
 public class Map
@@ -18,10 +20,11 @@ public class Map
 		{
 			for (int x = 0; x < SIZE; x += 1)
 			{
-				this.mapTiles[y][x] = new MapTile(Shape.quad, null);
+				this.mapTiles[y][x] = new MapTile(Shape.empty, null);
 			}
 		}
-		this.tempTile = new MapTile(Shape.L, null);
+		this.mapTiles[SIZE / 2][SIZE / 2] = new MapTile(Shape.quad, null);
+		this.tempTile = null;
 		this.tempPos = new Point(5, 5);
 	}
 	
@@ -38,8 +41,15 @@ public class Map
 	
 	public void placeTempTile()
 	{
-		this.mapTiles[this.tempPos.y][this.tempPos.x] = tempTile;
-		this.tempTile = null;
+		if (checkValidPosition(this.tempTile, this.tempPos.x, this.tempPos.y))
+		{
+			this.mapTiles[this.tempPos.y][this.tempPos.x] = tempTile;
+			this.tempTile = null;
+		}
+		else
+		{
+			JOptionPane.showMessageDialog(null, "Not a valid location for the tile.");
+		}
 	}
 	
 	public MapTile getTempTile()
