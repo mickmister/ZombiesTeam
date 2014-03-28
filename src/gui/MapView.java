@@ -16,9 +16,14 @@ import main.MapTile;
 public class MapView extends JPanel implements Runnable, KeyListener
 {
 	private final int SIZE = 11;
+	private BufferedImage image;
+	private Graphics2D graphics;
 	
 	public MapView()
 	{
+		this.image = new BufferedImage(2400, 2400, BufferedImage.TYPE_INT_ARGB);
+		this.graphics = (Graphics2D) this.image.getGraphics();
+		
 		setPreferredSize(new Dimension(2400, 2400));
 		
 		setFocusable(true);
@@ -31,24 +36,22 @@ public class MapView extends JPanel implements Runnable, KeyListener
 	@Override
 	public void paintComponent(Graphics g)
 	{
-		BufferedImage image = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB);
-		Graphics2D graphics = (Graphics2D) image.getGraphics();
-		for (int y = 0; y < SIZE; y += 1)
+		this.requestFocusInWindow();
+		for (int y = 0; y < this.SIZE; y += 1)
 		{
-			for (int x = 0; x < SIZE; x += 1)
+			for (int x = 0; x < this.SIZE; x += 1)
 			{
-				GameHandler.instance.getMap().getMapTile(y, x).draw(graphics, x, y, false);
+				GameHandler.instance.getMap().getMapTile(y, x).draw(this.graphics, x, y, false);
 			}
 		}
 		MapTile temp = GameHandler.instance.getMap().getTempTile();
 		if (temp != null)
 		{
 			Point point = GameHandler.instance.getMap().getTempPos();
-			temp.draw(graphics, point.x, point.y, true);
+			temp.draw(this.graphics, point.x, point.y, true);
 		}
 		
-		g.drawImage(image, 0, 0, null);
-		image.flush();
+		g.drawImage(this.image, 0, 0, null);
 	}
 	
 	@Override
@@ -67,7 +70,7 @@ public class MapView extends JPanel implements Runnable, KeyListener
 			e.printStackTrace();
 		}
 	}
-
+	
 	@Override
 	public void keyPressed(KeyEvent e)
 	{
@@ -101,14 +104,14 @@ public class MapView extends JPanel implements Runnable, KeyListener
 			GameHandler.instance.getMap().placeTempTile();
 		}
 	}
-
+	
 	@Override
 	public void keyReleased(KeyEvent arg0)
 	{
 		// TODO Auto-generated method stub.
 		
 	}
-
+	
 	@Override
 	public void keyTyped(KeyEvent arg0)
 	{
