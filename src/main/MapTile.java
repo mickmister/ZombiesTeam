@@ -9,6 +9,7 @@ import java.awt.Graphics2D;
  */
 public class MapTile
 {
+	private Shape shape;
 	public enum Shape
 	{
 		straight, T, L, quad, empty
@@ -19,6 +20,7 @@ public class MapTile
 	
 	public MapTile(Shape shape, String special)
 	{
+		this.shape = shape;
 		switch (shape)
 		{
 			case T:
@@ -37,6 +39,31 @@ public class MapTile
 				this.grid = createBlankGrid();
 				break;
 		}
+	}
+	
+	public Shape getShape()
+	{
+		return this.shape;
+	}
+	
+	public TileCell getLeftCell()
+	{
+		return this.grid[1][0];
+	}
+	
+	public TileCell getRightCell()
+	{
+		return this.grid[1][2];
+	}
+	
+	public TileCell getTopCell()
+	{
+		return this.grid[0][1];
+	}
+	
+	public TileCell getBottomCell()
+	{
+		return this.grid[2][1];
 	}
 	
 	public void draw(Graphics2D graphics, int xPos, int yPos, boolean isTemp)
