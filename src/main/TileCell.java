@@ -78,7 +78,15 @@ public class TileCell
 			AlphaComposite composite = AlphaComposite.getInstance(type, (float) alpha);
 			g.setComposite(composite);
 			
-			g.setColor(Color.RED);
+			Map map = GameHandler.instance.getMap();
+			if (map.checkValidPosition(map.getTempTile(), map.getTempPos().x, map.getTempPos().y))
+			{
+				g.setColor(Color.GREEN);
+			}
+			else
+			{
+				g.setColor(Color.RED);
+			}
 			g.fillRect(x, y, 80, 80);
 			
 			g.setComposite(old);
