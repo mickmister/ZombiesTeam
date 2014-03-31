@@ -39,7 +39,7 @@ public class Map
 		this.tempPos = new Point(SIZE / 2, SIZE / 2);
 	}
 	
-	public void placeTempTile()
+	public void placeTempTile() throws IllegalStateException
 	{
 		if (checkValidPosition(this.tempTile, this.tempPos.x, this.tempPos.y))
 		{
@@ -48,7 +48,8 @@ public class Map
 		}
 		else
 		{
-			JOptionPane.showMessageDialog(null, "Not a valid location for the tile.");
+			throw new IllegalStateException();
+			//JOptionPane.showMessageDialog(null, "Not a valid location for the tile.");
 		}
 	}
 	
@@ -71,6 +72,11 @@ public class Map
 		this.tempPos = point;
 	}
 	
+	public void setTempTile(MapTile tile)
+	{
+		this.tempTile = tile;
+	}
+	
 	public boolean checkValidPosition(MapTile newTile, int xPos, int yPos)
 	{
 		int emptyCount = 0;
@@ -78,7 +84,6 @@ public class Map
 		MapTile current = this.mapTiles[yPos][xPos];
 		if(!current.getShape().equals(Shape.empty))
 		{
-			System.out.println("Not on an empty space.");
 			return false;
 		}
 		
@@ -89,7 +94,6 @@ public class Map
 			if(left.getShape().equals(Shape.empty)) emptyCount++;
 			if(left.getRightCell().getAcessible() != newTile.getLeftCell().getAcessible() && !left.getShape().equals(Shape.empty))
 			{
-				System.out.println("Left side not valid.");
 				return false;
 			}
 		}
@@ -101,7 +105,6 @@ public class Map
 			if(right.getShape().equals(Shape.empty)) emptyCount++;
 			if(right.getLeftCell().getAcessible() != newTile.getRightCell().getAcessible() && !right.getShape().equals(Shape.empty))
 			{
-				System.out.println("Right side not valid.");
 				return false;
 			}
 		}
@@ -113,7 +116,6 @@ public class Map
 			if(top.getShape().equals(Shape.empty)) emptyCount++;
 			if(top.getBottomCell().getAcessible() != newTile.getTopCell().getAcessible() && !top.getShape().equals(Shape.empty))
 			{
-				System.out.println("Top side not valid.");
 				return false;
 			}	
 		}
@@ -125,7 +127,6 @@ public class Map
 			if(bottom.getShape().equals(Shape.empty)) emptyCount++;
 			if(bottom.getTopCell().getAcessible() != newTile.getBottomCell().getAcessible() && !bottom.getShape().equals(Shape.empty))
 			{
-				System.out.println("Bottom side not valid.");
 				return false;
 			}
 		}
@@ -136,7 +137,6 @@ public class Map
 		}
 		else
 		{
-			System.out.println("All sides empty.");
 			return false;
 		}
 	}
