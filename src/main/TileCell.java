@@ -1,9 +1,13 @@
 package main;
+import gui.ImageManager;
+
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Composite;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
+
+import main.MapTile.Shape;
 
 /**
  * TODO Put here a description of what this class does.
@@ -39,17 +43,25 @@ public class TileCell
 			if (this.specialBuilding)
 			{
 				g.setColor(Color.RED);
+				g.fillRect(x, y, 80, 80);
 			}
 			else
 			{
-				g.setColor(Color.GRAY);
+				g.drawImage(ImageManager.ROAD_TEXTURE, x, y, null);
 			}
 		}
 		else
 		{
-			g.setColor(new Color(0, 100, 0));
+			if (this.mapTile.getShape().equals(Shape.empty))
+			{
+				g.drawImage(ImageManager.DIRT_TEXTURE, x, y, null);
+			}
+			else
+			{
+				g.drawImage(ImageManager.GRASS_TEXTURE, x, y, null);
+			}
 		}
-		g.fillRect(x, y, 80, 80);
+		
 		
 		if (this.hasZombie)
 		{
@@ -60,9 +72,10 @@ public class TileCell
 		if (isTemp)
 		{
 			Composite old = g.getComposite();
-			float alpha = (float) ((Math.sin(System.currentTimeMillis() / 2000) + 1.0) * 0.25);
+			double alpha = (Math.sin(System.currentTimeMillis() / 400.0) + 1.0) / 2.0;
+			alpha = 0.5 * alpha + 0.25;
 			int type = AlphaComposite.SRC_OVER;
-			AlphaComposite composite = AlphaComposite.getInstance(type, alpha);
+			AlphaComposite composite = AlphaComposite.getInstance(type, (float) alpha);
 			g.setComposite(composite);
 			
 			g.setColor(Color.RED);

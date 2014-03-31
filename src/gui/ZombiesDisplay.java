@@ -1,9 +1,5 @@
 package gui;
 
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -16,21 +12,13 @@ public class ZombiesDisplay extends JLabel implements Runnable
 	
 	public ZombiesDisplay(Player player)
 	{
-		try
-		{
-			this.player = player;
-			BufferedImage zombiePicture = ImageIO.read(this.getClass().getResourceAsStream("../Resources/Zombie Picture.png"));
-			setIcon(new ImageIcon(zombiePicture));
-			setHorizontalAlignment(SwingConstants.CENTER);
-			setText("");
-			
-			Thread thread = new Thread(this);
-			thread.start();
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
+		this.player = player;
+		setIcon(new ImageIcon(ImageManager.ZOMBIE_PICTURE));
+		setHorizontalAlignment(SwingConstants.CENTER);
+		setText("");
+		
+		Thread thread = new Thread(this);
+		thread.start();
 	}
 	
 	@Override
