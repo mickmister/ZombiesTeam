@@ -10,7 +10,6 @@ import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JViewport;
 
 import main.GameHandler;
@@ -21,6 +20,7 @@ public class MapView extends JPanel implements Runnable, KeyListener
 	private final int SIZE = 11;
 	private BufferedImage image;
 	private Graphics2D graphics;
+	private boolean hasBeenCentered;
 	
 	public MapView()
 	{
@@ -28,7 +28,6 @@ public class MapView extends JPanel implements Runnable, KeyListener
 		this.graphics = (Graphics2D) this.image.getGraphics();
 		
 		setPreferredSize(new Dimension(2400, 2400));
-		
 		setFocusable(true);
 		addKeyListener(this);
 		
@@ -40,6 +39,12 @@ public class MapView extends JPanel implements Runnable, KeyListener
 	public void paintComponent(Graphics g)
 	{
 		requestFocusInWindow();
+		checkScrollPane();
+		if (!this.hasBeenCentered)
+		{
+			this.hasBeenCentered = true;
+			centerScrollPane();
+		}
 		
 		for (int y = 0; y < this.SIZE; y += 1)
 		{
@@ -56,6 +61,36 @@ public class MapView extends JPanel implements Runnable, KeyListener
 		}
 		
 		g.drawImage(this.image, 0, 0, null);
+	}
+	
+	private void checkScrollPane()
+	{
+		if (GameHandler.instance.getMap().getTempTile() != null)
+		{
+			JViewport viewPort = (JViewport) getParent();
+			Rectangle bounds = viewPort.getViewRect();
+			Point current = GameHandler.instance.getMap().getTempPos();
+			
+			int xCurrent = bounds.x;
+			int yCurrent = bounds.y;
+			int xMiddle = current.x * 240 + 240 / 2 - bounds.width / 2;
+			int yMiddle = current.y * 240 + 240 / 2 - bounds.height / 2;
+			int xNew = (int) (xCurrent * 0.75 + xMiddle * 0.25);
+			int yNew = (int) (yCurrent * 0.75 + yMiddle * 0.25);
+			xNew = Math.max(0, xNew);
+			yNew = Math.max(0, yNew);
+			viewPort.setViewPosition(new Point(xNew, yNew));
+		}
+	}
+	
+	private void centerScrollPane()
+	{
+		JViewport viewPort = (JViewport) getParent();
+		Rectangle bounds = viewPort.getViewRect();
+		Dimension size = viewPort.getViewSize();
+		int xView = size.width / 2 + 240 / 2 - bounds.width / 2;
+		int yView = size.height / 2 + 240 / 2 - bounds.height / 2;
+		viewPort.setViewPosition(new Point(xView, yView));
 	}
 	
 	@Override
@@ -78,10 +113,6 @@ public class MapView extends JPanel implements Runnable, KeyListener
 	@Override
 	public void keyPressed(KeyEvent e)
 	{
-		JViewport viewPort = (JViewport) getParent();
-		Rectangle bounds = viewPort.getViewRect();
-		Dimension size = viewPort.getViewSize();
-		
 		if (GameHandler.instance.getMap().getTempTile() != null)
 		{
 			Point old = GameHandler.instance.getMap().getTempPos();
@@ -113,17 +144,6 @@ public class MapView extends JPanel implements Runnable, KeyListener
 			{
 				GameHandler.instance.getMap().placeTempTile();
 			}
-			
-			Point current = GameHandler.instance.getMap().getTempPos();
-			int xView = current.x * 240 + 240 / 2 - bounds.width / 2;
-			int yView = current.y * 240 + 240 / 2 - bounds.height / 2;
-			viewPort.setViewPosition(new Point(xView, yView));
-		}
-		else
-		{
-			int xView = size.width / 2 + 240 / 2 - bounds.width / 2;
-			int yView = size.height / 2 + 240 / 2 - bounds.height / 2;
-			viewPort.setViewPosition(new Point(xView, yView));
 		}
 	}
 	

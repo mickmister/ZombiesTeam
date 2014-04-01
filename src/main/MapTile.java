@@ -3,13 +3,18 @@ package main;
 import java.awt.Graphics2D;
 
 /**
- * TODO Put here a description of what this class does.
+ * A MapTile represents one tile that is placed on the Map. It is a square with 9 sub-blocks
+ * (TileCells), and each has different patterns of sub-blocks that are accessible (roads) and
+ * buildings. Each turn, a player will place a new MapTile down and can rotate it so that the roads
+ * match up to adjacent MapTiles. Special building tiles can contain a bullet token, life token, and
+ * zombies.
  * 
- * @author watersdr. Created Mar 26, 2014.
+ * @author Donnie Waters, Jacob Ryan, and Coach. Created Mar 26, 2014.
  */
 public class MapTile
 {
 	private Shape shape;
+	
 	public enum Shape
 	{
 		straight, T, L, quad, empty
@@ -80,9 +85,10 @@ public class MapTile
 	}
 	
 	/**
-	 * TODO Put here a description of what this method does.
+	 * Creates a grid of TileCells where all normal sub-blocks are accessible (north, south, east,
+	 * west, and center).
 	 * 
-	 * @return
+	 * @return 2-D array of TileCells
 	 */
 	public TileCell[][] createQuad()
 	{
@@ -98,9 +104,10 @@ public class MapTile
 	}
 	
 	/**
-	 * TODO Put here a description of what this method does.
+	 * Creates a grid of TileCells where the L shape of sub-blocks are accessible (south, center,
+	 * and east).
 	 * 
-	 * @return
+	 * @return 2-D array of TileCells
 	 */
 	public TileCell[][] createL()
 	{

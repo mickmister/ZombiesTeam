@@ -15,7 +15,7 @@ import main.MapTile.Shape;
  * TileCell may or may not be accessible to players and a zombie. It may also have one life token
  * and/or one bullet token.
  * 
- * @author watersdr. Created Mar 26, 2014.
+ * @author Donnie Waters, Jacob Ryan, and Coach. Created Mar 26, 2014.
  */
 public class TileCell
 {
@@ -23,8 +23,8 @@ public class TileCell
 	private boolean isAccessible;
 	private boolean hasZombie;
 	private boolean specialBuilding;
-	private boolean lifeToken;
-	private boolean bulletToken;
+	private boolean hasLifeToken;
+	private boolean hasBulletToken;
 	private ArrayList<Player> playersOccupying;
 	
 	public TileCell(MapTile mapTile, boolean accessible, boolean specialBuilding)
@@ -35,8 +35,8 @@ public class TileCell
 		this.playersOccupying = new ArrayList<Player>();
 		this.playersOccupying.add(new Player());
 		this.hasZombie = true;
-		this.lifeToken = true;
-		this.bulletToken = true;
+		this.hasLifeToken = true;
+		this.hasBulletToken = true;
 	}
 	
 	public void draw(Graphics2D g, int x, int y, boolean isTemp)
@@ -70,12 +70,12 @@ public class TileCell
 			g.setColor(Color.BLACK);
 			g.fillOval(x, y + 10, 20, 80 - 20);
 		}
-		if (this.lifeToken)
+		if (this.hasLifeToken)
 		{
 			g.setColor(new Color(255, 100, 100));
 			g.fillOval(x + 30, y + 10, 20, 20);
 		}
-		if (this.bulletToken)
+		if (this.hasBulletToken)
 		{
 			g.setColor(new Color(255, 200, 0));
 			g.fillOval(x + 30, y + 50, 20, 20);
@@ -115,12 +115,12 @@ public class TileCell
 	
 	public boolean hasLifeToken()
 	{
-		return this.lifeToken;
+		return this.hasLifeToken;
 	}
 	
 	public boolean hasBulletToken()
 	{
-		return this.bulletToken;
+		return this.hasBulletToken;
 	}
 	
 	public boolean hasZombie()
@@ -130,12 +130,12 @@ public class TileCell
 	
 	public void setLifeToken(boolean life)
 	{
-		this.lifeToken = life;
+		this.hasLifeToken = life;
 	}
 	
 	public void setBulletToken(boolean bullet)
 	{
-		this.bulletToken = bullet;
+		this.hasBulletToken = bullet;
 	}
 	
 	public void setZombie(boolean zombie)
@@ -167,5 +167,4 @@ public class TileCell
 	{
 		return this.playersOccupying;
 	}
-	
 }
