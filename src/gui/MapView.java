@@ -9,6 +9,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JViewport;
 
@@ -46,6 +47,7 @@ public class MapView extends JPanel implements Runnable, KeyListener
 			centerScrollPane();
 		}
 		
+		this.graphics.drawImage(ImageManager.DIRT_TEXTURE, 0, 0, null);
 		for (int y = 0; y < this.SIZE; y += 1)
 		{
 			for (int x = 0; x < this.SIZE; x += 1)
@@ -93,6 +95,15 @@ public class MapView extends JPanel implements Runnable, KeyListener
 		viewPort.setViewPosition(new Point(xView, yView));
 	}
 	
+	private void displayInvalidLocation()
+	{
+		JOptionPane.showMessageDialog(null, "The selected location is not valid for the given map tile.\n"
+				+ "The tile must be touching at least one other tile,\n"
+				+ "all touching roads must connect (and not become blocked),\n"
+				+ "and it may not be placed on top of an existing tile.\n\nTry again.",
+				"Invalid Placement", JOptionPane.WARNING_MESSAGE);
+	}
+	
 	@Override
 	public void run()
 	{
@@ -100,7 +111,7 @@ public class MapView extends JPanel implements Runnable, KeyListener
 		{
 			while (true)
 			{
-				Thread.sleep(10);
+				Thread.sleep(1000 / 30);
 				repaint();
 			}
 		}
@@ -142,7 +153,14 @@ public class MapView extends JPanel implements Runnable, KeyListener
 			}
 			if (e.getKeyCode() == KeyEvent.VK_ENTER)
 			{
-				GameHandler.instance.getMap().placeTempTile();
+				try
+				{
+					GameHandler.instance.getMap().placeTempTile();
+				}
+				catch (IllegalStateException exception)
+				{
+					displayInvalidLocation();
+				}
 			}
 		}
 	}

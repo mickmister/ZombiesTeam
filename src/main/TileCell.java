@@ -34,9 +34,9 @@ public class TileCell
 		this.specialBuilding = specialBuilding;
 		this.playersOccupying = new ArrayList<Player>();
 		this.playersOccupying.add(new Player());
-		this.hasZombie = true;
-		this.hasLifeToken = true;
-		this.hasBulletToken = true;
+		this.hasZombie = false;
+		this.hasLifeToken = false;
+		this.hasBulletToken = false;
 	}
 	
 	public void draw(Graphics2D g, int x, int y, boolean isTemp)
@@ -50,14 +50,14 @@ public class TileCell
 			}
 			else
 			{
-				g.drawImage(ImageManager.ROAD_TEXTURE, x, y, null);
+				g.drawImage(ImageManager.ROAD_TEXTURE, x, y, x + 80, y + 80, x, y, x + 80, y + 80, null);
 			}
 		}
 		else
 		{
 			if (this.mapTile.getShape().equals(Shape.empty))
 			{
-				g.drawImage(ImageManager.DIRT_TEXTURE, x, y, null);
+				// Don't do anything.
 			}
 			else
 			{
@@ -80,14 +80,14 @@ public class TileCell
 			g.setColor(new Color(255, 200, 0));
 			g.fillOval(x + 30, y + 50, 20, 20);
 		}
-		for (Player player : this.playersOccupying)
+		/*for (Player player : this.playersOccupying)
 		{
 			int i = 1;
 			g.setColor(Color.WHITE);
 			g.fillRect(x + 58, y - 4 + 10 * i, 18, 18);
 			g.setColor(Color.BLACK);
 			g.drawString("P" + i, x + 60, y + 10 + 10 * i);
-		}
+		}*/
 		
 		if (isTemp)
 		{
