@@ -1,4 +1,5 @@
 package main;
+
 import gui.ImageManager;
 
 import java.awt.AlphaComposite;
@@ -10,10 +11,11 @@ import java.util.ArrayList;
 import main.MapTile.Shape;
 
 /**
- * TODO Put here a description of what this class does.
- *
- * @author watersdr.
- *         Created Mar 26, 2014.
+ * A TileCell represents one of the subsections within a MapTile, or one of the nine blocks. A
+ * TileCell may or may not be accessible to players and a zombie. It may also have one life token
+ * and/or one bullet token.
+ * 
+ * @author watersdr. Created Mar 26, 2014.
  */
 public class TileCell
 {
@@ -25,15 +27,16 @@ public class TileCell
 	private boolean bulletToken;
 	private ArrayList<Player> playersOccupying;
 	
-	public TileCell(MapTile mapTile, boolean accessible, boolean specialBuilding) 
+	public TileCell(MapTile mapTile, boolean accessible, boolean specialBuilding)
 	{
 		this.mapTile = mapTile;
 		this.isAccessible = accessible;
 		this.specialBuilding = specialBuilding;
 		this.playersOccupying = new ArrayList<Player>();
-		this.hasZombie = false;
-		this.lifeToken = false;
-		this.bulletToken = false;
+		this.playersOccupying.add(new Player());
+		this.hasZombie = true;
+		this.lifeToken = true;
+		this.bulletToken = true;
 	}
 	
 	public void draw(Graphics2D g, int x, int y, boolean isTemp)
@@ -62,18 +65,35 @@ public class TileCell
 			}
 		}
 		
-		
 		if (this.hasZombie)
 		{
 			g.setColor(Color.BLACK);
-			g.fillOval(0, 10, 20, 80 - 20);
+			g.fillOval(x, y + 10, 20, 80 - 20);
+		}
+		if (this.lifeToken)
+		{
+			g.setColor(new Color(255, 100, 100));
+			g.fillOval(x + 30, y + 10, 20, 20);
+		}
+		if (this.bulletToken)
+		{
+			g.setColor(new Color(255, 200, 0));
+			g.fillOval(x + 30, y + 50, 20, 20);
+		}
+		for (Player player : this.playersOccupying)
+		{
+			int i = 1;
+			g.setColor(Color.WHITE);
+			g.fillRect(x + 58, y - 4 + 10 * i, 18, 18);
+			g.setColor(Color.BLACK);
+			g.drawString("P" + i, x + 60, y + 10 + 10 * i);
 		}
 		
 		if (isTemp)
 		{
 			Composite old = g.getComposite();
 			double alpha = (Math.sin(System.currentTimeMillis() / 400.0) + 1.0) / 2.0;
-			alpha = 0.5 * alpha + 0.25;
+			alpha = 0.25 * alpha + 0.25;
 			int type = AlphaComposite.SRC_OVER;
 			AlphaComposite composite = AlphaComposite.getInstance(type, (float) alpha);
 			g.setComposite(composite);
@@ -93,17 +113,17 @@ public class TileCell
 		}
 	}
 	
-	public boolean hasLifeToken() 
+	public boolean hasLifeToken()
 	{
 		return this.lifeToken;
 	}
 	
-	public boolean hasBulletToken() 
+	public boolean hasBulletToken()
 	{
 		return this.bulletToken;
 	}
 	
-	public boolean hasZombie() 
+	public boolean hasZombie()
 	{
 		return this.hasZombie;
 	}

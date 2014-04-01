@@ -4,11 +4,14 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JViewport;
 
 import main.GameHandler;
 import main.MapTile;
@@ -37,6 +40,7 @@ public class MapView extends JPanel implements Runnable, KeyListener
 	public void paintComponent(Graphics g)
 	{
 		requestFocusInWindow();
+		
 		for (int y = 0; y < this.SIZE; y += 1)
 		{
 			for (int x = 0; x < this.SIZE; x += 1)
@@ -74,48 +78,62 @@ public class MapView extends JPanel implements Runnable, KeyListener
 	@Override
 	public void keyPressed(KeyEvent e)
 	{
-		Point old = GameHandler.instance.getMap().getTempPos();
-		if (e.getKeyCode() == KeyEvent.VK_LEFT)
+		JViewport viewPort = (JViewport) getParent();
+		Rectangle bounds = viewPort.getViewRect();
+		Dimension size = viewPort.getViewSize();
+		
+		if (GameHandler.instance.getMap().getTempTile() != null)
 		{
-			Point next = new Point(old.x - 1, old.y);
-			GameHandler.instance.getMap().setTempPos(next);
+			Point old = GameHandler.instance.getMap().getTempPos();
+			if (e.getKeyCode() == KeyEvent.VK_LEFT)
+			{
+				Point next = new Point(old.x - 1, old.y);
+				GameHandler.instance.getMap().setTempPos(next);
+			}
+			if (e.getKeyCode() == KeyEvent.VK_RIGHT)
+			{
+				Point next = new Point(old.x + 1, old.y);
+				GameHandler.instance.getMap().setTempPos(next);
+			}
+			if (e.getKeyCode() == KeyEvent.VK_UP)
+			{
+				Point next = new Point(old.x, old.y - 1);
+				GameHandler.instance.getMap().setTempPos(next);
+			}
+			if (e.getKeyCode() == KeyEvent.VK_DOWN)
+			{
+				Point next = new Point(old.x, old.y + 1);
+				GameHandler.instance.getMap().setTempPos(next);
+			}
+			if (e.getKeyCode() == KeyEvent.VK_SPACE)
+			{
+				GameHandler.instance.getMap().getTempTile().rotateTile();
+			}
+			if (e.getKeyCode() == KeyEvent.VK_ENTER)
+			{
+				GameHandler.instance.getMap().placeTempTile();
+			}
+			
+			Point current = GameHandler.instance.getMap().getTempPos();
+			int xView = current.x * 240 + 240 / 2 - bounds.width / 2;
+			int yView = current.y * 240 + 240 / 2 - bounds.height / 2;
+			viewPort.setViewPosition(new Point(xView, yView));
 		}
-		if (e.getKeyCode() == KeyEvent.VK_RIGHT)
+		else
 		{
-			Point next = new Point(old.x + 1, old.y);
-			GameHandler.instance.getMap().setTempPos(next);
-		}
-		if (e.getKeyCode() == KeyEvent.VK_UP)
-		{
-			Point next = new Point(old.x, old.y - 1);
-			GameHandler.instance.getMap().setTempPos(next);
-		}
-		if (e.getKeyCode() == KeyEvent.VK_DOWN)
-		{
-			Point next = new Point(old.x, old.y + 1);
-			GameHandler.instance.getMap().setTempPos(next);
-		}
-		if (e.getKeyCode() == KeyEvent.VK_SPACE)
-		{
-			GameHandler.instance.getMap().getTempTile().rotateTile();
-		}
-		if (e.getKeyCode() == KeyEvent.VK_ENTER)
-		{
-			GameHandler.instance.getMap().placeTempTile();
+			int xView = size.width / 2 + 240 / 2 - bounds.width / 2;
+			int yView = size.height / 2 + 240 / 2 - bounds.height / 2;
+			viewPort.setViewPosition(new Point(xView, yView));
 		}
 	}
 	
 	@Override
-	public void keyReleased(KeyEvent arg0)
+	public void keyReleased(KeyEvent e)
 	{
-		// TODO Auto-generated method stub.
-		
 	}
 	
 	@Override
-	public void keyTyped(KeyEvent arg0)
+	public void keyTyped(KeyEvent e)
 	{
-		// TODO Auto-generated method stub.
-		
 	}
 }

@@ -34,12 +34,6 @@ public class Window extends JFrame
 		add(scrollPane, BorderLayout.CENTER);
 		
 		setVisible(true);
-		
-		Rectangle bounds = scrollPane.getViewport().getViewRect();
-		Dimension size = scrollPane.getViewport().getViewSize();
-		int x = (size.width - bounds.width) / 2;
-		int y = (size.height - bounds.height) / 2;
-		scrollPane.getViewport().setViewPosition(new Point(x, y));
 	}
 	
 	public Player getPlayer()
