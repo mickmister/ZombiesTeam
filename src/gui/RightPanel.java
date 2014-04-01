@@ -18,7 +18,7 @@ public class RightPanel extends JPanel
 		this.window = window;
 		setLayout(new GridLayout(3, 1));
 		setBorder(new EmptyBorder(10, 10, 0, 10));
-		this.setPreferredSize(new Dimension(300, 1));
+		setPreferredSize(new Dimension(300, 1));
 		
 		for (int i = 0; i < 3; i += 1)
 		{

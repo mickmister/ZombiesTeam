@@ -7,7 +7,7 @@ import main.MapTile.Shape;
 
 public class MapTileDeck
 {
-	private int NUM_CARDS = 10; //Number of each kind of Map Tile
+	private int NUM_CARDS = 10; // Number of each kind of Map Tile
 	private ArrayList<MapTile> deck;
 	
 	public MapTileDeck()
@@ -24,7 +24,7 @@ public class MapTileDeck
 	
 	private void addMapTiles()
 	{
-		for (int i = 0; i < NUM_CARDS; i++)
+		for (int i = 0; i < this.NUM_CARDS; i++)
 		{
 			this.deck.add(new MapTile(Shape.L, null));
 			this.deck.add(new MapTile(Shape.quad, null));

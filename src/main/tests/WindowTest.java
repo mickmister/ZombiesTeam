@@ -1,6 +1,6 @@
 package main.tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
 import main.Window;
 
 import org.junit.Test;

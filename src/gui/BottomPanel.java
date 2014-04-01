@@ -18,7 +18,7 @@ public class BottomPanel extends JPanel
 		this.window = window;
 		setLayout(new GridLayout(1, 6));
 		setBorder(new EmptyBorder(10, 10, 10, 10));
-		this.setPreferredSize(new Dimension(1, 200));
+		setPreferredSize(new Dimension(1, 200));
 		
 		add(new MapTileDeckButton());
 		add(new LifeTokensDisplay(getPlayer()));

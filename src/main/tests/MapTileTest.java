@@ -23,9 +23,9 @@ public class MapTileTest
 		
 		for (TileCell[] element : grid)
 		{
-			for (int j = 0; j < element.length; j++)
+			for (TileCell element2 : element)
 			{
-				assertFalse(element[j].getAcessible());
+				assertFalse(element2.getAcessible());
 			}
 		}
 		

@@ -1,12 +1,10 @@
 package main;
+
 import gui.BottomPanel;
 import gui.MapView;
 import gui.RightPanel;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Point;
-import java.awt.Rectangle;
 
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
