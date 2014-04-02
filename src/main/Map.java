@@ -9,6 +9,7 @@ public class Map
 	private final int SIZE = 11;
 	private MapTile[][] mapTiles;
 	private MapTile tempTile;
+	private MapTile tempZombieTile;
 	private Point tempPos;
 	
 	public Map()
@@ -42,6 +43,8 @@ public class Map
 		if (checkValidPosition(this.tempTile, this.tempPos.x, this.tempPos.y))
 		{
 			this.mapTiles[this.tempPos.y][this.tempPos.x] = this.tempTile;
+			this.tempZombieTile = this.tempTile;
+			this.tempTile = null;
 		}
 		else
 		{
@@ -52,6 +55,11 @@ public class Map
 	public MapTile getTempTile()
 	{
 		return this.tempTile;
+	}
+	
+	public MapTile getTempZombieTile()
+	{
+		return this.tempZombieTile;
 	}
 	
 	public Point getTempPos()

@@ -177,7 +177,7 @@ public class MapView extends JPanel implements Runnable, KeyListener
 
 	private void handleZombiePlacement(KeyEvent e) {
 		
-		MapTile tile = GameHandler.instance.getMap().getTempTile();
+		MapTile tile = GameHandler.instance.getMap().getTempZombieTile();
 		Point current = tile.getTempZombiePos();
 		if (e.getKeyCode() == KeyEvent.VK_LEFT)
 		{
@@ -259,7 +259,7 @@ public class MapView extends JPanel implements Runnable, KeyListener
 				{
 					GameHandler.instance.getMap().placeTempTile();
 					GameHandler.instance.nextGameState();
-					GameHandler.instance.getMap().getTempTile().setTempZombiePos(new Point(1,1));
+					GameHandler.instance.getMap().getTempZombieTile().setTempZombiePos(new Point(1,1));
 				}
 				catch (IllegalStateException exception)
 				{
