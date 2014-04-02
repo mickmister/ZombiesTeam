@@ -281,9 +281,19 @@ public class MapTile
 	 *
 	 */
 	public void placeTempZombie() {
-		if (!this.grid[this.tempZombiePos.y][this.tempZombiePos.x].hasZombie())
+		TileCell cell = this.grid[this.tempZombiePos.y][this.tempZombiePos.x];
+		if (!cell.hasZombie())
 		{
-			
+			cell.setZombie(true);
+			this.zombiesToPlace --;
+			if(zombiesToPlace == 0)
+			{
+				GameHandler.instance.nextGameState();
+			}
+			else			
+			{
+				this.tempZombiePos = new Point(1, 1);
+			}
 		}
 	}
 }
