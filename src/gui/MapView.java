@@ -197,7 +197,7 @@ public class MapView extends JPanel implements Runnable, KeyListener
 		}
 		if (e.getKeyCode() == KeyEvent.VK_ENTER)
 		{
-			//TODO
+			tile.placeTempZombie();
 		}
 	}
 
