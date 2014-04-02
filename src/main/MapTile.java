@@ -58,6 +58,7 @@ public class MapTile
 	{
 		try
 		{
+			this.grid = createBlankGrid();
 			String[] words = string.split(" ");
 			for (int y = 0; y < 3; y += 1)
 			{

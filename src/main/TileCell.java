@@ -6,8 +6,6 @@ import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Composite;
 import java.awt.Graphics2D;
-import java.util.ArrayList;
-
 import main.MapTile.Shape;
 
 /**
@@ -42,9 +40,14 @@ public class TileCell
 	{
 		if (this.isAccessible)
 		{
-			if (this.isBuilding)
+			if (this.isDoor)
 			{
-				g.setColor(Color.RED);
+				g.setColor(Color.BLUE);
+				g.fillRect(x, y, 80, 80);
+			}
+			else if (this.isBuilding)
+			{
+				g.setColor(Color.YELLOW);
 				g.fillRect(x, y, 80, 80);
 			}
 			else
