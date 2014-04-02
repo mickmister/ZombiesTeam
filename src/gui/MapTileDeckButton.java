@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import main.GameHandler;
 import main.GameHandler.GameState;
 import main.MapTile;
+import main.Window;
 
 public class MapTileDeckButton extends JButton implements ActionListener
 {
@@ -25,13 +26,16 @@ public class MapTileDeckButton extends JButton implements ActionListener
 	
 	public void mapTileDeckClicked()
 	{
-		if (GameHandler.instance.getCurrentState() == GameState.tilePlacement) 
+		if (((Window) this.getTopLevelAncestor()).getPlayer().isPlayersTurn())
 		{
-			if (GameHandler.instance.getMap().getTempTile() == null)
+			if (GameHandler.instance.getCurrentState() == GameState.tilePlacement) 
 			{
-				MapTile tile = GameHandler.instance.getDeck().getNextCard();
-				System.out.println(GameHandler.instance.getCurrentState());
-				GameHandler.instance.getMap().addTempTile(tile);
+				if (GameHandler.instance.getMap().getTempTile() == null)
+				{
+					MapTile tile = GameHandler.instance.getDeck().getNextCard();
+					System.out.println(GameHandler.instance.getCurrentState());
+					GameHandler.instance.getMap().addTempTile(tile);
+				}
 			}
 		}
 		

@@ -1,6 +1,7 @@
 package main;
 
 import java.awt.Graphics2D;
+import java.awt.Point;
 
 import javax.swing.JOptionPane;
 
@@ -16,9 +17,10 @@ import javax.swing.JOptionPane;
 public class MapTile
 {
 	private Shape shape;
-	private int zombies;
+	private int zombiesToPlace;
 	private int lifeTokens;
 	private int bulletTokens;
+	private Point tempZombiePos;
 	
 	public enum Shape
 	{
@@ -31,22 +33,28 @@ public class MapTile
 	public MapTile(Shape shape, String special)
 	{
 		this.shape = shape;
+		this.tempZombiePos = null;
 		switch (shape)
 		{
 			case T:
 				this.grid = createTetris();
+				this.zombiesToPlace = 3;
 				break;
 			case straight:
 				this.grid = createStraight();
+				this.zombiesToPlace = 2;
 				break;
 			case L:
 				this.grid = createL();
+				this.zombiesToPlace = 2;
 				break;
 			case quad:
 				this.grid = createQuad();
+				this.zombiesToPlace = 4;
 				break;
 			case empty:
 				this.grid = createBlankGrid();
+				this.zombiesToPlace = 0;
 				break;
 			case special:
 				processSpecialString(special);
@@ -72,7 +80,7 @@ public class MapTile
 					this.grid[y][x] = new TileCell(this, accessible, building, door);
 				}
 			}
-			this.zombies = Integer.parseInt(words[9]);
+			this.zombiesToPlace = Integer.parseInt(words[9]);
 			this.lifeTokens = Integer.parseInt(words[10]);
 			this.bulletTokens = Integer.parseInt(words[11]);
 		}
@@ -245,5 +253,37 @@ public class MapTile
 		result += this.grid[2][2].isAcessible() + "\n";
 		
 		return result;
+	}
+
+	/**
+	 * TODO Put here a description of what this method does.
+	 *
+	 * @param point
+	 */
+	public void setTempZombiePos(Point point) 
+	{
+		if (point.x >= 0 && point.y >= 0 && point.x <= 2 && point.y <= 2)
+		{
+			if (this.grid[point.y][point.x].isAcessible())
+			{
+				this.tempZombiePos = point;
+			}
+		}
+	}
+	
+	public Point getTempZombiePos()
+	{
+		return this.tempZombiePos;
+	}
+
+	/**
+	 * TODO Put here a description of what this method does.
+	 *
+	 */
+	public void placeTempZombie() {
+		if (!this.grid[this.tempZombiePos.y][this.tempZombiePos.x].hasZombie())
+		{
+			
+		}
 	}
 }

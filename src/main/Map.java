@@ -42,7 +42,6 @@ public class Map
 		if (checkValidPosition(this.tempTile, this.tempPos.x, this.tempPos.y))
 		{
 			this.mapTiles[this.tempPos.y][this.tempPos.x] = this.tempTile;
-			this.tempTile = null;
 		}
 		else
 		{
