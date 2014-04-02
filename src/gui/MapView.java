@@ -14,7 +14,10 @@ import javax.swing.JPanel;
 import javax.swing.JViewport;
 
 import main.GameHandler;
+import main.GameHandler.GameState;
 import main.MapTile;
+import main.Player;
+import main.Window;
 
 public class MapView extends JPanel implements Runnable, KeyListener
 {
@@ -22,6 +25,8 @@ public class MapView extends JPanel implements Runnable, KeyListener
 	private BufferedImage image;
 	private Graphics2D graphics;
 	private boolean hasBeenCentered;
+	private static final int MAP_PLACEMENT_STATE = 0;
+	private static final int MOVEMENT_STATE = 1;
 	
 	public MapView()
 	{
@@ -124,6 +129,45 @@ public class MapView extends JPanel implements Runnable, KeyListener
 	@Override
 	public void keyPressed(KeyEvent e)
 	{
+		Window window = (Window) this.getTopLevelAncestor();
+		Player player = window.getPlayer();
+		if(!player.isPlayersTurn()) return;
+		
+		switch (GameHandler.instance.getCurrentState())
+		{
+		case tilePlacement:
+			handleTilePlacement(e);
+			break;
+		case zombiePlacement:
+			handleZombiePlacement(e);
+			break;
+		case playerMovement:
+			handlePlayerMovement(e);
+			break;
+		case zombieMovement:
+			handleZombieMovement(e);
+			break;		
+		}
+		
+		
+	}
+	
+	private void handleZombieMovement(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void handleZombiePlacement(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void handlePlayerMovement(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void handleTilePlacement(KeyEvent e) {
 		if (GameHandler.instance.getMap().getTempTile() != null)
 		{
 			Point old = GameHandler.instance.getMap().getTempPos();
@@ -163,8 +207,9 @@ public class MapView extends JPanel implements Runnable, KeyListener
 				}
 			}
 		}
+		
 	}
-	
+
 	@Override
 	public void keyReleased(KeyEvent e)
 	{

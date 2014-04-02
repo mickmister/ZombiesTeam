@@ -18,7 +18,7 @@ public class Window extends JFrame
 	public Window(int number)
 	{
 		this.number = number;
-		this.player = new Player();
+		this.player = new Player(number);
 		
 		setSize(1600, 900);
 		setLocation(this.number * 50, this.number * 50);

@@ -10,6 +10,12 @@ public class GameHandler
 	private MapTileDeck deck;
 	private int turn;
 	private ArrayList<Window> windows;
+	private GameState currentState;
+	
+	public enum GameState
+	{
+		tilePlacement, zombiePlacement, playerMovement, zombieMovement
+	}
 	
 	public GameHandler(int numberOfPlayers)
 	{
@@ -23,6 +29,7 @@ public class GameHandler
 		{
 			this.windows.add(new Window(i));
 		}
+		this.currentState = GameState.tilePlacement;
 	}
 	
 	public Player getPlayer(int i)
@@ -51,5 +58,10 @@ public class GameHandler
 	public void nextTurn()
 	{
 		this.turn = (this.turn + 1) % this.numberOfPlayers;
+	}
+	
+	public GameState getCurrentState()
+	{
+		return this.currentState;
 	}
 }
