@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 
 import javax.swing.JButton;
 
@@ -21,6 +22,8 @@ public class RollDiceButton extends JButton implements ActionListener
 	
 	public void rollDiceClicked()
 	{
-		// Do crap.
+		Random dice = new Random();
+		int rollNum = dice.nextInt(6) + 1;
+		System.out.println(rollNum);
 	}
 }
