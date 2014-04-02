@@ -246,5 +246,4 @@ public class MapTile
 		
 		return result;
 	}
-	
 }

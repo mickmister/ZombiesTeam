@@ -107,6 +107,11 @@ public class TileCell
 		}
 	}
 	
+	public boolean isRoad()
+	{
+		return this.isAccessible && !this.isBuilding && !this.isDoor;
+	}
+	
 	public boolean hasLifeToken()
 	{
 		return this.hasLifeToken;

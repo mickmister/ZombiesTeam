@@ -92,7 +92,7 @@ public class Map
 			{
 				emptyCount++;
 			}
-			if (left.getRightCell().isAcessible() != newTile.getLeftCell().isAcessible() && !left.getShape().equals(Shape.empty))
+			if (left.getRightCell().isRoad() != newTile.getLeftCell().isRoad() && !left.getShape().equals(Shape.empty))
 			{
 				return false;
 			}
@@ -106,7 +106,7 @@ public class Map
 			{
 				emptyCount++;
 			}
-			if (right.getLeftCell().isAcessible() != newTile.getRightCell().isAcessible() && !right.getShape().equals(Shape.empty))
+			if (right.getLeftCell().isRoad() != newTile.getRightCell().isRoad() && !right.getShape().equals(Shape.empty))
 			{
 				return false;
 			}
@@ -120,7 +120,7 @@ public class Map
 			{
 				emptyCount++;
 			}
-			if (top.getBottomCell().isAcessible() != newTile.getTopCell().isAcessible() && !top.getShape().equals(Shape.empty))
+			if (top.getBottomCell().isRoad() != newTile.getTopCell().isRoad() && !top.getShape().equals(Shape.empty))
 			{
 				return false;
 			}
@@ -134,7 +134,7 @@ public class Map
 			{
 				emptyCount++;
 			}
-			if (bottom.getTopCell().isAcessible() != newTile.getBottomCell().isAcessible() && !bottom.getShape().equals(Shape.empty))
+			if (bottom.getTopCell().isRoad() != newTile.getBottomCell().isRoad() && !bottom.getShape().equals(Shape.empty))
 			{
 				return false;
 			}
