@@ -47,7 +47,6 @@ public class Map
 		else
 		{
 			throw new IllegalStateException();
-			// JOptionPane.showMessageDialog(null, "Not a valid location for the tile.");
 		}
 	}
 	
