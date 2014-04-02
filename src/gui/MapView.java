@@ -153,17 +153,72 @@ public class MapView extends JPanel implements Runnable, KeyListener
 	}
 	
 	private void handleZombieMovement(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
+		if (e.getKeyCode() == KeyEvent.VK_LEFT)
+		{
+			//TODO
+		}
+		if (e.getKeyCode() == KeyEvent.VK_RIGHT)
+		{
+			//TODO
+		}
+		if (e.getKeyCode() == KeyEvent.VK_UP)
+		{
+			//TODO
+		}
+		if (e.getKeyCode() == KeyEvent.VK_DOWN)
+		{
+			//TODO
+		}
+		if (e.getKeyCode() == KeyEvent.VK_ENTER)
+		{
+			//TODO
+		}
 	}
 
 	private void handleZombiePlacement(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
+		if (e.getKeyCode() == KeyEvent.VK_LEFT)
+		{
+			//TODO
+		}
+		if (e.getKeyCode() == KeyEvent.VK_RIGHT)
+		{
+			//TODO
+		}
+		if (e.getKeyCode() == KeyEvent.VK_UP)
+		{
+			//TODO
+		}
+		if (e.getKeyCode() == KeyEvent.VK_DOWN)
+		{
+			//TODO
+		}
+		if (e.getKeyCode() == KeyEvent.VK_ENTER)
+		{
+			//TODO
+		}
 	}
 
 	private void handlePlayerMovement(KeyEvent e) {
-		// TODO Auto-generated method stub
+		if (e.getKeyCode() == KeyEvent.VK_LEFT)
+		{
+			//TODO
+		}
+		if (e.getKeyCode() == KeyEvent.VK_RIGHT)
+		{
+			//TODO
+		}
+		if (e.getKeyCode() == KeyEvent.VK_UP)
+		{
+			//TODO
+		}
+		if (e.getKeyCode() == KeyEvent.VK_DOWN)
+		{
+			//TODO
+		}
+		if (e.getKeyCode() == KeyEvent.VK_ENTER)
+		{
+			//TODO
+		}
 		
 	}
 
