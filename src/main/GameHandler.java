@@ -60,8 +60,37 @@ public class GameHandler
 		this.turn = (this.turn + 1) % this.numberOfPlayers;
 	}
 	
+	/**
+	 * TODO Put here a description of what this method does.
+	 *
+	 * @return
+	 */
 	public GameState getCurrentState()
 	{
 		return this.currentState;
+	}
+	
+	/**
+	 * TODO Put here a description of what this method does.
+	 *
+	 */
+	public void nextGameState()
+	{
+		switch (this.currentState)
+		{
+			case tilePlacement:
+				this.currentState = GameState.zombiePlacement;
+				break;
+			case zombiePlacement:
+				this.currentState = GameState.playerMovement;
+				break;
+			case playerMovement:
+				this.currentState = GameState.zombieMovement;
+				break;
+			case zombieMovement:
+				this.currentState = GameState.tilePlacement;
+				nextTurn();
+				break;
+		}
 	}
 }
