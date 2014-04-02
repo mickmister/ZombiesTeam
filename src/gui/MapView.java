@@ -255,6 +255,7 @@ public class MapView extends JPanel implements Runnable, KeyListener
 				try
 				{
 					GameHandler.instance.getMap().placeTempTile();
+					GameHandler.instance.nextGameState();
 				}
 				catch (IllegalStateException exception)
 				{
