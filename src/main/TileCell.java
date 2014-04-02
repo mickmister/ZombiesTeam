@@ -21,19 +21,18 @@ public class TileCell
 {
 	private MapTile mapTile;
 	private boolean isAccessible;
+	private boolean isBuilding;
+	private boolean isDoor;
 	private boolean hasZombie;
-	private boolean specialBuilding;
 	private boolean hasLifeToken;
 	private boolean hasBulletToken;
-	private ArrayList<Player> playersOccupying;
 	
-	public TileCell(MapTile mapTile, boolean accessible, boolean specialBuilding)
+	public TileCell(MapTile mapTile, boolean accessible, boolean building, boolean door)
 	{
 		this.mapTile = mapTile;
 		this.isAccessible = accessible;
-		this.specialBuilding = specialBuilding;
-		this.playersOccupying = new ArrayList<Player>();
-		this.playersOccupying.add(new Player());
+		this.isBuilding = building;
+		this.isDoor = door;
 		this.hasZombie = false;
 		this.hasLifeToken = false;
 		this.hasBulletToken = false;
@@ -43,7 +42,7 @@ public class TileCell
 	{
 		if (this.isAccessible)
 		{
-			if (this.specialBuilding)
+			if (this.isBuilding)
 			{
 				g.setColor(Color.RED);
 				g.fillRect(x, y, 80, 80);
@@ -57,7 +56,7 @@ public class TileCell
 		{
 			if (this.mapTile.getShape().equals(Shape.empty))
 			{
-				// Don't do anything.
+				// Don't do anything, already have dirt background.
 			}
 			else
 			{
@@ -80,14 +79,6 @@ public class TileCell
 			g.setColor(new Color(255, 200, 0));
 			g.fillOval(x + 30, y + 50, 20, 20);
 		}
-		/*for (Player player : this.playersOccupying)
-		{
-			int i = 1;
-			g.setColor(Color.WHITE);
-			g.fillRect(x + 58, y - 4 + 10 * i, 18, 18);
-			g.setColor(Color.BLACK);
-			g.drawString("P" + i, x + 60, y + 10 + 10 * i);
-		}*/
 		
 		if (isTemp)
 		{
@@ -128,6 +119,21 @@ public class TileCell
 		return this.hasZombie;
 	}
 	
+	public boolean isAcessible()
+	{
+		return this.isAccessible;
+	}
+	
+	public boolean isBuilding()
+	{
+		return this.isBuilding;
+	}
+	
+	public boolean isDoor()
+	{
+		return this.isDoor;
+	}
+	
 	public void setLifeToken(boolean life)
 	{
 		this.hasLifeToken = life;
@@ -143,28 +149,8 @@ public class TileCell
 		this.hasZombie = zombie;
 	}
 	
-	public boolean getAcessible()
-	{
-		return this.isAccessible;
-	}
-	
 	public void setAcessible(boolean accessible)
 	{
 		this.isAccessible = accessible;
-	}
-	
-	public void playerEntered(Player player)
-	{
-		this.playersOccupying.add(player);
-	}
-	
-	public void playerLeft(Player player)
-	{
-		this.playersOccupying.remove(player);
-	}
-	
-	public ArrayList<Player> getOccupyingPlayers()
-	{
-		return this.playersOccupying;
 	}
 }

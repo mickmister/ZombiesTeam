@@ -2,6 +2,8 @@ package main;
 
 import java.awt.Graphics2D;
 
+import javax.swing.JOptionPane;
+
 /**
  * A MapTile represents one tile that is placed on the Map. It is a square with 9 sub-blocks
  * (TileCells), and each has different patterns of sub-blocks that are accessible (roads) and
@@ -14,10 +16,13 @@ import java.awt.Graphics2D;
 public class MapTile
 {
 	private Shape shape;
+	private int zombies;
+	private int lifeTokens;
+	private int bulletTokens;
 	
 	public enum Shape
 	{
-		straight, T, L, quad, empty
+		straight, T, L, quad, empty, special
 	}
 	
 	// 2D array organized as [row, column].
@@ -43,6 +48,37 @@ public class MapTile
 			case empty:
 				this.grid = createBlankGrid();
 				break;
+			case special:
+				processSpecialString(special);
+				break;
+		}
+	}
+	
+	private void processSpecialString(String string)
+	{
+		try
+		{
+			String[] words = string.split(" ");
+			for (int y = 0; y < 3; y += 1)
+			{
+				for (int x = 0; x < 3; x += 1)
+				{
+					int index = y * 3 + x;
+					int number = Integer.parseInt(words[index]);
+					boolean accessible = number > 0;
+					boolean building = number > 1;
+					boolean door = number > 2;
+					this.grid[y][x] = new TileCell(this, accessible, building, door);
+				}
+			}
+			this.zombies = Integer.parseInt(words[9]);
+			this.lifeTokens = Integer.parseInt(words[10]);
+			this.bulletTokens = Integer.parseInt(words[11]);
+		}
+		catch (NumberFormatException e)
+		{
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "The special string could not be parsed for this MapTile:\n\"" + string + "\"", "Error Parsing", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	
@@ -164,7 +200,7 @@ public class MapTile
 		{
 			for (int j = 0; j < 3; j++)
 			{
-				toReturn[i][j] = new TileCell(this, false, false);
+				toReturn[i][j] = new TileCell(this, false, false, false);
 			}
 		}
 		return toReturn;
@@ -195,17 +231,17 @@ public class MapTile
 	{
 		String result = "";
 		
-		result += this.grid[0][0].getAcessible() + " ";
-		result += this.grid[0][1].getAcessible() + " ";
-		result += this.grid[0][2].getAcessible() + "\n";
+		result += this.grid[0][0].isAcessible() + " ";
+		result += this.grid[0][1].isAcessible() + " ";
+		result += this.grid[0][2].isAcessible() + "\n";
 		
-		result += this.grid[1][0].getAcessible() + " ";
-		result += this.grid[1][1].getAcessible() + " ";
-		result += this.grid[1][2].getAcessible() + "\n";
+		result += this.grid[1][0].isAcessible() + " ";
+		result += this.grid[1][1].isAcessible() + " ";
+		result += this.grid[1][2].isAcessible() + "\n";
 		
-		result += this.grid[2][0].getAcessible() + " ";
-		result += this.grid[2][1].getAcessible() + " ";
-		result += this.grid[2][2].getAcessible() + "\n";
+		result += this.grid[2][0].isAcessible() + " ";
+		result += this.grid[2][1].isAcessible() + " ";
+		result += this.grid[2][2].isAcessible() + "\n";
 		
 		return result;
 	}
