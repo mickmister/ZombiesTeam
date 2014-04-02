@@ -36,7 +36,7 @@ public class TileCell
 		this.hasBulletToken = false;
 	}
 	
-	public void draw(Graphics2D g, int x, int y, boolean isTemp)
+	public void draw(Graphics2D g, int x, int y, boolean isTemp, boolean tempZombie)
 	{
 		if (this.isAccessible)
 		{
@@ -67,7 +67,7 @@ public class TileCell
 			}
 		}
 		
-		if (this.hasZombie)
+		if (this.hasZombie || tempZombie)
 		{
 			g.setColor(Color.BLACK);
 			g.fillOval(x, y + 10, 20, 80 - 20);

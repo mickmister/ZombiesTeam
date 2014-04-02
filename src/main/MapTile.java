@@ -124,7 +124,8 @@ public class MapTile
 			{
 				int cellX = xPos * 240 + 80 * x;
 				int cellY = yPos * 240 + 80 * y;
-				this.grid[y][x].draw(graphics, cellX, cellY, isTemp);
+				boolean tempZombie = (new Point(x, y)).equals(this.tempZombiePos);
+				this.grid[y][x].draw(graphics, cellX, cellY, isTemp, tempZombie);
 			}
 		}
 	}
