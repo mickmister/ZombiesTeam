@@ -6,6 +6,9 @@ import java.util.Random;
 
 import javax.swing.JButton;
 
+import main.GameHandler;
+import main.GameHandler.GameState;
+
 public class RollDiceButton extends JButton implements ActionListener
 {
 	public RollDiceButton()
@@ -17,7 +20,10 @@ public class RollDiceButton extends JButton implements ActionListener
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
-		rollDiceClicked();
+		if (GameHandler.instance.getCurrentState() == GameState.playerMovement || GameHandler.instance.getCurrentState() == GameState.zombieMovement)
+		{
+			rollDiceClicked();
+		}
 	}
 	
 	public void rollDiceClicked()
