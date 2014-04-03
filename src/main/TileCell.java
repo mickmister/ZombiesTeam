@@ -73,18 +73,22 @@ public class TileCell
 		
 		if (this.hasZombie || tempZombie)
 		{
-			g.setColor(Color.BLACK);
-			g.fillOval(x, y + 10, 20, 80 - 20);
+			g.drawImage(ImageManager.ZOMBIE_ICON, x, y + 10, null);
 		}
 		if (this.hasLifeToken)
 		{
-			g.setColor(new Color(255, 100, 100));
-			g.fillOval(x + 30, y + 10, 20, 20);
+			g.drawImage(ImageManager.HEART_ICON, x, y + 10, null);
 		}
 		if (this.hasBulletToken)
 		{
-			g.setColor(new Color(255, 200, 0));
-			g.fillOval(x + 30, y + 50, 20, 20);
+			g.drawImage(ImageManager.BULLET_ICON, x, y + 10, null);
+		}
+		for (int i = 0; i < this.playersOccupying.size(); i += 1)
+		{
+			g.setColor(Color.WHITE);
+			g.fillRect(x + 60, 20 * i, 20, 20);
+			g.setColor(Color.BLACK);
+			g.drawString("P" + (i + 1), x + 65, 20 * i + 15);
 		}
 		
 		if (isTemp)

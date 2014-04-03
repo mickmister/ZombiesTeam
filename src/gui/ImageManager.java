@@ -13,6 +13,9 @@ public class ImageManager
 	public static BufferedImage ZOMBIE_PICTURE;
 	public static BufferedImage HEART_PICTURE;
 	public static BufferedImage BULLET_PICTURE;
+	public static BufferedImage ZOMBIE_ICON;
+	public static BufferedImage HEART_ICON;
+	public static BufferedImage BULLET_ICON;
 	
 	public ImageManager()
 	{
@@ -24,6 +27,9 @@ public class ImageManager
 			ZOMBIE_PICTURE = ImageIO.read(this.getClass().getResourceAsStream("../Resources/Zombie Picture.png"));
 			HEART_PICTURE = ImageIO.read(this.getClass().getResourceAsStream("../Resources/Heart Picture.png"));
 			BULLET_PICTURE = ImageIO.read(this.getClass().getResourceAsStream("../Resources/Bullet Picture.png"));
+			ZOMBIE_ICON = ImageIO.read(this.getClass().getResourceAsStream("../Resources/Zombie Icon.png"));
+			HEART_ICON = ImageIO.read(this.getClass().getResourceAsStream("../Resources/Heart Icon.png"));
+			BULLET_ICON = ImageIO.read(this.getClass().getResourceAsStream("../Resources/Bullet Icon.png"));
 		}
 		catch (IOException e)
 		{
