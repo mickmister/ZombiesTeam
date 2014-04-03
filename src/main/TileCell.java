@@ -6,6 +6,8 @@ import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Composite;
 import java.awt.Graphics2D;
+import java.util.ArrayList;
+
 import main.MapTile.Shape;
 
 /**
@@ -24,6 +26,7 @@ public class TileCell
 	private boolean hasZombie;
 	private boolean hasLifeToken;
 	private boolean hasBulletToken;
+	private ArrayList<Player> playersOccupying;
 	
 	public TileCell(MapTile mapTile, boolean accessible, boolean building, boolean door)
 	{
@@ -34,6 +37,7 @@ public class TileCell
 		this.hasZombie = false;
 		this.hasLifeToken = false;
 		this.hasBulletToken = false;
+		this.playersOccupying = new ArrayList<Player>();
 	}
 	
 	public void draw(Graphics2D g, int x, int y, boolean isTemp, boolean tempZombie)
@@ -160,5 +164,15 @@ public class TileCell
 	public void setAcessible(boolean accessible)
 	{
 		this.isAccessible = accessible;
+	}
+	
+	public void removePlayer(Player player)
+	{
+		this.playersOccupying.remove(player);
+	}
+	
+	public void addPlayer(Player player)
+	{
+		this.playersOccupying.add(player);
 	}
 }

@@ -202,26 +202,29 @@ public class MapView extends JPanel implements Runnable, KeyListener
 	}
 
 	private void handlePlayerMovement(KeyEvent e) {
+		Window window = (Window) this.getTopLevelAncestor();
+		Player player = window.getPlayer();
 		if (e.getKeyCode() == KeyEvent.VK_LEFT)
 		{
-			//TODO
+			player.tryMoveLeft();
 		}
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT)
 		{
-			//TODO
+			player.tryMoveRight();
 		}
 		if (e.getKeyCode() == KeyEvent.VK_UP)
 		{
-			//TODO
+			player.tryMoveUp();
 		}
 		if (e.getKeyCode() == KeyEvent.VK_DOWN)
 		{
-			//TODO
+			player.tryMoveDown();
 		}
-		if (e.getKeyCode() == KeyEvent.VK_ENTER)
+		if (e.getKeyCode() == KeyEvent.VK_ENTER || player.getMovesRemaining() == 0)
 		{
-			//TODO
+			GameHandler.instance.nextGameState();
 		}
+		
 		
 	}
 

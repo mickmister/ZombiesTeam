@@ -115,6 +115,10 @@ public class MapTile
 	{
 		return this.grid[2][1];
 	}
+	public TileCell getCell(int row, int col)
+	{
+		return this.grid[row][col];
+	}
 	
 	public void draw(Graphics2D graphics, int xPos, int yPos, boolean isTemp)
 	{
