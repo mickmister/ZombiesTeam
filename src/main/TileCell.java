@@ -86,9 +86,9 @@ public class TileCell
 		for (int i = 0; i < this.playersOccupying.size(); i += 1)
 		{
 			g.setColor(Color.WHITE);
-			g.fillRect(x + 60, 20 * i, 20, 20);
+			g.fillRect(x + 60, y + 20 * i, 20, 20);
 			g.setColor(Color.BLACK);
-			g.drawString("P" + (i + 1), x + 65, 20 * i + 15);
+			g.drawString("P" + (i + 1), x + 65, y + 20 * i + 15);
 		}
 		
 		if (isTemp)
