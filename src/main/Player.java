@@ -216,6 +216,7 @@ public class Player
 			{
 				currentCell.removePlayer(this);
 				targetCell.addPlayer(this);
+				return true;
 			}
 			
 			return false;

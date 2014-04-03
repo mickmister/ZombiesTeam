@@ -8,6 +8,7 @@ import javax.swing.JButton;
 
 import main.GameHandler;
 import main.GameHandler.GameState;
+import main.Player;
 
 public class RollDiceButton extends JButton implements ActionListener
 {
@@ -20,7 +21,7 @@ public class RollDiceButton extends JButton implements ActionListener
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
-		if (GameHandler.instance.getCurrentState() == GameState.playerMovement || GameHandler.instance.getCurrentState() == GameState.zombieMovement)
+		if (GameHandler.instance.getCurrentState() == GameState.playerMovementDieRoll || GameHandler.instance.getCurrentState() == GameState.zombieMovementDieRoll)
 		{
 			rollDiceClicked();
 		}
@@ -30,6 +31,10 @@ public class RollDiceButton extends JButton implements ActionListener
 	{
 		Random dice = new Random();
 		int rollNum = dice.nextInt(6) + 1;
+		GameHandler game = GameHandler.instance;
+		Player player = game.getPlayer(game.getTurn());
+		player.setMovesRemaining(rollNum);
 		System.out.println(rollNum);
+		game.nextGameState();
 	}
 }

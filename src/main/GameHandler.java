@@ -14,7 +14,7 @@ public class GameHandler
 	
 	public enum GameState
 	{
-		tilePlacement, zombiePlacement, playerMovement, zombieMovement
+		tilePlacement, zombiePlacement, playerMovementDieRoll, playerMovement, zombieMovementDieRoll, zombieMovement
 	}
 	
 	public GameHandler(int numberOfPlayers)
@@ -82,9 +82,15 @@ public class GameHandler
 				this.currentState = GameState.zombiePlacement;
 				break;
 			case zombiePlacement:
+				this.currentState = GameState.playerMovementDieRoll;
+				break;
+			case playerMovementDieRoll:
 				this.currentState = GameState.playerMovement;
 				break;
 			case playerMovement:
+				this.currentState = GameState.zombieMovementDieRoll;
+				break;
+			case zombieMovementDieRoll:
 				this.currentState = GameState.zombieMovement;
 				break;
 			case zombieMovement:
