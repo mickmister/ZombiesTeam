@@ -146,11 +146,11 @@ public class MapTile
 	{
 		TileCell[][] quadGrid = createBlankGrid();
 		
-		quadGrid[0][1].setAcessible(true); // Top Middle
-		quadGrid[1][0].setAcessible(true); // Middle Left
-		quadGrid[1][1].setAcessible(true); // Middle Middle
-		quadGrid[1][2].setAcessible(true); // Middle Right
-		quadGrid[2][1].setAcessible(true); // Bottom Middle
+		quadGrid[0][1].setAccessible(true); // Top Middle
+		quadGrid[1][0].setAccessible(true); // Middle Left
+		quadGrid[1][1].setAccessible(true); // Middle Middle
+		quadGrid[1][2].setAccessible(true); // Middle Right
+		quadGrid[2][1].setAccessible(true); // Bottom Middle
 		
 		return quadGrid;
 	}
@@ -165,9 +165,9 @@ public class MapTile
 	{
 		TileCell[][] LGrid = createBlankGrid();
 		
-		LGrid[1][1].setAcessible(true); // Middle Middle
-		LGrid[1][2].setAcessible(true); // Middle Right
-		LGrid[2][1].setAcessible(true); // Bottom Middle
+		LGrid[1][1].setAccessible(true); // Middle Middle
+		LGrid[1][2].setAccessible(true); // Middle Right
+		LGrid[2][1].setAccessible(true); // Bottom Middle
 		
 		return LGrid;
 	}
@@ -181,9 +181,9 @@ public class MapTile
 	{
 		TileCell[][] straightGrid = createBlankGrid();
 		
-		straightGrid[1][0].setAcessible(true); // Middle Left
-		straightGrid[1][1].setAcessible(true); // Middle Middle
-		straightGrid[1][2].setAcessible(true); // Middle Right
+		straightGrid[1][0].setAccessible(true); // Middle Left
+		straightGrid[1][1].setAccessible(true); // Middle Middle
+		straightGrid[1][2].setAccessible(true); // Middle Right
 		
 		return straightGrid;
 	}
@@ -197,10 +197,10 @@ public class MapTile
 	{
 		TileCell[][] tetrisGrid = createBlankGrid();
 		
-		tetrisGrid[1][0].setAcessible(true); // Middle Left
-		tetrisGrid[1][1].setAcessible(true); // Middle Middle
-		tetrisGrid[1][2].setAcessible(true); // Middle Right
-		tetrisGrid[2][1].setAcessible(true); // Bottom Middle
+		tetrisGrid[1][0].setAccessible(true); // Middle Left
+		tetrisGrid[1][1].setAccessible(true); // Middle Middle
+		tetrisGrid[1][2].setAccessible(true); // Middle Right
+		tetrisGrid[2][1].setAccessible(true); // Bottom Middle
 		
 		return tetrisGrid;
 	}
@@ -247,17 +247,17 @@ public class MapTile
 	{
 		String result = "";
 		
-		result += this.grid[0][0].isAcessible() + " ";
-		result += this.grid[0][1].isAcessible() + " ";
-		result += this.grid[0][2].isAcessible() + "\n";
+		result += this.grid[0][0].isAccessible() + " ";
+		result += this.grid[0][1].isAccessible() + " ";
+		result += this.grid[0][2].isAccessible() + "\n";
 		
-		result += this.grid[1][0].isAcessible() + " ";
-		result += this.grid[1][1].isAcessible() + " ";
-		result += this.grid[1][2].isAcessible() + "\n";
+		result += this.grid[1][0].isAccessible() + " ";
+		result += this.grid[1][1].isAccessible() + " ";
+		result += this.grid[1][2].isAccessible() + "\n";
 		
-		result += this.grid[2][0].isAcessible() + " ";
-		result += this.grid[2][1].isAcessible() + " ";
-		result += this.grid[2][2].isAcessible() + "\n";
+		result += this.grid[2][0].isAccessible() + " ";
+		result += this.grid[2][1].isAccessible() + " ";
+		result += this.grid[2][2].isAccessible() + "\n";
 		
 		return result;
 	}
@@ -271,7 +271,7 @@ public class MapTile
 	{
 		if (point.x >= 0 && point.y >= 0 && point.x <= 2 && point.y <= 2)
 		{
-			if (this.grid[point.y][point.x].isAcessible())
+			if (this.grid[point.y][point.x].isAccessible())
 			{
 				this.tempZombiePos = point;
 			}

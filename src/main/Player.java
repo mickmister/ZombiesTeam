@@ -10,8 +10,8 @@ import java.awt.Point;
  */
 public class Player
 {
-	private int life;
-	private int bullets;
+	private int lifeTokens;
+	private int bulletTokens;
 	private int zombiesCaptured;
 	private int number;
 	private int xTile;
@@ -23,8 +23,8 @@ public class Player
 	public Player(int number)
 	{
 		this.number = number;
-		this.life = 3;
-		this.bullets = 3;
+		this.lifeTokens = 3;
+		this.bulletTokens = 3;
 		this.zombiesCaptured = 0;
 		this.xTile = 5;
 		this.yTile = 5;
@@ -35,14 +35,19 @@ public class Player
 		GameHandler.instance.getMap().getMapTile(this.yTile, this.xTile).getCell(this.yCell, this.xCell).addPlayer(this);
 	}
 	
+	public int getNumber()
+	{
+		return this.number;
+	}
+	
 	public int getLifeTokens()
 	{
-		return this.life;
+		return this.lifeTokens;
 	}
 	
 	public int getBulletTokens()
 	{
-		return this.bullets;
+		return this.bulletTokens;
 	}
 	
 	public int getZombiesCaptured()
@@ -221,7 +226,7 @@ public class Player
 		}
 		else
 		{
-			if (targetCell.isAcessible())
+			if (targetCell.isAccessible())
 			{
 				currentCell.removePlayer(this);
 				targetCell.addPlayer(this);

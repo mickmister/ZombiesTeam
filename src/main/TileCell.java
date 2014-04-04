@@ -88,7 +88,8 @@ public class TileCell
 			g.setColor(Color.WHITE);
 			g.fillRect(x + 60, y + 20 * i, 20, 20);
 			g.setColor(Color.BLACK);
-			g.drawString("P" + (i + 1), x + 65, y + 20 * i + 15);
+			int num = this.playersOccupying.get(i).getNumber() + 1;
+			g.drawString("P" + num, x + 65, y + 20 * i + 15);
 		}
 		
 		if (isTemp || tempZombie)
@@ -135,7 +136,7 @@ public class TileCell
 		return this.hasZombie;
 	}
 	
-	public boolean isAcessible()
+	public boolean isAccessible()
 	{
 		return this.isAccessible;
 	}
@@ -165,7 +166,7 @@ public class TileCell
 		this.hasZombie = zombie;
 	}
 	
-	public void setAcessible(boolean accessible)
+	public void setAccessible(boolean accessible)
 	{
 		this.isAccessible = accessible;
 	}

@@ -60,18 +60,15 @@ public class GameHandler
 		this.turn = (this.turn + 1) % this.numberOfPlayers;
 	}
 	
-	/**
-	 * TODO Put here a description of what this method does.
-	 * 
-	 * @return
-	 */
 	public GameState getCurrentState()
 	{
 		return this.currentState;
 	}
 	
 	/**
-	 * TODO Put here a description of what this method does.
+	 * Moves to the next game state in the defined flow of a turn. This goes: tilePlacement ->
+	 * zombiePlacement -> playerMovementDieRoll -> playerMovement -> zombieMovementDieRoll ->
+	 * zombieMovement
 	 */
 	public void nextGameState()
 	{

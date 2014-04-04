@@ -25,7 +25,7 @@ public class MapTileTest
 		{
 			for (TileCell element2 : element)
 			{
-				assertFalse(element2.isAcessible());
+				assertFalse(element2.isAccessible());
 			}
 		}
 		
