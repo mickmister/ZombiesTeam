@@ -54,9 +54,9 @@ public class MapTileDeck
 		specialTiles += "2 3 2 1 1 1 0 1 0" + " " + "3 1 2" + "\n"; // Gas Station
 		
 		String[] lines = specialTiles.split("\n");
-		for (int i = 0; i < lines.length; i += 1)
+		for (String line : lines)
 		{
-			this.deck.add(new MapTile(Shape.special, lines[i]));
+			this.deck.add(new MapTile(Shape.special, line));
 		}
 	}
 }

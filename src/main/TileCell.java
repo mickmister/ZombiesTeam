@@ -91,7 +91,7 @@ public class TileCell
 			g.drawString("P" + (i + 1), x + 65, y + 20 * i + 15);
 		}
 		
-		if (isTemp)
+		if (isTemp || tempZombie)
 		{
 			Composite old = g.getComposite();
 			double alpha = (Math.sin(System.currentTimeMillis() / 400.0) + 1.0) / 2.0;

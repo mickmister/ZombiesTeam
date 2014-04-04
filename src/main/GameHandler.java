@@ -62,7 +62,7 @@ public class GameHandler
 	
 	/**
 	 * TODO Put here a description of what this method does.
-	 *
+	 * 
 	 * @return
 	 */
 	public GameState getCurrentState()
@@ -72,7 +72,6 @@ public class GameHandler
 	
 	/**
 	 * TODO Put here a description of what this method does.
-	 *
 	 */
 	public void nextGameState()
 	{

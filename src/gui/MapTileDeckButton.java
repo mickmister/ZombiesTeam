@@ -26,9 +26,9 @@ public class MapTileDeckButton extends JButton implements ActionListener
 	
 	public void mapTileDeckClicked()
 	{
-		if (((Window) this.getTopLevelAncestor()).getPlayer().isPlayersTurn())
+		if (((Window) getTopLevelAncestor()).getPlayer().isPlayersTurn())
 		{
-			if (GameHandler.instance.getCurrentState() == GameState.tilePlacement) 
+			if (GameHandler.instance.getCurrentState() == GameState.tilePlacement)
 			{
 				if (GameHandler.instance.getMap().getTempTile() == null)
 				{

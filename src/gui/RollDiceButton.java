@@ -21,7 +21,8 @@ public class RollDiceButton extends JButton implements ActionListener
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
-		if (GameHandler.instance.getCurrentState() == GameState.playerMovementDieRoll || GameHandler.instance.getCurrentState() == GameState.zombieMovementDieRoll)
+		if (GameHandler.instance.getCurrentState() == GameState.playerMovementDieRoll
+				|| GameHandler.instance.getCurrentState() == GameState.zombieMovementDieRoll)
 		{
 			rollDiceClicked();
 		}

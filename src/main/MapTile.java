@@ -87,7 +87,8 @@ public class MapTile
 		catch (NumberFormatException e)
 		{
 			e.printStackTrace();
-			JOptionPane.showMessageDialog(null, "The special string could not be parsed for this MapTile:\n\"" + string + "\"", "Error Parsing", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "The special string could not be parsed for this MapTile:\n\"" + string + "\"", "Error Parsing",
+					JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	
@@ -115,6 +116,7 @@ public class MapTile
 	{
 		return this.grid[2][1];
 	}
+	
 	public TileCell getCell(int row, int col)
 	{
 		return this.grid[row][col];
@@ -128,7 +130,7 @@ public class MapTile
 			{
 				int cellX = xPos * 240 + 80 * x;
 				int cellY = yPos * 240 + 80 * y;
-				boolean tempZombie = (new Point(x, y)).equals(this.tempZombiePos);
+				boolean tempZombie = new Point(x, y).equals(this.tempZombiePos);
 				this.grid[y][x].draw(graphics, cellX, cellY, isTemp, tempZombie);
 			}
 		}
@@ -259,13 +261,13 @@ public class MapTile
 		
 		return result;
 	}
-
+	
 	/**
 	 * TODO Put here a description of what this method does.
-	 *
+	 * 
 	 * @param point
 	 */
-	public void setTempZombiePos(Point point) 
+	public void setTempZombiePos(Point point)
 	{
 		if (point.x >= 0 && point.y >= 0 && point.x <= 2 && point.y <= 2)
 		{
@@ -280,22 +282,22 @@ public class MapTile
 	{
 		return this.tempZombiePos;
 	}
-
+	
 	/**
 	 * TODO Put here a description of what this method does.
-	 *
 	 */
-	public void placeTempZombie() {
+	public void placeTempZombie()
+	{
 		TileCell cell = this.grid[this.tempZombiePos.y][this.tempZombiePos.x];
 		if (!cell.hasZombie())
 		{
 			cell.setZombie(true);
-			this.zombiesToPlace --;
-			if(zombiesToPlace == 0)
+			this.zombiesToPlace--;
+			if (this.zombiesToPlace == 0)
 			{
 				GameHandler.instance.nextGameState();
 			}
-			else			
+			else
 			{
 				this.tempZombiePos = new Point(1, 1);
 			}

@@ -14,7 +14,6 @@ import javax.swing.JPanel;
 import javax.swing.JViewport;
 
 import main.GameHandler;
-import main.GameHandler.GameState;
 import main.MapTile;
 import main.Player;
 import main.Window;
@@ -103,10 +102,8 @@ public class MapView extends JPanel implements Runnable, KeyListener
 	private void displayInvalidLocation()
 	{
 		JOptionPane.showMessageDialog(null, "The selected location is not valid for the given map tile.\n"
-				+ "The tile must be touching at least one other tile,\n"
-				+ "all touching roads must connect (and not become blocked),\n"
-				+ "and it may not be placed on top of an existing tile.\n\nTry again.",
-				"Invalid Placement", JOptionPane.WARNING_MESSAGE);
+				+ "The tile must be touching at least one other tile,\n" + "all touching roads must connect (and not become blocked),\n"
+				+ "and it may not be placed on top of an existing tile.\n\nTry again.", "Invalid Placement", JOptionPane.WARNING_MESSAGE);
 	}
 	
 	@Override
@@ -129,53 +126,57 @@ public class MapView extends JPanel implements Runnable, KeyListener
 	@Override
 	public void keyPressed(KeyEvent e)
 	{
-		Window window = (Window) this.getTopLevelAncestor();
+		Window window = (Window) getTopLevelAncestor();
 		Player player = window.getPlayer();
-		if(!player.isPlayersTurn()) return;
+		if (!player.isPlayersTurn())
+		{
+			return;
+		}
 		
 		switch (GameHandler.instance.getCurrentState())
 		{
-		case tilePlacement:
-			handleTilePlacement(e);
-			break;
-		case zombiePlacement:
-			handleZombiePlacement(e);
-			break;
-		case playerMovement:
-			handlePlayerMovement(e);
-			break;
-		case zombieMovement:
-			handleZombieMovement(e);
-			break;		
+			case tilePlacement:
+				handleTilePlacement(e);
+				break;
+			case zombiePlacement:
+				handleZombiePlacement(e);
+				break;
+			case playerMovement:
+				handlePlayerMovement(e);
+				break;
+			case zombieMovement:
+				handleZombieMovement(e);
+				break;
 		}
-		
 		
 	}
 	
-	private void handleZombieMovement(KeyEvent e) {
+	private void handleZombieMovement(KeyEvent e)
+	{
 		if (e.getKeyCode() == KeyEvent.VK_LEFT)
 		{
-			//TODO
+			// TODO
 		}
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT)
 		{
-			//TODO
+			// TODO
 		}
 		if (e.getKeyCode() == KeyEvent.VK_UP)
 		{
-			//TODO
+			// TODO
 		}
 		if (e.getKeyCode() == KeyEvent.VK_DOWN)
 		{
-			//TODO
+			// TODO
 		}
 		if (e.getKeyCode() == KeyEvent.VK_ENTER)
 		{
-			//TODO
+			// TODO
 		}
 	}
-
-	private void handleZombiePlacement(KeyEvent e) {
+	
+	private void handleZombiePlacement(KeyEvent e)
+	{
 		
 		MapTile tile = GameHandler.instance.getMap().getTempZombieTile();
 		Point current = tile.getTempZombiePos();
@@ -200,9 +201,10 @@ public class MapView extends JPanel implements Runnable, KeyListener
 			tile.placeTempZombie();
 		}
 	}
-
-	private void handlePlayerMovement(KeyEvent e) {
-		Window window = (Window) this.getTopLevelAncestor();
+	
+	private void handlePlayerMovement(KeyEvent e)
+	{
+		Window window = (Window) getTopLevelAncestor();
 		Player player = window.getPlayer();
 		System.out.println(player.getMovesRemaining());
 		if (e.getKeyCode() == KeyEvent.VK_LEFT)
@@ -230,10 +232,10 @@ public class MapView extends JPanel implements Runnable, KeyListener
 			GameHandler.instance.nextGameState();
 		}
 		
-		
 	}
-
-	private void handleTilePlacement(KeyEvent e) {
+	
+	private void handleTilePlacement(KeyEvent e)
+	{
 		if (GameHandler.instance.getMap().getTempTile() != null)
 		{
 			Point old = GameHandler.instance.getMap().getTempPos();
@@ -267,7 +269,7 @@ public class MapView extends JPanel implements Runnable, KeyListener
 				{
 					GameHandler.instance.getMap().placeTempTile();
 					GameHandler.instance.nextGameState();
-					GameHandler.instance.getMap().getTempZombieTile().setTempZombiePos(new Point(1,1));
+					GameHandler.instance.getMap().getTempZombieTile().setTempZombiePos(new Point(1, 1));
 				}
 				catch (IllegalStateException exception)
 				{
@@ -277,7 +279,7 @@ public class MapView extends JPanel implements Runnable, KeyListener
 		}
 		
 	}
-
+	
 	@Override
 	public void keyReleased(KeyEvent e)
 	{

@@ -31,6 +31,8 @@ public class Player
 		this.xCell = 1;
 		this.yCell = 1;
 		this.movesRemaining = 0;
+		
+		GameHandler.instance.getMap().getMapTile(this.yTile, this.xTile).getCell(this.yCell, this.xCell).addPlayer(this);
 	}
 	
 	public int getLifeTokens()
@@ -67,152 +69,159 @@ public class Player
 	{
 		return this.number == GameHandler.instance.getTurn();
 	}
+	
 	public int getMovesRemaining()
 	{
 		return this.movesRemaining;
 	}
+	
 	public void setMovesRemaining(int moves)
 	{
 		this.movesRemaining = moves;
 	}
+	
 	public void tryMoveLeft()
 	{
 		Map map = GameHandler.instance.getMap();
-		MapTile currentTile = map.getMapTile(yTile, xTile);
-		TileCell currentCell = currentTile.getCell(yCell, xCell);
+		MapTile currentTile = map.getMapTile(this.yTile, this.xTile);
+		TileCell currentCell = currentTile.getCell(this.yCell, this.xCell);
 		TileCell targetCell = null;
 		
-		if(xCell == 0)
+		if (this.xCell == 0)
 		{
-			targetCell = map.getMapTile(yTile, xTile - 1).getCell(yCell, 2);
-			if(checkDifferentTileMove(currentCell, targetCell))
+			targetCell = map.getMapTile(this.yTile, this.xTile - 1).getCell(this.yCell, 2);
+			if (checkDifferentTileMove(currentCell, targetCell))
 			{
-				xTile -= 1;
-				xCell = 2;
-				movesRemaining -=1;
-				//Zombie check
+				this.xTile -= 1;
+				this.xCell = 2;
+				this.movesRemaining -= 1;
+				// Zombie check
 			}
 		}
 		else
 		{
-			targetCell = currentTile.getCell(yCell, xCell - 1);
-			if(checkSameTileMove(currentCell, targetCell))
+			targetCell = currentTile.getCell(this.yCell, this.xCell - 1);
+			if (checkSameTileMove(currentCell, targetCell))
 			{
-				xCell -=1;
-				movesRemaining -=1;
-				//Zombie check
+				this.xCell -= 1;
+				this.movesRemaining -= 1;
+				// Zombie check
 			}
-		}		
+		}
 	}
+	
 	public void tryMoveRight()
 	{
 		Map map = GameHandler.instance.getMap();
-		MapTile currentTile = map.getMapTile(yTile, xTile);
-		TileCell currentCell = currentTile.getCell(yCell, xCell);
+		MapTile currentTile = map.getMapTile(this.yTile, this.xTile);
+		TileCell currentCell = currentTile.getCell(this.yCell, this.xCell);
 		TileCell targetCell = null;
 		
-		if(xCell == 2)
+		if (this.xCell == 2)
 		{
-			targetCell = map.getMapTile(yTile, xTile + 1).getCell(yCell, 0);
-			if(checkDifferentTileMove(currentCell, targetCell))
+			targetCell = map.getMapTile(this.yTile, this.xTile + 1).getCell(this.yCell, 0);
+			if (checkDifferentTileMove(currentCell, targetCell))
 			{
-				xTile += 1;
-				xCell = 0;
-				movesRemaining -=1;
-				//Zombie check
+				this.xTile += 1;
+				this.xCell = 0;
+				this.movesRemaining -= 1;
+				// Zombie check
 			}
 		}
 		else
 		{
-			targetCell = currentTile.getCell(yCell, xCell + 1);
-			if(checkSameTileMove(currentCell, targetCell))
+			targetCell = currentTile.getCell(this.yCell, this.xCell + 1);
+			if (checkSameTileMove(currentCell, targetCell))
 			{
-				xCell +=1;
-				movesRemaining -=1;
-				//Zombie check
+				this.xCell += 1;
+				this.movesRemaining -= 1;
+				// Zombie check
 			}
-		}		
+		}
 	}
 	
 	public void tryMoveUp()
 	{
 		
 		Map map = GameHandler.instance.getMap();
-		MapTile currentTile = map.getMapTile(yTile, xTile);
-		TileCell currentCell = currentTile.getCell(yCell, xCell);
+		MapTile currentTile = map.getMapTile(this.yTile, this.xTile);
+		TileCell currentCell = currentTile.getCell(this.yCell, this.xCell);
 		TileCell targetCell = null;
 		
-		if(yCell == 0)
+		if (this.yCell == 0)
 		{
-			targetCell = map.getMapTile(yTile - 1, xTile).getCell(2, xCell);
-			if(checkDifferentTileMove(currentCell, targetCell))
+			targetCell = map.getMapTile(this.yTile - 1, this.xTile).getCell(2, this.xCell);
+			if (checkDifferentTileMove(currentCell, targetCell))
 			{
-				yTile -= 1;
-				yCell = 2;
-				movesRemaining -=1;
-				//Zombie check
+				this.yTile -= 1;
+				this.yCell = 2;
+				this.movesRemaining -= 1;
+				// Zombie check
 			}
 		}
 		else
 		{
-			targetCell = currentTile.getCell(yCell - 1, xCell);
-			if(checkSameTileMove(currentCell, targetCell))
+			targetCell = currentTile.getCell(this.yCell - 1, this.xCell);
+			if (checkSameTileMove(currentCell, targetCell))
 			{
-				yCell -= 1;
-				movesRemaining -=1;
-				//Zombie check
+				this.yCell -= 1;
+				this.movesRemaining -= 1;
+				// Zombie check
 			}
-		}		
+		}
 	}
+	
 	public void tryMoveDown()
 	{
 		
 		Map map = GameHandler.instance.getMap();
-		MapTile currentTile = map.getMapTile(yTile, xTile);
-		TileCell currentCell = currentTile.getCell(yCell, xCell);
+		MapTile currentTile = map.getMapTile(this.yTile, this.xTile);
+		TileCell currentCell = currentTile.getCell(this.yCell, this.xCell);
 		TileCell targetCell = null;
 		
-		if(yCell == 2)
+		if (this.yCell == 2)
 		{
-			targetCell = map.getMapTile(yTile + 1, xTile).getCell(0, xCell);
-			if(checkDifferentTileMove(currentCell, targetCell))
+			targetCell = map.getMapTile(this.yTile + 1, this.xTile).getCell(0, this.xCell);
+			if (checkDifferentTileMove(currentCell, targetCell))
 			{
-				yTile += 1;
-				yCell = 0;
-				movesRemaining -=1;
-				//Zombie check
+				this.yTile += 1;
+				this.yCell = 0;
+				this.movesRemaining -= 1;
+				// Zombie check
 			}
 		}
 		else
 		{
-			targetCell = currentTile.getCell(yCell + 1, xCell);
-			if(checkSameTileMove(currentCell, targetCell))
+			targetCell = currentTile.getCell(this.yCell + 1, this.xCell);
+			if (checkSameTileMove(currentCell, targetCell))
 			{
-				yCell += 1;
-				movesRemaining -=1;
-				//Zombie check
+				this.yCell += 1;
+				this.movesRemaining -= 1;
+				// Zombie check
 			}
-		}		
+		}
 	}
+	
 	private boolean checkDifferentTileMove(TileCell currentCell, TileCell targetCell)
 	{
-		if(currentCell.isRoad() && targetCell.isRoad())
+		if (currentCell.isRoad() && targetCell.isRoad())
 		{
 			currentCell.removePlayer(this);
-			targetCell.addPlayer(this);			
+			targetCell.addPlayer(this);
 			return true;
 		}
 		return false;
 	}
+	
 	private boolean checkSameTileMove(TileCell currentCell, TileCell targetCell)
 	{
-		if ((currentCell.isBuilding() && targetCell.isRoad()) || (currentCell.isRoad() && targetCell.isBuilding()))
+		if (currentCell.isBuilding() && targetCell.isRoad() || currentCell.isRoad() && targetCell.isBuilding())
 		{
 			return false;
 		}
 		else
 		{
-			if(targetCell.isAcessible())
+			if (targetCell.isAcessible())
 			{
 				currentCell.removePlayer(this);
 				targetCell.addPlayer(this);
