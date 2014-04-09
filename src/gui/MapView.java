@@ -219,7 +219,6 @@ public class MapView extends JPanel implements Runnable, KeyListener
 	{
 		Window window = (Window) getTopLevelAncestor();
 		Player player = window.getPlayer();
-		System.out.println(player.getMovesRemaining());
 		if (e.getKeyCode() == KeyEvent.VK_LEFT)
 		{
 			player.tryMoveLeft();
