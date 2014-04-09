@@ -147,7 +147,6 @@ public class Player
 	
 	public void tryMoveUp()
 	{
-		
 		Map map = GameHandler.instance.getMap();
 		MapTile currentTile = map.getMapTile(this.yTile, this.xTile);
 		TileCell currentCell = currentTile.getCell(this.yCell, this.xCell);
@@ -178,7 +177,6 @@ public class Player
 	
 	public void tryMoveDown()
 	{
-		
 		Map map = GameHandler.instance.getMap();
 		MapTile currentTile = map.getMapTile(this.yTile, this.xTile);
 		TileCell currentCell = currentTile.getCell(this.yCell, this.xCell);
@@ -236,5 +234,4 @@ public class Player
 			return false;
 		}
 	}
-	
 }

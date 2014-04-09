@@ -13,22 +13,41 @@ public class GameHandlerTest
 	@Test
 	public void testGameHandler()
 	{
-		for (int i = 0; i <= 4; i += 1)
+		for (int i = 2; i <= 4; i += 1)
 		{
 			new ImageManager();
 			GameHandler test = new GameHandler(i);
+			// Test valid constructor (no exceptions, etc.).
 			assertNotNull(test);
+			// Test that the singleton global reference is correct.
+			assertEquals(test, GameHandler.instance);
 		}
 	}
 	
 	@Test
-	public void testNextTurn()
+	public void testNextTurn2Players()
 	{
 		new ImageManager();
 		GameHandler test = new GameHandler(2);
 		assertEquals(0, test.getTurn());
 		test.nextTurn();
 		assertEquals(1, test.getTurn());
+		test.nextTurn();
+		assertEquals(0, test.getTurn());
+	}
+	
+	@Test
+	public void testNextTurn4Players()
+	{
+		new ImageManager();
+		GameHandler test = new GameHandler(4);
+		assertEquals(0, test.getTurn());
+		test.nextTurn();
+		assertEquals(1, test.getTurn());
+		test.nextTurn();
+		assertEquals(2, test.getTurn());
+		test.nextTurn();
+		assertEquals(3, test.getTurn());
 		test.nextTurn();
 		assertEquals(0, test.getTurn());
 	}
@@ -42,7 +61,11 @@ public class GameHandlerTest
 		test.nextGameState();
 		assertEquals(GameState.zombiePlacement, test.getCurrentState());
 		test.nextGameState();
+		assertEquals(GameState.playerMovementDieRoll, test.getCurrentState());
+		test.nextGameState();
 		assertEquals(GameState.playerMovement, test.getCurrentState());
+		test.nextGameState();
+		assertEquals(GameState.zombieMovementDieRoll, test.getCurrentState());
 		test.nextGameState();
 		assertEquals(GameState.zombieMovement, test.getCurrentState());
 		test.nextGameState();

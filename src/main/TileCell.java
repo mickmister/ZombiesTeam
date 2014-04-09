@@ -89,7 +89,7 @@ public class TileCell
 			g.fillRect(x + 60, y + 20 * i, 20, 20);
 			g.setColor(Color.BLACK);
 			int num = this.playersOccupying.get(i).getNumber() + 1;
-			g.drawString("P" + num, x + 65, y + 20 * i + 15);
+			g.drawString("P" + num, x + 63, y + 20 * i + 15);
 		}
 		
 		if (isTemp || tempZombie)

@@ -32,12 +32,10 @@ public class MapTileDeckButton extends JButton implements ActionListener
 			{
 				if (GameHandler.instance.getMap().getTempTile() == null)
 				{
-					MapTile tile = GameHandler.instance.getDeck().getNextCard();
-					System.out.println(GameHandler.instance.getCurrentState());
+					MapTile tile = GameHandler.instance.getTileDeck().getNextCard();
 					GameHandler.instance.getMap().addTempTile(tile);
 				}
 			}
 		}
-		
 	}
 }

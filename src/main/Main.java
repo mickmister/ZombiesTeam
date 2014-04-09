@@ -1,7 +1,5 @@
 package main;
 
-import gui.ImageManager;
-
 import java.awt.Font;
 
 import javax.swing.JOptionPane;
@@ -37,8 +35,8 @@ public class Main
 			System.exit(1);
 		}
 		
-		new ImageManager();
 		new GameHandler(numberOfPlayers);
+		GameHandler.instance.initWindows();
 	}
 	
 	private static void setWindowsLaF()

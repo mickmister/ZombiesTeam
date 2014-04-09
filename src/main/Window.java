@@ -13,12 +13,13 @@ import javax.swing.WindowConstants;
 public class Window extends JFrame
 {
 	private int number;
-	private Player player;
+	
+	public BottomPanel bottomPanel;
+	public RightPanel rightPanel;
 	
 	public Window(int number)
 	{
 		this.number = number;
-		this.player = new Player(number);
 		
 		setSize(1600, 900);
 		setLocation(this.number * 50, this.number * 50);
@@ -26,8 +27,10 @@ public class Window extends JFrame
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setLayout(new BorderLayout());
 		
-		add(new BottomPanel(this), BorderLayout.PAGE_END);
-		add(new RightPanel(this), BorderLayout.LINE_END);
+		this.bottomPanel = new BottomPanel(this);
+		this.rightPanel = new RightPanel(this);
+		add(this.bottomPanel, BorderLayout.PAGE_END);
+		add(this.rightPanel, BorderLayout.LINE_END);
 		JScrollPane scrollPane = new JScrollPane(new MapView());
 		add(scrollPane, BorderLayout.CENTER);
 		
@@ -36,6 +39,6 @@ public class Window extends JFrame
 	
 	public Player getPlayer()
 	{
-		return this.player;
+		return GameHandler.instance.getPlayer(this.number);
 	}
 }
