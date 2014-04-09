@@ -1,10 +1,13 @@
 package gui;
 
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.RenderingHints;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
@@ -31,6 +34,7 @@ public class MapView extends JPanel implements Runnable, KeyListener
 	{
 		this.image = new BufferedImage(2400, 2400, BufferedImage.TYPE_INT_ARGB);
 		this.graphics = (Graphics2D) this.image.getGraphics();
+		this.graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		
 		setPreferredSize(new Dimension(2400, 2400));
 		setFocusable(true);
@@ -51,6 +55,7 @@ public class MapView extends JPanel implements Runnable, KeyListener
 			centerScrollPane();
 		}
 		
+		this.graphics.setFont(new Font("Segoe UI", Font.PLAIN, 13));
 		this.graphics.drawImage(ImageManager.DIRT_TEXTURE, 0, 0, null);
 		for (int y = 0; y < this.SIZE; y += 1)
 		{
@@ -65,6 +70,14 @@ public class MapView extends JPanel implements Runnable, KeyListener
 			Point point = GameHandler.instance.getMap().getTempPos();
 			temp.draw(this.graphics, point.x, point.y, true);
 		}
+		
+		JViewport viewPort = (JViewport) getParent();
+		Rectangle bounds = viewPort.getViewRect();
+		this.graphics.setFont(new Font("Segoe UI", Font.PLAIN, 40));
+		this.graphics.setColor(Color.BLACK);
+		this.graphics.drawString(GameHandler.instance.getMap().getMessage(), bounds.x + 22, bounds.y + 52);
+		this.graphics.setColor(Color.WHITE);
+		this.graphics.drawString(GameHandler.instance.getMap().getMessage(), bounds.x + 20, bounds.y + 50);
 		
 		g.drawImage(this.image, 0, 0, null);
 	}

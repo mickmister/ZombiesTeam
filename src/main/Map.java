@@ -11,6 +11,7 @@ public class Map
 	private MapTile tempTile;
 	private MapTile tempZombieTile;
 	private Point tempPos;
+	private String message;
 	
 	public Map()
 	{
@@ -25,6 +26,7 @@ public class Map
 		this.mapTiles[this.SIZE / 2][this.SIZE / 2] = new MapTile(Shape.quad, null);
 		this.tempTile = null;
 		this.tempPos = new Point(5, 5);
+		this.message = "";
 	}
 	
 	public MapTile getMapTile(int row, int col)
@@ -79,6 +81,16 @@ public class Map
 	public void setTempTile(MapTile tile)
 	{
 		this.tempTile = tile;
+	}
+	
+	public String getMessage()
+	{
+		return this.message;
+	}
+	
+	public void setMessage(String message)
+	{
+		this.message = message;
 	}
 	
 	public boolean checkValidPosition(MapTile newTile, int xPos, int yPos)
