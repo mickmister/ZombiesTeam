@@ -25,7 +25,6 @@ public class BottomPanel extends JPanel
 		add(new BulletTokensDisplay(getPlayer()));
 		add(new ZombiesDisplay(getPlayer()));
 		add(new RollDiceButton());
-		add(new EventCardDeckButton());
 	}
 	
 	public Player getPlayer()
