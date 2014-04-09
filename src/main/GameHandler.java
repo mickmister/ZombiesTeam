@@ -5,6 +5,7 @@ import gui.ImageManager;
 import java.util.ArrayList;
 
 import main.DataListener.DataChangedEvent;
+import main.GameHandler.GameState;
 
 public class GameHandler
 {
@@ -22,7 +23,7 @@ public class GameHandler
 	
 	public enum GameState
 	{
-		tilePlacement, zombiePlacement, playerMovementDieRoll, playerMovement, zombieMovementDieRoll, zombieMovement
+		tilePlacement, zombiePlacement, playerMovementDieRoll, zombieCombat, playerMovement, zombieMovementDieRoll, zombieMovement
 	}
 	
 	public GameHandler(int numberOfPlayers)
@@ -115,6 +116,11 @@ public class GameHandler
 				this.fireDataChangedEvent(null);
 				break;
 			case playerMovementDieRoll:
+				this.currentState = GameState.zombieCombat;
+				this.guiStateData.rollDiceButtonEnabled = true;
+				this.fireDataChangedEvent(null);
+				break;
+			case zombieCombat:
 				this.currentState = GameState.playerMovement;
 				this.guiStateData.rollDiceButtonEnabled = false;
 				this.fireDataChangedEvent(null);
@@ -155,5 +161,11 @@ public class GameHandler
 	public GuiStateData getGuiStateData()
 	{
 		return this.guiStateData;
+	}
+
+	public void setCurrentState(GameState state)
+	{
+		this.currentState = state;
+		
 	}
 }

@@ -2,6 +2,8 @@ package main;
 
 import java.awt.Point;
 
+import main.GameHandler.GameState;
+
 /**
  * This class will hold the given player's status such as life tokens, bullet tokens, and zombies
  * captured.
@@ -19,6 +21,7 @@ public class Player
 	private int xCell;
 	private int yCell;
 	private int movesRemaining;
+	private int zombieCombatRoll;
 	
 	public Player(int number)
 	{
@@ -85,6 +88,16 @@ public class Player
 		this.movesRemaining = moves;
 	}
 	
+	public int getZombieCombatRoll()
+	{
+		return zombieCombatRoll;
+	}
+
+	public void setZombieCombatRoll(int zombieCombatRoll)
+	{
+		this.zombieCombatRoll = zombieCombatRoll;
+	}
+	
 	public void tryMoveLeft()
 	{
 		Map map = GameHandler.instance.getMap();
@@ -101,6 +114,10 @@ public class Player
 				this.xCell = 2;
 				this.movesRemaining -= 1;
 				// Zombie check
+				if (currentTile.getCell(this.xCell, this.yCell).hasZombie())
+				{
+					GameHandler.instance.setCurrentState(GameState.zombieCombat);
+				}
 			}
 		}
 		else
@@ -111,10 +128,16 @@ public class Player
 				this.xCell -= 1;
 				this.movesRemaining -= 1;
 				// Zombie check
+				if (currentTile.getCell(this.xCell, this.yCell).hasZombie())
+				{
+					GameHandler.instance.setCurrentState(GameState.zombieCombat);
+				}
 			}
 		}
 	}
 	
+	
+
 	public void tryMoveRight()
 	{
 		Map map = GameHandler.instance.getMap();
@@ -131,6 +154,10 @@ public class Player
 				this.xCell = 0;
 				this.movesRemaining -= 1;
 				// Zombie check
+				if (currentTile.getCell(this.xCell, this.yCell).hasZombie())
+				{
+					GameHandler.instance.setCurrentState(GameState.zombieCombat);
+				}
 			}
 		}
 		else
@@ -141,6 +168,10 @@ public class Player
 				this.xCell += 1;
 				this.movesRemaining -= 1;
 				// Zombie check
+				if (currentTile.getCell(this.xCell, this.yCell).hasZombie())
+				{
+					GameHandler.instance.setCurrentState(GameState.zombieCombat);
+				}
 			}
 		}
 	}
@@ -161,6 +192,10 @@ public class Player
 				this.yCell = 2;
 				this.movesRemaining -= 1;
 				// Zombie check
+				if (currentTile.getCell(this.xCell, this.yCell).hasZombie())
+				{
+					GameHandler.instance.setCurrentState(GameState.zombieCombat);
+				}
 			}
 		}
 		else
@@ -171,6 +206,10 @@ public class Player
 				this.yCell -= 1;
 				this.movesRemaining -= 1;
 				// Zombie check
+				if (currentTile.getCell(this.xCell, this.yCell).hasZombie())
+				{
+					GameHandler.instance.setCurrentState(GameState.zombieCombat);
+				}
 			}
 		}
 	}
@@ -191,6 +230,10 @@ public class Player
 				this.yCell = 0;
 				this.movesRemaining -= 1;
 				// Zombie check
+				if (currentTile.getCell(this.xCell, this.yCell).hasZombie())
+				{
+					GameHandler.instance.setCurrentState(GameState.zombieCombat);
+				}
 			}
 		}
 		else
@@ -201,10 +244,74 @@ public class Player
 				this.yCell += 1;
 				this.movesRemaining -= 1;
 				// Zombie check
+				if (currentTile.getCell(this.xCell, this.yCell).hasZombie())
+				{
+					GameHandler.instance.setCurrentState(GameState.zombieCombat);
+				}
 			}
 		}
 	}
 	
+	public boolean fightZombie(TileCell cell)
+	{
+		if (cell.hasZombie())
+		{
+			if (this.zombieCombatRoll > 3)
+			{
+				cell.setZombie(false);
+				this.zombiesCaptured++;
+				return true;
+			}
+			
+			else if (this.zombieCombatRoll + this.bulletTokens > 3)
+			{
+				if (promptUseBulletTokens() == false)
+				{
+					loseLifeToken();
+					return false;
+				}
+				else
+				{
+					cell.setZombie(false);
+					this.bulletTokens = this.bulletTokens - (4 - this.zombieCombatRoll);
+					this.zombiesCaptured++;
+					return true;
+				}
+			}
+			
+			else
+			{
+				loseLifeToken();
+				return false;
+			}
+		}
+	}
+	
+	private boolean loseLifeToken()
+	{
+		if (this.lifeTokens > 0)
+		{
+			this.lifeTokens--;
+			return true;
+		}
+		else
+		{
+			resetPlayer();
+			return false;
+		}
+	}
+
+	private void resetPlayer()
+	{
+		this.xTile = 5;
+		this.yTile = 5;
+		this.xCell = 1;
+		this.yCell = 1;
+		this.bulletTokens = 3;
+		this.lifeTokens = 3;
+		this.zombiesCaptured = (int) Math.ceil(this.zombiesCaptured/2.0);
+	}
+
 	private boolean checkDifferentTileMove(TileCell currentCell, TileCell targetCell)
 	{
 		if (currentCell.isRoad() && targetCell.isRoad())
@@ -234,4 +341,5 @@ public class Player
 			return false;
 		}
 	}
+
 }
