@@ -2,13 +2,12 @@ package gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Random;
-
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 import main.DataListener;
 import main.GameHandler;
+import main.Window;
 import main.GameHandler.GameState;
 import main.Player;
 
@@ -24,27 +23,29 @@ public class RollDiceButton extends JButton implements ActionListener, DataListe
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
-		if (GameHandler.instance.getCurrentState() == GameState.playerMovementDieRoll
-				|| GameHandler.instance.getCurrentState() == GameState.zombieMovementDieRoll)
-		{
-			rollDiceClicked();
-		}
+		rollDiceClicked();
 	}
 	
 	public void rollDiceClicked()
 	{
-		int rollNum = (int) (Math.random() * 6 + 1);
-		GameHandler game = GameHandler.instance;
-		Player player = game.getPlayer(game.getTurn());
-		player.setMovesRemaining(rollNum);
-		JOptionPane.showMessageDialog(null, "You rolled a " + rollNum + "!");
-		System.out.println("Rolled a " + rollNum);
-		game.nextGameState();
+		if (GameHandler.instance.getCurrentState() == GameState.playerMovementDieRoll
+				|| GameHandler.instance.getCurrentState() == GameState.zombieMovementDieRoll)
+		{
+			int rollNum = (int) (Math.random() * 6 + 1);
+			GameHandler game = GameHandler.instance;
+			Player player = game.getPlayer(game.getTurn());
+			player.setMovesRemaining(rollNum);
+			JOptionPane.showMessageDialog(null, "You rolled a " + rollNum + "!");
+			System.out.println("Rolled a " + rollNum);
+			game.nextGameState();
+		}
 	}
 
 	@Override
 	public void dataChanged(DataChangedEvent e)
 	{
-		setEnabled(GameHandler.instance.getGuiStateData().rollDiceButtonEnabled);
+		boolean canEnable = GameHandler.instance.getGuiStateData().rollDiceButtonEnabled;
+		boolean myTurn = ((Window)getTopLevelAncestor()).getPlayer().isPlayersTurn();
+		setEnabled(canEnable && myTurn);
 	}
 }
