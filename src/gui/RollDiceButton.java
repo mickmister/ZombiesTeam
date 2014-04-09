@@ -39,7 +39,7 @@ public class RollDiceButton extends JButton implements ActionListener, DataListe
 			game.nextGameState();
 		}
 		
-		if (game.getCurrentState() == GameState.zombieCombat)
+		else if (game.getCurrentState() == GameState.zombieCombat)
 		{
 			int combatRoll = (int) (Math.random() * 6 + 1);
 			JOptionPane.showMessageDialog(null, "Your combat roll was a " + combatRoll + "!");
