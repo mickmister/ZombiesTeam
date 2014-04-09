@@ -14,9 +14,6 @@ public class Window extends JFrame
 {
 	private int number;
 	
-	public BottomPanel bottomPanel;
-	public RightPanel rightPanel;
-	
 	public Window(int number)
 	{
 		this.number = number;
@@ -27,10 +24,8 @@ public class Window extends JFrame
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setLayout(new BorderLayout());
 		
-		this.bottomPanel = new BottomPanel(this);
-		this.rightPanel = new RightPanel(this);
-		add(this.bottomPanel, BorderLayout.PAGE_END);
-		add(this.rightPanel, BorderLayout.LINE_END);
+		add(new BottomPanel(this), BorderLayout.PAGE_END);
+		add(new RightPanel(this), BorderLayout.LINE_END);
 		JScrollPane scrollPane = new JScrollPane(new MapView());
 		add(scrollPane, BorderLayout.CENTER);
 		

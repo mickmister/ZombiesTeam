@@ -5,17 +5,19 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
+import main.DataListener;
 import main.GameHandler;
 import main.GameHandler.GameState;
 import main.MapTile;
 import main.Window;
 
-public class MapTileDeckButton extends JButton implements ActionListener
+public class MapTileDeckButton extends JButton implements ActionListener, DataListener
 {
 	public MapTileDeckButton()
 	{
 		setText("Map Tile Deck");
 		addActionListener(this);
+		GameHandler.instance.addDataListener(this);
 	}
 	
 	@Override
@@ -37,5 +39,11 @@ public class MapTileDeckButton extends JButton implements ActionListener
 				}
 			}
 		}
+	}
+
+	@Override
+	public void dataChanged(DataChangedEvent e)
+	{
+		setEnabled(GameHandler.instance.getGuiStateData().mapTileDeckButtonEnabled);
 	}
 }

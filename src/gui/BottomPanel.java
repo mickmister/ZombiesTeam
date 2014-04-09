@@ -13,9 +13,6 @@ public class BottomPanel extends JPanel
 {
 	private Window window;
 	
-	public MapTileDeckButton mapTileDeckButton;
-	public RollDiceButton rollDiceButton;
-	
 	public BottomPanel(Window window)
 	{
 		this.window = window;
@@ -23,13 +20,11 @@ public class BottomPanel extends JPanel
 		setBorder(new EmptyBorder(10, 10, 10, 10));
 		setPreferredSize(new Dimension(1, 200));
 		
-		this.mapTileDeckButton = new MapTileDeckButton();
-		this.rollDiceButton = new RollDiceButton();
-		add(this.mapTileDeckButton);
+		add(new MapTileDeckButton());
 		add(new LifeTokensDisplay(getPlayer()));
 		add(new BulletTokensDisplay(getPlayer()));
 		add(new ZombiesDisplay(getPlayer()));
-		add(this.rollDiceButton);
+		add(new RollDiceButton());
 		add(new EventCardDeckButton());
 	}
 	

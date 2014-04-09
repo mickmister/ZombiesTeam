@@ -50,7 +50,8 @@ public class GameHandler
 		new ImageManager();
 		for (int i = 0; i < this.numberOfPlayers; i += 1)
 		{
-			this.windows.add(new Window(i));
+			// Create windows in reverse order so first player appears on top.
+			this.windows.add(new Window(this.numberOfPlayers - i - 1));
 		}
 		fireDataChangedEvent(null);
 	}
@@ -105,37 +106,33 @@ public class GameHandler
 		{
 			case tilePlacement:
 				this.currentState = GameState.zombiePlacement;
-				for (int i = 0; i < this.windows.size(); i += 1)
-				{
-					this.windows.get(i).bottomPanel.mapTileDeckButton.setEnabled(false);
-				}
+				this.guiStateData.mapTileDeckButtonEnabled = false;
+				this.fireDataChangedEvent(null);
 				break;
 			case zombiePlacement:
 				this.currentState = GameState.playerMovementDieRoll;
-				for (int i = 0; i < this.windows.size(); i += 1)
-				{
-					this.windows.get(i).bottomPanel.rollDiceButton.setEnabled(true);
-				}
+				this.guiStateData.rollDiceButtonEnabled = true;
+				this.fireDataChangedEvent(null);
 				break;
 			case playerMovementDieRoll:
 				this.currentState = GameState.playerMovement;
-				for (int i = 0; i < this.windows.size(); i += 1)
-				{
-					this.windows.get(i).bottomPanel.rollDiceButton.setEnabled(true);
-				}
+				this.guiStateData.rollDiceButtonEnabled = false;
+				this.fireDataChangedEvent(null);
 				break;
 			case playerMovement:
 				this.currentState = GameState.zombieMovementDieRoll;
+				this.guiStateData.rollDiceButtonEnabled = true;
+				this.fireDataChangedEvent(null);
 				break;
 			case zombieMovementDieRoll:
 				this.currentState = GameState.zombieMovement;
+				this.guiStateData.rollDiceButtonEnabled = false;
+				this.fireDataChangedEvent(null);
 				break;
 			case zombieMovement:
 				this.currentState = GameState.tilePlacement;
-				for (int i = 0; i < this.windows.size(); i += 1)
-				{
-					this.windows.get(i).bottomPanel.mapTileDeckButton.setEnabled(true);
-				}
+				this.guiStateData.mapTileDeckButtonEnabled = true;
+				this.fireDataChangedEvent(null);
 				nextTurn();
 				break;
 		}
