@@ -92,9 +92,9 @@ public class Player
 	
 	public int getZombieCombatRoll()
 	{
-		return zombieCombatRoll;
+		return this.zombieCombatRoll;
 	}
-
+	
 	public void setZombieCombatRoll(int zombieCombatRoll)
 	{
 		this.zombieCombatRoll = zombieCombatRoll;
@@ -138,8 +138,6 @@ public class Player
 		}
 	}
 	
-	
-
 	public void tryMoveRight()
 	{
 		Map map = GameHandler.instance.getMap();
@@ -303,7 +301,7 @@ public class Player
 			return false;
 		}
 	}
-
+	
 	private void resetPlayer()
 	{
 		this.xTile = 5;
@@ -312,9 +310,9 @@ public class Player
 		this.yCell = 1;
 		this.bulletTokens = 3;
 		this.lifeTokens = 3;
-		this.zombiesCaptured = (int) Math.ceil(this.zombiesCaptured/2.0);
+		this.zombiesCaptured = (int) Math.ceil(this.zombiesCaptured / 2.0);
 	}
-
+	
 	private boolean checkDifferentTileMove(TileCell currentCell, TileCell targetCell)
 	{
 		if (currentCell.isRoad() && targetCell.isRoad())
@@ -347,7 +345,8 @@ public class Player
 	
 	private boolean promptUseBulletTokens()
 	{
-		int result = JOptionPane.showConfirmDialog(null, "Do you want to use bullet tokens to defeat the zombie?", "Shoot or Die", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+		int result = JOptionPane.showConfirmDialog(null, "Do you want to use bullet tokens to defeat the zombie?", "Shoot or Die",
+				JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 		return result == JOptionPane.YES_OPTION;
 	}
 }

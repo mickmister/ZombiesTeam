@@ -5,7 +5,6 @@ import gui.ImageManager;
 import java.util.ArrayList;
 
 import main.DataListener.DataChangedEvent;
-import main.GameHandler.GameState;
 
 public class GameHandler
 {
@@ -108,37 +107,37 @@ public class GameHandler
 			case tilePlacement:
 				this.currentState = GameState.zombiePlacement;
 				this.guiStateData.mapTileDeckButtonEnabled = false;
-				this.fireDataChangedEvent(null);
+				fireDataChangedEvent(null);
 				break;
 			case zombiePlacement:
 				this.currentState = GameState.playerMovementDieRoll;
 				this.guiStateData.rollDiceButtonEnabled = true;
-				this.fireDataChangedEvent(null);
+				fireDataChangedEvent(null);
 				break;
 			case playerMovementDieRoll:
 				this.currentState = GameState.zombieCombat;
 				this.guiStateData.rollDiceButtonEnabled = true;
-				this.fireDataChangedEvent(null);
+				fireDataChangedEvent(null);
 				break;
 			case zombieCombat:
 				this.currentState = GameState.playerMovement;
 				this.guiStateData.rollDiceButtonEnabled = false;
-				this.fireDataChangedEvent(null);
+				fireDataChangedEvent(null);
 				break;
 			case playerMovement:
 				this.currentState = GameState.zombieMovementDieRoll;
 				this.guiStateData.rollDiceButtonEnabled = true;
-				this.fireDataChangedEvent(null);
+				fireDataChangedEvent(null);
 				break;
 			case zombieMovementDieRoll:
 				this.currentState = GameState.zombieMovement;
 				this.guiStateData.rollDiceButtonEnabled = false;
-				this.fireDataChangedEvent(null);
+				fireDataChangedEvent(null);
 				break;
 			case zombieMovement:
 				this.currentState = GameState.tilePlacement;
 				this.guiStateData.mapTileDeckButtonEnabled = true;
-				this.fireDataChangedEvent(null);
+				fireDataChangedEvent(null);
 				nextTurn();
 				break;
 		}
@@ -162,7 +161,7 @@ public class GameHandler
 	{
 		return this.guiStateData;
 	}
-
+	
 	public void setCurrentState(GameState state)
 	{
 		this.currentState = state;

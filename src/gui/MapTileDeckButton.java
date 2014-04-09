@@ -40,12 +40,12 @@ public class MapTileDeckButton extends JButton implements ActionListener, DataLi
 			}
 		}
 	}
-
+	
 	@Override
 	public void dataChanged(DataChangedEvent e)
 	{
 		boolean canEnable = GameHandler.instance.getGuiStateData().mapTileDeckButtonEnabled;
-		boolean myTurn = ((Window)getTopLevelAncestor()).getPlayer().isPlayersTurn();
+		boolean myTurn = ((Window) getTopLevelAncestor()).getPlayer().isPlayersTurn();
 		setEnabled(canEnable && myTurn);
 	}
 }
