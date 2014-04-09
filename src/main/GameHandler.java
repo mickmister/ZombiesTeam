@@ -115,8 +115,20 @@ public class GameHandler
 				fireDataChangedEvent(null);
 				break;
 			case playerMovementDieRoll:
-				this.currentState = GameState.zombieCombat;
-				this.guiStateData.rollDiceButtonEnabled = true;
+				Player player = this.getPlayer(this.getTurn());
+				TileCell cell = this.getMap().getMapTile(player.getTileLocation().y, 
+						player.getTileLocation().x).getCell(player.getCellLocation().y, 
+								player.getCellLocation().x);
+				if (cell.hasZombie())
+				{
+					this.currentState = GameState.zombieCombat;
+					this.guiStateData.rollDiceButtonEnabled = true;
+				}
+				else
+				{
+					this.currentState = GameState.playerMovement;
+					this.guiStateData.rollDiceButtonEnabled = false;
+				}
 				fireDataChangedEvent(null);
 				break;
 			case zombieCombat:
