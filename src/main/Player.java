@@ -2,6 +2,8 @@ package main;
 
 import java.awt.Point;
 
+import javax.swing.JOptionPane;
+
 import main.GameHandler.GameState;
 
 /**
@@ -285,6 +287,7 @@ public class Player
 				return false;
 			}
 		}
+		return true;
 	}
 	
 	private boolean loseLifeToken()
@@ -341,5 +344,10 @@ public class Player
 			return false;
 		}
 	}
-
+	
+	private boolean promptUseBulletTokens()
+	{
+		int result = JOptionPane.showConfirmDialog(null, "Do you want to use bullet tokens to defeat the zombie?", "Shoot or Die", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+		return result == JOptionPane.YES_OPTION;
+	}
 }
