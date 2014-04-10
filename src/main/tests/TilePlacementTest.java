@@ -15,7 +15,6 @@ import org.junit.Test;
  */
 public class TilePlacementTest
 {
-	
 	// TESTS FOR L
 	@Test(expected = IllegalStateException.class)
 	public void testPlaceTempLTile()

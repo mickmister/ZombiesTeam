@@ -12,10 +12,10 @@ import javax.swing.JOptionPane;
  */
 public class Player
 {
+	private int number;
 	private int lifeTokens;
 	private int bulletTokens;
 	private int zombiesCaptured;
-	private int number;
 	private int xTile;
 	private int yTile;
 	private int xCell;
@@ -34,6 +34,7 @@ public class Player
 		this.xCell = 1;
 		this.yCell = 1;
 		this.movesRemaining = 0;
+		this.zombieCombatRoll = 0;
 		
 		GameHandler.instance.getMap().getMapTile(this.yTile, this.xTile).getCell(this.yCell, this.xCell).addPlayer(this);
 	}
