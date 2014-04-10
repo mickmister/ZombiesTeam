@@ -160,7 +160,7 @@ public class TileCell
 	
 	public boolean isBuilding()
 	{
-		return this.isBuilding;
+		return this.isBuilding && !this.isDoor;
 	}
 	
 	public boolean isDoor()
