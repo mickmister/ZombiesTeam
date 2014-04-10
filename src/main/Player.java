@@ -301,7 +301,9 @@ public class Player
 	
 	private boolean checkSameTileMove(TileCell currentCell, TileCell targetCell)
 	{
-		if (currentCell.isBuilding() && targetCell.isRoad() || currentCell.isRoad() && targetCell.isBuilding())
+		boolean a = currentCell.isBuilding() && !currentCell.isDoor() && targetCell.isRoad();
+		boolean b = currentCell.isRoad() && targetCell.isBuilding() && !targetCell.isDoor();
+		if (a || b)
 		{
 			return false;
 		}
