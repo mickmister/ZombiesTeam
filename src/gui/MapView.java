@@ -160,8 +160,13 @@ public class MapView extends JPanel implements Runnable, KeyListener
 			case zombieMovement:
 				handleZombieMovement(e);
 				break;
+			case playerMovementDieRoll:
+				break;
+			case zombieCombat:
+				break;
+			case zombieMovementDieRoll:
+				break;
 		}
-		
 	}
 	
 	private void handleZombieMovement(KeyEvent e)
@@ -239,11 +244,6 @@ public class MapView extends JPanel implements Runnable, KeyListener
 		{
 			GameHandler.instance.nextGameState();
 		}
-		else if (player.getMovesRemaining() == 0)
-		{
-			GameHandler.instance.nextGameState();
-		}
-		
 	}
 	
 	private void handleTilePlacement(KeyEvent e)

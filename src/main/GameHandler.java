@@ -102,20 +102,18 @@ public class GameHandler
 	public void nextGameState()
 	{
 		GameState old = this.currentState;
+		Player player = this.getPlayer(this.getTurn());
 		switch (this.currentState)
 		{
 			case tilePlacement:
 				this.currentState = GameState.zombiePlacement;
 				this.guiStateData.mapTileDeckButtonEnabled = false;
-				fireDataChangedEvent(null);
 				break;
 			case zombiePlacement:
 				this.currentState = GameState.playerMovementDieRoll;
 				this.guiStateData.rollDiceButtonEnabled = true;
-				fireDataChangedEvent(null);
 				break;
 			case playerMovementDieRoll:
-				Player player = this.getPlayer(this.getTurn());
 				TileCell cell = this.getMap().getMapTile(player.getTileLocation().y, 
 						player.getTileLocation().x).getCell(player.getCellLocation().y, 
 								player.getCellLocation().x);
@@ -129,30 +127,30 @@ public class GameHandler
 					this.currentState = GameState.playerMovement;
 					this.guiStateData.rollDiceButtonEnabled = false;
 				}
-				fireDataChangedEvent(null);
 				break;
 			case zombieCombat:
 				this.currentState = GameState.playerMovement;
 				this.guiStateData.rollDiceButtonEnabled = false;
-				fireDataChangedEvent(null);
+				if (player.getMovesRemaining() == 0)
+				{
+					GameHandler.instance.nextGameState();
+				}
 				break;
 			case playerMovement:
 				this.currentState = GameState.zombieMovementDieRoll;
 				this.guiStateData.rollDiceButtonEnabled = true;
-				fireDataChangedEvent(null);
 				break;
 			case zombieMovementDieRoll:
 				this.currentState = GameState.zombieMovement;
 				this.guiStateData.rollDiceButtonEnabled = false;
-				fireDataChangedEvent(null);
 				break;
 			case zombieMovement:
 				this.currentState = GameState.tilePlacement;
 				this.guiStateData.mapTileDeckButtonEnabled = true;
-				fireDataChangedEvent(null);
 				nextTurn();
 				break;
 		}
+		fireDataChangedEvent(null);
 		System.out.println("Changed state from: " + old.toString() + " -> " + this.currentState.toString());
 	}
 	
@@ -174,9 +172,9 @@ public class GameHandler
 		return this.guiStateData;
 	}
 	
-	public void setCurrentState(GameState state)
+	public void checkCombatOrMoveState()
 	{
-		this.currentState = state;
-		
+		this.currentState = GameState.playerMovementDieRoll;
+		nextGameState();
 	}
 }
