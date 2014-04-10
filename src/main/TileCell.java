@@ -6,6 +6,7 @@ import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Composite;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.util.ArrayList;
 
 import main.MapTile.Shape;
@@ -115,7 +116,16 @@ public class TileCell
 			}
 			if (tempZombie)
 			{
-				g.setColor(Color.YELLOW);
+				MapTile zombieTile = map.getTempZombieTile();
+				Point zombiePos = zombieTile.getTempZombiePos();
+				if (zombieTile.getCell(zombiePos.y, zombiePos.x).hasZombie())
+				{
+					g.setColor(Color.RED);
+				}
+				else
+				{
+					g.setColor(Color.GREEN);
+				}
 			}
 			g.fillRect(x, y, 80, 80);
 			
