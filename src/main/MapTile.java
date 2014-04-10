@@ -97,6 +97,11 @@ public class MapTile
 		return this.shape;
 	}
 	
+	public int getZombiesToPlace()
+	{
+		return this.zombiesToPlace;
+	}
+	
 	public TileCell getLeftCell()
 	{
 		return this.grid[1][0];

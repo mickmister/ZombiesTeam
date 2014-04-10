@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.JViewport;
 
 import main.GameHandler;
+import main.GameHandler.GameState;
 import main.MapTile;
 import main.Player;
 import main.Window;
@@ -27,8 +28,6 @@ public class MapView extends JPanel implements Runnable, KeyListener
 	private BufferedImage image;
 	private Graphics2D graphics;
 	private boolean hasBeenCentered;
-	private static final int MAP_PLACEMENT_STATE = 0;
-	private static final int MOVEMENT_STATE = 1;
 	
 	public MapView()
 	{
@@ -71,13 +70,41 @@ public class MapView extends JPanel implements Runnable, KeyListener
 			temp.draw(this.graphics, point.x, point.y, true);
 		}
 		
+		String message = "";
+		if (GameHandler.instance.getCurrentState().equals(GameState.tilePlacement))
+		{
+			message = "Draw and place a map tile";
+		}
+		if (GameHandler.instance.getCurrentState().equals(GameState.playerMovementDieRoll))
+		{
+			message = "Roll the dice to move";
+		}
+		if (GameHandler.instance.getCurrentState().equals(GameState.playerMovement))
+		{
+			Player player = ((Window) getTopLevelAncestor()).getPlayer();
+			message = player.getMovesRemaining() + " move(s) remaining";
+		}
+		if (GameHandler.instance.getCurrentState().equals(GameState.zombiePlacement))
+		{
+			MapTile tile = GameHandler.instance.getMap().getTempZombieTile();
+			message = "Place " + tile.getZombiesToPlace() + " more zombie(s)";
+		}
+		if (GameHandler.instance.getCurrentState().equals(GameState.zombieCombat))
+		{
+			message = "Roll the dice to fight";
+		}
+		if (GameHandler.instance.getCurrentState().equals(GameState.zombieMovementDieRoll))
+		{
+			message = "Roll the dice to move zombies";
+		}
+		
 		JViewport viewPort = (JViewport) getParent();
 		Rectangle bounds = viewPort.getViewRect();
 		this.graphics.setFont(new Font("Segoe UI", Font.PLAIN, 40));
 		this.graphics.setColor(Color.BLACK);
-		this.graphics.drawString(GameHandler.instance.getMap().getMessage(), bounds.x + 22, bounds.y + 52);
+		this.graphics.drawString(message, bounds.x + 22, bounds.y + 52);
 		this.graphics.setColor(Color.WHITE);
-		this.graphics.drawString(GameHandler.instance.getMap().getMessage(), bounds.x + 20, bounds.y + 50);
+		this.graphics.drawString(message, bounds.x + 20, bounds.y + 50);
 		
 		g.drawImage(this.image, 0, 0, null);
 	}

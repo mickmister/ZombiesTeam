@@ -143,6 +143,9 @@ public class GameHandler
 			case zombieMovementDieRoll:
 				this.currentState = GameState.zombieMovement;
 				this.guiStateData.rollDiceButtonEnabled = false;
+				// TODO: Remove this testing line.
+				try{Thread.sleep(1000);}catch(Exception e){}
+				nextGameState();
 				break;
 			case zombieMovement:
 				this.currentState = GameState.tilePlacement;
