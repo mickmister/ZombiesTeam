@@ -274,7 +274,7 @@ public class Player
 	
 	private void resetPlayer()
 	{
-		GameHandler.instance.getMap().getMapTile(this.yTile, this.xTile).getCell(this.yCell, this.xCell).removePlayer(this);;
+		GameHandler.instance.getMap().getMapTile(this.yTile, this.xTile).getCell(this.yCell, this.xCell).removePlayer(this);
 		this.xTile = 5;
 		this.yTile = 5;
 		this.xCell = 1;
@@ -283,6 +283,9 @@ public class Player
 		this.lifeTokens = 3;
 		this.zombiesCaptured = (int) Math.ceil(this.zombiesCaptured / 2.0);
 		GameHandler.instance.getMap().getMapTile(this.yTile, this.xTile).getCell(this.yCell, this.xCell).addPlayer(this);
+		// Go from ZombieCombat to PlayerMovement to continue turn.
+		GameHandler.instance.nextGameState();
+		JOptionPane.showMessageDialog(null, "You died!  Your player will be reset.");
 	}
 	
 	private boolean checkDifferentTileMove(TileCell currentCell, TileCell targetCell)
