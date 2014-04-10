@@ -102,7 +102,7 @@ public class GameHandler
 	public void nextGameState()
 	{
 		GameState old = this.currentState;
-		Player player = this.getPlayer(this.getTurn());
+		Player player = getPlayer(getTurn());
 		switch (this.currentState)
 		{
 			case tilePlacement:
@@ -114,9 +114,8 @@ public class GameHandler
 				this.guiStateData.rollDiceButtonEnabled = true;
 				break;
 			case playerMovementDieRoll:
-				TileCell cell = this.getMap().getMapTile(player.getTileLocation().y, 
-						player.getTileLocation().x).getCell(player.getCellLocation().y, 
-								player.getCellLocation().x);
+				TileCell cell = getMap().getMapTile(player.getTileLocation().y, player.getTileLocation().x).getCell(player.getCellLocation().y,
+						player.getCellLocation().x);
 				if (cell.hasZombie())
 				{
 					this.currentState = GameState.zombieCombat;
@@ -126,13 +125,19 @@ public class GameHandler
 				{
 					this.currentState = GameState.playerMovement;
 					this.guiStateData.rollDiceButtonEnabled = false;
+					if (player.getMovesRemaining() < 1)
+					{
+						// Skip from PlayerMovement -> ZombieMovementDieRoll.
+						GameHandler.instance.nextGameState();
+					}
 				}
 				break;
 			case zombieCombat:
 				this.currentState = GameState.playerMovement;
 				this.guiStateData.rollDiceButtonEnabled = false;
-				if (player.getMovesRemaining() == 0)
+				if (player.getMovesRemaining() < 1)
 				{
+					// Skip from PlayerMovement -> ZombieMovementDieRoll.
 					GameHandler.instance.nextGameState();
 				}
 				break;
@@ -144,7 +149,13 @@ public class GameHandler
 				this.currentState = GameState.zombieMovement;
 				this.guiStateData.rollDiceButtonEnabled = false;
 				// TODO: Remove this testing line.
-				try{Thread.sleep(1000);}catch(Exception e){}
+				try
+				{
+					Thread.sleep(1000);
+				}
+				catch (Exception e)
+				{
+				}
 				nextGameState();
 				break;
 			case zombieMovement:

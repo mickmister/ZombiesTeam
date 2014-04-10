@@ -100,7 +100,7 @@ public class MapView extends JPanel implements Runnable, KeyListener
 		
 		JViewport viewPort = (JViewport) getParent();
 		Rectangle bounds = viewPort.getViewRect();
-		this.graphics.setFont(new Font("Segoe UI", Font.PLAIN, 40));
+		this.graphics.setFont(new Font("Segoe UI", Font.PLAIN, 35));
 		this.graphics.setColor(Color.BLACK);
 		this.graphics.drawString(message, bounds.x + 22, bounds.y + 52);
 		this.graphics.setColor(Color.WHITE);
