@@ -295,6 +295,7 @@ public class MapTile
 			this.zombiesToPlace--;
 			if (this.zombiesToPlace == 0)
 			{
+				this.tempZombiePos = null;
 				GameHandler.instance.nextGameState();
 			}
 			else

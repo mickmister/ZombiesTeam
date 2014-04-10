@@ -102,13 +102,20 @@ public class TileCell
 			g.setComposite(composite);
 			
 			Map map = GameHandler.instance.getMap();
-			if (map.checkValidPosition(map.getTempTile(), map.getTempPos().x, map.getTempPos().y))
+			if (isTemp)
 			{
-				g.setColor(Color.GREEN);
+				if (map.checkValidPosition(map.getTempTile(), map.getTempPos().x, map.getTempPos().y))
+				{
+					g.setColor(Color.GREEN);
+				}
+				else
+				{
+					g.setColor(Color.RED);
+				}
 			}
-			else
+			if (tempZombie)
 			{
-				g.setColor(Color.RED);
+				g.setColor(Color.YELLOW);
 			}
 			g.fillRect(x, y, 80, 80);
 			
