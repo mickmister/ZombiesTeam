@@ -15,15 +15,14 @@ import org.junit.Test;
  */
 public class MapTileTest
 {
-	
 	@Test
 	public void testBlankTileCreation()
 	{
 		TileCell[][] grid = new MapTile(Shape.empty, null).createBlankGrid();
 		
-		for (TileCell[] element : grid)
+		for (TileCell[] element1 : grid)
 		{
-			for (TileCell element2 : element)
+			for (TileCell element2 : element1)
 			{
 				assertFalse(element2.isAccessible());
 			}
@@ -115,5 +114,4 @@ public class MapTileTest
 		mapTile.rotateTile();
 		assertEquals(fourthRotateStraightFormation, mapTile.toString());
 	}
-	
 }

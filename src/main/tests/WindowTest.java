@@ -10,6 +10,7 @@ public class WindowTest
 	@Test
 	public void testConstructor()
 	{
+		
 		Window test = new Window(3);
 		assertNotNull(test);
 	}

@@ -2,7 +2,6 @@ package main.tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import gui.ImageManager;
 import main.GameHandler;
 import main.GameHandler.GameState;
 
@@ -15,7 +14,6 @@ public class GameHandlerTest
 	{
 		for (int i = 2; i <= 4; i += 1)
 		{
-			new ImageManager();
 			GameHandler test = new GameHandler(i);
 			// Test valid constructor (no exceptions, etc.).
 			assertNotNull(test);
@@ -27,7 +25,6 @@ public class GameHandlerTest
 	@Test
 	public void testNextTurn2Players()
 	{
-		new ImageManager();
 		GameHandler test = new GameHandler(2);
 		assertEquals(0, test.getTurn());
 		test.nextTurn();
@@ -39,7 +36,6 @@ public class GameHandlerTest
 	@Test
 	public void testNextTurn4Players()
 	{
-		new ImageManager();
 		GameHandler test = new GameHandler(4);
 		assertEquals(0, test.getTurn());
 		test.nextTurn();
@@ -55,7 +51,6 @@ public class GameHandlerTest
 	@Test
 	public void testNextState()
 	{
-		new ImageManager();
 		GameHandler test = new GameHandler(2);
 		assertEquals(GameState.tilePlacement, test.getCurrentState());
 		test.nextGameState();
