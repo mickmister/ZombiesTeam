@@ -7,9 +7,9 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 import main.DataListener;
+import main.DiceRoll;
 import main.GameHandler;
 import main.GameHandler.GameState;
-import main.Player;
 
 public class RollDiceButton extends JButton implements ActionListener, DataListener
 {
@@ -28,30 +28,18 @@ public class RollDiceButton extends JButton implements ActionListener, DataListe
 	
 	public void rollDiceClicked()
 	{
-		GameHandler game = GameHandler.instance;
-		if (game.getCurrentState() == GameState.playerMovementDieRoll || game.getCurrentState() == GameState.zombieMovementDieRoll)
+		int result = DiceRoll.rollDice();
+		if (GameHandler.instance.getCurrentState().equals(GameState.playerMovementDieRoll))
 		{
-			// TODO: REMOVE CHANGE.
-			int rollNum = (int) (Math.random() * 6 + 1);
-			Player player = game.getPlayer(game.getTurn());
-			player.setMovesRemaining(rollNum);
-			JOptionPane.showMessageDialog(getTopLevelAncestor(), "Your player/zombie movement roll was a " + rollNum + "!");
-			game.nextGameState();
+			JOptionPane.showMessageDialog(getTopLevelAncestor(), "Your player movement roll was a " + result + "!");
 		}
-		
-		else if (game.getCurrentState() == GameState.zombieCombat)
+		if (GameHandler.instance.getCurrentState().equals(GameState.zombieMovementDieRoll))
 		{
-			// TODO: REMOVE CHANGE.
-			int combatRoll = (int) (Math.random() * 6 + 1);
-			JOptionPane.showMessageDialog(getTopLevelAncestor(), "Your combat roll was a " + combatRoll + "!");
-			Player player = game.getPlayer(game.getTurn());
-			player.setZombieCombatRoll(combatRoll);
-			boolean win = player.fightZombie(game.getMap().getMapTile(player.getTileLocation().y, player.getTileLocation().x)
-					.getCell(player.getCellLocation().y, player.getCellLocation().x));
-			if (win)
-			{
-				game.nextGameState();
-			}
+			JOptionPane.showMessageDialog(getTopLevelAncestor(), "Your zombie movement roll was a " + result + "!");
+		}
+		if (GameHandler.instance.getCurrentState().equals(GameState.zombieCombat))
+		{
+			JOptionPane.showMessageDialog(getTopLevelAncestor(), "Your combat roll was a " + result + "!");
 		}
 	}
 	

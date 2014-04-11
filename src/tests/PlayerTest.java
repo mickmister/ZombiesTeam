@@ -134,9 +134,9 @@ public class PlayerTest
 			TileCell door = new TileCell(true, true, true);
 			
 			assertEquals(false, method.invoke(player, grass, grass));
-			//assertEquals(false, method.invoke(player, grass, road));
-			//assertEquals(false, method.invoke(player, grass, building));
-			//assertEquals(false, method.invoke(player, grass, door));
+			// assertEquals(false, method.invoke(player, grass, road));
+			// assertEquals(false, method.invoke(player, grass, building));
+			// assertEquals(false, method.invoke(player, grass, door));
 			assertEquals(false, method.invoke(player, road, grass));
 			assertEquals(true, method.invoke(player, road, road));
 			assertEquals(false, method.invoke(player, road, building));
