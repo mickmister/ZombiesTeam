@@ -97,6 +97,10 @@ public class MapView extends JPanel implements Runnable, KeyListener
 		{
 			message = "Roll the dice to move zombies";
 		}
+		if (!((Window) getTopLevelAncestor()).getPlayer().isPlayersTurn())
+		{
+			message = "Not your turn";
+		}
 		
 		JViewport viewPort = (JViewport) getParent();
 		Rectangle bounds = viewPort.getViewRect();
