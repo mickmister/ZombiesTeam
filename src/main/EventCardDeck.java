@@ -13,8 +13,8 @@ public class EventCardDeck
 		Collections.shuffle(this.deck);
 	}
 	
-	public EventCard getNextCard()
+	/*public EventCard getNextCard()
 	{
 		return this.deck.remove(0);
-	}
+	}*/
 }
