@@ -2,8 +2,10 @@ package tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import main.EventCardDeck;
 import main.GameHandler;
 import main.GameHandler.GameState;
+import main.MapTileDeck;
 
 import org.junit.Test;
 
@@ -91,5 +93,13 @@ public class GameHandlerTest
 		// assertEquals(GameState.zombieMovement, test.getCurrentState());
 		test.nextGameState();
 		assertEquals(GameState.tilePlacement, test.getCurrentState());
+	}
+	
+	@Test
+	public void testCardDecks()
+	{
+		new GameHandler(1);
+		assertNotNull(GameHandler.instance.getTileDeck());
+		assertNotNull(GameHandler.instance.getEventDeck());
 	}
 }

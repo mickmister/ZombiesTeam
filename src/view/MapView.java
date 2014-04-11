@@ -1,6 +1,7 @@
 package view;
 
 import gui.ImageManager;
+import gui.Window;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -22,7 +23,6 @@ import main.GameHandler;
 import main.GameHandler.GameState;
 import main.MapTile;
 import main.Player;
-import main.Window;
 
 public class MapView extends JPanel implements Runnable, KeyListener
 {
@@ -62,14 +62,16 @@ public class MapView extends JPanel implements Runnable, KeyListener
 		{
 			for (int x = 0; x < this.SIZE; x += 1)
 			{
-				GameHandler.instance.getMap().getMapTile(y, x).draw(this.graphics, x, y, false);
+				MapTileView view = new MapTileView(GameHandler.instance.getMap().getMapTile(y, x));
+				view.draw(this.graphics, x, y, false);
 			}
 		}
 		MapTile temp = GameHandler.instance.getMap().getTempTile();
 		if (temp != null)
 		{
 			Point point = GameHandler.instance.getMap().getTempPos();
-			temp.draw(this.graphics, point.x, point.y, true);
+			MapTileView view = new MapTileView(temp);
+			view.draw(this.graphics, point.x, point.y, true);
 		}
 		
 		String message = "";

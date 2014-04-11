@@ -77,7 +77,7 @@ public class MapTile
 					boolean accessible = number > 0;
 					boolean building = number > 1;
 					boolean door = number > 2;
-					this.grid[y][x] = new TileCell(this, accessible, building, door);
+					this.grid[y][x] = new TileCell(accessible, building, door);
 				}
 			}
 			this.zombiesToPlace = Integer.parseInt(words[9]);
@@ -125,20 +125,6 @@ public class MapTile
 	public TileCell getCell(int row, int col)
 	{
 		return this.grid[row][col];
-	}
-	
-	public void draw(Graphics2D graphics, int xPos, int yPos, boolean isTemp)
-	{
-		for (int y = 0; y < 3; y += 1)
-		{
-			for (int x = 0; x < 3; x += 1)
-			{
-				int cellX = xPos * 240 + 80 * x;
-				int cellY = yPos * 240 + 80 * y;
-				boolean tempZombie = new Point(x, y).equals(this.tempZombiePos);
-				this.grid[y][x].draw(graphics, cellX, cellY, isTemp, tempZombie);
-			}
-		}
 	}
 	
 	/**
@@ -221,7 +207,7 @@ public class MapTile
 		{
 			for (int j = 0; j < 3; j++)
 			{
-				toReturn[i][j] = new TileCell(this, false, false, false);
+				toReturn[i][j] = new TileCell(false, false, false);
 			}
 		}
 		return toReturn;

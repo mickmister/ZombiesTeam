@@ -2,6 +2,9 @@ package tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+
+import java.awt.Point;
+
 import main.MapTile;
 import main.MapTile.Shape;
 import main.TileCell;
@@ -15,6 +18,33 @@ import org.junit.Test;
  */
 public class MapTileTest
 {
+	@Test
+	public void testTempZombiePos()
+	{
+		MapTile test = new MapTile(Shape.quad, null);
+		assertEquals(null, test.getTempZombiePos());
+		test.setTempZombiePos(new Point(1, 2));
+		assertEquals(new Point(1, 2), test.getTempZombiePos());
+	}
+	
+	@Test
+	public void testPlaceTempZombie()
+	{
+		MapTile test = new MapTile(Shape.quad, null);
+		// MapTile will begin with 4 zombies to place because it is a Quad shape.
+		assertEquals(4, test.getZombiesToPlace());
+		
+		test.setTempZombiePos(new Point(1, 0));
+		test.placeTempZombie();
+		assertEquals(3, test.getZombiesToPlace());
+		
+		assertEquals(new Point(1, 1), test.getTempZombiePos());
+		
+		test.setTempZombiePos(new Point(1, 0));
+		test.placeTempZombie();
+		assertEquals(3, test.getZombiesToPlace());
+	}
+	
 	@Test
 	public void testBlankTileCreation()
 	{

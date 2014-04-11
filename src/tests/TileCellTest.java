@@ -12,14 +12,14 @@ public class TileCellTest
 	@Test
 	public void testConstructorForNonAccesibleCell()
 	{
-		TileCell cell = new TileCell(null, false, false, false);
+		TileCell cell = new TileCell(false, false, false);
 		assertNotNull(cell);
 	}
 	
 	@Test
 	public void testSetLifeToken()
 	{
-		TileCell cell = new TileCell(null, false, false, false);
+		TileCell cell = new TileCell(false, false, false);
 		cell.setLifeToken(true);
 		assertTrue(cell.hasLifeToken());
 		
@@ -30,7 +30,7 @@ public class TileCellTest
 	@Test
 	public void testSetBulletToken()
 	{
-		TileCell cell = new TileCell(null, false, false, false);
+		TileCell cell = new TileCell(false, false, false);
 		cell.setBulletToken(true);
 		assertTrue(cell.hasBulletToken());
 		
@@ -41,7 +41,7 @@ public class TileCellTest
 	@Test
 	public void testSetZombie()
 	{
-		TileCell cell = new TileCell(null, false, false, false);
+		TileCell cell = new TileCell(false, false, false);
 		cell.setZombie(true);
 		assertTrue(cell.hasZombie());
 		
