@@ -1,6 +1,7 @@
 package main;
 
 import gui.ImageManager;
+import gui.Window;
 
 import java.util.ArrayList;
 

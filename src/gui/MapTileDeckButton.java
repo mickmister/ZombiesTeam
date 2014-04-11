@@ -9,7 +9,6 @@ import main.DataListener;
 import main.GameHandler;
 import main.GameHandler.GameState;
 import main.MapTile;
-import main.Window;
 
 public class MapTileDeckButton extends JButton implements ActionListener, DataListener
 {

@@ -7,8 +7,6 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import main.Window;
-
 public class RightPanel extends JPanel
 {
 	private Window window;

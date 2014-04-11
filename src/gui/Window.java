@@ -1,7 +1,4 @@
-package main;
-
-import gui.BottomPanel;
-import gui.RightPanel;
+package gui;
 
 import java.awt.BorderLayout;
 
@@ -9,6 +6,8 @@ import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.WindowConstants;
 
+import main.GameHandler;
+import main.Player;
 import view.MapView;
 
 public class Window extends JFrame

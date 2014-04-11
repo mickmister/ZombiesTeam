@@ -10,7 +10,6 @@ import main.DataListener;
 import main.GameHandler;
 import main.GameHandler.GameState;
 import main.Player;
-import main.Window;
 
 public class RollDiceButton extends JButton implements ActionListener, DataListener
 {

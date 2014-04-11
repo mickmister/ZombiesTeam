@@ -7,7 +7,6 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import main.Player;
-import main.Window;
 
 public class BottomPanel extends JPanel
 {
