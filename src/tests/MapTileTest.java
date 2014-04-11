@@ -5,6 +5,8 @@ import static org.junit.Assert.assertFalse;
 
 import java.awt.Point;
 
+import main.GameHandler;
+import main.GameHandler.GameState;
 import main.MapTile;
 import main.MapTile.Shape;
 import main.TileCell;
@@ -22,14 +24,25 @@ public class MapTileTest
 	public void testTempZombiePos()
 	{
 		MapTile test = new MapTile(Shape.quad, null);
+		
 		assertEquals(null, test.getTempZombiePos());
 		test.setTempZombiePos(new Point(1, 2));
+		assertEquals(new Point(1, 2), test.getTempZombiePos());
+		
+		test.setTempZombiePos(new Point(0, 3));
+		test.setTempZombiePos(new Point(3, 0));
+		test.setTempZombiePos(new Point(3, 3));
+		test.setTempZombiePos(new Point(0, -1));
+		test.setTempZombiePos(new Point(-1, 0));
+		test.setTempZombiePos(new Point(-1, -1));
+		test.setTempZombiePos(new Point(0, 0));
 		assertEquals(new Point(1, 2), test.getTempZombiePos());
 	}
 	
 	@Test
 	public void testPlaceTempZombie()
 	{
+		new GameHandler(2);
 		MapTile test = new MapTile(Shape.quad, null);
 		// MapTile will begin with 4 zombies to place because it is a Quad shape.
 		assertEquals(4, test.getZombiesToPlace());
@@ -43,6 +56,18 @@ public class MapTileTest
 		test.setTempZombiePos(new Point(1, 0));
 		test.placeTempZombie();
 		assertEquals(3, test.getZombiesToPlace());
+		
+		test.setTempZombiePos(new Point(0, 1));
+		test.placeTempZombie();
+		test.setTempZombiePos(new Point(0, 2));
+		test.placeTempZombie();
+		test.setTempZombiePos(new Point(1, 2));
+		test.placeTempZombie();
+		// Since there are no more zombies to place, the tempZombiePos should be set to null and it
+		// should move to the next game state (mapTilePlacement -> zombiePlacement, in this case).
+		assertEquals(0, test.getZombiesToPlace());
+		assertEquals(null, test.getTempZombiePos());
+		assertEquals(GameState.zombiePlacement, GameHandler.instance.getCurrentState());
 	}
 	
 	@Test
