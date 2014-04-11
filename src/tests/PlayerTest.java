@@ -250,4 +250,62 @@ public class PlayerTest
 		assertEquals(0, player.getCellLocation().x);
 		assertEquals(3, player.getMovesRemaining());
 	}
+	
+	@Test
+	public void testTryMoveUp()
+	{
+		new GameHandler(2);
+		Player player = new Player(0);
+		player.setMovesRemaining(5);
+		
+		GameHandler.instance.getMap().getMapTile(5, 5).getCell(0, 1).setAccessible(false);
+		player.tryMoveUp();
+		assertEquals(1, player.getCellLocation().y);
+		assertEquals(5, player.getMovesRemaining());
+		
+		GameHandler.instance.getMap().getMapTile(5, 5).getCell(0, 1).setAccessible(true);
+		player.tryMoveUp();
+		assertEquals(0, player.getCellLocation().y);
+		assertEquals(4, player.getMovesRemaining());
+		
+		// Now check move to other tile.
+		GameHandler.instance.getMap().getMapTile(4, 5).getCell(2, 1).setAccessible(false);
+		player.tryMoveUp();
+		assertEquals(0, player.getCellLocation().y);
+		assertEquals(4, player.getMovesRemaining());
+		
+		GameHandler.instance.getMap().getMapTile(4, 5).getCell(2, 1).setAccessible(true);
+		player.tryMoveUp();
+		assertEquals(2, player.getCellLocation().y);
+		assertEquals(3, player.getMovesRemaining());
+	}
+	
+	@Test
+	public void testTryMoveDown()
+	{
+		new GameHandler(2);
+		Player player = new Player(0);
+		player.setMovesRemaining(5);
+		
+		GameHandler.instance.getMap().getMapTile(5, 5).getCell(2, 1).setAccessible(false);
+		player.tryMoveDown();
+		assertEquals(1, player.getCellLocation().y);
+		assertEquals(5, player.getMovesRemaining());
+		
+		GameHandler.instance.getMap().getMapTile(5, 5).getCell(2, 1).setAccessible(true);
+		player.tryMoveDown();
+		assertEquals(2, player.getCellLocation().y);
+		assertEquals(4, player.getMovesRemaining());
+		
+		// Now check move to other tile.
+		GameHandler.instance.getMap().getMapTile(6, 5).getCell(0, 1).setAccessible(false);
+		player.tryMoveDown();
+		assertEquals(2, player.getCellLocation().y);
+		assertEquals(4, player.getMovesRemaining());
+		
+		GameHandler.instance.getMap().getMapTile(6, 5).getCell(0, 1).setAccessible(true);
+		player.tryMoveDown();
+		assertEquals(0, player.getCellLocation().y);
+		assertEquals(3, player.getMovesRemaining());
+	}
 }
