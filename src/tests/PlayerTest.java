@@ -156,4 +156,98 @@ public class PlayerTest
 			fail(e.getLocalizedMessage());
 		}
 	}
+	
+	@Test
+	public void fightZombie()
+	{
+		Player player = new Player(0);
+		TileCell tile = new TileCell(true, false, false);
+		
+		assertEquals(true, player.fightZombie(tile));
+		assertEquals(0, player.getZombiesCaptured());
+		
+		tile.setZombie(true);
+		player.setZombieCombatRoll(4);
+		assertEquals(true, player.fightZombie(tile));
+		assertEquals(1, player.getZombiesCaptured());
+		
+		tile.setZombie(true);
+		player.setZombieCombatRoll(0);
+		assertEquals(false, player.fightZombie(tile));
+		assertEquals(2, player.getLifeTokens());
+		
+		tile.setZombie(true);
+		player.setZombieCombatRoll(2);
+		if (player.fightZombie(tile))
+		{
+			assertEquals(2, player.getZombiesCaptured());
+			assertEquals(1, player.getBulletTokens());
+			assertEquals(2, player.getLifeTokens());
+		}
+		else
+		{
+			// Lose life token.
+			assertEquals(1, player.getZombiesCaptured());
+			assertEquals(3, player.getBulletTokens());
+			assertEquals(1, player.getLifeTokens());
+		}
+	}
+	
+	@Test
+	public void testTryMoveLeft()
+	{
+		new GameHandler(2);
+		Player player = new Player(0);
+		player.setMovesRemaining(5);
+		
+		GameHandler.instance.getMap().getMapTile(5, 5).getCell(1, 0).setAccessible(false);
+		player.tryMoveLeft();
+		assertEquals(1, player.getCellLocation().x);
+		assertEquals(5, player.getMovesRemaining());
+		
+		GameHandler.instance.getMap().getMapTile(5, 5).getCell(1, 0).setAccessible(true);
+		player.tryMoveLeft();
+		assertEquals(0, player.getCellLocation().x);
+		assertEquals(4, player.getMovesRemaining());
+		
+		// Now check move to other tile.
+		GameHandler.instance.getMap().getMapTile(5, 4).getCell(1, 2).setAccessible(false);
+		player.tryMoveLeft();
+		assertEquals(0, player.getCellLocation().x);
+		assertEquals(4, player.getMovesRemaining());
+		
+		GameHandler.instance.getMap().getMapTile(5, 4).getCell(1, 2).setAccessible(true);
+		player.tryMoveLeft();
+		assertEquals(2, player.getCellLocation().x);
+		assertEquals(3, player.getMovesRemaining());
+	}
+	
+	@Test
+	public void testTryMoveRight()
+	{
+		new GameHandler(2);
+		Player player = new Player(0);
+		player.setMovesRemaining(5);
+		
+		GameHandler.instance.getMap().getMapTile(5, 5).getCell(1, 2).setAccessible(false);
+		player.tryMoveRight();
+		assertEquals(1, player.getCellLocation().x);
+		assertEquals(5, player.getMovesRemaining());
+		
+		GameHandler.instance.getMap().getMapTile(5, 5).getCell(1, 2).setAccessible(true);
+		player.tryMoveRight();
+		assertEquals(2, player.getCellLocation().x);
+		assertEquals(4, player.getMovesRemaining());
+		
+		// Now check move to other tile.
+		GameHandler.instance.getMap().getMapTile(5, 6).getCell(1, 0).setAccessible(false);
+		player.tryMoveRight();
+		assertEquals(2, player.getCellLocation().x);
+		assertEquals(4, player.getMovesRemaining());
+		
+		GameHandler.instance.getMap().getMapTile(5, 6).getCell(1, 0).setAccessible(true);
+		player.tryMoveRight();
+		assertEquals(0, player.getCellLocation().x);
+		assertEquals(3, player.getMovesRemaining());
+	}
 }
