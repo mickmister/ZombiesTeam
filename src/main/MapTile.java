@@ -1,6 +1,5 @@
 package main;
 
-import java.awt.Graphics2D;
 import java.awt.Point;
 
 import javax.swing.JOptionPane;

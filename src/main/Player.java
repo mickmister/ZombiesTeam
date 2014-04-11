@@ -110,7 +110,7 @@ public class Player
 				this.xCell = 2;
 				this.movesRemaining -= 1;
 				// Zombie check
-				GameHandler.instance.checkCombatOrMoveState();
+				GameHandler.instance.gotoCombatOrMoveState();
 			}
 		}
 		else
@@ -121,7 +121,7 @@ public class Player
 				this.xCell -= 1;
 				this.movesRemaining -= 1;
 				// Zombie check
-				GameHandler.instance.checkCombatOrMoveState();
+				GameHandler.instance.gotoCombatOrMoveState();
 			}
 		}
 	}
@@ -142,7 +142,7 @@ public class Player
 				this.xCell = 0;
 				this.movesRemaining -= 1;
 				// Zombie check
-				GameHandler.instance.checkCombatOrMoveState();
+				GameHandler.instance.gotoCombatOrMoveState();
 			}
 		}
 		else
@@ -153,7 +153,7 @@ public class Player
 				this.xCell += 1;
 				this.movesRemaining -= 1;
 				// Zombie check
-				GameHandler.instance.checkCombatOrMoveState();
+				GameHandler.instance.gotoCombatOrMoveState();
 			}
 		}
 	}
@@ -174,7 +174,7 @@ public class Player
 				this.yCell = 2;
 				this.movesRemaining -= 1;
 				// Zombie check
-				GameHandler.instance.checkCombatOrMoveState();
+				GameHandler.instance.gotoCombatOrMoveState();
 			}
 		}
 		else
@@ -185,7 +185,7 @@ public class Player
 				this.yCell -= 1;
 				this.movesRemaining -= 1;
 				// Zombie check
-				GameHandler.instance.checkCombatOrMoveState();
+				GameHandler.instance.gotoCombatOrMoveState();
 			}
 		}
 	}
@@ -206,7 +206,7 @@ public class Player
 				this.yCell = 0;
 				this.movesRemaining -= 1;
 				// Zombie check
-				GameHandler.instance.checkCombatOrMoveState();
+				GameHandler.instance.gotoCombatOrMoveState();
 			}
 		}
 		else
@@ -217,7 +217,7 @@ public class Player
 				this.yCell += 1;
 				this.movesRemaining -= 1;
 				// Zombie check
-				GameHandler.instance.checkCombatOrMoveState();
+				GameHandler.instance.gotoCombatOrMoveState();
 			}
 		}
 	}

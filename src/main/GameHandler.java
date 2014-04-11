@@ -187,7 +187,7 @@ public class GameHandler
 		return this.guiStateData;
 	}
 	
-	public void checkCombatOrMoveState()
+	public void gotoCombatOrMoveState()
 	{
 		this.currentState = GameState.playerMovementDieRoll;
 		nextGameState();

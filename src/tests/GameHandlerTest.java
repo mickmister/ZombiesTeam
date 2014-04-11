@@ -2,10 +2,9 @@ package tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import main.EventCardDeck;
+import main.DataListener;
 import main.GameHandler;
 import main.GameHandler.GameState;
-import main.MapTileDeck;
 
 import org.junit.Test;
 
@@ -101,5 +100,36 @@ public class GameHandlerTest
 		new GameHandler(1);
 		assertNotNull(GameHandler.instance.getTileDeck());
 		assertNotNull(GameHandler.instance.getEventDeck());
+	}
+	
+	@Test
+	public void testGuiStateData()
+	{
+		new GameHandler(1);
+		assertNotNull(GameHandler.instance.getGuiStateData());
+		assertEquals(true, GameHandler.instance.getGuiStateData().mapTileDeckButtonEnabled);
+		assertEquals(false, GameHandler.instance.getGuiStateData().rollDiceButtonEnabled);
+	}
+	
+	@Test
+	public void testDataListeners()
+	{
+		new GameHandler(1);
+		final int[] test = new int[1];
+		DataListener listener = new DataListener()
+		{
+			@Override
+			public void dataChanged(DataChangedEvent e)
+			{
+				test[0] += 1;
+			}
+		};
+		GameHandler.instance.addDataListener(listener);
+		GameHandler.instance.addDataListener(listener);
+		for (int i = 0; i < 10; i += 1)
+		{
+			GameHandler.instance.fireDataChangedEvent(null);
+		}
+		assertEquals(2 * 10, test[0]);
 	}
 }
