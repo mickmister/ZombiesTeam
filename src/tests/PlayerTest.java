@@ -5,9 +5,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
 import java.awt.Point;
-import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 
 import main.GameHandler;
 import main.Player;
@@ -48,25 +46,13 @@ public class PlayerTest
 		assertEquals(8, test.getZombieCombatRoll());
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Test
 	public void testAddsSelfToMap()
 	{
-		try
-		{
-			new GameHandler(4);
-			Player test = new Player(2);
-			TileCell cell = GameHandler.instance.getMap().getMapTile(5, 5).getCell(1, 1);
-			Field field = cell.getClass().getDeclaredField("playersOccupying");
-			field.setAccessible(true);
-			ArrayList<Player> players = (ArrayList<Player>) field.get(cell);
-			assertEquals(true, players.contains(test));
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-			fail(e.getLocalizedMessage());
-		}
+		new GameHandler(4);
+		Player test = GameHandler.instance.getPlayer(2);
+		TileCell cell = GameHandler.instance.getMap().getMapTile(5, 5).getCell(1, 1);
+		assertEquals(test, cell.getPlayersOccupying().get(2));
 	}
 	
 	@Test
@@ -97,6 +83,72 @@ public class PlayerTest
 			assertEquals(0, test.getLifeTokens());
 			assertEquals(false, method.invoke(test));
 			assertEquals(3, test.getLifeTokens());
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			fail(e.getLocalizedMessage());
+		}
+	}
+	
+	@Test
+	public void testDifferentTileMove()
+	{
+		try
+		{
+			Player player = new Player(0);
+			Method method = Player.class.getDeclaredMethod("checkDifferentTileMove", TileCell.class, TileCell.class);
+			method.setAccessible(true);
+			TileCell road = new TileCell(true, false, false);
+			TileCell building = new TileCell(true, true, false);
+			TileCell door = new TileCell(true, true, true);
+			
+			assertEquals(true, method.invoke(player, road, road));
+			assertEquals(false, method.invoke(player, road, building));
+			assertEquals(false, method.invoke(player, road, door));
+			assertEquals(false, method.invoke(player, building, road));
+			assertEquals(false, method.invoke(player, building, building));
+			assertEquals(false, method.invoke(player, building, door));
+			assertEquals(false, method.invoke(player, door, road));
+			assertEquals(false, method.invoke(player, door, building));
+			assertEquals(false, method.invoke(player, door, door));
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			fail(e.getLocalizedMessage());
+		}
+	}
+	
+	@Test
+	public void testSameTileMove()
+	{
+		try
+		{
+			Player player = new Player(0);
+			Method method = Player.class.getDeclaredMethod("checkSameTileMove", TileCell.class, TileCell.class);
+			method.setAccessible(true);
+			TileCell grass = new TileCell(false, false, false);
+			TileCell road = new TileCell(true, false, false);
+			TileCell building = new TileCell(true, true, false);
+			TileCell door = new TileCell(true, true, true);
+			
+			assertEquals(false, method.invoke(player, grass, grass));
+			//assertEquals(false, method.invoke(player, grass, road));
+			//assertEquals(false, method.invoke(player, grass, building));
+			//assertEquals(false, method.invoke(player, grass, door));
+			assertEquals(false, method.invoke(player, road, grass));
+			assertEquals(true, method.invoke(player, road, road));
+			assertEquals(false, method.invoke(player, road, building));
+			assertEquals(true, method.invoke(player, road, door));
+			assertEquals(false, method.invoke(player, building, grass));
+			assertEquals(false, method.invoke(player, building, road));
+			assertEquals(true, method.invoke(player, building, building));
+			assertEquals(true, method.invoke(player, building, door));
+			assertEquals(false, method.invoke(player, door, grass));
+			assertEquals(true, method.invoke(player, door, road));
+			assertEquals(true, method.invoke(player, door, building));
+			assertEquals(true, method.invoke(player, door, door));
 		}
 		catch (Exception e)
 		{
