@@ -32,7 +32,7 @@ public class RollDiceButton extends JButton implements ActionListener, DataListe
 		if (game.getCurrentState() == GameState.playerMovementDieRoll || game.getCurrentState() == GameState.zombieMovementDieRoll)
 		{
 			// TODO: REMOVE CHANGE.
-			int rollNum = (int) (Math.random() * 6 + 1) + 5;
+			int rollNum = (int) (Math.random() * 6 + 1);
 			Player player = game.getPlayer(game.getTurn());
 			player.setMovesRemaining(rollNum);
 			JOptionPane.showMessageDialog(getTopLevelAncestor(), "Your player/zombie movement roll was a " + rollNum + "!");
@@ -42,7 +42,7 @@ public class RollDiceButton extends JButton implements ActionListener, DataListe
 		else if (game.getCurrentState() == GameState.zombieCombat)
 		{
 			// TODO: REMOVE CHANGE.
-			int combatRoll = (int) (Math.random() * 6 + 1) - 3;
+			int combatRoll = (int) (Math.random() * 6 + 1);
 			JOptionPane.showMessageDialog(getTopLevelAncestor(), "Your combat roll was a " + combatRoll + "!");
 			Player player = game.getPlayer(game.getTurn());
 			player.setZombieCombatRoll(combatRoll);
