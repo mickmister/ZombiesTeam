@@ -50,48 +50,101 @@ public class GameHandlerTest
 	}
 	
 	@Test
+	public void testNextStateInitial()
+	{
+		new GameHandler(2);
+		assertEquals(GameState.tilePlacement, GameHandler.instance.getCurrentState());
+		GameHandler.instance.nextGameState();
+		assertEquals(GameState.zombiePlacement, GameHandler.instance.getCurrentState());
+		GameHandler.instance.nextGameState();
+		assertEquals(GameState.playerMovementDieRoll, GameHandler.instance.getCurrentState());
+	}
+	
+	@Test
 	public void testNextStateNoMoves()
 	{
-		GameHandler test = new GameHandler(2);
-		
-		assertEquals(GameState.tilePlacement, test.getCurrentState());
-		test.nextGameState();
-		assertEquals(GameState.zombiePlacement, test.getCurrentState());
-		test.nextGameState();
-		assertEquals(GameState.playerMovementDieRoll, test.getCurrentState());
-		test.nextGameState();
+		new GameHandler(2);
+		GameHandler.instance.nextGameState();
+		GameHandler.instance.nextGameState();
 		// The player will have no moves, so it should skip from
 		// playerMovementDieRoll -> zombieMovementDieRoll
-		assertEquals(GameState.zombieMovementDieRoll, test.getCurrentState());
+		GameHandler.instance.nextGameState();
+		assertEquals(GameState.zombieMovementDieRoll, GameHandler.instance.getCurrentState());
 		// TODO: Uncomment when last states are done.
 		// test.nextGameState();
 		// assertEquals(GameState.zombieMovement, test.getCurrentState());
-		test.nextGameState();
-		assertEquals(GameState.tilePlacement, test.getCurrentState());
+		GameHandler.instance.nextGameState();
+		assertEquals(GameState.tilePlacement, GameHandler.instance.getCurrentState());
 	}
 	
 	@Test
 	public void testNextStateWithMoves()
 	{
-		GameHandler test = new GameHandler(3);
-		test.getPlayer(0).setMovesRemaining(5);
+		new GameHandler(2);
+		GameHandler.instance.getPlayer(0).setMovesRemaining(5);
 		
-		assertEquals(GameState.tilePlacement, test.getCurrentState());
-		test.nextGameState();
-		assertEquals(GameState.zombiePlacement, test.getCurrentState());
-		test.nextGameState();
-		assertEquals(GameState.playerMovementDieRoll, test.getCurrentState());
-		test.nextGameState();
+		GameHandler.instance.nextGameState();
+		GameHandler.instance.nextGameState();
 		// The player will have moves, so it should go from
 		// playerMovementDieRoll -> playerMovement
-		assertEquals(GameState.playerMovement, test.getCurrentState());
-		test.nextGameState();
-		assertEquals(GameState.zombieMovementDieRoll, test.getCurrentState());
+		GameHandler.instance.nextGameState();
+		assertEquals(GameState.playerMovement, GameHandler.instance.getCurrentState());
+		GameHandler.instance.nextGameState();
+		assertEquals(GameState.zombieMovementDieRoll, GameHandler.instance.getCurrentState());
 		// TODO: Uncomment when last states are done.
 		// test.nextGameState();
 		// assertEquals(GameState.zombieMovement, test.getCurrentState());
-		test.nextGameState();
-		assertEquals(GameState.tilePlacement, test.getCurrentState());
+		GameHandler.instance.nextGameState();
+		assertEquals(GameState.tilePlacement, GameHandler.instance.getCurrentState());
+	}
+	
+	@Test
+	public void testNextStateWithCombat()
+	{
+		new GameHandler(2);
+		GameHandler.instance.getMap().getMapTile(5, 5).getCell(1, 1).setZombie(true);
+		GameHandler.instance.getPlayer(0).setMovesRemaining(1);
+		
+		GameHandler.instance.nextGameState();
+		GameHandler.instance.nextGameState();
+		// There is a zombie to fight, so it should go from
+		// playerMovementDieRoll -> zombieCombat
+		GameHandler.instance.nextGameState();
+		assertEquals(GameState.zombieCombat, GameHandler.instance.getCurrentState());
+		GameHandler.instance.nextGameState();
+		assertEquals(GameState.playerMovement, GameHandler.instance.getCurrentState());
+		
+		GameHandler.instance.getPlayer(0).setMovesRemaining(0);
+		GameHandler.instance.gotoCombatOrMoveState();
+		GameHandler.instance.nextGameState();
+		assertEquals(GameState.zombieMovementDieRoll, GameHandler.instance.getCurrentState());
+		
+		// TODO: Uncomment when last states are done.
+		// test.nextGameState();
+		// assertEquals(GameState.zombieMovement, test.getCurrentState());
+		GameHandler.instance.nextGameState();
+		assertEquals(GameState.tilePlacement, GameHandler.instance.getCurrentState());
+	}
+	
+	@Test
+	public void testGotoCombatOrMoveState()
+	{
+		new GameHandler(2);
+		
+		GameHandler.instance.gotoCombatOrMoveState();
+		assertEquals(GameState.zombieMovementDieRoll, GameHandler.instance.getCurrentState());
+		GameHandler.instance.getMap().getMapTile(5, 5).getCell(1, 1).setZombie(true);
+		GameHandler.instance.gotoCombatOrMoveState();
+		assertEquals(GameState.zombieCombat, GameHandler.instance.getCurrentState());
+		
+		new GameHandler(2);
+		
+		GameHandler.instance.getPlayer(0).setMovesRemaining(1);
+		GameHandler.instance.gotoCombatOrMoveState();
+		assertEquals(GameState.playerMovement, GameHandler.instance.getCurrentState());
+		GameHandler.instance.getMap().getMapTile(5, 5).getCell(1, 1).setZombie(true);
+		GameHandler.instance.gotoCombatOrMoveState();
+		assertEquals(GameState.zombieCombat, GameHandler.instance.getCurrentState());
 	}
 	
 	@Test
