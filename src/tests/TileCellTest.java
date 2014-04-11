@@ -1,10 +1,8 @@
-package main.tests;
+package tests;
 
-import static org.junit.Assert.*;
-
-import java.util.ArrayList;
-
-import main.Player;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import main.TileCell;
 
 import org.junit.Test;

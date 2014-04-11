@@ -1,7 +1,6 @@
 package main;
 
 import gui.BottomPanel;
-import gui.MapView;
 import gui.RightPanel;
 
 import java.awt.BorderLayout;
@@ -9,6 +8,8 @@ import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.WindowConstants;
+
+import view.MapView;
 
 public class Window extends JFrame
 {

@@ -1,4 +1,4 @@
-package main.tests;
+package tests;
 
 import static org.junit.Assert.assertNotNull;
 import gui.ImageManager;

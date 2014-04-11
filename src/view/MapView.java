@@ -1,4 +1,6 @@
-package gui;
+package view;
+
+import gui.ImageManager;
 
 import java.awt.Color;
 import java.awt.Dimension;
