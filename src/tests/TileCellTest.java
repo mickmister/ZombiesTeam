@@ -1,11 +1,9 @@
 package tests;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import main.TileCell;
+import static org.junit.Assert.*;
+import main.*;
 
-import org.junit.Test;
+import org.junit.*;
 
 public class TileCellTest
 {

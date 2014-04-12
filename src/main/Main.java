@@ -1,10 +1,8 @@
 package main;
 
-import java.awt.Font;
+import java.awt.*;
 
-import javax.swing.JOptionPane;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.*;
 
 public class Main
 {

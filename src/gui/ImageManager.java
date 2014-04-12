@@ -1,9 +1,9 @@
 package gui;
 
-import java.awt.image.BufferedImage;
-import java.io.IOException;
+import java.awt.image.*;
+import java.io.*;
 
-import javax.imageio.ImageIO;
+import javax.imageio.*;
 
 public class ImageManager
 {
@@ -21,15 +21,15 @@ public class ImageManager
 	{
 		try
 		{
-			ROAD_TEXTURE = ImageIO.read(this.getClass().getResourceAsStream("../Resources/Road Texture.png"));
-			GRASS_TEXTURE = ImageIO.read(this.getClass().getResourceAsStream("../Resources/Grass Texture.png"));
-			DIRT_TEXTURE = ImageIO.read(this.getClass().getResourceAsStream("../Resources/Dirt Texture.png"));
-			ZOMBIE_PICTURE = ImageIO.read(this.getClass().getResourceAsStream("../Resources/Zombie Picture.png"));
-			HEART_PICTURE = ImageIO.read(this.getClass().getResourceAsStream("../Resources/Heart Picture.png"));
-			BULLET_PICTURE = ImageIO.read(this.getClass().getResourceAsStream("../Resources/Bullet Picture.png"));
-			ZOMBIE_ICON = ImageIO.read(this.getClass().getResourceAsStream("../Resources/Zombie Icon.png"));
-			HEART_ICON = ImageIO.read(this.getClass().getResourceAsStream("../Resources/Heart Icon.png"));
-			BULLET_ICON = ImageIO.read(this.getClass().getResourceAsStream("../Resources/Bullet Icon.png"));
+			ImageManager.ROAD_TEXTURE = ImageIO.read(this.getClass().getResourceAsStream("../Resources/Road Texture.png"));
+			ImageManager.GRASS_TEXTURE = ImageIO.read(this.getClass().getResourceAsStream("../Resources/Grass Texture.png"));
+			ImageManager.DIRT_TEXTURE = ImageIO.read(this.getClass().getResourceAsStream("../Resources/Dirt Texture.png"));
+			ImageManager.ZOMBIE_PICTURE = ImageIO.read(this.getClass().getResourceAsStream("../Resources/Zombie Picture.png"));
+			ImageManager.HEART_PICTURE = ImageIO.read(this.getClass().getResourceAsStream("../Resources/Heart Picture.png"));
+			ImageManager.BULLET_PICTURE = ImageIO.read(this.getClass().getResourceAsStream("../Resources/Bullet Picture.png"));
+			ImageManager.ZOMBIE_ICON = ImageIO.read(this.getClass().getResourceAsStream("../Resources/Zombie Icon.png"));
+			ImageManager.HEART_ICON = ImageIO.read(this.getClass().getResourceAsStream("../Resources/Heart Icon.png"));
+			ImageManager.BULLET_ICON = ImageIO.read(this.getClass().getResourceAsStream("../Resources/Bullet Icon.png"));
 		}
 		catch (IOException e)
 		{

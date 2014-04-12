@@ -1,7 +1,6 @@
 package main;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.*;
 
 public class EventCardDeck
 {
@@ -13,8 +12,7 @@ public class EventCardDeck
 		Collections.shuffle(this.deck);
 	}
 	
-	/*public EventCard getNextCard()
-	{
-		return this.deck.remove(0);
-	}*/
+	/*
+	 * public EventCard getNextCard() { return this.deck.remove(0); }
+	 */
 }

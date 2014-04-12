@@ -1,12 +1,10 @@
 package tests;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import main.DataListener;
-import main.GameHandler;
+import static org.junit.Assert.*;
+import main.*;
 import main.GameHandler.GameState;
 
-import org.junit.Test;
+import org.junit.*;
 
 public class GameHandlerTest
 {

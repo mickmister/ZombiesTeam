@@ -1,17 +1,14 @@
 package tests;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.*;
 
-import java.awt.Point;
+import java.awt.*;
 
-import main.GameHandler;
+import main.*;
 import main.GameHandler.GameState;
-import main.MapTile;
 import main.MapTile.Shape;
-import main.TileCell;
 
-import org.junit.Test;
+import org.junit.*;
 
 /**
  * Tests the functionality of creating and rotating different map tile types.

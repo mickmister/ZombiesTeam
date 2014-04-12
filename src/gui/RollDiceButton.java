@@ -1,14 +1,10 @@
 package gui;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
-import javax.swing.JButton;
-import javax.swing.JOptionPane;
+import javax.swing.*;
 
-import main.DataListener;
-import main.DiceRoll;
-import main.GameHandler;
+import main.*;
 import main.GameHandler.GameState;
 
 public class RollDiceButton extends JButton implements ActionListener, DataListener
@@ -28,7 +24,7 @@ public class RollDiceButton extends JButton implements ActionListener, DataListe
 	
 	public void rollDiceClicked()
 	{
-		int result = DiceRoll.rollDice();
+		int result = RollDice.rollDice();
 		if (GameHandler.instance.getCurrentState().equals(GameState.playerMovementDieRoll))
 		{
 			JOptionPane.showMessageDialog(getTopLevelAncestor(), "Your player movement roll was a " + result + "!");

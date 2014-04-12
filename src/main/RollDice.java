@@ -2,7 +2,7 @@ package main;
 
 import main.GameHandler.GameState;
 
-public class DiceRoll
+public class RollDice
 {
 	public static int rollDice()
 	{

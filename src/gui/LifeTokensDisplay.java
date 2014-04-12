@@ -1,10 +1,8 @@
 package gui;
 
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 
-import main.Player;
+import main.*;
 
 public class LifeTokensDisplay extends JLabel implements Runnable
 {

@@ -1,8 +1,8 @@
 package main;
 
-import java.awt.Point;
+import java.awt.*;
 
-import javax.swing.JOptionPane;
+import javax.swing.*;
 
 /**
  * A MapTile represents one tile that is placed on the Map. It is a square with 9 sub-blocks

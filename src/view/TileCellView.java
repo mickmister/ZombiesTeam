@@ -1,18 +1,11 @@
 package view;
 
-import gui.ImageManager;
+import gui.*;
 
-import java.awt.AlphaComposite;
-import java.awt.Color;
-import java.awt.Composite;
-import java.awt.Graphics2D;
-import java.awt.Point;
+import java.awt.*;
 
-import main.GameHandler;
-import main.Map;
-import main.MapTile;
+import main.*;
 import main.MapTile.Shape;
-import main.TileCell;
 
 public class TileCellView
 {

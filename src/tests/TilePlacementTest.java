@@ -1,12 +1,11 @@
 package tests;
 
-import java.awt.Point;
+import java.awt.*;
 
-import main.Map;
-import main.MapTile;
+import main.*;
 import main.MapTile.Shape;
 
-import org.junit.Test;
+import org.junit.*;
 
 /**
  * TODO Put here a description of what this class does.

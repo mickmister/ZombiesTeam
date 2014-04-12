@@ -1,6 +1,6 @@
 package main;
 
-import java.awt.Point;
+import java.awt.*;
 
 import main.MapTile.Shape;
 

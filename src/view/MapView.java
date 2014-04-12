@@ -1,28 +1,16 @@
 package view;
 
-import gui.ImageManager;
+import gui.*;
 import gui.Window;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.RenderingHints;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.image.BufferedImage;
+import java.awt.*;
+import java.awt.event.*;
+import java.awt.image.*;
 
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JViewport;
+import javax.swing.*;
 
-import main.GameHandler;
+import main.*;
 import main.GameHandler.GameState;
-import main.MapTile;
-import main.Player;
 
 public class MapView extends JPanel implements Runnable, KeyListener
 {

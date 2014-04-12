@@ -1,9 +1,8 @@
 package view;
 
-import java.awt.Graphics2D;
-import java.awt.Point;
+import java.awt.*;
 
-import main.MapTile;
+import main.*;
 
 public class MapTileView
 {

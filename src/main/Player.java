@@ -1,8 +1,8 @@
 package main;
 
-import java.awt.Point;
+import java.awt.*;
 
-import javax.swing.JOptionPane;
+import javax.swing.*;
 
 /**
  * This class will hold the given player's status such as life tokens, bullet tokens, and zombies

@@ -1,9 +1,8 @@
 package main;
 
-import gui.ImageManager;
-import gui.Window;
+import gui.*;
 
-import java.util.ArrayList;
+import java.util.*;
 
 import main.DataListener.DataChangedEvent;
 
