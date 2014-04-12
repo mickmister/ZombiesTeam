@@ -2,6 +2,7 @@ package tests;
 
 import static org.junit.Assert.*;
 import main.*;
+import main.DataListener.DataChangedEvent;
 import main.GameHandler.GameState;
 
 import org.junit.*;
@@ -179,7 +180,7 @@ public class GameHandlerTest
 		GameHandler.instance.addDataListener(listener);
 		for (int i = 0; i < 10; i += 1)
 		{
-			GameHandler.instance.fireDataChangedEvent(null);
+			GameHandler.instance.fireDataChangedEvent(DataChangedEvent.test);
 		}
 		assertEquals(2 * 10, test[0]);
 	}

@@ -136,5 +136,4 @@ public class TilePlacementTest
 		testMap.setTempPos(new Point(5, 5));
 		testMap.placeTempTile();
 	}
-	
 }
