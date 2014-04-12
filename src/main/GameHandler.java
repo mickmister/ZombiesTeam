@@ -20,6 +20,47 @@ public class GameHandler
 	private ArrayList<DataListener> listeners;
 	private GuiStateData guiStateData;
 	
+	/**
+	 *         tilePlacement
+	 *               |
+	 *        zombiePlacement <---------------
+	 *               |                       |
+	 * ------------------------------        |
+	 * |  Are there more zombies to |        |
+	 * |  place in the new MapTile? |---------
+	 * ------------------------------   Yes
+	 *               | No
+	 *               |
+	 *     playerMovementDieRoll <-------------------------------------------------------------------------------
+	 *               |                                                                                          |
+	 *               |                                                                                          |
+	 * ------------------------------                                                                           |
+	 * |  Is there a zombie in the  |                            no moves                                       |
+	 * | player's current TileCell? |----------> zombieCombat ---------------------------                       |
+	 * ------------------------------   Yes            |                                |                       |
+	 *               | No                              |                                |                       |
+	 *               |                                 | move remaining                 |                       |
+	 *               |                                 |                                |                       |
+	 * ------------------------------                  |                                |                       |
+	 * | Does the player have any   |                  |           move remaining        \                      |
+	 * | moves remaining?           |----------> playerMovement -------------------------------------------------
+	 * ------------------------------   Yes            |                                 /
+	 *               | No                              |                                |
+	 *               |                                 | no moves                       |
+	 *               |                                 |                                |
+	 *               |                                 |                                |
+	 *     zombieMovementDieRoll <---------------------- <-------------------------------
+	 *               |
+	 *               |
+	 *         zombieMovement
+	 *               |
+	 *               |
+	 *           NEXT TURN
+	 *
+	 *
+	 * @author ryanjm.
+	 *         Created Apr 12, 2014.
+	 */
 	public enum GameState
 	{
 		tilePlacement, zombiePlacement, playerMovementDieRoll, zombieCombat, playerMovement, zombieMovementDieRoll, zombieMovement
