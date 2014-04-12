@@ -20,6 +20,7 @@ public class GameHandler
 	private ArrayList<DataListener> listeners;
 	private GuiStateData guiStateData;
 	
+	//@formatter:off
 	/**
 	 *         tilePlacement
 	 *               |
@@ -58,9 +59,10 @@ public class GameHandler
 	 *           NEXT TURN
 	 *
 	 *
-	 * @author ryanjm.
+	 * @author Jacob Ryan.
 	 *         Created Apr 12, 2014.
 	 */
+	//@formatter:on
 	public enum GameState
 	{
 		tilePlacement, zombiePlacement, playerMovementDieRoll, zombieCombat, playerMovement, zombieMovementDieRoll, zombieMovement
@@ -136,9 +138,7 @@ public class GameHandler
 	}
 	
 	/**
-	 * Moves to the next game state in the defined flow of a turn. This goes: tilePlacement ->
-	 * zombiePlacement -> playerMovementDieRoll -> playerMovement -> zombieMovementDieRoll ->
-	 * zombieMovement
+	 * Moves to the next game state in the defined flow of a turn. See the diagram above for more information.
 	 */
 	public void nextGameState()
 	{
