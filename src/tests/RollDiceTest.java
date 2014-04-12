@@ -12,7 +12,7 @@ public class RollDiceTest
 	public void testRollDice()
 	{
 		new GameHandler(2);
-		for (int i = 0; i < 1000000; i++)
+		for (int i = 0; i < 10000000; i++)
 		{
 			int roll = RollDice.rollDice();
 			if (roll > 6)
@@ -33,8 +33,20 @@ public class RollDiceTest
 		game.nextGameState();
 		game.nextGameState();
 		int roll = RollDice.rollDice();
-		assertEquals(game.getPlayer(game.getTurn()).getMovesRemaining(), roll);
+		assertEquals(roll, game.getPlayer(0).getMovesRemaining());
 		assertEquals(GameState.playerMovement, game.getCurrentState());
+	}
+	
+	@Test
+	public void testRollDiceZombieMovementDieRollState()
+	{
+		GameHandler game = new GameHandler(2);
+		game.nextGameState();
+		game.nextGameState();
+		game.nextGameState();
+		int roll = RollDice.rollDice();
+		assertEquals(roll, game.getPlayer(0).getMovesRemaining());
+		//assertEquals(GameState.zombieMovement, game.getCurrentState());
 	}
 	
 	@Test
@@ -48,7 +60,7 @@ public class RollDiceTest
 		game.nextGameState();
 		start.setZombie(false);
 		int roll = RollDice.rollDice();
-		assertEquals(game.getPlayer(game.getTurn()).getZombieCombatRoll(), roll);
+		assertEquals(game.getPlayer(0).getZombieCombatRoll(), roll);
 		assertEquals(GameState.zombieMovementDieRoll, game.getCurrentState());
 	}
 }
