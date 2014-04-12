@@ -24,7 +24,7 @@ public class Map
 		}
 		this.mapTiles[this.SIZE / 2][this.SIZE / 2] = new MapTile(Shape.quad, null);
 		this.tempTile = null;
-		this.tempPos = new Point(5, 5);
+		this.tempPos = new Point(this.SIZE / 2, this.SIZE / 2);
 	}
 	
 	public MapTile getMapTile(int row, int col)
@@ -70,9 +70,9 @@ public class Map
 	public void setTempPos(Point point)
 	{
 		point.x = Math.max(0, point.x);
-		point.x = Math.min(this.SIZE - 2, point.x);
+		point.x = Math.min(this.SIZE - 1, point.x);
 		point.y = Math.max(0, point.y);
-		point.y = Math.min(this.SIZE - 2, point.y);
+		point.y = Math.min(this.SIZE - 1, point.y);
 		this.tempPos = point;
 	}
 	

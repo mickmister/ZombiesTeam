@@ -21,11 +21,11 @@ public class MapView extends JPanel implements Runnable, KeyListener
 	
 	public MapView()
 	{
-		this.image = new BufferedImage(2400, 2400, BufferedImage.TYPE_INT_ARGB);
+		this.image = new BufferedImage(240 * 11, 240 * 11, BufferedImage.TYPE_INT_ARGB);
 		this.graphics = (Graphics2D) this.image.getGraphics();
 		this.graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		
-		setPreferredSize(new Dimension(2400, 2400));
+		setPreferredSize(new Dimension(240 * 11, 240 * 11));
 		setFocusable(true);
 		addKeyListener(this);
 		
@@ -95,12 +95,12 @@ public class MapView extends JPanel implements Runnable, KeyListener
 		}
 		
 		JViewport viewPort = (JViewport) getParent();
-		Rectangle bounds = viewPort.getViewRect();
+		Point view = viewPort.getViewPosition();
 		this.graphics.setFont(new Font("Segoe UI", Font.PLAIN, 35));
 		this.graphics.setColor(Color.BLACK);
-		this.graphics.drawString(message, bounds.x + 22, bounds.y + 52);
+		this.graphics.drawString(message, view.x + 22, view.y + 52);
 		this.graphics.setColor(Color.WHITE);
-		this.graphics.drawString(message, bounds.x + 20, bounds.y + 50);
+		this.graphics.drawString(message, view.x + 20, view.y + 50);
 		
 		g.drawImage(this.image, 0, 0, null);
 	}
@@ -111,16 +111,19 @@ public class MapView extends JPanel implements Runnable, KeyListener
 		{
 			JViewport viewPort = (JViewport) getParent();
 			Rectangle bounds = viewPort.getViewRect();
+			Dimension size = viewPort.getViewSize();
 			Point current = GameHandler.instance.getMap().getTempPos();
 			
 			int xCurrent = bounds.x;
 			int yCurrent = bounds.y;
-			int xMiddle = current.x * 240 + 240 / 2 - bounds.width / 2;
-			int yMiddle = current.y * 240 + 240 / 2 - bounds.height / 2;
+			int xMiddle = current.x * 240 + 120 - bounds.width / 2;
+			int yMiddle = current.y * 240 + 120 - bounds.height / 2;
 			int xNew = (int) (xCurrent * 0.75 + xMiddle * 0.25);
 			int yNew = (int) (yCurrent * 0.75 + yMiddle * 0.25);
-			xNew = Math.max(0, xNew);
-			yNew = Math.max(0, yNew);
+			xNew = Math.max(xNew, 0);
+			yNew = Math.max(yNew, 0);
+			xNew = Math.min(xNew, size.width - bounds.width);
+			yNew = Math.min(yNew, size.height - bounds.height);
 			viewPort.setViewPosition(new Point(xNew, yNew));
 		}
 	}
@@ -130,8 +133,8 @@ public class MapView extends JPanel implements Runnable, KeyListener
 		JViewport viewPort = (JViewport) getParent();
 		Rectangle bounds = viewPort.getViewRect();
 		Dimension size = viewPort.getViewSize();
-		int xView = size.width / 2 + 240 / 2 - bounds.width / 2;
-		int yView = size.height / 2 + 240 / 2 - bounds.height / 2;
+		int xView = size.width / 2 - bounds.width / 2;
+		int yView = size.height / 2 - bounds.height / 2;
 		viewPort.setViewPosition(new Point(xView, yView));
 	}
 	
