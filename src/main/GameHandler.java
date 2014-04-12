@@ -138,7 +138,8 @@ public class GameHandler
 	}
 	
 	/**
-	 * Moves to the next game state in the defined flow of a turn. See the diagram above for more information.
+	 * Moves to the next game state in the defined flow of a turn. See the diagram above for more
+	 * information.
 	 */
 	public void nextGameState()
 	{
@@ -190,14 +191,8 @@ public class GameHandler
 				this.currentState = GameState.zombieMovement;
 				this.guiStateData.rollDiceButtonEnabled = false;
 				// TODO: Remove this testing line.
-				try
-				{
-					Thread.sleep(1000);
-				}
-				catch (Exception e)
-				{
-				}
 				nextGameState();
+				// TODO: Remove this testing line.
 				break;
 			case zombieMovement:
 				this.currentState = GameState.tilePlacement;

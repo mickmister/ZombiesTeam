@@ -46,7 +46,7 @@ public class RollDiceTest
 		game.nextGameState();
 		int roll = RollDice.rollDice();
 		assertEquals(roll, game.getPlayer(0).getMovesRemaining());
-		//assertEquals(GameState.zombieMovement, game.getCurrentState());
+		// assertEquals(GameState.zombieMovement, game.getCurrentState());
 	}
 	
 	@Test
