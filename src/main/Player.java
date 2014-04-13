@@ -1,6 +1,7 @@
 package main;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 import javax.swing.*;
 
@@ -22,6 +23,7 @@ public class Player
 	private int yCell;
 	private int movesRemaining;
 	private int zombieCombatRoll;
+	private ArrayList<String> activeEventCards = new ArrayList<String>();
 	
 	public Player(int number)
 	{
@@ -37,6 +39,24 @@ public class Player
 		this.zombieCombatRoll = 0;
 		
 		GameHandler.instance.getMap().getMapTile(this.yTile, this.xTile).getCell(this.yCell, this.xCell).addPlayer(this);
+	}
+	
+	public void addActiveEventCard(String name)
+	{
+		this.activeEventCards.add(name);
+	}
+	
+	public boolean checkIfCardIsActive(String name)
+	{
+		return this.activeEventCards.contains(name);
+	}
+	
+	public void removeActiveEventCard(String name)
+	{
+		if (!this.activeEventCards.remove(name))
+		{
+			throw new IllegalArgumentException();
+		}
 	}
 	
 	public int getNumber()

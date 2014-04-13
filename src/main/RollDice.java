@@ -16,6 +16,11 @@ public class RollDice
 		if (game.getCurrentState() == GameState.playerMovementDieRoll || game.getCurrentState() == GameState.zombieMovementDieRoll)
 		{
 			Player player = game.getPlayer(game.getTurn());
+			if (player.checkIfCardIsActive("Double Trouble"))
+			{
+				roll = roll * 2;
+				player.removeActiveEventCard("Double Trouble");
+			}			
 			player.setMovesRemaining(roll);
 			game.nextGameState();
 		}
