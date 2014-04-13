@@ -6,7 +6,17 @@ public class RollDice
 {
 	public static int rollDice()
 	{
-		return (int) (Math.random() * 6 + 1);
+		int roll;
+		GameHandler game = GameHandler.instance;
+		Player player = game.getPlayer(game.getTurn());
+		roll = (int) (Math.random() * 6 + 1);
+		if (player.checkIfCardIsActive("Double Trouble"))
+		{
+			System.out.println("Double card executed!");
+			roll = roll * 2;
+			player.removeActiveEventCard("Double Trouble");
+		}	
+		return roll;
 	}
 	
 	public static void rollAction(int roll)

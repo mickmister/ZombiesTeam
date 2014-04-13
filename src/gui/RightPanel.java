@@ -18,7 +18,7 @@ public class RightPanel extends JPanel
 		
 		for (int i = 0; i < 3; i += 1)
 		{
-			add(new JButton("Event card"));
+			add(new EventCardButton(i));
 		}
 	}
 }

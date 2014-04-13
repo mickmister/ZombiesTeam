@@ -130,6 +130,7 @@ public class GameHandler
 	public void nextTurn()
 	{
 		this.turn = (this.turn + 1) % this.numberOfPlayers;
+		this.players.get(this.turn).setCardPlayed(false);
 	}
 	
 	public GameState getCurrentState()

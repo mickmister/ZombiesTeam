@@ -16,5 +16,15 @@ public class EventCard
 		//Massive code with name checking
 		
 	}
+	
+	public String getName()
+	{
+		return this.name;
+	}
+	
+	public String getDescription()
+	{
+		return this.description;
+	}
 
 }

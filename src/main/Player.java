@@ -23,7 +23,9 @@ public class Player
 	private int yCell;
 	private int movesRemaining;
 	private int zombieCombatRoll;
-	private ArrayList<String> activeEventCards = new ArrayList<String>();
+	private ArrayList<String> activeEventCards;
+	private ArrayList<EventCard> handOfEventCards;
+	private boolean cardPlayed;
 	
 	public Player(int number)
 	{
@@ -37,8 +39,31 @@ public class Player
 		this.yCell = 1;
 		this.movesRemaining = 0;
 		this.zombieCombatRoll = 0;
+		this.activeEventCards = new ArrayList<String>();
+		this.handOfEventCards = new ArrayList<EventCard>();
+		this.cardPlayed = false;
+		for (int i = 0; i < 3; i+=1)
+		{
+			this.handOfEventCards.add(GameHandler.instance.getEventDeck().getNextCard());		
+		}
+		
 		
 		GameHandler.instance.getMap().getMapTile(this.yTile, this.xTile).getCell(this.yCell, this.xCell).addPlayer(this);
+	}
+	
+	public boolean checkCardPlayed()
+	{
+		return this.cardPlayed;
+	}
+	
+	public void setCardPlayed(boolean played)
+	{
+		this.cardPlayed = played;
+	}
+	
+	public EventCard getCardAtIndex(int i)
+	{
+		return this.handOfEventCards.get(i);
 	}
 	
 	public void addActiveEventCard(String name)
