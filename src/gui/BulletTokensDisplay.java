@@ -4,7 +4,7 @@ import javax.swing.*;
 
 import main.*;
 
-public class BulletTokensDisplay extends JLabel implements Runnable
+public class BulletTokensDisplay extends JLabel implements DataListener
 {
 	private Player player;
 	
@@ -15,24 +15,12 @@ public class BulletTokensDisplay extends JLabel implements Runnable
 		setHorizontalAlignment(SwingConstants.CENTER);
 		setText("");
 		
-		Thread thread = new Thread(this);
-		thread.start();
+		GameHandler.instance.addDataListener(this);
 	}
 	
 	@Override
-	public void run()
+	public void dataChanged(DataChangedEvent e)
 	{
-		try
-		{
-			while (true)
-			{
-				setText(" " + this.player.getBulletTokens());
-				Thread.sleep(1000);
-			}
-		}
-		catch (InterruptedException e)
-		{
-			e.printStackTrace();
-		}
+		setText(" " + this.player.getBulletTokens());
 	}
 }
