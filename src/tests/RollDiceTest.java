@@ -11,7 +11,6 @@ public class RollDiceTest
 	@Test
 	public void testRollDice()
 	{
-		new GameHandler(2);
 		for (int i = 0; i < 10000000; i++)
 		{
 			int roll = RollDice.rollDice();
@@ -27,30 +26,32 @@ public class RollDiceTest
 	}
 	
 	@Test
-	public void testRollDicePlayerMovementDieRollState()
+	public void testRollActionPlayerMovementDieRoll()
 	{
 		GameHandler game = new GameHandler(2);
 		game.nextGameState();
 		game.nextGameState();
 		int roll = RollDice.rollDice();
+		RollDice.rollAction(roll);
 		assertEquals(roll, game.getPlayer(0).getMovesRemaining());
 		assertEquals(GameState.playerMovement, game.getCurrentState());
 	}
 	
 	@Test
-	public void testRollDiceZombieMovementDieRollState()
+	public void testRollActionZombieMovementDieRoll()
 	{
 		GameHandler game = new GameHandler(2);
 		game.nextGameState();
 		game.nextGameState();
 		game.nextGameState();
 		int roll = RollDice.rollDice();
+		RollDice.rollAction(roll);
 		assertEquals(roll, game.getPlayer(0).getMovesRemaining());
 		// assertEquals(GameState.zombieMovement, game.getCurrentState());
 	}
 	
 	@Test
-	public void testRollDiceZombieCombatState()
+	public void testRollActionZombieCombat()
 	{
 		GameHandler game = new GameHandler(2);
 		TileCell start = game.getMap().getMapTile(5, 5).getCell(1, 1);
@@ -60,7 +61,19 @@ public class RollDiceTest
 		game.nextGameState();
 		start.setZombie(false);
 		int roll = RollDice.rollDice();
-		assertEquals(game.getPlayer(0).getZombieCombatRoll(), roll);
+		RollDice.rollAction(roll);
+		assertEquals(roll, game.getPlayer(0).getZombieCombatRoll());
 		assertEquals(GameState.zombieMovementDieRoll, game.getCurrentState());
+	}
+	
+	@Test
+	public void testRollActionOtherState()
+	{
+		GameHandler game = new GameHandler(2);
+		int roll = RollDice.rollDice();
+		RollDice.rollAction(roll);
+		assertEquals(0, game.getPlayer(0).getMovesRemaining());
+		assertEquals(0, game.getPlayer(0).getZombieCombatRoll());
+		assertEquals(GameState.tilePlacement, game.getCurrentState());
 	}
 }

@@ -6,8 +6,12 @@ public class RollDice
 {
 	public static int rollDice()
 	{
+		return (int) (Math.random() * 6 + 1);
+	}
+	
+	public static void rollAction(int roll)
+	{
 		GameHandler game = GameHandler.instance;
-		int roll = (int) (Math.random() * 6 + 1);
 		
 		if (game.getCurrentState() == GameState.playerMovementDieRoll || game.getCurrentState() == GameState.zombieMovementDieRoll)
 		{
@@ -26,7 +30,5 @@ public class RollDice
 				game.nextGameState();
 			}
 		}
-		
-		return roll;
 	}
 }

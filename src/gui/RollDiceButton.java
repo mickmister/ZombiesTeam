@@ -37,6 +37,7 @@ public class RollDiceButton extends JButton implements ActionListener, DataListe
 		{
 			JOptionPane.showMessageDialog(getTopLevelAncestor(), "Your combat roll was a " + result + "!");
 		}
+		RollDice.rollAction(result);
 	}
 	
 	@Override
