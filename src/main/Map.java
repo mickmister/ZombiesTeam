@@ -11,6 +11,7 @@ public class Map
 	private MapTile tempTile;
 	private MapTile tempZombieTile;
 	private Point tempPos;
+	private MapTile tempBulletTile;
 	
 	public Map()
 	{
@@ -44,6 +45,8 @@ public class Map
 		{
 			this.mapTiles[this.tempPos.y][this.tempPos.x] = this.tempTile;
 			this.tempZombieTile = this.tempTile;
+			this.tempBulletTile = this.tempTile;
+			
 			this.tempTile = null;
 		}
 		else
@@ -155,5 +158,10 @@ public class Map
 		{
 			return false;
 		}
+	}
+
+	public MapTile getTempBulletTile()
+	{
+		return this.tempBulletTile;
 	}
 }

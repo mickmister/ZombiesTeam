@@ -180,6 +180,12 @@ public class MapView extends JPanel implements Runnable, KeyListener
 			case zombiePlacement:
 				handleZombiePlacement(e);
 				break;
+			case lifeTokenPlacement:
+				handleLifeTokenPlacement(e);
+				break;
+			case bulletTokenPlacement:
+				handleBulletTokenPlacement(e);
+				break;
 			case playerMovement:
 				handlePlayerMovement(e);
 				break;
@@ -195,6 +201,60 @@ public class MapView extends JPanel implements Runnable, KeyListener
 		}
 	}
 	
+	private void handleLifeTokenPlacement(KeyEvent e)
+	{
+		MapTile tile = GameHandler.instance.getMap().getTempZombieTile();
+		Point current = tile.getTempZombiePos();
+		if (e.getKeyCode() == KeyEvent.VK_LEFT)
+		{
+			tile.setTempZombiePos(new Point(current.x - 1, current.y));
+		}
+		if (e.getKeyCode() == KeyEvent.VK_RIGHT)
+		{
+			tile.setTempZombiePos(new Point(current.x + 1, current.y));
+		}
+		if (e.getKeyCode() == KeyEvent.VK_UP)
+		{
+			tile.setTempZombiePos(new Point(current.x, current.y - 1));
+		}
+		if (e.getKeyCode() == KeyEvent.VK_DOWN)
+		{
+			tile.setTempZombiePos(new Point(current.x, current.y + 1));
+		}
+		if (e.getKeyCode() == KeyEvent.VK_ENTER)
+		{
+			tile.placeTempZombie();
+		}
+		
+	}
+
+	private void handleBulletTokenPlacement(KeyEvent e)
+	{
+		MapTile tile = GameHandler.instance.getMap().getTempBulletTile();
+		Point current = tile.getTempBulletPos();
+		if (e.getKeyCode() == KeyEvent.VK_LEFT)
+		{
+			tile.setTempBulletPos(new Point(current.x - 1, current.y));
+		}
+		if (e.getKeyCode() == KeyEvent.VK_RIGHT)
+		{
+			tile.setTempBulletPos(new Point(current.x + 1, current.y));
+		}
+		if (e.getKeyCode() == KeyEvent.VK_UP)
+		{
+			tile.setTempBulletPos(new Point(current.x, current.y - 1));
+		}
+		if (e.getKeyCode() == KeyEvent.VK_DOWN)
+		{
+			tile.setTempBulletPos(new Point(current.x, current.y + 1));
+		}
+		if (e.getKeyCode() == KeyEvent.VK_ENTER)
+		{
+			tile.placeTempBullet();
+		}
+		
+	}
+
 	private void handleZombieMovement(KeyEvent e)
 	{
 		if (e.getKeyCode() == KeyEvent.VK_LEFT)

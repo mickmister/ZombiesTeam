@@ -20,6 +20,8 @@ public class MapTile
 	private int lifeTokens;
 	private int bulletTokens;
 	private Point tempZombiePos;
+	private Point tempBulletPos;
+	private Point tempLifePos;
 	
 	public enum Shape
 	{
@@ -294,4 +296,57 @@ public class MapTile
 			}
 		}
 	}
+	
+	public boolean isSpecialBuilding()
+	{
+		return this.shape == Shape.special;
+	}
+
+	public void setTempBulletPos(Point point)
+	{
+		if (point.x >= 0 && point.y >= 0 && point.x <= 2 && point.y <= 2)
+		{
+			if (this.grid[point.y][point.x].isAccessible())
+			{
+				this.tempBulletPos = point;
+			}
+		}
+		
+	}
+
+	public Point getTempBulletPos()
+	{
+		return this.tempBulletPos;
+	}
+	
+	public int getBulletsToPlace()
+	{
+		return this.bulletTokens;
+	}
+	
+	public int getLifeToPlace()
+	{
+		return this.lifeTokens;
+	}
+
+	public void placeTempBullet()
+	{
+		TileCell cell = this.grid[this.tempBulletPos.y][this.tempBulletPos.x];
+		if (!cell.hasBulletToken())
+		{
+			cell.setBulletToken(true);
+			this.bulletTokens--;
+			if (this.bulletTokens == 0)
+			{
+				this.tempBulletPos = null;
+				GameHandler.instance.nextGameState();
+			}
+			else
+			{
+				this.tempBulletPos = new Point(1, 1);
+			}
+		}
+	}
+
+	
 }

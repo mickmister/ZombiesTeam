@@ -65,7 +65,8 @@ public class GameHandler
 	//@formatter:on
 	public enum GameState
 	{
-		tilePlacement, zombiePlacement, playerMovementDieRoll, zombieCombat, playerMovement, zombieMovementDieRoll, zombieMovement
+		tilePlacement, zombiePlacement,lifeTokenPlacement,bulletTokenPlacement, playerMovementDieRoll, 
+			zombieCombat, playerMovement, zombieMovementDieRoll, zombieMovement 
 	}
 	
 	public GameHandler(int numberOfPlayers)
@@ -146,6 +147,7 @@ public class GameHandler
 	{
 		GameState old = this.currentState;
 		Player player = getPlayer(getTurn());
+		MapTile tile = getMap().getTempBulletTile();
 		switch (this.currentState)
 		{
 			case tilePlacement:
@@ -153,6 +155,35 @@ public class GameHandler
 				this.guiStateData.mapTileDeckButtonEnabled = false;
 				break;
 			case zombiePlacement:
+				if (tile.getBulletsToPlace() == 0 && tile.getLifeToPlace() == 0)
+				{
+					this.currentState = GameState.playerMovementDieRoll;
+					this.guiStateData.rollDiceButtonEnabled = true;
+				}
+				else if (tile.getBulletsToPlace() == 0)
+				{
+					this.currentState = GameState.lifeTokenPlacement;
+					this.guiStateData.rollDiceButtonEnabled = false;
+				}
+				else
+				{
+					this.currentState = GameState.bulletTokenPlacement;
+					this.guiStateData.rollDiceButtonEnabled = false;
+				}
+				break;
+			case bulletTokenPlacement:
+				if (tile.getLifeToPlace() == 0)
+				{
+					this.currentState = GameState.playerMovementDieRoll;
+					this.guiStateData.rollDiceButtonEnabled = true;
+				}
+				else
+				{
+					this.currentState = GameState.lifeTokenPlacement;
+					this.guiStateData.rollDiceButtonEnabled = false;
+				}
+				break;
+			case lifeTokenPlacement:
 				this.currentState = GameState.playerMovementDieRoll;
 				this.guiStateData.rollDiceButtonEnabled = true;
 				break;
