@@ -7,15 +7,8 @@ public class RollDice
 	public static int rollDice()
 	{
 		int roll;
-		GameHandler game = GameHandler.instance;
-		Player player = game.getPlayer(game.getTurn());
 		roll = (int) (Math.random() * 6 + 1);
-		if (player.checkIfCardIsActive("Double Trouble"))
-		{
-			System.out.println("Double card executed!");
-			roll = roll * 2;
-			player.removeActiveEventCard("Double Trouble");
-		}	
+		roll = processRoll(roll);
 		return roll;
 	}
 	
@@ -25,12 +18,7 @@ public class RollDice
 		
 		if (game.getCurrentState() == GameState.playerMovementDieRoll || game.getCurrentState() == GameState.zombieMovementDieRoll)
 		{
-			Player player = game.getPlayer(game.getTurn());
-			if (player.checkIfCardIsActive("Double Trouble"))
-			{
-				roll = roll * 2;
-				player.removeActiveEventCard("Double Trouble");
-			}			
+			Player player = game.getPlayer(game.getTurn());		
 			player.setMovesRemaining(roll);
 			game.nextGameState();
 		}
@@ -45,5 +33,17 @@ public class RollDice
 				game.nextGameState();
 			}
 		}
+	}
+	
+	private static int processRoll(int roll) {
+		GameHandler game = GameHandler.instance;
+		Player player = game.getPlayer(game.getTurn());
+		if (player.checkIfCardIsActive("Double Trouble"))
+		{
+			System.out.println("Double card executed!");
+			roll = roll * 2;
+			player.removeActiveEventCard("Double Trouble");
+		}	
+		return 0;
 	}
 }

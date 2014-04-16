@@ -2,20 +2,22 @@ package main;
 
 public class EventCard
 {
+	
+	public enum EventType
+	{
+		movement, zombieCombat, zombiePlacement, zombieMovement, whenCardPlayed, startOfTurn
+	}
+		
 	private String name;
 	private String description;
-	private int count;
-	public EventCard(String name, String description)
+	private EventType type;
+	public EventCard(String name, String description, EventType type)
 	{
 		this.name = name;
 		this.description = description;
-		this.count = 0;
-		initializeCount();
+		this.type = type;
 	}
-	private void initializeCount() {
-		//Massive code with name checking
-		
-	}
+	
 	
 	public String getName()
 	{
@@ -25,6 +27,11 @@ public class EventCard
 	public String getDescription()
 	{
 		return this.description;
+	}
+	
+	public EventType getType()
+	{
+		return this.type;
 	}
 
 }
