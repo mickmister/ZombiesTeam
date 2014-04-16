@@ -287,8 +287,6 @@ public class MapTile
 			if (this.zombiesToPlace == 0)
 			{
 				this.tempZombiePos = null;
-				this.tempBulletPos = new Point(1, 1);
-				this.tempLifePos = new Point(1, 1);
 				GameHandler.instance.nextGameState();
 			}
 			else

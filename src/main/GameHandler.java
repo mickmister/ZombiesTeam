@@ -2,6 +2,7 @@ package main;
 
 import gui.*;
 
+import java.awt.Point;
 import java.util.*;
 
 import main.DataListener.DataChangedEvent;
@@ -162,11 +163,13 @@ public class GameHandler
 				}
 				else if (tile.getBulletsToPlace() == 0)
 				{
+					tile.setTempLifePos(new Point(1, 1));
 					this.currentState = GameState.lifeTokenPlacement;
 					this.guiStateData.rollDiceButtonEnabled = false;
 				}
 				else
 				{
+					tile.setTempBulletPos(new Point(1, 1));
 					this.currentState = GameState.bulletTokenPlacement;
 					this.guiStateData.rollDiceButtonEnabled = false;
 				}
@@ -179,6 +182,7 @@ public class GameHandler
 				}
 				else
 				{
+					tile.setTempLifePos(new Point(1, 1));
 					this.currentState = GameState.lifeTokenPlacement;
 					this.guiStateData.rollDiceButtonEnabled = false;
 				}
@@ -197,6 +201,16 @@ public class GameHandler
 				}
 				else
 				{
+					if (cell.hasBulletToken())
+					{
+						player.addBulletToken();
+						cell.setBulletToken(false);
+					}
+					if (cell.hasLifeToken())
+					{
+						player.addLifeToken();
+						cell.setLifeToken(false);
+					}
 					this.currentState = GameState.playerMovement;
 					this.guiStateData.rollDiceButtonEnabled = false;
 					if (player.getMovesRemaining() < 1)
