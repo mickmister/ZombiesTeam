@@ -35,6 +35,8 @@ public class MapTile
 	{
 		this.shape = shape;
 		this.tempZombiePos = null;
+		this.tempBulletPos = null;
+		this.tempLifePos = null;
 		switch (shape)
 		{
 			case T:
@@ -275,9 +277,6 @@ public class MapTile
 		return this.tempZombiePos;
 	}
 	
-	/**
-	 * TODO Put here a description of what this method does.
-	 */
 	public void placeTempZombie()
 	{
 		TileCell cell = this.grid[this.tempZombiePos.y][this.tempZombiePos.x];
@@ -288,6 +287,8 @@ public class MapTile
 			if (this.zombiesToPlace == 0)
 			{
 				this.tempZombiePos = null;
+				this.tempBulletPos = new Point(1, 1);
+				this.tempLifePos = new Point(1, 1);
 				GameHandler.instance.nextGameState();
 			}
 			else
@@ -311,12 +312,27 @@ public class MapTile
 				this.tempBulletPos = point;
 			}
 		}
-		
+	}
+	
+	public void setTempLifePos(Point point)
+	{
+		if (point.x >= 0 && point.y >= 0 && point.x <= 2 && point.y <= 2)
+		{
+			if (this.grid[point.y][point.x].isAccessible())
+			{
+				this.tempLifePos = point;
+			}
+		}
 	}
 
 	public Point getTempBulletPos()
 	{
 		return this.tempBulletPos;
+	}
+	
+	public Point getTempLifePos()
+	{
+		return this.tempLifePos;
 	}
 	
 	public int getBulletsToPlace()
@@ -347,6 +363,23 @@ public class MapTile
 			}
 		}
 	}
-
 	
+	public void placeTempLife()
+	{
+		TileCell cell = this.grid[this.tempLifePos.y][this.tempLifePos.x];
+		if (!cell.hasLifeToken())
+		{
+			cell.setLifeToken(true);
+			this.lifeTokens--;
+			if (this.lifeTokens == 0)
+			{
+				this.tempLifePos = null;
+				GameHandler.instance.nextGameState();
+			}
+			else
+			{
+				this.tempLifePos = new Point(1, 1);
+			}
+		}
+	}
 }

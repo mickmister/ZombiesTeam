@@ -10,8 +10,8 @@ public class Map
 	private MapTile[][] mapTiles;
 	private MapTile tempTile;
 	private MapTile tempZombieTile;
-	private Point tempPos;
 	private MapTile tempBulletTile;
+	private Point tempPos;
 	
 	public Map()
 	{
@@ -25,6 +25,8 @@ public class Map
 		}
 		this.mapTiles[this.SIZE / 2][this.SIZE / 2] = new MapTile(Shape.quad, null);
 		this.tempTile = null;
+		this.tempZombieTile = null;
+		this.tempBulletTile = null;
 		this.tempPos = new Point(this.SIZE / 2, this.SIZE / 2);
 	}
 	
@@ -63,6 +65,11 @@ public class Map
 	public MapTile getTempZombieTile()
 	{
 		return this.tempZombieTile;
+	}
+	
+	public MapTile getTempBulletTile()
+	{
+		return this.tempBulletTile;
 	}
 	
 	public Point getTempPos()
@@ -158,10 +165,5 @@ public class Map
 		{
 			return false;
 		}
-	}
-
-	public MapTile getTempBulletTile()
-	{
-		return this.tempBulletTile;
 	}
 }

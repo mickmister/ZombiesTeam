@@ -201,137 +201,6 @@ public class MapView extends JPanel implements Runnable, KeyListener
 		}
 	}
 	
-	private void handleLifeTokenPlacement(KeyEvent e)
-	{
-		MapTile tile = GameHandler.instance.getMap().getTempZombieTile();
-		Point current = tile.getTempZombiePos();
-		if (e.getKeyCode() == KeyEvent.VK_LEFT)
-		{
-			tile.setTempZombiePos(new Point(current.x - 1, current.y));
-		}
-		if (e.getKeyCode() == KeyEvent.VK_RIGHT)
-		{
-			tile.setTempZombiePos(new Point(current.x + 1, current.y));
-		}
-		if (e.getKeyCode() == KeyEvent.VK_UP)
-		{
-			tile.setTempZombiePos(new Point(current.x, current.y - 1));
-		}
-		if (e.getKeyCode() == KeyEvent.VK_DOWN)
-		{
-			tile.setTempZombiePos(new Point(current.x, current.y + 1));
-		}
-		if (e.getKeyCode() == KeyEvent.VK_ENTER)
-		{
-			tile.placeTempZombie();
-		}
-		
-	}
-
-	private void handleBulletTokenPlacement(KeyEvent e)
-	{
-		MapTile tile = GameHandler.instance.getMap().getTempBulletTile();
-		Point current = tile.getTempBulletPos();
-		if (e.getKeyCode() == KeyEvent.VK_LEFT)
-		{
-			tile.setTempBulletPos(new Point(current.x - 1, current.y));
-		}
-		if (e.getKeyCode() == KeyEvent.VK_RIGHT)
-		{
-			tile.setTempBulletPos(new Point(current.x + 1, current.y));
-		}
-		if (e.getKeyCode() == KeyEvent.VK_UP)
-		{
-			tile.setTempBulletPos(new Point(current.x, current.y - 1));
-		}
-		if (e.getKeyCode() == KeyEvent.VK_DOWN)
-		{
-			tile.setTempBulletPos(new Point(current.x, current.y + 1));
-		}
-		if (e.getKeyCode() == KeyEvent.VK_ENTER)
-		{
-			tile.placeTempBullet();
-		}
-		
-	}
-
-	private void handleZombieMovement(KeyEvent e)
-	{
-		if (e.getKeyCode() == KeyEvent.VK_LEFT)
-		{
-			// TODO
-		}
-		if (e.getKeyCode() == KeyEvent.VK_RIGHT)
-		{
-			// TODO
-		}
-		if (e.getKeyCode() == KeyEvent.VK_UP)
-		{
-			// TODO
-		}
-		if (e.getKeyCode() == KeyEvent.VK_DOWN)
-		{
-			// TODO
-		}
-		if (e.getKeyCode() == KeyEvent.VK_ENTER)
-		{
-			// TODO
-		}
-	}
-	
-	private void handleZombiePlacement(KeyEvent e)
-	{
-		
-		MapTile tile = GameHandler.instance.getMap().getTempZombieTile();
-		Point current = tile.getTempZombiePos();
-		if (e.getKeyCode() == KeyEvent.VK_LEFT)
-		{
-			tile.setTempZombiePos(new Point(current.x - 1, current.y));
-		}
-		if (e.getKeyCode() == KeyEvent.VK_RIGHT)
-		{
-			tile.setTempZombiePos(new Point(current.x + 1, current.y));
-		}
-		if (e.getKeyCode() == KeyEvent.VK_UP)
-		{
-			tile.setTempZombiePos(new Point(current.x, current.y - 1));
-		}
-		if (e.getKeyCode() == KeyEvent.VK_DOWN)
-		{
-			tile.setTempZombiePos(new Point(current.x, current.y + 1));
-		}
-		if (e.getKeyCode() == KeyEvent.VK_ENTER)
-		{
-			tile.placeTempZombie();
-		}
-	}
-	
-	private void handlePlayerMovement(KeyEvent e)
-	{
-		Window window = (Window) getTopLevelAncestor();
-		Player player = window.getPlayer();
-		if (e.getKeyCode() == KeyEvent.VK_LEFT)
-		{
-			player.tryMoveLeft();
-		}
-		if (e.getKeyCode() == KeyEvent.VK_RIGHT)
-		{
-			player.tryMoveRight();
-		}
-		if (e.getKeyCode() == KeyEvent.VK_UP)
-		{
-			player.tryMoveUp();
-		}
-		if (e.getKeyCode() == KeyEvent.VK_DOWN)
-		{
-			player.tryMoveDown();
-		}
-		if (e.getKeyCode() == KeyEvent.VK_ENTER)
-		{
-			GameHandler.instance.nextGameState();
-		}
-	}
-	
 	private void handleTilePlacement(KeyEvent e)
 	{
 		if (GameHandler.instance.getMap().getTempTile() != null)
@@ -375,7 +244,134 @@ public class MapView extends JPanel implements Runnable, KeyListener
 				}
 			}
 		}
-		
+	}
+	
+	private void handleZombiePlacement(KeyEvent e)
+	{
+		MapTile tile = GameHandler.instance.getMap().getTempZombieTile();
+		Point current = tile.getTempZombiePos();
+		if (e.getKeyCode() == KeyEvent.VK_LEFT)
+		{
+			tile.setTempZombiePos(new Point(current.x - 1, current.y));
+		}
+		if (e.getKeyCode() == KeyEvent.VK_RIGHT)
+		{
+			tile.setTempZombiePos(new Point(current.x + 1, current.y));
+		}
+		if (e.getKeyCode() == KeyEvent.VK_UP)
+		{
+			tile.setTempZombiePos(new Point(current.x, current.y - 1));
+		}
+		if (e.getKeyCode() == KeyEvent.VK_DOWN)
+		{
+			tile.setTempZombiePos(new Point(current.x, current.y + 1));
+		}
+		if (e.getKeyCode() == KeyEvent.VK_ENTER)
+		{
+			tile.placeTempZombie();
+		}
+	}
+	
+	private void handleBulletTokenPlacement(KeyEvent e)
+	{
+		MapTile tile = GameHandler.instance.getMap().getTempBulletTile();
+		Point current = tile.getTempBulletPos();
+		if (e.getKeyCode() == KeyEvent.VK_LEFT)
+		{
+			tile.setTempBulletPos(new Point(current.x - 1, current.y));
+		}
+		if (e.getKeyCode() == KeyEvent.VK_RIGHT)
+		{
+			tile.setTempBulletPos(new Point(current.x + 1, current.y));
+		}
+		if (e.getKeyCode() == KeyEvent.VK_UP)
+		{
+			tile.setTempBulletPos(new Point(current.x, current.y - 1));
+		}
+		if (e.getKeyCode() == KeyEvent.VK_DOWN)
+		{
+			tile.setTempBulletPos(new Point(current.x, current.y + 1));
+		}
+		if (e.getKeyCode() == KeyEvent.VK_ENTER)
+		{
+			tile.placeTempBullet();
+		}
+	}
+	
+	private void handleLifeTokenPlacement(KeyEvent e)
+	{
+		MapTile tile = GameHandler.instance.getMap().getTempBulletTile();
+		Point current = tile.getTempLifePos();
+		if (e.getKeyCode() == KeyEvent.VK_LEFT)
+		{
+			tile.setTempLifePos(new Point(current.x - 1, current.y));
+		}
+		if (e.getKeyCode() == KeyEvent.VK_RIGHT)
+		{
+			tile.setTempLifePos(new Point(current.x + 1, current.y));
+		}
+		if (e.getKeyCode() == KeyEvent.VK_UP)
+		{
+			tile.setTempLifePos(new Point(current.x, current.y - 1));
+		}
+		if (e.getKeyCode() == KeyEvent.VK_DOWN)
+		{
+			tile.setTempLifePos(new Point(current.x, current.y + 1));
+		}
+		if (e.getKeyCode() == KeyEvent.VK_ENTER)
+		{
+			tile.placeTempLife();
+		}
+	}
+	
+	private void handlePlayerMovement(KeyEvent e)
+	{
+		Window window = (Window) getTopLevelAncestor();
+		Player player = window.getPlayer();
+		if (e.getKeyCode() == KeyEvent.VK_LEFT)
+		{
+			player.tryMoveLeft();
+		}
+		if (e.getKeyCode() == KeyEvent.VK_RIGHT)
+		{
+			player.tryMoveRight();
+		}
+		if (e.getKeyCode() == KeyEvent.VK_UP)
+		{
+			player.tryMoveUp();
+		}
+		if (e.getKeyCode() == KeyEvent.VK_DOWN)
+		{
+			player.tryMoveDown();
+		}
+		if (e.getKeyCode() == KeyEvent.VK_ENTER)
+		{
+			GameHandler.instance.nextGameState();
+		}
+	}
+	
+	private void handleZombieMovement(KeyEvent e)
+	{
+		if (e.getKeyCode() == KeyEvent.VK_LEFT)
+		{
+			// TODO
+		}
+		if (e.getKeyCode() == KeyEvent.VK_RIGHT)
+		{
+			// TODO
+		}
+		if (e.getKeyCode() == KeyEvent.VK_UP)
+		{
+			// TODO
+		}
+		if (e.getKeyCode() == KeyEvent.VK_DOWN)
+		{
+			// TODO
+		}
+		if (e.getKeyCode() == KeyEvent.VK_ENTER)
+		{
+			// TODO
+		}
 	}
 	
 	@Override
