@@ -22,8 +22,10 @@ public class MapTileView
 				int cellX = xPos * 240 + 80 * x;
 				int cellY = yPos * 240 + 80 * y;
 				boolean tempZombie = new Point(x, y).equals(this.mapTile.getTempZombiePos());
+				boolean tempBullet = new Point(x, y).equals(this.mapTile.getTempBulletPos());
+				boolean tempLife = new Point(x, y).equals(this.mapTile.getTempLifePos());
 				TileCellView view = new TileCellView(this.mapTile.getCell(y, x), this.mapTile);
-				view.draw(graphics, cellX, cellY, isTemp, tempZombie);
+				view.draw(graphics, cellX, cellY, isTemp, tempZombie, tempBullet, tempLife);
 			}
 		}
 	}

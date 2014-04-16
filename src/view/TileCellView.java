@@ -18,7 +18,7 @@ public class TileCellView
 		this.mapTile = tile;
 	}
 	
-	public void draw(Graphics2D g, int x, int y, boolean isTemp, boolean tempZombie)
+	public void draw(Graphics2D g, int x, int y, boolean isTemp, boolean tempZombie, boolean tempBullet, boolean tempLife)
 	{
 		if (this.tileCell.isAccessible())
 		{
@@ -53,13 +53,13 @@ public class TileCellView
 		{
 			g.drawImage(ImageManager.ZOMBIE_ICON, x, y + 10, null);
 		}
-		if (this.tileCell.hasLifeToken())
+		if (this.tileCell.hasBulletToken() || tempBullet)
 		{
-			g.drawImage(ImageManager.HEART_ICON, x, y + 10, null);
+			g.drawImage(ImageManager.BULLET_ICON, x + 35, y + 10, null);
 		}
-		if (this.tileCell.hasBulletToken())
+		if (this.tileCell.hasLifeToken() || tempLife)
 		{
-			g.drawImage(ImageManager.BULLET_ICON, x, y + 10, null);
+			g.drawImage(ImageManager.HEART_ICON, x + 35, y + 50, null);
 		}
 		for (int i = 0; i < this.tileCell.getPlayersOccupying().size(); i += 1)
 		{
