@@ -26,10 +26,21 @@ public class RollDice
 		{
 			Player player = game.getPlayer(game.getTurn());
 			player.setZombieCombatRoll(roll);
-			boolean win = player.fightZombie(game.getMap().getMapTile(player.getTileLocation().y, player.getTileLocation().x)
-					.getCell(player.getCellLocation().y, player.getCellLocation().x));
+			TileCell cell = game.getMap().getMapTile(player.getTileLocation().y, player.getTileLocation().x)
+					.getCell(player.getCellLocation().y, player.getCellLocation().x);
+			boolean win = player.fightZombie(cell);
 			if (win)
 			{
+				if (cell.hasBulletToken())
+				{
+					player.addBulletToken();
+					cell.setBulletToken(false);
+				}
+				if (cell.hasLifeToken())
+				{
+					player.addLifeToken();
+					cell.setLifeToken(false);
+				}
 				game.nextGameState();
 			}
 		}

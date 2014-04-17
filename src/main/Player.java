@@ -371,4 +371,14 @@ public class Player
 				JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 		return result == JOptionPane.YES_OPTION;
 	}
+	
+	public void addBulletToken()
+	{
+		this.bulletTokens++;
+	}
+	
+	public void addLifeToken()
+	{
+		this.lifeTokens++;
+	}
 }
