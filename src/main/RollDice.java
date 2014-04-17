@@ -8,7 +8,7 @@ public class RollDice
 	{
 		int roll;
 		roll = (int) (Math.random() * 6 + 1);
-		roll = processRoll(roll);
+		//roll = processRoll(roll);
 		return roll;
 	}
 	
@@ -44,6 +44,6 @@ public class RollDice
 			roll = roll * 2;
 			player.removeActiveEventCard("Double Trouble");
 		}	
-		return 0;
+		return roll;
 	}
 }

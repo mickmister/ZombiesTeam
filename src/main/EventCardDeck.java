@@ -11,12 +11,11 @@ public class EventCardDeck
 	public EventCardDeck()
 	{
 		this.deck = new ArrayList<EventCard>();
-		add("Double Trouble", "You can move a lot now!");
-		add("Double Trouble", "You can move a lot now!");
-		add("Double Trouble", "You can move a lot now!");
-		add("Double Trouble", "You can move a lot now!");
-		add("Double Trouble", "You can move a lot now!");
-		add("Double Trouble", "You can move a lot now!");	
+		for (int i = 0; i < 200; i++)
+		{
+			add("Double Trouble", "You can move a lot now!");
+		}
+			
 		Collections.shuffle(this.deck);
 	}
 	
