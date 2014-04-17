@@ -1,37 +1,53 @@
 package main;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
 
-import main.EventCard.EventType;
+import main.eventCardTypes.AdrenalineRush;
 
 public class EventCardDeck
 {
 	private ArrayList<EventCard> deck;
+	private ArrayList<EventCard> activeCards;
 	
 	public EventCardDeck()
 	{
 		this.deck = new ArrayList<EventCard>();
+		this.activeCards = new ArrayList<EventCard>();
 		for (int i = 0; i < 200; i++)
 		{
-			add("Double Trouble", "You can move a lot now!");
-		}
-			
+			this.deck.add(new AdrenalineRush());
+		}		
+		
 		Collections.shuffle(this.deck);
 	}
 	
-	private void add(String name, String description)
+	public void addActiveCard(EventCard card)
 	{
-		EventCard card = new EventCard(name, description, EventType.movement);
-		this.deck.add(card);
+		this.activeCards.add(card);
 	}
-	private void addMovementCard(String name, String description, double multiplier)
+	
+	public void removeActiveCard(EventCard card)
 	{
-		
-		
+		this.activeCards.remove(card);
 	}
-	private void addCombatCard(String name, String description, int addition)
+	
+	public int doCardAction(Player p, Class<? extends EventCard> className, int num)
 	{
+		for(EventCard card: this.activeCards)
+		{
+			if(card.getTargetPlayer() == p)
+			{
+				if(card.getClass() == className)
+				{
+					return card.action(num);
+				}
+				
+			}
+		}
 		
+		
+		return num;
 	}
 	
 	public EventCard getNextCard() { return this.deck.remove(0); }

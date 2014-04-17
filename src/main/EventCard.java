@@ -1,23 +1,28 @@
 package main;
 
-public class EventCard
+public abstract class EventCard
 {
 	
-	public enum EventType
+	public enum PossibleTarget
 	{
-		movement, zombieCombat, zombiePlacement, zombieMovement, whenCardPlayed, startOfTurn
+		None, Self, Pick
 	}
 		
 	private String name;
 	private String description;
-	private EventType type;
-	public EventCard(String name, String description, EventType type)
+	private Player targetPlayer;
+	private PossibleTarget posTar;
+	public EventCard(PossibleTarget posTar, String name, String description)
 	{
+		this.posTar = posTar;
 		this.name = name;
 		this.description = description;
-		this.type = type;
 	}
 	
+	public PossibleTarget getPossibleTarget()
+	{
+		return this.posTar;
+	}
 	
 	public String getName()
 	{
@@ -29,9 +34,22 @@ public class EventCard
 		return this.description;
 	}
 	
-	public EventType getType()
+	public Player getTargetPlayer()
 	{
-		return this.type;
+		return this.targetPlayer;
+	}
+	public void setTargetPlayer(Player target)
+	{
+		this.targetPlayer = target;
+	}
+	
+	public abstract int behavior(int num);
+	public abstract void checkRemove();
+	public int action(int num)
+	{
+		int result = behavior(num);
+		checkRemove();
+		return result;
 	}
 
 }

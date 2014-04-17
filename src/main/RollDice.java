@@ -1,6 +1,7 @@
 package main;
 
 import main.GameHandler.GameState;
+import main.eventCardTypes.AdrenalineRush;
 
 public class RollDice
 {
@@ -8,7 +9,9 @@ public class RollDice
 	{
 		int roll;
 		roll = (int) (Math.random() * 6 + 1);
-		//roll = processRoll(roll);
+		Player player = GameHandler.instance.getPlayer(GameHandler.instance.getTurn());
+		roll = GameHandler.instance.getEventDeck().doCardAction(player, AdrenalineRush.class, roll);
+		
 		return roll;
 	}
 	
@@ -46,15 +49,4 @@ public class RollDice
 		}
 	}
 	
-	private static int processRoll(int roll) {
-		GameHandler game = GameHandler.instance;
-		Player player = game.getPlayer(game.getTurn());
-		if (player.checkIfCardIsActive("Double Trouble"))
-		{
-			System.out.println("Double card executed!");
-			roll = roll * 2;
-			player.removeActiveEventCard("Double Trouble");
-		}	
-		return roll;
-	}
 }

@@ -23,7 +23,6 @@ public class Player
 	private int yCell;
 	private int movesRemaining;
 	private int zombieCombatRoll;
-	private ArrayList<String> activeEventCards;
 	private ArrayList<EventCard> handOfEventCards;
 	private boolean cardPlayed;
 	
@@ -39,7 +38,6 @@ public class Player
 		this.yCell = 1;
 		this.movesRemaining = 0;
 		this.zombieCombatRoll = 0;
-		this.activeEventCards = new ArrayList<String>();
 		this.handOfEventCards = new ArrayList<EventCard>();
 		this.cardPlayed = false;
 		for (int i = 0; i < 3; i+=1)
@@ -61,27 +59,16 @@ public class Player
 		this.cardPlayed = played;
 	}
 	
-	public EventCard getCardAtIndex(int i)
+	public EventCard getCardFromHand(int i)
 	{
 		return this.handOfEventCards.get(i);
 	}
 	
-	public void addActiveEventCard(String name)
+	public EventCard removeCardFromHand(int i)
 	{
-		this.activeEventCards.add(name);
-	}
-	
-	public boolean checkIfCardIsActive(String name)
-	{
-		return this.activeEventCards.contains(name);
-	}
-	
-	public void removeActiveEventCard(String name)
-	{
-		if (!this.activeEventCards.remove(name))
-		{
-			throw new IllegalArgumentException();
-		}
+		EventCard card = this.handOfEventCards.get(i);
+		this.handOfEventCards.set(i, null);
+		return card;
 	}
 	
 	public int getNumber()
