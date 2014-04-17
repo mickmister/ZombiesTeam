@@ -94,6 +94,7 @@ public class Map
 	public boolean checkValidPosition(MapTile newTile, int xPos, int yPos)
 	{
 		int emptyCount = 0;
+		int edgeCount = 0;
 		// Check if not hovering over empty
 		MapTile current = this.mapTiles[yPos][xPos];
 		if (!current.getShape().equals(Shape.empty))
@@ -114,6 +115,10 @@ public class Map
 				return false;
 			}
 		}
+		else
+		{
+			edgeCount++;
+		}
 		
 		// Check right
 		if (xPos < this.SIZE - 1)
@@ -127,6 +132,10 @@ public class Map
 			{
 				return false;
 			}
+		}
+		else
+		{
+			edgeCount++;
 		}
 		
 		// Check top
@@ -142,6 +151,10 @@ public class Map
 				return false;
 			}
 		}
+		else
+		{
+			edgeCount++;
+		}
 		
 		// Check bottom
 		if (yPos < this.SIZE - 1)
@@ -156,8 +169,12 @@ public class Map
 				return false;
 			}
 		}
+		else
+		{
+			edgeCount++;
+		}
 		
-		if (emptyCount < 4)
+		if(edgeCount + emptyCount < 4)
 		{
 			return true;
 		}

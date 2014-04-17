@@ -1,9 +1,13 @@
 package tests;
 
 import static org.junit.Assert.*;
+
+import java.awt.Point;
+
 import main.*;
 import main.DataListener.DataChangedEvent;
 import main.GameHandler.GameState;
+import main.MapTile.Shape;
 
 import org.junit.*;
 

@@ -131,6 +131,7 @@ public class GameHandler
 	 */
 	public void nextTurn()
 	{
+		this.currentState = GameState.tilePlacement;
 		this.turn = (this.turn + 1) % this.numberOfPlayers;
 		this.players.get(this.turn).setCardPlayed(false);
 	}
@@ -156,7 +157,8 @@ public class GameHandler
 				this.guiStateData.mapTileDeckButtonEnabled = false;
 				break;
 			case zombiePlacement:
-				if (tile.getBulletsToPlace() == 0 && tile.getLifeToPlace() == 0)
+				//tile = null if testing nextGameState
+				if (tile == null || (tile.getBulletsToPlace() == 0 && tile.getLifeToPlace() == 0))
 				{
 					this.currentState = GameState.playerMovementDieRoll;
 					this.guiStateData.rollDiceButtonEnabled = true;
@@ -241,7 +243,6 @@ public class GameHandler
 				// TODO: Remove this testing line.
 				break;
 			case zombieMovement:
-				this.currentState = GameState.tilePlacement;
 				this.guiStateData.mapTileDeckButtonEnabled = true;
 				nextTurn();
 				break;
