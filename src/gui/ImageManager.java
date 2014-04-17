@@ -19,21 +19,28 @@ public class ImageManager
 	
 	public ImageManager()
 	{
+		ImageManager.ROAD_TEXTURE = loadImage("Road Texture.png");
+		ImageManager.GRASS_TEXTURE = loadImage("Grass Texture.png");
+		ImageManager.DIRT_TEXTURE = loadImage("Dirt Texture.png");
+		ImageManager.ZOMBIE_PICTURE = loadImage("Zombie Picture.png");
+		ImageManager.HEART_PICTURE = loadImage("Heart Picture.png");
+		ImageManager.BULLET_PICTURE = loadImage("Bullet Picture.png");
+		ImageManager.ZOMBIE_ICON = loadImage("Zombie Icon.png");
+		ImageManager.HEART_ICON = loadImage("Heart Icon.png");
+		ImageManager.BULLET_ICON = loadImage("Bullet Icon.png");
+	}
+	
+	private BufferedImage loadImage(String name)
+	{
 		try
 		{
-			ImageManager.ROAD_TEXTURE = ImageIO.read(this.getClass().getResourceAsStream("../Resources/Road Texture.png"));
-			ImageManager.GRASS_TEXTURE = ImageIO.read(this.getClass().getResourceAsStream("../Resources/Grass Texture.png"));
-			ImageManager.DIRT_TEXTURE = ImageIO.read(this.getClass().getResourceAsStream("../Resources/Dirt Texture.png"));
-			ImageManager.ZOMBIE_PICTURE = ImageIO.read(this.getClass().getResourceAsStream("../Resources/Zombie Picture.png"));
-			ImageManager.HEART_PICTURE = ImageIO.read(this.getClass().getResourceAsStream("../Resources/Heart Picture.png"));
-			ImageManager.BULLET_PICTURE = ImageIO.read(this.getClass().getResourceAsStream("../Resources/Bullet Picture.png"));
-			ImageManager.ZOMBIE_ICON = ImageIO.read(this.getClass().getResourceAsStream("../Resources/Zombie Icon.png"));
-			ImageManager.HEART_ICON = ImageIO.read(this.getClass().getResourceAsStream("../Resources/Heart Icon.png"));
-			ImageManager.BULLET_ICON = ImageIO.read(this.getClass().getResourceAsStream("../Resources/Bullet Icon.png"));
+			String fileName = "../Resources/" + name;
+			return ImageIO.read(this.getClass().getResourceAsStream(fileName));
 		}
 		catch (IOException e)
 		{
 			e.printStackTrace();
 		}
+		return null;
 	}
 }
