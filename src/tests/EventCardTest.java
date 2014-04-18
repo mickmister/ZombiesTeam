@@ -1,7 +1,13 @@
 package tests;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
+
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+
+import main.EventCard;
 import main.EventCard.PossibleTarget;
+import main.EventCardDeck;
 import main.GameHandler;
 import main.Player;
 import main.eventCardTypes.AdrenalineRush;
@@ -93,7 +99,55 @@ public class EventCardTest {
 		Shotgun card = new Shotgun();
 		int base1 = 4;
 		int base2 = 5;
+		int expected1 = 5;
+		int expected2 = 6;
 		int result;
+		result = card.behavior(base1);
+		assertEquals(result, expected1);
+		result = card.behavior(base2);
+		assertEquals(result, expected2);
+	}
+	
+	@Test
+	public void testShotgunAction()
+	{
+		new GameHandler(2);
+		GameHandler game = GameHandler.instance;
+		try
+		{
+			EventCardDeck deck = game.getEventDeck();
+			Shotgun card = new Shotgun();
+			deck.addActiveCard(card);
+			Field field = EventCardDeck.class.getDeclaredField("activeCards");
+			field.setAccessible(true);
+			ArrayList<EventCard> activeCards = (ArrayList<EventCard>) field.get(deck);
+			assertTrue(activeCards.contains(card));
+			
+			int base1 = 3;
+			int expected1 = 4;
+			int base2 = 1;
+			int expected2 = 2;
+			int base3 = 5;
+			int expected3 = 6;
+			int result;
+			
+			result = card.action(base1);
+			assertEquals(result, expected1);
+			assertTrue(activeCards.contains(card));
+			
+			result = card.action(base2);
+			assertEquals(result, expected2);
+			assertTrue(activeCards.contains(card));
+			
+			result = card.action(base3);
+			assertEquals(result, expected3);
+			assertFalse(activeCards.contains(card));
+		}
+		catch(Exception e)
+		{
+			
+		}
+		
 		
 	}
 
