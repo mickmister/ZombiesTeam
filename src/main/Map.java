@@ -2,6 +2,7 @@ package main;
 
 import java.awt.*;
 
+import main.GameHandler.*;
 import main.MapTile.Shape;
 
 public class Map
@@ -182,5 +183,49 @@ public class Map
 		{
 			return false;
 		}
+	}
+	
+	public String getCurrentMessage(Player player)
+	{
+		if (!player.isPlayersTurn())
+		{
+			return "Not your turn";
+		}
+		if (GameHandler.instance.getCurrentState().equals(GameState.tilePlacement))
+		{
+			return "Draw and place a map tile";
+		}
+		if (GameHandler.instance.getCurrentState().equals(GameState.zombiePlacement))
+		{
+			MapTile tile = GameHandler.instance.getMap().getTempZombieTile();
+			return "Place " + tile.getZombiesToPlace() + " more zombie(s)";
+		}
+		if (GameHandler.instance.getCurrentState().equals(GameState.bulletTokenPlacement))
+		{
+			MapTile tile = GameHandler.instance.getMap().getTempBulletTile();
+			return "Place " + tile.getBulletsToPlace() + " more bullet token(s)";
+		}
+		if (GameHandler.instance.getCurrentState().equals(GameState.lifeTokenPlacement))
+		{
+			MapTile tile = GameHandler.instance.getMap().getTempBulletTile();
+			return "Place " + tile.getLifeToPlace() + " more life token(s)";
+		}
+		if (GameHandler.instance.getCurrentState().equals(GameState.playerMovementDieRoll))
+		{
+			return "Roll the dice to move";
+		}
+		if (GameHandler.instance.getCurrentState().equals(GameState.playerMovement))
+		{
+			return player.getMovesRemaining() + " move(s) remaining";
+		}
+		if (GameHandler.instance.getCurrentState().equals(GameState.zombieCombat))
+		{
+			return "Roll the dice to fight";
+		}
+		if (GameHandler.instance.getCurrentState().equals(GameState.zombieMovementDieRoll))
+		{
+			return "Roll the dice to move zombies";
+		}
+		return "ERROR: No status defined!";
 	}
 }
