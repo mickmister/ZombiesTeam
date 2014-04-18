@@ -48,6 +48,7 @@ public class RollDice
 				game.nextGameState();
 			}
 		}
+		
+		game.fireDataChangedEvent(null);
 	}
-	
 }

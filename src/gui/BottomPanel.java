@@ -7,26 +7,37 @@ import javax.swing.border.*;
 
 import main.*;
 
-public class BottomPanel extends JPanel
+public class BottomPanel extends JPanel implements DataListener
 {
 	private Window window;
+	private IconDisplay lifeTokenDisplay;
+	private IconDisplay bulletTokenDisplay;
+	private IconDisplay zombiesDisplay;
 	
 	public BottomPanel(Window window)
 	{
 		this.window = window;
+		this.lifeTokenDisplay = new IconDisplay(ImageManager.HEART_PICTURE);
+		this.bulletTokenDisplay = new IconDisplay(ImageManager.BULLET_PICTURE);
+		this.zombiesDisplay = new IconDisplay(ImageManager.ZOMBIE_PICTURE);
 		setLayout(new GridLayout(1, 6));
 		setBorder(new EmptyBorder(10, 10, 10, 10));
 		setPreferredSize(new Dimension(1, 200));
 		
 		add(new MapTileDeckButton());
-		add(new LifeTokensDisplay(getPlayer()));
-		add(new BulletTokensDisplay(getPlayer()));
-		add(new ZombiesDisplay(getPlayer()));
+		add(this.lifeTokenDisplay);
+		add(this.bulletTokenDisplay);
+		add(this.zombiesDisplay);
 		add(new RollDiceButton());
+		
+		GameHandler.instance.addDataListener(this);
 	}
 	
-	public Player getPlayer()
+	@Override
+	public void dataChanged(DataChangedEvent e)
 	{
-		return this.window.getPlayer();
+		this.lifeTokenDisplay.setNumber(this.window.getPlayer().getLifeTokens());
+		this.bulletTokenDisplay.setNumber(this.window.getPlayer().getBulletTokens());
+		this.zombiesDisplay.setNumber(this.window.getPlayer().getZombiesCaptured());
 	}
 }
