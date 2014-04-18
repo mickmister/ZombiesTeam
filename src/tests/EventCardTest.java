@@ -5,6 +5,7 @@ import main.EventCard.PossibleTarget;
 import main.GameHandler;
 import main.Player;
 import main.eventCardTypes.AdrenalineRush;
+import main.eventCardTypes.Shotgun;
 
 import org.junit.Test;
 
@@ -80,6 +81,19 @@ public class EventCardTest {
 		game.nextGameState();
 		result = card.action(base1);
 		assertEquals(result, expected2);
+		
+	}
+	
+	@Test
+	public void testShotgunBehavior()
+	{
+		new GameHandler(2);
+		GameHandler game = GameHandler.instance;
+		Player player = game.getPlayer(0);
+		Shotgun card = new Shotgun();
+		int base1 = 4;
+		int base2 = 5;
+		int result;
 		
 	}
 
