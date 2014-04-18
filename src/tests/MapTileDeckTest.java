@@ -1,6 +1,7 @@
-package main;
+package tests;
 
 import static org.junit.Assert.*;
+import main.*;
 import main.MapTile.Shape;
 
 import org.junit.*;

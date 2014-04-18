@@ -33,13 +33,11 @@ public class EventCardButton extends JButton implements DataListener, ActionList
 			setText("<html><center>" + card.getName() + "<br>" + card.getDescription());
 			setEnabled(true);
 		}
-		
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
-		
 		Player player = ((Window) getTopLevelAncestor()).getPlayer();
 		if (!player.checkCardPlayed())
 		{
@@ -47,7 +45,22 @@ public class EventCardButton extends JButton implements DataListener, ActionList
 			GameHandler.instance.fireDataChangedEvent(null);
 			if (card.getPossibleTarget() == PossibleTarget.Pick)
 			{
-				// dialog
+				String[] choices = { "Player 1", "Player 2", "Player 3", "Player 4" };
+				Object result = JOptionPane.showInputDialog(getTopLevelAncestor(), "Select the target player.", "Target Player", JOptionPane.PLAIN_MESSAGE, null,
+						choices, "Player 1");
+				
+				int target = -1;
+				for (int i = 0; i < choices.length; i += 1)
+				{
+					if (choices[i].equals(result))
+					{
+						target = i;
+					}
+				}
+				if (target == -1)
+				{
+					target = player.getNumber();
+				}
 			}
 			else if (card.getPossibleTarget() == PossibleTarget.Self)
 			{
@@ -59,9 +72,10 @@ public class EventCardButton extends JButton implements DataListener, ActionList
 			}
 			GameHandler.instance.getEventDeck().addActiveCard(card);
 			player.setCardPlayed(true);
-			
 		}
-		
+		else
+		{
+			JOptionPane.showMessageDialog(getTopLevelAncestor(), "You have already played an Event Card this turn.\n\nYou must wait until your next turn to play another.", "Cannot Play 2 Event Cards", JOptionPane.WARNING_MESSAGE);
+		}
 	}
-	
 }

@@ -10,7 +10,6 @@ import java.awt.image.*;
 import javax.swing.*;
 
 import main.*;
-import main.GameHandler.GameState;
 
 public class MapView extends JPanel implements Runnable, KeyListener
 {
@@ -62,40 +61,11 @@ public class MapView extends JPanel implements Runnable, KeyListener
 			view.draw(this.graphics, point.x, point.y, true);
 		}
 		
-		String message = "";
-		if (GameHandler.instance.getCurrentState().equals(GameState.tilePlacement))
-		{
-			message = "Draw and place a map tile";
-		}
-		if (GameHandler.instance.getCurrentState().equals(GameState.playerMovementDieRoll))
-		{
-			message = "Roll the dice to move";
-		}
-		if (GameHandler.instance.getCurrentState().equals(GameState.playerMovement))
-		{
-			Player player = ((Window) getTopLevelAncestor()).getPlayer();
-			message = player.getMovesRemaining() + " move(s) remaining";
-		}
-		if (GameHandler.instance.getCurrentState().equals(GameState.zombiePlacement))
-		{
-			MapTile tile = GameHandler.instance.getMap().getTempZombieTile();
-			message = "Place " + tile.getZombiesToPlace() + " more zombie(s)";
-		}
-		if (GameHandler.instance.getCurrentState().equals(GameState.zombieCombat))
-		{
-			message = "Roll the dice to fight";
-		}
-		if (GameHandler.instance.getCurrentState().equals(GameState.zombieMovementDieRoll))
-		{
-			message = "Roll the dice to move zombies";
-		}
-		if (!((Window) getTopLevelAncestor()).getPlayer().isPlayersTurn())
-		{
-			message = "Not your turn";
-		}
-		
+		Player player = ((Window) getTopLevelAncestor()).getPlayer();
+		String message = GameHandler.instance.getMap().getCurrentMessage(player);
 		JViewport viewPort = (JViewport) getParent();
 		Point view = viewPort.getViewPosition();
+		
 		this.graphics.setFont(new Font("Segoe UI", Font.PLAIN, 35));
 		this.graphics.setColor(Color.BLACK);
 		this.graphics.drawString(message, view.x + 22, view.y + 52);
