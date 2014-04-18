@@ -300,7 +300,7 @@ public class MapTile
 	{
 		return this.shape == Shape.special;
 	}
-
+	
 	public void setTempBulletPos(Point point)
 	{
 		if (point.x >= 0 && point.y >= 0 && point.x <= 2 && point.y <= 2)
@@ -322,7 +322,7 @@ public class MapTile
 			}
 		}
 	}
-
+	
 	public Point getTempBulletPos()
 	{
 		return this.tempBulletPos;
@@ -342,7 +342,7 @@ public class MapTile
 	{
 		return this.lifeTokens;
 	}
-
+	
 	public void placeTempBullet()
 	{
 		TileCell cell = this.grid[this.tempBulletPos.y][this.tempBulletPos.x];

@@ -1,7 +1,7 @@
 package main;
 
 import main.GameHandler.GameState;
-import main.eventCardTypes.AdrenalineRush;
+import main.eventCardTypes.*;
 
 public class RollDice
 {
@@ -21,7 +21,7 @@ public class RollDice
 		
 		if (game.getCurrentState() == GameState.playerMovementDieRoll || game.getCurrentState() == GameState.zombieMovementDieRoll)
 		{
-			Player player = game.getPlayer(game.getTurn());		
+			Player player = game.getPlayer(game.getTurn());
 			player.setMovesRemaining(roll);
 			game.nextGameState();
 		}

@@ -174,7 +174,7 @@ public class Map
 			edgeCount++;
 		}
 		
-		if(edgeCount + emptyCount < 4)
+		if (edgeCount + emptyCount < 4)
 		{
 			return true;
 		}

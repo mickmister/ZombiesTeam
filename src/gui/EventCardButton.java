@@ -1,33 +1,30 @@
 package gui;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
-import javax.swing.JButton;
+import javax.swing.*;
 
-import main.DataListener;
-import main.EventCard;
+import main.*;
 import main.EventCard.PossibleTarget;
-import main.GameHandler;
-import main.Player;
 
-public class EventCardButton extends JButton implements DataListener, ActionListener {
-	
+public class EventCardButton extends JButton implements DataListener, ActionListener
+{
 	
 	private int index;
-
+	
 	public EventCardButton(int index)
 	{
 		this.index = index;
 		GameHandler.instance.addDataListener(this);
-		this.addActionListener(this);
+		addActionListener(this);
 	}
-
+	
 	@Override
-	public void dataChanged(DataChangedEvent e) {
+	public void dataChanged(DataChangedEvent e)
+	{
 		Player player = ((Window) getTopLevelAncestor()).getPlayer();
 		EventCard card = player.getCardFromHand(this.index);
-		if(card == null)
+		if (card == null)
 		{
 			setEnabled(false);
 		}
@@ -38,20 +35,21 @@ public class EventCardButton extends JButton implements DataListener, ActionList
 		}
 		
 	}
-
+	
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent e)
+	{
 		
 		Player player = ((Window) getTopLevelAncestor()).getPlayer();
 		if (!player.checkCardPlayed())
-		{			
+		{
 			EventCard card = player.removeCardFromHand(this.index);
 			GameHandler.instance.fireDataChangedEvent(null);
-			if(card.getPossibleTarget() == PossibleTarget.Pick)
+			if (card.getPossibleTarget() == PossibleTarget.Pick)
 			{
-				//dialog
+				// dialog
 			}
-			else if(card.getPossibleTarget() == PossibleTarget.Self)
+			else if (card.getPossibleTarget() == PossibleTarget.Self)
 			{
 				card.setTargetPlayer(player);
 			}
@@ -65,5 +63,5 @@ public class EventCardButton extends JButton implements DataListener, ActionList
 		}
 		
 	}
-
+	
 }

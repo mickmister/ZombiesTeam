@@ -1,9 +1,8 @@
 package main;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.*;
 
-import main.eventCardTypes.AdrenalineRush;
+import main.eventCardTypes.*;
 
 public class EventCardDeck
 {
@@ -17,7 +16,7 @@ public class EventCardDeck
 		for (int i = 0; i < 200; i++)
 		{
 			this.deck.add(new AdrenalineRush());
-		}		
+		}
 		
 		Collections.shuffle(this.deck);
 	}
@@ -34,11 +33,11 @@ public class EventCardDeck
 	
 	public int doCardAction(Player p, Class<? extends EventCard> className, int num)
 	{
-		for(EventCard card: this.activeCards)
+		for (EventCard card : this.activeCards)
 		{
-			if(card.getTargetPlayer() == p)
+			if (card.getTargetPlayer() == p)
 			{
-				if(card.getClass() == className)
+				if (card.getClass() == className)
 				{
 					return card.action(num);
 				}
@@ -46,10 +45,12 @@ public class EventCardDeck
 			}
 		}
 		
-		
 		return num;
 	}
 	
-	public EventCard getNextCard() { return this.deck.remove(0); }
-	 
+	public EventCard getNextCard()
+	{
+		return this.deck.remove(0);
+	}
+	
 }

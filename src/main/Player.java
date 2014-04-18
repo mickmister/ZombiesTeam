@@ -1,7 +1,7 @@
 package main;
 
 import java.awt.*;
-import java.util.ArrayList;
+import java.util.*;
 
 import javax.swing.*;
 
@@ -40,11 +40,10 @@ public class Player
 		this.zombieCombatRoll = 0;
 		this.handOfEventCards = new ArrayList<EventCard>();
 		this.cardPlayed = false;
-		for (int i = 0; i < 3; i+=1)
+		for (int i = 0; i < 3; i += 1)
 		{
-			this.handOfEventCards.add(GameHandler.instance.getEventDeck().getNextCard());		
+			this.handOfEventCards.add(GameHandler.instance.getEventDeck().getNextCard());
 		}
-		
 		
 		GameHandler.instance.getMap().getMapTile(this.yTile, this.xTile).getCell(this.yCell, this.xCell).addPlayer(this);
 	}

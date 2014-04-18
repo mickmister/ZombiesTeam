@@ -7,11 +7,12 @@ public abstract class EventCard
 	{
 		None, Self, Pick
 	}
-		
+	
 	private String name;
 	private String description;
 	private Player targetPlayer;
 	private PossibleTarget posTar;
+	
 	public EventCard(PossibleTarget posTar, String name, String description)
 	{
 		this.posTar = posTar;
@@ -38,18 +39,21 @@ public abstract class EventCard
 	{
 		return this.targetPlayer;
 	}
+	
 	public void setTargetPlayer(Player target)
 	{
 		this.targetPlayer = target;
 	}
 	
 	public abstract int behavior(int num);
+	
 	public abstract void checkRemove();
+	
 	public int action(int num)
 	{
 		int result = behavior(num);
 		checkRemove();
 		return result;
 	}
-
+	
 }

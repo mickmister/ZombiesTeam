@@ -1,8 +1,9 @@
 package main;
 
 import gui.*;
+import gui.Window;
 
-import java.awt.Point;
+import java.awt.*;
 import java.util.*;
 
 import main.DataListener.DataChangedEvent;
@@ -66,8 +67,7 @@ public class GameHandler
 	//@formatter:on
 	public enum GameState
 	{
-		tilePlacement, zombiePlacement,lifeTokenPlacement,bulletTokenPlacement, playerMovementDieRoll, 
-			zombieCombat, playerMovement, zombieMovementDieRoll, zombieMovement 
+		tilePlacement, zombiePlacement, lifeTokenPlacement, bulletTokenPlacement, playerMovementDieRoll, zombieCombat, playerMovement, zombieMovementDieRoll, zombieMovement
 	}
 	
 	public GameHandler(int numberOfPlayers)
@@ -157,8 +157,8 @@ public class GameHandler
 				this.guiStateData.mapTileDeckButtonEnabled = false;
 				break;
 			case zombiePlacement:
-				//tile = null if testing nextGameState
-				if (tile == null || (tile.getBulletsToPlace() == 0 && tile.getLifeToPlace() == 0))
+				// tile = null if testing nextGameState
+				if (tile == null || tile.getBulletsToPlace() == 0 && tile.getLifeToPlace() == 0)
 				{
 					this.currentState = GameState.playerMovementDieRoll;
 					this.guiStateData.rollDiceButtonEnabled = true;
