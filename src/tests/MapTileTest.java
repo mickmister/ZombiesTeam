@@ -166,4 +166,79 @@ public class MapTileTest
 		mapTile.rotateTile();
 		assertEquals(fourthRotateStraightFormation, mapTile.toString());
 	}
+	
+	@Test
+	public void testGetAndTempBulletPos()
+	{
+		MapTile tile = new MapTile(Shape.straight, null);
+		
+		//makes sure you can't set position to invalid place
+		tile.setTempBulletPos(new Point(-1, 3));
+		assertNull(tile.getTempBulletPos());
+		
+		tile.setTempBulletPos(new Point(1, 1));
+		assertEquals(new Point(1, 1), tile.getTempBulletPos());
+		
+	}
+	
+	@Test
+	public void testGetAndSetTempLifePos()
+	{
+		MapTile tile = new MapTile(Shape.straight, null);
+		
+		//makes sure you can't set position to invalid place
+		tile.setTempLifePos(new Point(-1, 3));
+		assertNull(tile.getTempLifePos());
+		
+		tile.setTempLifePos(new Point(1, 1));
+		assertEquals(new Point(1, 1), tile.getTempLifePos());
+	}
+	
+	@Test
+	public void bulletTokenPlacementtest()
+	{
+		new GameHandler(2);
+		GameHandler game = GameHandler.instance;
+		MapTile building = new MapTile(Shape.special, "2 3 2 1 1 1 0 0 0" + " " + "0 0 2");
+		//special tile that has 0 zombies 0 lifetokens and 2 bullet tokens
+		Map map = game.getMap();
+		map.setTempTile(building);
+		map.setTempPos(new Point(6, 5));
+		map.placeTempTile();
+		game.nextGameState();
+
+		//placing a bullet at the center of tile
+		building.setTempBulletPos(new Point(1, 1));
+		building.placeTempBullet();
+		assertTrue(building.getCell(1, 1).hasBulletToken());
+		
+		//placing a bullet at top left of tile
+		building.setTempBulletPos(new Point(0, 0));
+		building.placeTempBullet();
+		assertTrue(building.getCell(0, 0).hasBulletToken());
+	}
+	
+	@Test
+	public void lifeTokenPlacementtest()
+	{
+		new GameHandler(2);
+		GameHandler game = GameHandler.instance;
+		MapTile building = new MapTile(Shape.special, "2 3 2 1 1 1 0 0 0" + " " + "0 2 0");
+		//special tile that has 0 zombies 2 lifetokens and 0 bullet tokens
+		Map map = game.getMap();
+		map.setTempTile(building);
+		map.setTempPos(new Point(6, 5));
+		map.placeTempTile();
+		game.nextGameState();
+
+		//placing a bullet at the center of tile
+		building.setTempLifePos(new Point(1, 1));
+		building.placeTempLife();
+		assertTrue(building.getCell(1, 1).hasLifeToken());
+		
+		//placing a bullet at top left of tile
+		building.setTempLifePos(new Point(0, 0));
+		building.placeTempLife();
+		assertTrue(building.getCell(0, 0).hasLifeToken());
+	}
 }
