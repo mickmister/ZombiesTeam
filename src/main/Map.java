@@ -107,18 +107,15 @@ public class Map
 	
 	public void selectNextZombie()
 	{
-		int start = this.zombieMovementIndex;
-		System.out.println("Starting index: " + this.zombieMovementIndex);
-		while (this.zombieMovementIndex != start - 1)
+		int max = 10 * 10 * 3 * 3;
+		for (int i = 0; i < max; i += 1)
 		{
-			this.zombieMovementIndex += 1;
-			this.zombieMovementIndex = this.zombieMovementIndex % (10 * 10 * 3 * 3);
+			this.zombieMovementIndex = (this.zombieMovementIndex + 1) % max;
 			Point cell = getCellFromIndex();
 			Point tile = getTileFromIndex();
 			TileCell check = getMapTile(tile.y, tile.x).getCell(cell.y, cell.x);
 			if (check.hasZombie())
 			{
-				System.out.println("Returning index: " + this.zombieMovementIndex);
 				return;
 			}
 		}
