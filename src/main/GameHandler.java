@@ -26,6 +26,10 @@ public class GameHandler
 	/**
 	 *         tilePlacement
 	 *               |
+	 *     bulletTokenPlacement
+	 *               |
+	 *      lifeTokenPlacement
+	 *               |
 	 *        zombiePlacement <---------------
 	 *               |                       |
 	 * ------------------------------        |
@@ -127,10 +131,13 @@ public class GameHandler
 	}
 	
 	/**
-	 * Increments the current turn, and automatically wraps back to 0 after the last player.
+	 * Increments the current turn, and automatically wraps back to 0 after the last player. Also
+	 * resets the current state back to tilePlacement, makes the last player draw new Event Cards,
+	 * and allows the new player to use an Event Card.
 	 */
 	public void nextTurn()
 	{
+		this.players.get(this.turn).drawNewCards();
 		this.currentState = GameState.tilePlacement;
 		this.turn = (this.turn + 1) % this.numberOfPlayers;
 		this.players.get(this.turn).setCardPlayed(false);

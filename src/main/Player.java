@@ -58,6 +58,18 @@ public class Player
 		this.cardPlayed = played;
 	}
 	
+	public void drawNewCards()
+	{
+		for (int i = 0; i < 3; i += 1)
+		{
+			if (this.handOfEventCards.get(i) == null)
+			{
+				EventCard card = GameHandler.instance.getEventDeck().getNextCard();
+				this.handOfEventCards.set(i, card);
+			}
+		}
+	}
+	
 	public EventCard getCardFromHand(int i)
 	{
 		return this.handOfEventCards.get(i);

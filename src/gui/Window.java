@@ -22,7 +22,7 @@ public class Window extends JFrame
 		setLayout(new BorderLayout());
 		
 		add(new BottomPanel(this), BorderLayout.PAGE_END);
-		add(new RightPanel(this), BorderLayout.LINE_END);
+		add(new RightPanel(), BorderLayout.LINE_END);
 		JScrollPane scrollPane = new JScrollPane(new MapView());
 		add(scrollPane, BorderLayout.CENTER);
 		

@@ -7,11 +7,8 @@ import javax.swing.border.*;
 
 public class RightPanel extends JPanel
 {
-	private Window window;
-	
-	public RightPanel(Window window)
+	public RightPanel()
 	{
-		this.window = window;
 		setLayout(new GridLayout(3, 1));
 		setBorder(new EmptyBorder(10, 10, 0, 10));
 		setPreferredSize(new Dimension(300, 1));

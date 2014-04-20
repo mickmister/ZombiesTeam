@@ -93,8 +93,6 @@ public class EventCardTest
 	public void testShotgunBehavior()
 	{
 		new GameHandler(2);
-		GameHandler game = GameHandler.instance;
-		Player player = game.getPlayer(0);
 		Shotgun card = new Shotgun();
 		int base1 = 4;
 		int base2 = 5;
@@ -107,6 +105,7 @@ public class EventCardTest
 		assertEquals(result, expected2);
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Test
 	public void testShotgunAction()
 	{
