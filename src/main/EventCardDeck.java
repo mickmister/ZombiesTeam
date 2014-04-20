@@ -16,6 +16,7 @@ public class EventCardDeck
 		for (int i = 0; i < 200; i++)
 		{
 			this.deck.add(new AdrenalineRush());
+			this.deck.add(new Shotgun());
 		}
 		
 		Collections.shuffle(this.deck);

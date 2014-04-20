@@ -11,6 +11,7 @@ public class RollDice
 		roll = (int) (Math.random() * 6 + 1);
 		Player player = GameHandler.instance.getPlayer(GameHandler.instance.getTurn());
 		roll = GameHandler.instance.getEventDeck().doCardAction(player, AdrenalineRush.class, roll);
+		roll = GameHandler.instance.getEventDeck().doCardAction(player, Shotgun.class, roll);
 		
 		return roll;
 	}
