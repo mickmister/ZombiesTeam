@@ -31,6 +31,7 @@ public class Map
 		this.tempZombieTile = null;
 		this.tempBulletTile = null;
 		this.tempPos = new Point(this.SIZE / 2, this.SIZE / 2);
+		this.zombieMovementIndex = -1;
 	}
 	
 	public MapTile getMapTile(int row, int col)
@@ -121,6 +122,7 @@ public class Map
 				return;
 			}
 		}
+		this.zombieMovementIndex = -1;
 	}
 	
 	public void placeMovingZombie(KeyEvent e)

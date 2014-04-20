@@ -132,7 +132,14 @@ public class TileCellView
 			}
 			if (tempMove)
 			{
-				g.setColor(Color.BLUE);
+				if (this.tileCell.hasZombieMoved())
+				{
+					g.setColor(Color.RED);
+				}
+				else
+				{
+					g.setColor(Color.GREEN);
+				}
 			}
 			g.fillRect(x, y, 80, 80);
 			

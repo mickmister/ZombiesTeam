@@ -243,6 +243,7 @@ public class GameHandler
 				break;
 			case zombieMovement:
 				this.guiStateData.mapTileDeckButtonEnabled = true;
+				this.map.setZombieMovementIndex(-1);
 				for (int tx = 0; tx < 11; tx += 1)
 				{
 					for (int ty = 0; ty < 11; ty += 1)
