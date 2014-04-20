@@ -19,7 +19,7 @@ public class MapTileView
 		{
 			for (int x = 0; x < 3; x += 1)
 			{
-				int index = (yPos * 3 + y) * (10 * 3) + (xPos * 3 + x);
+				int index = (yPos * 3 + y) * 10 * 3 + xPos * 3 + x;
 				int cellX = xPos * 240 + 80 * x;
 				int cellY = yPos * 240 + 80 * y;
 				boolean tempZombie = new Point(x, y).equals(this.mapTile.getTempZombiePos());

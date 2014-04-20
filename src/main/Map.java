@@ -3,7 +3,7 @@ package main;
 import java.awt.*;
 import java.awt.event.*;
 
-import main.GameHandler.*;
+import main.GameHandler.GameState;
 import main.MapTile.Shape;
 
 public class Map

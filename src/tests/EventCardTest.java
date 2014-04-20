@@ -2,23 +2,21 @@ package tests;
 
 import static org.junit.Assert.*;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
+import java.lang.reflect.*;
+import java.util.*;
 
-import main.EventCard;
+import main.*;
 import main.EventCard.PossibleTarget;
-import main.EventCardDeck;
-import main.GameHandler;
-import main.Player;
-import main.eventCardTypes.AdrenalineRush;
-import main.eventCardTypes.Shotgun;
+import main.eventCardTypes.*;
 
-import org.junit.Test;
+import org.junit.*;
 
-public class EventCardTest {
-
+public class EventCardTest
+{
+	
 	@Test
-	public void testAdrenalineRushMovementBehavior() {
+	public void testAdrenalineRushMovementBehavior()
+	{
 		new GameHandler(2);
 		GameHandler game = GameHandler.instance;
 		AdrenalineRush card = new AdrenalineRush();
@@ -28,7 +26,7 @@ public class EventCardTest {
 		int expected2 = 6;
 		int result;
 		game.nextGameState();
-		game.nextGameState();	//now in player movement die roll
+		game.nextGameState(); // now in player movement die roll
 		result = card.behavior(base1);
 		assertEquals(result, expected1);
 		result = card.behavior(base2);
@@ -36,7 +34,8 @@ public class EventCardTest {
 	}
 	
 	@Test
-	public void testAdrenalineRushCombatBehavior() {
+	public void testAdrenalineRushCombatBehavior()
+	{
 		new GameHandler(2);
 		GameHandler game = GameHandler.instance;
 		AdrenalineRush card = new AdrenalineRush();
@@ -48,7 +47,7 @@ public class EventCardTest {
 		game.nextGameState();
 		game.nextGameState();
 		game.getMap().getMapTile(5, 5).getCell(1, 1).setZombie(true);
-		game.nextGameState();	//now in zombie combat
+		game.nextGameState(); // now in zombie combat
 		result = card.behavior(base1);
 		assertEquals(result, expected1);
 		result = card.behavior(base2);
@@ -143,12 +142,11 @@ public class EventCardTest {
 			assertEquals(result, expected3);
 			assertFalse(activeCards.contains(card));
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			
 		}
 		
-		
 	}
-
+	
 }
