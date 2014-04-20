@@ -17,6 +17,7 @@ public class TileCell
 	private boolean hasZombie;
 	private boolean hasLifeToken;
 	private boolean hasBulletToken;
+	private boolean hasZombieMoved;
 	private ArrayList<Player> playersOccupying;
 	
 	public TileCell(boolean accessible, boolean building, boolean door)
@@ -27,6 +28,7 @@ public class TileCell
 		this.hasZombie = false;
 		this.hasLifeToken = false;
 		this.hasBulletToken = false;
+		this.hasZombieMoved = false;
 		this.playersOccupying = new ArrayList<Player>();
 	}
 	
@@ -48,6 +50,11 @@ public class TileCell
 	public boolean hasZombie()
 	{
 		return this.hasZombie;
+	}
+	
+	public boolean hasZombieMoved()
+	{
+		return this.hasZombieMoved;
 	}
 	
 	public boolean isAccessible()
@@ -83,6 +90,11 @@ public class TileCell
 	public void setAccessible(boolean accessible)
 	{
 		this.isAccessible = accessible;
+	}
+	
+	public void setZombieMoved(boolean moved)
+	{
+		this.hasZombieMoved = moved;
 	}
 	
 	public void removePlayer(Player player)

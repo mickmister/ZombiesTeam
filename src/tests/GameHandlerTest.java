@@ -69,9 +69,8 @@ public class GameHandlerTest
 		// playerMovementDieRoll -> zombieMovementDieRoll
 		GameHandler.instance.nextGameState();
 		assertEquals(GameState.zombieMovementDieRoll, GameHandler.instance.getCurrentState());
-		// TODO: Uncomment when last states are done.
-		// test.nextGameState();
-		// assertEquals(GameState.zombieMovement, test.getCurrentState());
+		GameHandler.instance.nextGameState();
+		assertEquals(GameState.zombieMovement, GameHandler.instance.getCurrentState());
 		GameHandler.instance.nextGameState();
 		assertEquals(GameState.tilePlacement, GameHandler.instance.getCurrentState());
 	}
@@ -90,9 +89,8 @@ public class GameHandlerTest
 		assertEquals(GameState.playerMovement, GameHandler.instance.getCurrentState());
 		GameHandler.instance.nextGameState();
 		assertEquals(GameState.zombieMovementDieRoll, GameHandler.instance.getCurrentState());
-		// TODO: Uncomment when last states are done.
-		// test.nextGameState();
-		// assertEquals(GameState.zombieMovement, test.getCurrentState());
+		GameHandler.instance.nextGameState();
+		assertEquals(GameState.zombieMovement, GameHandler.instance.getCurrentState());
 		GameHandler.instance.nextGameState();
 		assertEquals(GameState.tilePlacement, GameHandler.instance.getCurrentState());
 	}
@@ -118,9 +116,8 @@ public class GameHandlerTest
 		GameHandler.instance.nextGameState();
 		assertEquals(GameState.zombieMovementDieRoll, GameHandler.instance.getCurrentState());
 		
-		// TODO: Uncomment when last states are done.
-		// test.nextGameState();
-		// assertEquals(GameState.zombieMovement, test.getCurrentState());
+		GameHandler.instance.nextGameState();
+		assertEquals(GameState.zombieMovement, GameHandler.instance.getCurrentState());
 		GameHandler.instance.nextGameState();
 		assertEquals(GameState.tilePlacement, GameHandler.instance.getCurrentState());
 	}

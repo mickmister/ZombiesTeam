@@ -284,25 +284,20 @@ public class MapView extends JPanel implements Runnable, KeyListener
 	
 	private void handleZombieMovement(KeyEvent e)
 	{
-		if (e.getKeyCode() == KeyEvent.VK_LEFT)
+		switch (e.getKeyCode())
 		{
-			// TODO
-		}
-		if (e.getKeyCode() == KeyEvent.VK_RIGHT)
-		{
-			// TODO
-		}
-		if (e.getKeyCode() == KeyEvent.VK_UP)
-		{
-			// TODO
-		}
-		if (e.getKeyCode() == KeyEvent.VK_DOWN)
-		{
-			// TODO
-		}
-		if (e.getKeyCode() == KeyEvent.VK_ENTER)
-		{
-			// TODO
+			case KeyEvent.VK_LEFT:
+			case KeyEvent.VK_RIGHT:
+			case KeyEvent.VK_UP:
+			case KeyEvent.VK_DOWN:
+				GameHandler.instance.getMap().placeMovingZombie(e);
+				break;
+			case KeyEvent.VK_SPACE:
+				GameHandler.instance.getMap().selectNextZombie();
+				break;
+			case KeyEvent.VK_ENTER:
+				GameHandler.instance.nextGameState();
+				break;
 		}
 	}
 	

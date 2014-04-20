@@ -1,6 +1,7 @@
 package main;
 
 import java.awt.*;
+import java.awt.event.*;
 
 import main.GameHandler.*;
 import main.MapTile.Shape;
@@ -13,6 +14,7 @@ public class Map
 	private MapTile tempZombieTile;
 	private MapTile tempBulletTile;
 	private Point tempPos;
+	private int zombieMovementIndex;
 	
 	public Map()
 	{
@@ -90,6 +92,95 @@ public class Map
 	public void setTempTile(MapTile tile)
 	{
 		this.tempTile = tile;
+	}
+	
+	public void setZombieMovementIndex(int index)
+	{
+		this.zombieMovementIndex = index;
+	}
+	
+	public void selectNextZombie()
+	{
+		int start = this.zombieMovementIndex;
+		System.out.println("Starting index: " + this.zombieMovementIndex);
+		while (this.zombieMovementIndex != start)
+		{
+			this.zombieMovementIndex += 1;
+			this.zombieMovementIndex = this.zombieMovementIndex % (10 * 10 * 3 * 3);
+			Point cell = getCellFromIndex();
+			Point tile = getTileFromIndex();
+			TileCell check = getMapTile(tile.y, tile.x).getCell(cell.y, cell.x);
+			if (check.hasZombie())
+			{
+				System.out.println("Returning index: " + this.zombieMovementIndex);
+				return;
+			}
+		}
+	}
+	
+	public void placeMovingZombie(KeyEvent e)
+	{
+		int old = this.zombieMovementIndex;
+		Point cell = getCellFromIndex();
+		Point tile = getTileFromIndex();
+		TileCell oldTile = getMapTile(tile.y, tile.x).getCell(cell.y, cell.x);
+		switch (e.getKeyCode())
+		{
+			case KeyEvent.VK_LEFT:
+				this.zombieMovementIndex -= 1;
+				break;
+			case KeyEvent.VK_RIGHT:
+				this.zombieMovementIndex += 1;
+				break;
+			case KeyEvent.VK_UP:
+				this.zombieMovementIndex -= 10 * 3;
+				break;
+			case KeyEvent.VK_DOWN:
+				this.zombieMovementIndex += 10 * 3;
+				break;
+		}
+		cell = getCellFromIndex();
+		tile = getTileFromIndex();
+		TileCell newTile = getMapTile(tile.y, tile.x).getCell(cell.y, cell.x);
+		if (newTile.isAccessible() && !newTile.hasZombie() && !oldTile.hasZombieMoved())
+		{
+			oldTile.setZombie(false);
+			newTile.setZombie(true);
+			newTile.setZombieMoved(true);
+			Player player = GameHandler.instance.getPlayer(GameHandler.instance.getTurn());
+			player.setMovesRemaining(player.getMovesRemaining() - 1);
+			if (player.getMovesRemaining() == 0)
+			{
+				GameHandler.instance.nextGameState();
+			}
+		}
+		else
+		{
+			this.zombieMovementIndex = old;
+		}
+	}
+	
+	private Point getCellFromIndex()
+	{
+		Point p = getRawCell();
+		int x = p.x % 3;
+		int y = p.y % 3;
+		return new Point(x, y);
+	}
+	
+	private Point getTileFromIndex()
+	{
+		Point p = getRawCell();
+		int x = p.x / 3;
+		int y = p.y / 3;
+		return new Point(x, y);
+	}
+	
+	private Point getRawCell()
+	{
+		int y = this.zombieMovementIndex / (10 * 3);
+		int x = this.zombieMovementIndex % (10 * 3);
+		return new Point(x, y);
 	}
 	
 	public boolean checkValidPosition(MapTile newTile, int xPos, int yPos)
@@ -225,6 +316,10 @@ public class Map
 		if (GameHandler.instance.getCurrentState().equals(GameState.zombieMovementDieRoll))
 		{
 			return "Roll the dice to move zombies";
+		}
+		if (GameHandler.instance.getCurrentState().equals(GameState.zombieMovement))
+		{
+			return player.getMovesRemaining() + " zombie(s) to move";
 		}
 		return "ERROR: No status defined!";
 	}

@@ -238,12 +238,24 @@ public class GameHandler
 			case zombieMovementDieRoll:
 				this.currentState = GameState.zombieMovement;
 				this.guiStateData.rollDiceButtonEnabled = false;
-				// TODO: Remove this testing line.
-				nextGameState();
-				// TODO: Remove this testing line.
+				this.map.setZombieMovementIndex(0);
+				this.map.selectNextZombie();
 				break;
 			case zombieMovement:
 				this.guiStateData.mapTileDeckButtonEnabled = true;
+				for (int tx = 0; tx < 11; tx += 1)
+				{
+					for (int ty = 0; ty < 11; ty += 1)
+					{
+						for (int cx = 0; cx < 3; cx += 1)
+						{
+							for (int cy = 0; cy < 3; cy += 1)
+							{
+								this.map.getMapTile(ty, tx).getCell(cy, cx).setZombieMoved(false);
+							}
+						}
+					}
+				}
 				nextTurn();
 				break;
 		}
