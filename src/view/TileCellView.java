@@ -18,7 +18,7 @@ public class TileCellView
 		this.mapTile = tile;
 	}
 	
-	public void draw(Graphics2D g, int x, int y, boolean isTemp, boolean tempZombie, boolean tempBullet, boolean tempLife)
+	public void draw(Graphics2D g, int x, int y, boolean isTemp, boolean tempZombie, boolean tempBullet, boolean tempLife, boolean tempMove)
 	{
 		if (this.tileCell.isAccessible())
 		{
@@ -70,7 +70,7 @@ public class TileCellView
 			g.drawString("P" + num, x + 63, y + 20 * i + 15);
 		}
 		
-		if (isTemp || tempZombie)
+		if (isTemp || tempZombie || tempBullet || tempLife || tempMove)
 		{
 			Composite old = g.getComposite();
 			double alpha = (Math.sin(System.currentTimeMillis() / 400.0) + 1.0) / 2.0;
@@ -103,6 +103,36 @@ public class TileCellView
 				{
 					g.setColor(Color.GREEN);
 				}
+			}
+			if (tempBullet)
+			{
+				MapTile bulletTile = map.getTempBulletTile();
+				Point bulletPos = bulletTile.getTempBulletPos();
+				if (bulletTile.getCell(bulletPos.y, bulletPos.x).hasBulletToken())
+				{
+					g.setColor(Color.RED);
+				}
+				else
+				{
+					g.setColor(Color.GREEN);
+				}
+			}
+			if (tempLife)
+			{
+				MapTile lifeTile = map.getTempBulletTile();
+				Point lifePos = lifeTile.getTempLifePos();
+				if (lifeTile.getCell(lifePos.y, lifePos.x).hasLifeToken())
+				{
+					g.setColor(Color.RED);
+				}
+				else
+				{
+					g.setColor(Color.GREEN);
+				}
+			}
+			if (tempMove)
+			{
+				g.setColor(Color.BLUE);
 			}
 			g.fillRect(x, y, 80, 80);
 			

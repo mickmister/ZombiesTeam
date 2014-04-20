@@ -80,6 +80,11 @@ public class Map
 		return this.tempPos;
 	}
 	
+	public int getZombieMovementIndex()
+	{
+		return this.zombieMovementIndex;
+	}
+	
 	public void setTempPos(Point point)
 	{
 		point.x = Math.max(0, point.x);
@@ -103,7 +108,7 @@ public class Map
 	{
 		int start = this.zombieMovementIndex;
 		System.out.println("Starting index: " + this.zombieMovementIndex);
-		while (this.zombieMovementIndex != start)
+		while (this.zombieMovementIndex != start - 1)
 		{
 			this.zombieMovementIndex += 1;
 			this.zombieMovementIndex = this.zombieMovementIndex % (10 * 10 * 3 * 3);
