@@ -327,4 +327,20 @@ public class Map
 		}
 		return "ERROR: No status defined!";
 	}
+	
+	public MapTile getHelipad()
+	{
+		for (int x = 0; x < SIZE; x += 1)
+		{
+			for (int y = 0; y < SIZE; y += 1)
+			{
+				MapTile tile = this.mapTiles[y][x];
+				if (tile.toString().equals("true true true\ntrue true true\ntrue true true\n"))
+				{
+					return tile;
+				}
+			}
+		}
+		return null;
+	}
 }
