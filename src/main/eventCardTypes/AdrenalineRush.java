@@ -29,7 +29,7 @@ public class AdrenalineRush extends OneUseCard
 		}
 		else
 		{
-			return num;
+			throw new UnsupportedOperationException("Trying to call behavior() of AdrenalineRush card in an invalid state: " + game.getCurrentState());
 		}
 	}
 	

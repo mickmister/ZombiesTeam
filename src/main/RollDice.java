@@ -10,8 +10,15 @@ public class RollDice
 		int roll;
 		roll = (int) (Math.random() * 6 + 1);
 		Player player = GameHandler.instance.getPlayer(GameHandler.instance.getTurn());
-		roll = GameHandler.instance.getEventDeck().doCardAction(player, AdrenalineRush.class, roll);
-		roll = GameHandler.instance.getEventDeck().doCardAction(player, Shotgun.class, roll);
+		if (GameHandler.instance.getCurrentState() == GameState.playerMovementDieRoll)
+		{
+			roll = GameHandler.instance.getEventDeck().doCardAction(player, AdrenalineRush.class, roll);
+		}
+		if (GameHandler.instance.getCurrentState() == GameState.zombieCombat)
+		{
+			roll = GameHandler.instance.getEventDeck().doCardAction(player, AdrenalineRush.class, roll);
+			roll = GameHandler.instance.getEventDeck().doCardAction(player, Shotgun.class, roll);
+		}
 		
 		return roll;
 	}
