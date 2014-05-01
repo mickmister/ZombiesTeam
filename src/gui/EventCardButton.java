@@ -61,6 +61,7 @@ public class EventCardButton extends JButton implements DataListener, ActionList
 				{
 					target = player.getNumber();
 				}
+				card.setTargetPlayer(GameHandler.instance.getPlayer(target));
 			}
 			else if (card.getPossibleTarget() == PossibleTarget.Self)
 			{

@@ -191,6 +191,7 @@ public class Map
 	{
 		int emptyCount = 0;
 		int edgeCount = 0;
+		int connectionCount = 0;
 		// Check if not hovering over empty
 		MapTile current = this.mapTiles[yPos][xPos];
 		if (!current.getShape().equals(Shape.empty))
@@ -206,7 +207,11 @@ public class Map
 			{
 				emptyCount++;
 			}
-			if (left.getRightCell().isRoad() != newTile.getLeftCell().isRoad() && !left.getShape().equals(Shape.empty))
+			else if(left.getRightCell().isRoad() && newTile.getLeftCell().isRoad())
+			{
+				connectionCount++;
+			}
+			else if (left.getRightCell().isRoad() != newTile.getLeftCell().isRoad())
 			{
 				return false;
 			}
@@ -224,7 +229,11 @@ public class Map
 			{
 				emptyCount++;
 			}
-			if (right.getLeftCell().isRoad() != newTile.getRightCell().isRoad() && !right.getShape().equals(Shape.empty))
+			else if(right.getLeftCell().isRoad() && newTile.getRightCell().isRoad())
+			{
+				connectionCount++;
+			}
+			else if (right.getLeftCell().isRoad() != newTile.getRightCell().isRoad())
 			{
 				return false;
 			}
@@ -242,7 +251,11 @@ public class Map
 			{
 				emptyCount++;
 			}
-			if (top.getBottomCell().isRoad() != newTile.getTopCell().isRoad() && !top.getShape().equals(Shape.empty))
+			else if(top.getBottomCell().isRoad() && newTile.getTopCell().isRoad())
+			{
+				connectionCount++;
+			}
+			else if (top.getBottomCell().isRoad() != newTile.getTopCell().isRoad())
 			{
 				return false;
 			}
@@ -260,7 +273,11 @@ public class Map
 			{
 				emptyCount++;
 			}
-			if (bottom.getTopCell().isRoad() != newTile.getBottomCell().isRoad() && !bottom.getShape().equals(Shape.empty))
+			else if(bottom.getTopCell().isRoad() && newTile.getBottomCell().isRoad())
+			{
+				connectionCount++;
+			}
+			else if (bottom.getTopCell().isRoad() != newTile.getBottomCell().isRoad())
 			{
 				return false;
 			}
@@ -270,7 +287,7 @@ public class Map
 			edgeCount++;
 		}
 		
-		if (edgeCount + emptyCount < 4)
+		if (edgeCount + emptyCount < 4 && connectionCount >= 1)
 		{
 			return true;
 		}

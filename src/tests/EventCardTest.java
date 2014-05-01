@@ -7,6 +7,7 @@ import java.util.*;
 
 import main.*;
 import main.EventCard.PossibleTarget;
+import main.GameHandler.GameState;
 import main.eventCardTypes.*;
 
 import org.junit.*;
@@ -28,9 +29,9 @@ public class EventCardTest
 		game.nextGameState();
 		game.nextGameState(); // now in player movement die roll
 		result = card.behavior(base1);
-		assertEquals(result, expected1);
+		assertEquals(expected1, result);
 		result = card.behavior(base2);
-		assertEquals(result, expected2);
+		assertEquals(expected2, result);
 	}
 	
 	@Test
@@ -49,9 +50,9 @@ public class EventCardTest
 		game.getMap().getMapTile(5, 5).getCell(1, 1).setZombie(true);
 		game.nextGameState(); // now in zombie combat
 		result = card.behavior(base1);
-		assertEquals(result, expected1);
-		result = card.behavior(base2);
-		assertEquals(result, expected2);
+		assertEquals(expected1, result);
+		result = card.behavior(base2);	
+		assertEquals(expected2, result);
 	}
 	
 	@Test
@@ -62,10 +63,10 @@ public class EventCardTest
 		Player player = game.getPlayer(0);
 		AdrenalineRush card = new AdrenalineRush();
 		card.setTargetPlayer(player);
-		assertEquals(card.getName(), "Adrenaline Rush");
-		assertEquals(card.getDescription(), "You can move a lot now!");
-		assertEquals(card.getPossibleTarget(), PossibleTarget.Self);
-		assertEquals(card.getTargetPlayer(), player);
+		assertEquals("Adrenaline Rush", card.getName());
+		assertEquals("You can move a lot now!", card.getDescription());
+		assertEquals(PossibleTarget.Self, card.getPossibleTarget());
+		assertEquals(player, card.getTargetPlayer());
 	}
 	
 	@Test
@@ -74,18 +75,16 @@ public class EventCardTest
 		new GameHandler(2);
 		GameHandler game = GameHandler.instance;
 		Player player = game.getPlayer(0);
+		game.nextGameState();
+		game.nextGameState();
 		AdrenalineRush card = new AdrenalineRush();
-		int base1 = 5;
-		int expected1 = 5;
-		int expected2 = 10;
+		int base = 5;
+		int expected = 10;
 		int result;
-		card.setTargetPlayer(player);
-		result = card.action(base1);
-		assertEquals(result, expected1);
-		game.nextGameState();
-		game.nextGameState();
-		result = card.action(base1);
-		assertEquals(result, expected2);
+		card.setTargetPlayer(player);		
+		result = card.action(base);
+		assertEquals(expected, result);
+		
 		
 	}
 	
@@ -93,16 +92,27 @@ public class EventCardTest
 	public void testShotgunBehavior()
 	{
 		new GameHandler(2);
-		Shotgun card = new Shotgun();
-		int base1 = 4;
-		int base2 = 5;
-		int expected1 = 5;
-		int expected2 = 6;
-		int result;
-		result = card.behavior(base1);
-		assertEquals(result, expected1);
-		result = card.behavior(base2);
-		assertEquals(result, expected2);
+		Field gameState;
+		try 
+		{
+			gameState = GameHandler.class.getDeclaredField("currentState");		
+			gameState.setAccessible(true);
+			gameState.set(GameHandler.instance, GameState.zombieCombat);
+			Shotgun card = new Shotgun();
+			int base1 = 4;
+			int base2 = 5;
+			int expected1 = 5;
+			int expected2 = 6;
+			int result;
+			result = card.behavior(base1);
+			assertEquals(expected1, result);
+			result = card.behavior(base2);
+			assertEquals(expected2, result);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -111,13 +121,18 @@ public class EventCardTest
 	{
 		new GameHandler(2);
 		GameHandler game = GameHandler.instance;
+		Player player = game.getPlayer(0);
 		try
 		{
 			EventCardDeck deck = game.getEventDeck();
 			Shotgun card = new Shotgun();
+			card.setTargetPlayer(player);
 			deck.addActiveCard(card);
 			Field field = EventCardDeck.class.getDeclaredField("activeCards");
 			field.setAccessible(true);
+			Field gameState = GameHandler.class.getDeclaredField("currentState");
+			gameState.setAccessible(true);
+			gameState.set(GameHandler.instance, GameState.zombieCombat);
 			ArrayList<EventCard> activeCards = (ArrayList<EventCard>) field.get(deck);
 			assertTrue(activeCards.contains(card));
 			
@@ -130,22 +145,38 @@ public class EventCardTest
 			int result;
 			
 			result = card.action(base1);
-			assertEquals(result, expected1);
+			assertEquals(expected1, result);
 			assertTrue(activeCards.contains(card));
 			
 			result = card.action(base2);
-			assertEquals(result, expected2);
+			assertEquals(expected2, result);
 			assertTrue(activeCards.contains(card));
 			
-			result = card.action(base3);
-			assertEquals(result, expected3);
+			result = deck.doCardAction(player, Shotgun.class, base3);
+			assertEquals(expected3, result);
 			assertFalse(activeCards.contains(card));
 		}
 		catch (Exception e)
 		{
 			
-		}
+		}		
+	}
+	
+	@Test
+	public void testSkipTurnAction()
+	{
+		new GameHandler(2);
+		GameHandler game = GameHandler.instance;
+		Player player = game.getPlayer(0);
+		SkipTurn card = new SkipTurn();
+		card.setTargetPlayer(player);
 		
+		assertEquals(0, game.getTurn());
+		game.nextTurn();
+		assertEquals(1, game.getTurn());
+		game.nextTurn();
+		card.action(0);
+		assertEquals(1, game.getTurn());
 	}
 	
 }
