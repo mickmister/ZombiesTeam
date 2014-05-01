@@ -22,7 +22,14 @@ public class MapTileDeck
 	
 	public MapTile getNextCard()
 	{
-		return this.deck.remove(0);
+		if (this.deck.isEmpty())
+		{
+			return null;
+		}
+		else
+		{
+			return this.deck.remove(0);
+		}
 	}
 	
 	private void addMapTiles()

@@ -31,7 +31,40 @@ public class MapTileDeckButton extends JButton implements ActionListener, DataLi
 				if (GameHandler.instance.getMap().getTempTile() == null)
 				{
 					MapTile tile = GameHandler.instance.getTileDeck().getNextCard();
-					GameHandler.instance.getMap().addTempTile(tile);
+					if (tile != null)
+					{
+						boolean possible = false;
+						for (int x = 0; x < 11; x += 1)
+						{
+							for (int y = 0; y < 11; y += 1)
+							{
+								for (int r = 0; r < 4; r += 1)
+								{
+									if (GameHandler.instance.getMap().checkValidPosition(tile, x, y))
+									{
+										possible = true;
+									}
+									tile.rotateTile();
+								}
+							}
+						}
+						if (possible)
+						{
+							GameHandler.instance.getMap().addTempTile(tile);
+						}
+						else
+						{
+							JOptionPane.showMessageDialog(null, "No available places to put Map Tile, skipping.");
+							GameHandler.instance.nextGameState();
+							GameHandler.instance.nextGameState();
+						}
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(null, "No more Map Tile cards, skipping.");
+						GameHandler.instance.nextGameState();
+						GameHandler.instance.nextGameState();
+					}
 				}
 			}
 		}
