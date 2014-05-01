@@ -1,5 +1,7 @@
 package main;
 
+import gui.*;
+
 import java.awt.*;
 import java.util.*;
 
@@ -272,7 +274,7 @@ public class Player
 			if (this.zombieCombatRoll > 3)
 			{
 				cell.setZombie(false);
-				this.zombiesCaptured++;
+				incrementZombiesCaptured();
 				return true;
 			}
 			
@@ -287,7 +289,7 @@ public class Player
 				{
 					cell.setZombie(false);
 					this.bulletTokens = this.bulletTokens - (4 - this.zombieCombatRoll);
-					this.zombiesCaptured++;
+					incrementZombiesCaptured();
 					return true;
 				}
 			}
@@ -312,6 +314,35 @@ public class Player
 		{
 			resetPlayer();
 			return false;
+		}
+	}
+	
+	private void incrementZombiesCaptured()
+	{
+		this.zombiesCaptured += 1;
+		if (this.zombiesCaptured >= 25)
+		{
+			// You win!
+			new GameWin(this, true);
+		}
+		MapTile helipad = GameHandler.instance.getMap().getHelipad();
+		if (helipad != null)
+		{
+			boolean allEmpty = true;
+			for (int x = 0; x < 3; x += 1)
+			{
+				for (int y = 0; y < 3; y += 1)
+				{
+					if (helipad.getCell(y, x).hasZombie())
+					{
+						allEmpty = false;
+					}
+				}
+			}
+			if (allEmpty)
+			{
+				new GameWin(this, false);
+			}
 		}
 	}
 	

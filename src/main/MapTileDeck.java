@@ -16,7 +16,7 @@ public class MapTileDeck
 		addSpecialMapTiles();
 		Collections.shuffle(this.deck);
 		
-		String helipad = "0 1 0 1 1 1 0 1 0" + " " + "9 0 0"; // Helipad
+		String helipad = "1 1 1 1 1 1 1 1 1" + " " + "9 0 0"; // Helipad
 		this.deck.add(new MapTile(Shape.special, helipad));
 	}
 	
