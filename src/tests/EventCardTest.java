@@ -51,7 +51,7 @@ public class EventCardTest
 		game.nextGameState(); // now in zombie combat
 		result = card.behavior(base1);
 		assertEquals(expected1, result);
-		result = card.behavior(base2);	
+		result = card.behavior(base2);
 		assertEquals(expected2, result);
 	}
 	
@@ -81,10 +81,9 @@ public class EventCardTest
 		int base = 5;
 		int expected = 10;
 		int result;
-		card.setTargetPlayer(player);		
+		card.setTargetPlayer(player);
 		result = card.action(base);
 		assertEquals(expected, result);
-		
 		
 	}
 	
@@ -93,9 +92,9 @@ public class EventCardTest
 	{
 		new GameHandler(2);
 		Field gameState;
-		try 
+		try
 		{
-			gameState = GameHandler.class.getDeclaredField("currentState");		
+			gameState = GameHandler.class.getDeclaredField("currentState");
 			gameState.setAccessible(true);
 			gameState.set(GameHandler.instance, GameState.zombieCombat);
 			Shotgun card = new Shotgun();
@@ -109,7 +108,7 @@ public class EventCardTest
 			result = card.behavior(base2);
 			assertEquals(expected2, result);
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			e.printStackTrace();
 		}
@@ -159,7 +158,7 @@ public class EventCardTest
 		catch (Exception e)
 		{
 			
-		}		
+		}
 	}
 	
 	@Test

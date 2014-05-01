@@ -7,7 +7,7 @@ import java.awt.*;
 import java.util.*;
 
 import main.DataListener.DataChangedEvent;
-import main.eventCardTypes.SkipTurn;
+import main.eventCardTypes.*;
 
 public class GameHandler
 {

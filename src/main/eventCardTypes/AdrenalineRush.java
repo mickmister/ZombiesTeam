@@ -22,15 +22,11 @@ public class AdrenalineRush extends OneUseCard
 			JOptionPane.showMessageDialog(null, "Your movement roll was multiplied by 2 by the Adrenaline Rush card!");
 			return num * 2;
 		}
-		else if (game.getCurrentState() == GameState.zombieCombat)
+		else
+		// if (game.getCurrentState() == GameState.zombieCombat)
 		{
 			JOptionPane.showMessageDialog(null, "Your combat roll was increased by 2 by the Adrenaline Rush card!");
 			return num + 2;
 		}
-		else
-		{
-			throw new UnsupportedOperationException("Trying to call behavior() of AdrenalineRush card in an invalid state: " + game.getCurrentState());
-		}
 	}
-	
 }

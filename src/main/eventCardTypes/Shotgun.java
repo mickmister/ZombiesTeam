@@ -1,9 +1,6 @@
 package main.eventCardTypes;
 
-import javax.swing.JOptionPane;
-
-import main.GameHandler;
-import main.GameHandler.GameState;
+import javax.swing.*;
 
 public class Shotgun extends MultipleUseCard
 {
@@ -15,16 +12,7 @@ public class Shotgun extends MultipleUseCard
 	@Override
 	public int behavior(int num)
 	{
-		GameState state = GameHandler.instance.getCurrentState();
-		if(state == GameState.zombieCombat)
-		{
-			JOptionPane.showMessageDialog(null, "Your combat roll was increased by 1 by the Shotgun card!");
-			return num + 1;			
-		}
-		else
-		{
-			throw new UnsupportedOperationException("Trying to call behavior() of Shotgun card in an invalid state: " + state);
-		}
-		
+		JOptionPane.showMessageDialog(null, "Your combat roll was increased by 1 by the Shotgun card!");
+		return num + 1;
 	}
 }

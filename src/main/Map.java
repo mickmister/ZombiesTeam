@@ -207,7 +207,7 @@ public class Map
 			{
 				emptyCount++;
 			}
-			else if(left.getRightCell().isRoad() && newTile.getLeftCell().isRoad())
+			else if (left.getRightCell().isRoad() && newTile.getLeftCell().isRoad())
 			{
 				connectionCount++;
 			}
@@ -229,7 +229,7 @@ public class Map
 			{
 				emptyCount++;
 			}
-			else if(right.getLeftCell().isRoad() && newTile.getRightCell().isRoad())
+			else if (right.getLeftCell().isRoad() && newTile.getRightCell().isRoad())
 			{
 				connectionCount++;
 			}
@@ -251,7 +251,7 @@ public class Map
 			{
 				emptyCount++;
 			}
-			else if(top.getBottomCell().isRoad() && newTile.getTopCell().isRoad())
+			else if (top.getBottomCell().isRoad() && newTile.getTopCell().isRoad())
 			{
 				connectionCount++;
 			}
@@ -273,7 +273,7 @@ public class Map
 			{
 				emptyCount++;
 			}
-			else if(bottom.getTopCell().isRoad() && newTile.getBottomCell().isRoad())
+			else if (bottom.getTopCell().isRoad() && newTile.getBottomCell().isRoad())
 			{
 				connectionCount++;
 			}
@@ -347,9 +347,9 @@ public class Map
 	
 	public MapTile getHelipad()
 	{
-		for (int x = 0; x < SIZE; x += 1)
+		for (int x = 0; x < this.SIZE; x += 1)
 		{
-			for (int y = 0; y < SIZE; y += 1)
+			for (int y = 0; y < this.SIZE; y += 1)
 			{
 				MapTile tile = this.mapTiles[y][x];
 				if (tile.toString().equals("true true true\ntrue true true\ntrue true true\n"))
