@@ -30,5 +30,7 @@ public class MapTileView
 				view.draw(graphics, cellX, cellY, isTemp, tempZombie, tempBullet, tempLife, tempMove);
 			}
 		}
+		graphics.setColor(Color.WHITE);
+		graphics.drawRect(xPos * 240, yPos * 240, 240, 240);
 	}
 }
