@@ -3,11 +3,14 @@ package tests;
 import static org.junit.Assert.*;
 
 import java.awt.*;
+import java.awt.event.*;
 
 import main.*;
 import main.MapTile.Shape;
 
 import org.junit.*;
+
+import view.*;
 
 public class MapTest
 {
@@ -91,5 +94,39 @@ public class MapTest
 		player.setMovesRemaining(0);
 		GameHandler.instance.nextGameState();
 		assertEquals("Roll the dice to move zombies", map.getCurrentMessage(player));
+		GameHandler.instance.nextGameState();
+		player.setMovesRemaining(5);
+		assertEquals("5 zombie(s) to move", map.getCurrentMessage(player));
+	}
+	
+	@Test
+	public void testPlaceMovingZombie()
+	{
+		new GameHandler(2);
+		Map map = GameHandler.instance.getMap();
+		MapView view = new MapView();
+		assertEquals(-1, map.getZombieMovementIndex());
+		
+		map.setZombieMovementIndex(10);
+		assertEquals(10, map.getZombieMovementIndex());
+		
+		map.placeMovingZombie(new KeyEvent(view, 0, 0, 0, KeyEvent.VK_DOWN, '\0'));
+		assertEquals(10, map.getZombieMovementIndex());
+		
+		map.getMapTile(5, 5).getCell(0, 1).setZombie(true);
+		map.selectNextZombie();
+		int previous = map.getZombieMovementIndex();
+		map.placeMovingZombie(new KeyEvent(view, 0, 0, 0, KeyEvent.VK_LEFT, '\0'));
+		assertEquals(previous, map.getZombieMovementIndex());
+		map.placeMovingZombie(new KeyEvent(view, 0, 0, 0, KeyEvent.VK_RIGHT, '\0'));
+		assertEquals(previous, map.getZombieMovementIndex());
+		map.placeMovingZombie(new KeyEvent(view, 0, 0, 0, KeyEvent.VK_DOWN, '\0'));
+		assertEquals(previous + 30, map.getZombieMovementIndex());
+	}
+	
+	@Test
+	public void testGetHelipad()
+	{
+		
 	}
 }
