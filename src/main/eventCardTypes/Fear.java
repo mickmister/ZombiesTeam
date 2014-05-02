@@ -1,25 +1,28 @@
 package main.eventCardTypes;
 
-import javax.swing.JOptionPane;
+import gui.*;
 
-import gui.DialogHandler;
-import main.GameHandler;
-import main.Player;
+import javax.swing.*;
 
-public class Fear extends OneUseCard {
+import main.*;
 
-	public Fear() {
+public class Fear extends OneUseCard
+{
+	
+	public Fear()
+	{
 		super(PossibleTarget.Pick, "Fear", "Target player may not move by any means during their next turn.");
 		
 	}
-
+	
 	@Override
-	public int behavior(int num) {
-		Player player = this.getTargetPlayer();
+	public int behavior(int num)
+	{
+		Player player = getTargetPlayer();
 		player.setMovesRemaining(0);
 		GameHandler.instance.nextGameState();
-		DialogHandler.showMessage(null, "Your movement got skipped", this.getName(), JOptionPane.WARNING_MESSAGE);
+		DialogHandler.showMessage(null, "Your movement got skipped", getName(), JOptionPane.WARNING_MESSAGE);
 		return 1;
 	}
-
+	
 }

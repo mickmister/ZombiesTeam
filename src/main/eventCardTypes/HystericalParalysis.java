@@ -1,8 +1,9 @@
 package main.eventCardTypes;
 
-import javax.swing.JOptionPane;
+import gui.*;
 
-import gui.DialogHandler;
+import javax.swing.*;
+
 import main.*;
 
 public class HystericalParalysis extends OneUseCard
@@ -17,7 +18,7 @@ public class HystericalParalysis extends OneUseCard
 	public int behavior(int num)
 	{
 		GameHandler.instance.nextTurn();
-		DialogHandler.showMessage(null, "Your turn has been skipped because you are paralyzed!", this.getName(), JOptionPane.WARNING_MESSAGE);
+		DialogHandler.showMessage(null, "Your turn has been skipped because you are paralyzed!", getName(), JOptionPane.WARNING_MESSAGE);
 		return 1;
 	}
 	

@@ -396,7 +396,8 @@ public class Player
 	
 	private boolean promptUseBulletTokens()
 	{
-		int result = DialogHandler.showChoice(null, "Do you want to use bullet tokens to defeat the zombie?", "Shoot or Die", JOptionPane.QUESTION_MESSAGE);
+		int result = DialogHandler.showChoice(null, "Do you want to use bullet tokens to defeat the zombie?", "Shoot or Die",
+				JOptionPane.QUESTION_MESSAGE);
 		return result == JOptionPane.YES_OPTION;
 	}
 	

@@ -208,7 +208,7 @@ public class EventCardTest
 		card.setTargetPlayer(player);
 		
 		game.nextGameState();
-		game.nextGameState(); //player movement die roll now
+		game.nextGameState(); // player movement die roll now
 		
 		int result = card.action(0);
 		assertEquals(1, result);

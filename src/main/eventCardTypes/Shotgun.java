@@ -1,6 +1,6 @@
 package main.eventCardTypes;
 
-import gui.DialogHandler;
+import gui.*;
 
 import javax.swing.*;
 
@@ -14,7 +14,7 @@ public class Shotgun extends MultipleUseCard
 	@Override
 	public int behavior(int num)
 	{
-		DialogHandler.showMessage(null, "Your combat roll was increased by 1 by the Shotgun card!", this.getName(), JOptionPane.INFORMATION_MESSAGE);
+		DialogHandler.showMessage(null, "Your combat roll was increased by 1 by the Shotgun card!", getName(), JOptionPane.INFORMATION_MESSAGE);
 		return num + 1;
 	}
 }

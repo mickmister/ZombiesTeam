@@ -54,7 +54,8 @@ public class MapTileDeckButton extends JButton implements ActionListener, DataLi
 						}
 						else
 						{
-							DialogHandler.showMessage(null, "No available places to put Map Tile, skipping.", "Map Tile", JOptionPane.INFORMATION_MESSAGE);
+							DialogHandler.showMessage(null, "No available places to put Map Tile, skipping.", "Map Tile",
+									JOptionPane.INFORMATION_MESSAGE);
 							GameHandler.instance.nextGameState();
 							GameHandler.instance.nextGameState();
 						}

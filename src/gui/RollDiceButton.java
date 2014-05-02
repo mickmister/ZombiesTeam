@@ -27,11 +27,13 @@ public class RollDiceButton extends JButton implements ActionListener, DataListe
 		int result = RollDice.rollDice();
 		if (GameHandler.instance.getCurrentState().equals(GameState.playerMovementDieRoll))
 		{
-			DialogHandler.showMessage(getTopLevelAncestor(), "Your player movement roll was a " + result + "!", "Roll Dice", JOptionPane.INFORMATION_MESSAGE);
+			DialogHandler.showMessage(getTopLevelAncestor(), "Your player movement roll was a " + result + "!", "Roll Dice",
+					JOptionPane.INFORMATION_MESSAGE);
 		}
 		if (GameHandler.instance.getCurrentState().equals(GameState.zombieMovementDieRoll))
 		{
-			DialogHandler.showMessage(getTopLevelAncestor(), "Your zombie movement roll was a " + result + "!", "Roll Dice", JOptionPane.INFORMATION_MESSAGE);
+			DialogHandler.showMessage(getTopLevelAncestor(), "Your zombie movement roll was a " + result + "!", "Roll Dice",
+					JOptionPane.INFORMATION_MESSAGE);
 		}
 		if (GameHandler.instance.getCurrentState().equals(GameState.zombieCombat))
 		{

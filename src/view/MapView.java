@@ -1,7 +1,6 @@
 package view;
 
 import gui.*;
-import gui.DialogHandler;
 import gui.Window;
 
 import java.awt.*;

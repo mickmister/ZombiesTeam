@@ -1,6 +1,6 @@
 package main;
 
-import gui.DialogHandler;
+import gui.*;
 
 import java.awt.*;
 

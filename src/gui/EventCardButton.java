@@ -50,31 +50,31 @@ public class EventCardButton extends JButton implements DataListener, ActionList
 				String[] choices = new String[numPlayers - 1];
 				int j = 0;
 				int turn = GameHandler.instance.getTurn();
-				for(int i = 0; i < numPlayers ; i+=1)
+				for (int i = 0; i < numPlayers; i += 1)
 				{
-					if(i != turn)
+					if (i != turn)
 					{
 						choices[j] = choicesTotal[i];
 						j++;
 					}
 				}
 				Object result = JOptionPane.showInputDialog(getTopLevelAncestor(), "Select the target player.", "Target Player",
-						JOptionPane.PLAIN_MESSAGE, null, choices, "Player 1");				
+						JOptionPane.PLAIN_MESSAGE, null, choices, "Player 1");
 				int target = -1;
 				String resultString = (String) result;
-				for(int i = 0; i < numPlayers - 1; i += 1)
+				for (int i = 0; i < numPlayers - 1; i += 1)
 				{
-					if(choices[i].equals(result))
+					if (choices[i].equals(result))
 					{
-						if(i >= turn)
+						if (i >= turn)
 						{
 							target = i + 1;
 						}
 						else
 						{
 							target = i;
-						}						
-					}					
+						}
+					}
 				}
 				if (target == -1)
 				{
