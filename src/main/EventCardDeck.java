@@ -56,5 +56,4 @@ public class EventCardDeck
 	{
 		return this.deck.remove(0);
 	}
-	
 }
