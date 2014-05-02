@@ -167,7 +167,7 @@ public class EventCardTest
 		new GameHandler(2);
 		GameHandler game = GameHandler.instance;
 		Player player = game.getPlayer(0);
-		SkipTurn card = new SkipTurn();
+		HystericalParalysis card = new HystericalParalysis();
 		card.setTargetPlayer(player);
 		
 		assertEquals(0, game.getTurn());

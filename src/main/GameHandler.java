@@ -142,7 +142,7 @@ public class GameHandler
 		this.currentState = GameState.tilePlacement;
 		this.turn = (this.turn + 1) % this.numberOfPlayers;
 		this.players.get(this.turn).setCardPlayed(false);
-		this.eventDeck.doCardAction(this.players.get(this.turn), SkipTurn.class, 0);
+		this.eventDeck.doCardAction(this.players.get(this.turn), HystericalParalysis.class, 0);
 	}
 	
 	public GameState getCurrentState()

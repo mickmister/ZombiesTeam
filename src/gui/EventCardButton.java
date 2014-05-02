@@ -95,7 +95,7 @@ public class EventCardButton extends JButton implements DataListener, ActionList
 		}
 		else
 		{
-			Dialog.showMessage(getTopLevelAncestor(),
+			DialogHandler.showMessage(getTopLevelAncestor(),
 					"You have already played an Event Card this turn.\n\nYou must wait until your next turn to play another.",
 					"Cannot Play 2 Event Cards", JOptionPane.WARNING_MESSAGE);
 		}

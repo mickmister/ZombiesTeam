@@ -1,5 +1,8 @@
 package main.eventCardTypes;
 
+import javax.swing.JOptionPane;
+
+import gui.DialogHandler;
 import main.GameHandler;
 import main.Player;
 
@@ -18,6 +21,7 @@ public class GainTwoHealthNoMove extends OneUseCard
 		player.addLifeToken();
 		player.addLifeToken();
 		GameHandler.instance.nextGameState();
+		DialogHandler.showMessage(null, "You played it safe and rested to gain 2 health", this.getName(), JOptionPane.INFORMATION_MESSAGE);
 		return 1;
 	}
 

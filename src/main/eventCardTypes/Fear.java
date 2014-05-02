@@ -2,7 +2,7 @@ package main.eventCardTypes;
 
 import javax.swing.JOptionPane;
 
-import gui.Dialog;
+import gui.DialogHandler;
 import main.GameHandler;
 import main.Player;
 
@@ -18,7 +18,7 @@ public class Fear extends OneUseCard {
 		Player player = this.getTargetPlayer();
 		player.setMovesRemaining(0);
 		GameHandler.instance.nextGameState();
-		Dialog.showMessage(null, "Your movement got skipped", this.getName(), JOptionPane.WARNING_MESSAGE);
+		DialogHandler.showMessage(null, "Your movement got skipped", this.getName(), JOptionPane.WARNING_MESSAGE);
 		return 1;
 	}
 
