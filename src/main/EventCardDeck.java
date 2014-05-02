@@ -18,6 +18,7 @@ public class EventCardDeck
 			this.deck.add(new AdrenalineRush());
 			this.deck.add(new Shotgun());
 			this.deck.add(new SkipTurn());
+			this.deck.add(new GainTwoHealthNoMove());
 		}
 		
 		Collections.shuffle(this.deck);
