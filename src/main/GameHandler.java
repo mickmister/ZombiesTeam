@@ -300,7 +300,7 @@ public class GameHandler
 		nextGameState();
 	}
 	
-	public int getNumberofPlayers()
+	public int getNumberOfPlayers()
 	{
 		return this.numberOfPlayers;
 	}

@@ -34,6 +34,7 @@ public class RollDice
 		{
 		case playerMovementDieRoll:
 			result = deck.doCardAction(player, AdrenalineRush.class, result);
+			result = deck.doCardAction(player, UntiedShoe.class, result);
 			break;
 		case zombieCombat:
 			result = deck.doCardAction(player, AdrenalineRush.class, result);

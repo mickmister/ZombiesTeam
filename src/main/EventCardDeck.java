@@ -19,6 +19,7 @@ public class EventCardDeck
 			this.deck.add(new Shotgun());
 			this.deck.add(new SkipTurn());
 			this.deck.add(new GainTwoHealthNoMove());
+			this.deck.add(new UntiedShoe());
 		}
 		
 		Collections.shuffle(this.deck);
