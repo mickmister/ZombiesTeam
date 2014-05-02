@@ -178,4 +178,40 @@ public class EventCardTest
 		assertEquals(1, game.getTurn());
 	}
 	
+	@Test
+	public void testUntiedShoe()
+	{
+		new GameHandler(2);
+		GameHandler game = GameHandler.instance;
+		Player player = game.getPlayer(0);
+		UntiedShoe card = new UntiedShoe();
+		card.setTargetPlayer(player);
+		int base1 = 3;
+		int base2 = 5;
+		int expected1 = 1;
+		int expected2 = 2;
+		
+		int result = card.action(base1);
+		assertEquals(expected1, result);
+		result = card.action(base2);
+		assertEquals(expected2, result);
+		
+	}
+	
+	@Test
+	public void testFear()
+	{
+		new GameHandler(2);
+		GameHandler game = GameHandler.instance;
+		Player player = game.getPlayer(0);
+		Fear card = new Fear();
+		card.setTargetPlayer(player);
+		
+		game.nextGameState();
+		game.nextGameState(); //player movement die roll now
+		
+		int result = card.action(0);
+		assertEquals(1, result);
+		assertEquals(GameState.zombieMovementDieRoll, game.getCurrentState());
+	}
 }

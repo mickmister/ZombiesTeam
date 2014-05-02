@@ -171,7 +171,11 @@ public class GameHandler
 				{
 					this.currentState = GameState.playerMovementDieRoll;
 					this.guiStateData.rollDiceButtonEnabled = true;
-					this.eventDeck.doCardAction(player, GainTwoHealthNoMove.class, 0);
+					int didAction = this.eventDeck.doCardAction(player, Fear.class, 0);
+					if (didAction == 0)
+					{
+						this.eventDeck.doCardAction(player, GainTwoHealthNoMove.class, 0);
+					}
 				}
 				else if (tile.getBulletsToPlace() == 0)
 				{
@@ -191,7 +195,11 @@ public class GameHandler
 				{
 					this.currentState = GameState.playerMovementDieRoll;
 					this.guiStateData.rollDiceButtonEnabled = true;
-					this.eventDeck.doCardAction(player, GainTwoHealthNoMove.class, 0);
+					int didAction = this.eventDeck.doCardAction(player, Fear.class, 0);
+					if (didAction == 0)
+					{
+						this.eventDeck.doCardAction(player, GainTwoHealthNoMove.class, 0);
+					}
 				}
 				else
 				{
@@ -203,7 +211,11 @@ public class GameHandler
 			case lifeTokenPlacement:
 				this.currentState = GameState.playerMovementDieRoll;
 				this.guiStateData.rollDiceButtonEnabled = true;
-				this.eventDeck.doCardAction(player, GainTwoHealthNoMove.class, 0);
+				int didAction = this.eventDeck.doCardAction(player, Fear.class, 0);
+				if (didAction == 0)
+				{
+					this.eventDeck.doCardAction(player, GainTwoHealthNoMove.class, 0);
+				}
 				break;
 			case playerMovementDieRoll:
 				TileCell cell = getMap().getMapTile(player.getTileLocation().y, player.getTileLocation().x).getCell(player.getCellLocation().y,

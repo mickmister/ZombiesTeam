@@ -1,6 +1,7 @@
 package main;
 
 import java.awt.*;
+import gui.Dialog;
 
 import javax.swing.*;
 
@@ -90,7 +91,7 @@ public class MapTile
 		catch (NumberFormatException e)
 		{
 			e.printStackTrace();
-			JOptionPane.showMessageDialog(null, "The special string could not be parsed for this MapTile:\n\"" + string + "\"", "Error Parsing",
+			Dialog.showMessage(null, "The special string could not be parsed for this MapTile:\n\"" + string + "\"", "Error Parsing",
 					JOptionPane.ERROR_MESSAGE);
 		}
 	}

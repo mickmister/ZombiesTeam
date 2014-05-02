@@ -13,12 +13,11 @@ public class GainTwoHealthNoMove extends OneUseCard
 	@Override
 	public int behavior(int num)
 	{
-		GameHandler game = GameHandler.instance;
-		Player player = game.getPlayer(game.getTurn());
+		Player player = this.getTargetPlayer();
 		player.setMovesRemaining(0);
 		player.addLifeToken();
 		player.addLifeToken();
-		game.nextGameState();
+		GameHandler.instance.nextGameState();
 		return num;
 	}
 
