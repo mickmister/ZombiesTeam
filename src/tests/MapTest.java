@@ -5,12 +5,12 @@ import static org.junit.Assert.*;
 import java.awt.*;
 import java.awt.event.*;
 
+import javax.swing.*;
+
 import main.*;
 import main.MapTile.Shape;
 
 import org.junit.*;
-
-import view.*;
 
 public class MapTest
 {
@@ -104,7 +104,7 @@ public class MapTest
 	{
 		new GameHandler(2);
 		Map map = GameHandler.instance.getMap();
-		MapView view = new MapView();
+		JButton view = new JButton();
 		assertEquals(-1, map.getZombieMovementIndex());
 		
 		map.setZombieMovementIndex(10);
@@ -127,6 +127,17 @@ public class MapTest
 	@Test
 	public void testGetHelipad()
 	{
-		
+		new GameHandler(2);
+		int count = 4 * 4 + 12;
+		for (int i = 0; i < count; i += 1)
+		{
+			GameHandler.instance.getTileDeck().getNextCard();
+		}
+		MapTile helipad = GameHandler.instance.getTileDeck().getNextCard();
+		GameHandler.instance.getMap().addTempTile(helipad);
+		GameHandler.instance.getMap().setTempPos(new Point(5, 6));
+		GameHandler.instance.getMap().placeTempTile();
+		MapTile test = GameHandler.instance.getMap().getHelipad();
+		assertEquals(helipad, test);
 	}
 }

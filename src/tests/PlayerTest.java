@@ -325,7 +325,8 @@ public class PlayerTest
 		Player player = GameHandler.instance.getPlayer(0);
 		player.drawNewCards();
 		EventCard card = player.getCardFromHand(0);
-		player.removeCardFromHand(0);
+		EventCard removed = player.removeCardFromHand(0);
+		assertEquals(card, removed);
 		player.drawNewCards();
 		player.setCardPlayed(true);
 		assertTrue(player.checkCardPlayed());

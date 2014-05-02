@@ -19,6 +19,7 @@ public class GameHandlerTest
 			assertNotNull(test);
 			// Test that the singleton global reference is correct.
 			assertEquals(test, GameHandler.instance);
+			assertEquals(i, GameHandler.instance.getNumberOfPlayers());
 		}
 	}
 	
