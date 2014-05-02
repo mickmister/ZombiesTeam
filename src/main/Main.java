@@ -1,5 +1,7 @@
 package main;
 
+import gui.Dialog;
+
 import java.awt.*;
 
 import javax.swing.*;
@@ -14,6 +16,7 @@ public class Main
 	 */
 	public static void main(String[] args)
 	{
+		Dialog.isTesting = false;
 		setWindowsLaF();
 		
 		String[] choices = { "2 players", "3 players", "4 players" };

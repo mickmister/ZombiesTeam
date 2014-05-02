@@ -18,7 +18,7 @@ public class GainTwoHealthNoMove extends OneUseCard
 		player.addLifeToken();
 		player.addLifeToken();
 		GameHandler.instance.nextGameState();
-		return num;
+		return 1;
 	}
 
 }

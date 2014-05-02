@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
 
 public class Dialog {
 	public static int defaultReturn;
-	public static boolean isTesting;
+	public static boolean isTesting = true;
 	
 	public static void showMessage(Component comp, String message, String title, int messageType)
 	{

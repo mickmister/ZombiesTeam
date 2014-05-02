@@ -1,6 +1,7 @@
 package main;
 
 import gui.*;
+import gui.Dialog;
 
 import java.awt.*;
 import java.util.*;
@@ -359,7 +360,7 @@ public class Player
 		GameHandler.instance.getMap().getMapTile(this.yTile, this.xTile).getCell(this.yCell, this.xCell).addPlayer(this);
 		// Go from ZombieCombat to PlayerMovement to continue turn.
 		GameHandler.instance.nextGameState();
-		Dialog.showMessageDialog(null, "You died!  Your player will be reset.");
+		Dialog.showMessage(null, "You died!  Your player will be reset.", "Reset Player", JOptionPane.INFORMATION_MESSAGE);
 	}
 	
 	private boolean checkDifferentTileMove(TileCell currentCell, TileCell targetCell)
@@ -396,9 +397,8 @@ public class Player
 	
 	private boolean promptUseBulletTokens()
 	{
-		int result = Dialog.showConfirmDialog(null, "Do you want to use bullet tokens to defeat the zombie?", "Shoot or Die",
-				Dialog.YES_NO_OPTION, Dialog.QUESTION_MESSAGE);
-		return result == Dialog.YES_OPTION;
+		int result = Dialog.showChoice(null, "Do you want to use bullet tokens to defeat the zombie?", "Shoot or Die", JOptionPane.QUESTION_MESSAGE);
+		return result == JOptionPane.YES_OPTION;
 	}
 	
 	public void addBulletToken()

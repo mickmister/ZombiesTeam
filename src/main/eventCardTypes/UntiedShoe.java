@@ -2,6 +2,8 @@ package main.eventCardTypes;
 
 
 
+import javax.swing.JOptionPane;
+
 import gui.Dialog;
 import main.GameHandler;
 import main.Player;
@@ -17,7 +19,7 @@ public class UntiedShoe extends OneUseCard
 	@Override
 	public int behavior(int num)
 	{
-		Dialog.showMessageDialog(null, "Your movement roll was cut in half because your shoes are untied!");
+		Dialog.showMessage(null, "Your movement roll was cut in half because your shoes are untied!", "Untied Shoe", JOptionPane.INFORMATION_MESSAGE);
 		return num/2;
 	}
 	

@@ -14,7 +14,7 @@ public class SkipTurn extends OneUseCard
 	public int behavior(int num)
 	{
 		GameHandler.instance.nextTurn();
-		return num;
+		return 1;
 	}
 	
 }
