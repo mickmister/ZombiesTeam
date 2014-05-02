@@ -24,13 +24,11 @@ public class TileCellView
 		{
 			if (this.tileCell.isDoor())
 			{
-				g.setColor(Color.BLUE);
-				g.fillRect(x, y, 80, 80);
+				g.drawImage(ImageManager.DOOR_TEXTURE, x, y, null);
 			}
 			else if (this.tileCell.isBuilding())
 			{
-				g.setColor(Color.YELLOW);
-				g.fillRect(x, y, 80, 80);
+				g.drawImage(ImageManager.BUILDING_TEXTURE, x, y, null);
 			}
 			else
 			{
