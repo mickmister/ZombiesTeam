@@ -304,4 +304,30 @@ public class PlayerTest
 		assertEquals(0, player.getCellLocation().y);
 		assertEquals(3, player.getMovesRemaining());
 	}
+	
+	@Test
+	public void testTokenAdditions()
+	{
+		new GameHandler(2);
+		Player player = GameHandler.instance.getPlayer(0);
+		assertEquals(3, player.getBulletTokens());
+		assertEquals(3, player.getLifeTokens());
+		player.addBulletToken();
+		player.addLifeToken();
+		assertEquals(4, player.getBulletTokens());
+		assertEquals(4, player.getLifeTokens());
+	}
+	
+	@Test
+	public void testCardHandBehavior()
+	{
+		new GameHandler(2);
+		Player player = GameHandler.instance.getPlayer(0);
+		player.drawNewCards();
+		EventCard card = player.getCardFromHand(0);
+		player.removeCardFromHand(0);
+		player.drawNewCards();
+		player.setCardPlayed(true);
+		assertTrue(player.checkCardPlayed());
+	}
 }
