@@ -359,7 +359,7 @@ public class Player
 		GameHandler.instance.getMap().getMapTile(this.yTile, this.xTile).getCell(this.yCell, this.xCell).addPlayer(this);
 		// Go from ZombieCombat to PlayerMovement to continue turn.
 		GameHandler.instance.nextGameState();
-		JOptionPane.showMessageDialog(null, "You died!  Your player will be reset.");
+		Dialog.showMessageDialog(null, "You died!  Your player will be reset.");
 	}
 	
 	private boolean checkDifferentTileMove(TileCell currentCell, TileCell targetCell)
@@ -396,9 +396,9 @@ public class Player
 	
 	private boolean promptUseBulletTokens()
 	{
-		int result = JOptionPane.showConfirmDialog(null, "Do you want to use bullet tokens to defeat the zombie?", "Shoot or Die",
-				JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-		return result == JOptionPane.YES_OPTION;
+		int result = Dialog.showConfirmDialog(null, "Do you want to use bullet tokens to defeat the zombie?", "Shoot or Die",
+				Dialog.YES_NO_OPTION, Dialog.QUESTION_MESSAGE);
+		return result == Dialog.YES_OPTION;
 	}
 	
 	public void addBulletToken()

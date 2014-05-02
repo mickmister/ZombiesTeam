@@ -110,9 +110,9 @@ public class MapView extends JPanel implements Runnable, KeyListener
 	
 	private void displayInvalidLocation()
 	{
-		JOptionPane.showMessageDialog(null, "The selected location is not valid for the given map tile.\n"
+		Dialog.showMessageDialog(null, "The selected location is not valid for the given map tile.\n"
 				+ "The tile must be touching at least one other tile,\n" + "all touching roads must connect (and not become blocked),\n"
-				+ "and it may not be placed on top of an existing tile.\n\nTry again.", "Invalid Placement", JOptionPane.WARNING_MESSAGE);
+				+ "and it may not be placed on top of an existing tile.\n\nTry again.", "Invalid Placement", Dialog.WARNING_MESSAGE);
 	}
 	
 	@Override

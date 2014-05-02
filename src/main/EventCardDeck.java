@@ -18,6 +18,8 @@ public class EventCardDeck
 			this.deck.add(new AdrenalineRush());
 			this.deck.add(new Shotgun());
 			this.deck.add(new SkipTurn());
+			this.deck.add(new GainTwoHealthNoMove());
+			this.deck.add(new UntiedShoe());
 		}
 		
 		Collections.shuffle(this.deck);
@@ -54,5 +56,4 @@ public class EventCardDeck
 	{
 		return this.deck.remove(0);
 	}
-	
 }

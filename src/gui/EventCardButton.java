@@ -45,17 +45,36 @@ public class EventCardButton extends JButton implements DataListener, ActionList
 			GameHandler.instance.fireDataChangedEvent(null);
 			if (card.getPossibleTarget() == PossibleTarget.Pick)
 			{
-				String[] choices = { "Player 1", "Player 2", "Player 3", "Player 4" };
-				Object result = JOptionPane.showInputDialog(getTopLevelAncestor(), "Select the target player.", "Target Player",
-						JOptionPane.PLAIN_MESSAGE, null, choices, "Player 1");
-				
-				int target = -1;
-				for (int i = 0; i < choices.length; i += 1)
+				int numPlayers = GameHandler.instance.getNumberOfPlayers();
+				String[] choicesTotal = { "Player 1", "Player 2", "Player 3", "Player 4" };
+				String[] choices = new String[numPlayers - 1];
+				int j = 0;
+				int turn = GameHandler.instance.getTurn();
+				for(int i = 0; i < numPlayers ; i+=1)
 				{
-					if (choices[i].equals(result))
+					if(i != turn)
 					{
-						target = i;
+						choices[j] = choicesTotal[i];
+						j++;
 					}
+				}
+				Object result = JOptionPane.showInputDialog(getTopLevelAncestor(), "Select the target player.", "Target Player",
+						JOptionPane.PLAIN_MESSAGE, null, choices, "Player 1");				
+				int target = -1;
+				String resultString = (String) result;
+				for(int i = 0; i < numPlayers - 1; i += 1)
+				{
+					if(choices[i].equals(result))
+					{
+						if(i >= turn)
+						{
+							target = i + 1;
+						}
+						else
+						{
+							target = i;
+						}						
+					}					
 				}
 				if (target == -1)
 				{
@@ -76,9 +95,9 @@ public class EventCardButton extends JButton implements DataListener, ActionList
 		}
 		else
 		{
-			JOptionPane.showMessageDialog(getTopLevelAncestor(),
+			Dialog.showMessageDialog(getTopLevelAncestor(),
 					"You have already played an Event Card this turn.\n\nYou must wait until your next turn to play another.",
-					"Cannot Play 2 Event Cards", JOptionPane.WARNING_MESSAGE);
+					"Cannot Play 2 Event Cards", Dialog.WARNING_MESSAGE);
 		}
 	}
 }
