@@ -1,16 +1,27 @@
 package tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-import java.lang.reflect.*;
-import java.util.*;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
 
-import main.*;
+import main.EventCard;
 import main.EventCard.PossibleTarget;
+import main.EventCardDeck;
+import main.GameHandler;
 import main.GameHandler.GameState;
-import main.eventCardTypes.*;
+import main.Player;
+import main.eventCardTypes.AdrenalineRush;
+import main.eventCardTypes.BadSenseOfDirection;
+import main.eventCardTypes.Fear;
+import main.eventCardTypes.GainTwoHealthNoMove;
+import main.eventCardTypes.HystericalParalysis;
+import main.eventCardTypes.Shotgun;
+import main.eventCardTypes.UntiedShoe;
 
-import org.junit.*;
+import org.junit.Test;
 
 public class EventCardTest
 {
@@ -213,5 +224,41 @@ public class EventCardTest
 		int result = card.action(0);
 		assertEquals(1, result);
 		assertEquals(GameState.zombieMovementDieRoll, game.getCurrentState());
+	}
+	
+	@Test
+	public void testGainTwoHealthNoMove()
+	{
+		new GameHandler(2);
+		GameHandler game = GameHandler.instance;
+		Player player = game.getPlayer(0);
+		GainTwoHealthNoMove card = new GainTwoHealthNoMove();
+		card.setTargetPlayer(player);
+		
+		game.nextGameState();
+		game.nextGameState(); // player movement die roll now
+		
+		int result = card.action(0);
+		assertEquals(1, result);
+		assertEquals(GameState.zombieMovementDieRoll, game.getCurrentState());
+		assertEquals(5, player.getLifeTokens());
+	}
+	
+	@Test
+	public void testBadSenseOfDirection()
+	{
+		new GameHandler(2);
+		GameHandler game = GameHandler.instance;
+		Player player1 = game.getPlayer(0);
+		Player player2 = game.getPlayer(1);
+		BadSenseOfDirection card = new BadSenseOfDirection();
+		card.setTargetPlayer(player2);
+		player2.setMovesRemaining(1);
+		player2.tryMoveLeft();
+		assertEquals(0, player2.getCellLocation().x);
+		card.action(0);
+		assertEquals(2, player1.getLifeTokens());
+		assertEquals(1, player2.getCellLocation().x);
+		
 	}
 }

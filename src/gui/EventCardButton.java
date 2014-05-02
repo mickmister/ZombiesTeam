@@ -6,6 +6,7 @@ import javax.swing.*;
 
 import main.*;
 import main.EventCard.PossibleTarget;
+import main.eventCardTypes.BadSenseOfDirection;
 
 public class EventCardButton extends JButton implements DataListener, ActionListener
 {
@@ -61,7 +62,6 @@ public class EventCardButton extends JButton implements DataListener, ActionList
 				Object result = JOptionPane.showInputDialog(getTopLevelAncestor(), "Select the target player.", "Target Player",
 						JOptionPane.PLAIN_MESSAGE, null, choices, "Player 1");
 				int target = -1;
-				String resultString = (String) result;
 				for (int i = 0; i < numPlayers - 1; i += 1)
 				{
 					if (choices[i].equals(result))
@@ -92,6 +92,7 @@ public class EventCardButton extends JButton implements DataListener, ActionList
 			}
 			GameHandler.instance.getEventDeck().addActiveCard(card);
 			player.setCardPlayed(true);
+			GameHandler.instance.getEventDeck().doCardAction(card.getTargetPlayer(), BadSenseOfDirection.class, player.getNumber());
 		}
 		else
 		{

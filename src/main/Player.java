@@ -303,7 +303,7 @@ public class Player
 		return true;
 	}
 	
-	private boolean loseLifeToken()
+	public boolean loseLifeToken()
 	{
 		if (this.lifeTokens > 0)
 		{
@@ -348,18 +348,23 @@ public class Player
 	
 	private void resetPlayer()
 	{
+		resetPlayerLocation();
+		this.bulletTokens = 3;
+		this.lifeTokens = 3;
+		this.zombiesCaptured = (int) Math.ceil(this.zombiesCaptured / 2.0);
+		// Go from ZombieCombat to PlayerMovement to continue turn.
+		GameHandler.instance.nextGameState();
+		DialogHandler.showMessage(null, "You died!  Your player will be reset.", "Reset Player", JOptionPane.INFORMATION_MESSAGE);
+	}
+	
+	public void resetPlayerLocation()
+	{
 		GameHandler.instance.getMap().getMapTile(this.yTile, this.xTile).getCell(this.yCell, this.xCell).removePlayer(this);
 		this.xTile = 5;
 		this.yTile = 5;
 		this.xCell = 1;
 		this.yCell = 1;
-		this.bulletTokens = 3;
-		this.lifeTokens = 3;
-		this.zombiesCaptured = (int) Math.ceil(this.zombiesCaptured / 2.0);
 		GameHandler.instance.getMap().getMapTile(this.yTile, this.xTile).getCell(this.yCell, this.xCell).addPlayer(this);
-		// Go from ZombieCombat to PlayerMovement to continue turn.
-		GameHandler.instance.nextGameState();
-		DialogHandler.showMessage(null, "You died!  Your player will be reset.", "Reset Player", JOptionPane.INFORMATION_MESSAGE);
 	}
 	
 	private boolean checkDifferentTileMove(TileCell currentCell, TileCell targetCell)
