@@ -7,43 +7,16 @@ import java.awt.*;
 import main.*;
 import main.GameHandler.GameState;
 import main.MapTile.Shape;
-import main.TileCell.CellType;
 
 import org.junit.*;
 
 /**
  * Tests the functionality of creating and rotating different map tile types.
  * 
- * @author watersdr, kochelmj. Created Mar 26, 2014.
+ * @author Jacob Ryan, Donnie Waters, and Coach. Created Mar 26, 2014.
  */
 public class MapTileTest
 {
-	private void assertSameCells(String string, MapTile tile)
-	{
-		String[] numbers = string.split(" ");
-		int i = 0;
-		for (int y = 0; y < 3; y += 1)
-		{
-			for (int x = 0; x < 3; x += 1)
-			{
-				assertEquals(convertNumToType(numbers[i]), tile.getCell(y, x).toString());
-				i += 1;
-			}
-		}
-	}
-	
-	private String convertNumToType(String num)
-	{
-		if (num.equals("0"))
-		{
-			return CellType.grass.toString();
-		}
-		else
-		{
-			return CellType.road.toString();
-		}
-	}
-	
 	@Test
 	public void testTempZombiePos()
 	{
@@ -61,6 +34,44 @@ public class MapTileTest
 		test.setTempZombiePos(new Point(-1, -1));
 		test.setTempZombiePos(new Point(0, 0));
 		assertEquals(new Point(1, 2), test.getTempZombiePos());
+	}
+	
+	@Test
+	public void testTempBulletPos()
+	{
+		MapTile test = new MapTile(Shape.quad, null);
+		
+		assertEquals(null, test.getTempBulletPos());
+		test.setTempBulletPos(new Point(1, 2));
+		assertEquals(new Point(1, 2), test.getTempBulletPos());
+		
+		test.setTempBulletPos(new Point(0, 3));
+		test.setTempBulletPos(new Point(3, 0));
+		test.setTempBulletPos(new Point(3, 3));
+		test.setTempBulletPos(new Point(0, -1));
+		test.setTempBulletPos(new Point(-1, 0));
+		test.setTempBulletPos(new Point(-1, -1));
+		test.setTempBulletPos(new Point(0, 0));
+		assertEquals(new Point(1, 2), test.getTempBulletPos());
+	}
+	
+	@Test
+	public void testTempLifePos()
+	{
+		MapTile test = new MapTile(Shape.quad, null);
+		
+		assertEquals(null, test.getTempLifePos());
+		test.setTempLifePos(new Point(1, 2));
+		assertEquals(new Point(1, 2), test.getTempLifePos());
+		
+		test.setTempLifePos(new Point(0, 3));
+		test.setTempLifePos(new Point(3, 0));
+		test.setTempLifePos(new Point(3, 3));
+		test.setTempLifePos(new Point(0, -1));
+		test.setTempLifePos(new Point(-1, 0));
+		test.setTempLifePos(new Point(-1, -1));
+		test.setTempLifePos(new Point(0, 0));
+		assertEquals(new Point(1, 2), test.getTempLifePos());
 	}
 	
 	@Test
@@ -95,119 +106,12 @@ public class MapTileTest
 	}
 	
 	@Test
-	public void testEmptyTile()
-	{
-		MapTile tile = new MapTile(Shape.empty, null);
-		assertEquals(Shape.empty, tile.getShape());
-		
-		assertSameCells("0 0 0 0 0 0 0 0 0", tile);
-		
-		tile.rotateTile();
-		assertSameCells("0 0 0 0 0 0 0 0 0", tile);
-	}
-	
-	@Test
-	public void testQuadTile()
-	{
-		MapTile tile = new MapTile(Shape.quad, null);
-		assertEquals(Shape.quad, tile.getShape());
-		
-		assertSameCells("0 1 0 1 1 1 0 1 0", tile);
-		
-		tile.rotateTile();
-		assertSameCells("0 1 0 1 1 1 0 1 0", tile);
-	}
-	
-	@Test
-	public void testLTile()
-	{
-		MapTile tile = new MapTile(Shape.L, null);
-		assertEquals(Shape.L, tile.getShape());
-		
-		assertSameCells("0 0 0 0 1 1 0 1 0", tile);
-		
-		tile.rotateTile();
-		assertSameCells("0 1 0 0 1 1 0 0 0", tile);
-		
-		tile.rotateTile();
-		assertSameCells("0 1 0 1 1 0 0 0 0", tile);
-		
-		tile.rotateTile();
-		assertSameCells("0 0 0 1 1 0 0 1 0", tile);
-		
-		tile.rotateTile();
-		assertSameCells("0 0 0 0 1 1 0 1 0", tile);
-	}
-	
-	@Test
-	public void testTTile()
-	{
-		MapTile tile = new MapTile(Shape.T, null);
-		assertEquals(Shape.T, tile.getShape());
-		
-		assertSameCells("0 0 0 1 1 1 0 1 0", tile);
-		
-		tile.rotateTile();
-		assertSameCells("0 1 0 0 1 1 0 1 0", tile);
-		
-		tile.rotateTile();
-		assertSameCells("0 1 0 1 1 1 0 0 0", tile);
-		
-		tile.rotateTile();
-		assertSameCells("0 1 0 1 1 0 0 1 0", tile);
-		
-		tile.rotateTile();
-		assertSameCells("0 0 0 1 1 1 0 1 0", tile);
-	}
-	
-	@Test
-	public void testStraightTile()
-	{
-		MapTile tile = new MapTile(Shape.straight, null);
-		assertEquals(Shape.straight, tile.getShape());
-		
-		assertSameCells("0 0 0 1 1 1 0 0 0", tile);
-		
-		tile.rotateTile();
-		assertSameCells("0 1 0 0 1 0 0 1 0", tile);
-		
-		tile.rotateTile();
-		assertSameCells("0 0 0 1 1 1 0 0 0", tile);
-	}
-	
-	@Test
-	public void testGetAndTempBulletPos()
-	{
-		MapTile tile = new MapTile(Shape.straight, null);
-		
-		// makes sure you can't set position to invalid place
-		tile.setTempBulletPos(new Point(-1, 3));
-		assertNull(tile.getTempBulletPos());
-		
-		tile.setTempBulletPos(new Point(1, 1));
-		assertEquals(new Point(1, 1), tile.getTempBulletPos());
-	}
-	
-	@Test
-	public void testGetAndSetTempLifePos()
-	{
-		MapTile tile = new MapTile(Shape.straight, null);
-		
-		// makes sure you can't set position to invalid place
-		tile.setTempLifePos(new Point(-1, 3));
-		assertNull(tile.getTempLifePos());
-		
-		tile.setTempLifePos(new Point(1, 1));
-		assertEquals(new Point(1, 1), tile.getTempLifePos());
-	}
-	
-	@Test
-	public void bulletTokenPlacementtest()
+	public void testPlaceTempBullet()
 	{
 		new GameHandler(2);
 		GameHandler game = GameHandler.instance;
-		MapTile building = new MapTile(Shape.special, "2 3 2 1 1 1 0 0 0" + " " + "0 0 2");
-		// special tile that has 0 zombies 0 lifetokens and 2 bullet tokens
+		MapTile building = new MapTile(Shape.special, "2 3 2 1 1 1 0 0 0" + " " + "0 0 3");
+		// Special tile that has 0 zombies, 0 lifetokens, and 3 bullet tokens.
 		Map map = game.getMap();
 		map.setTempTile(building);
 		map.setTempPos(new Point(6, 5));
@@ -217,21 +121,28 @@ public class MapTileTest
 		// placing a bullet at the center of tile
 		building.setTempBulletPos(new Point(1, 1));
 		building.placeTempBullet();
-		assertTrue(building.getCell(1, 1).hasBulletToken());
+		assertEquals(true, building.getCell(1, 1).hasBulletToken());
+		assertEquals(2, building.getBulletsToPlace());
+		
+		// Cannot place bullet on top of another bullet token.
+		building.setTempBulletPos(new Point(1, 1));
+		building.placeTempBullet();
+		assertEquals(2, building.getBulletsToPlace());
 		
 		// placing a bullet at top left of tile
 		building.setTempBulletPos(new Point(0, 0));
 		building.placeTempBullet();
-		assertTrue(building.getCell(0, 0).hasBulletToken());
+		assertEquals(true, building.getCell(0, 0).hasBulletToken());
+		assertEquals(1, building.getBulletsToPlace());
 	}
 	
 	@Test
-	public void lifeTokenPlacementTest()
+	public void testPlaceTempLife()
 	{
 		new GameHandler(2);
 		GameHandler game = GameHandler.instance;
-		MapTile building = new MapTile(Shape.special, "2 3 2 1 1 1 0 0 0" + " " + "0 2 0");
-		// special tile that has 0 zombies 2 lifetokens and 0 bullet tokens
+		MapTile building = new MapTile(Shape.special, "2 3 2 1 1 1 0 0 0" + " " + "0 3 0");
+		// Special tile that has 0 zombies, 3 lifetokens, and 0 bullet tokens.
 		Map map = game.getMap();
 		map.setTempTile(building);
 		map.setTempPos(new Point(6, 5));
@@ -241,11 +152,26 @@ public class MapTileTest
 		// placing a bullet at the center of tile
 		building.setTempLifePos(new Point(1, 1));
 		building.placeTempLife();
-		assertTrue(building.getCell(1, 1).hasLifeToken());
+		assertEquals(true, building.getCell(1, 1).hasLifeToken());
+		assertEquals(2, building.getLifeToPlace());
+		
+		// Cannot place life on top of another life token.
+		building.setTempLifePos(new Point(1, 1));
+		building.placeTempLife();
+		assertEquals(2, building.getLifeToPlace());
 		
 		// placing a bullet at top left of tile
 		building.setTempLifePos(new Point(0, 0));
 		building.placeTempLife();
-		assertTrue(building.getCell(0, 0).hasLifeToken());
+		assertEquals(true, building.getCell(0, 0).hasLifeToken());
+		assertEquals(1, building.getLifeToPlace());
+	}
+	
+	@Test
+	public void testToString()
+	{
+		MapTile tile = new MapTile(Shape.quad, null);
+		String quadString = "MapTile quad shape:\n" + "[ grass\troad\tgrass\t]\n" + "[ road\troad\troad\t]\n" + "[ grass\troad\tgrass\t]\n";
+		assertEquals(quadString, tile.toString());
 	}
 }

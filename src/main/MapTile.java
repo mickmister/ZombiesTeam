@@ -246,11 +246,6 @@ public class MapTile
 		this.grid[2][1] = middleLeftEdge;
 	}
 	
-	public boolean isSpecialBuilding()
-	{
-		return Shape.special.equals(this.shape);
-	}
-	
 	public Point getTempZombiePos()
 	{
 		return this.tempZombiePos;

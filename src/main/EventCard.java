@@ -45,10 +45,6 @@ public abstract class EventCard
 		this.targetPlayer = target;
 	}
 	
-	public abstract int behavior(int num);
-	
-	public abstract void checkRemove();
-	
 	public int action(int num)
 	{
 		int result = behavior(num);
@@ -56,4 +52,7 @@ public abstract class EventCard
 		return result;
 	}
 	
+	public abstract int behavior(int num);
+	
+	public abstract void checkRemove();
 }
