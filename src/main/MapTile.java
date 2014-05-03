@@ -6,6 +6,8 @@ import java.awt.*;
 
 import javax.swing.*;
 
+import main.TileCell.*;
+
 /**
  * A MapTile represents one tile that is placed on the Map. It is a square with 9 sub-blocks
  * (TileCells), and each has different patterns of sub-blocks that are accessible (roads) and
@@ -79,10 +81,25 @@ public class MapTile
 				{
 					int index = y * 3 + x;
 					int number = Integer.parseInt(words[index]);
-					boolean accessible = number > 0;
-					boolean building = number > 1;
-					boolean door = number > 2;
-					this.grid[y][x] = new TileCell(accessible, building, door);
+					CellType type;
+					switch (number)
+					{
+						case 0:
+							type = CellType.grass;
+							break;
+						case 1:
+							type = CellType.road;
+							break;
+						case 2:
+							type = CellType.building;
+							break;
+						case 3:
+							type = CellType.door;
+							break;
+						default:
+							throw new NumberFormatException();
+					}
+					this.grid[y][x] = new TileCell(type);
 				}
 			}
 			this.zombiesToPlace = Integer.parseInt(words[9]);
@@ -105,6 +122,16 @@ public class MapTile
 	public int getZombiesToPlace()
 	{
 		return this.zombiesToPlace;
+	}
+	
+	public int getBulletsToPlace()
+	{
+		return this.bulletTokens;
+	}
+	
+	public int getLifeToPlace()
+	{
+		return this.lifeTokens;
 	}
 	
 	public TileCell getLeftCell()
@@ -140,82 +167,63 @@ public class MapTile
 	 */
 	public TileCell[][] createQuad()
 	{
-		TileCell[][] quadGrid = createBlankGrid();
+		TileCell[][] grid = createBlankGrid();
 		
-		quadGrid[0][1].setAccessible(true); // Top Middle
-		quadGrid[1][0].setAccessible(true); // Middle Left
-		quadGrid[1][1].setAccessible(true); // Middle Middle
-		quadGrid[1][2].setAccessible(true); // Middle Right
-		quadGrid[2][1].setAccessible(true); // Bottom Middle
+		grid[0][1].setCellType(CellType.road); // Top Middle
+		grid[1][0].setCellType(CellType.road); // Middle Left
+		grid[1][1].setCellType(CellType.road); // Middle Middle
+		grid[1][2].setCellType(CellType.road); // Middle Right
+		grid[2][1].setCellType(CellType.road); // Bottom Middle
 		
-		return quadGrid;
+		return grid;
 	}
 	
-	/**
-	 * Creates a grid of TileCells where the L shape of sub-blocks are accessible (south, center,
-	 * and east).
-	 * 
-	 * @return 2-D array of TileCells
-	 */
 	public TileCell[][] createL()
 	{
-		TileCell[][] LGrid = createBlankGrid();
+		TileCell[][] grid = createBlankGrid();
 		
-		LGrid[1][1].setAccessible(true); // Middle Middle
-		LGrid[1][2].setAccessible(true); // Middle Right
-		LGrid[2][1].setAccessible(true); // Bottom Middle
+		grid[1][1].setCellType(CellType.road); // Middle Middle
+		grid[1][2].setCellType(CellType.road); // Middle Right
+		grid[2][1].setCellType(CellType.road); // Bottom Middle
 		
-		return LGrid;
+		return grid;
 	}
 	
-	/**
-	 * TODO Put here a description of what this method does.
-	 * 
-	 * @return
-	 */
 	public TileCell[][] createStraight()
 	{
-		TileCell[][] straightGrid = createBlankGrid();
+		TileCell[][] grid = createBlankGrid();
 		
-		straightGrid[1][0].setAccessible(true); // Middle Left
-		straightGrid[1][1].setAccessible(true); // Middle Middle
-		straightGrid[1][2].setAccessible(true); // Middle Right
+		grid[1][0].setCellType(CellType.road); // Middle Left
+		grid[1][1].setCellType(CellType.road); // Middle Middle
+		grid[1][2].setCellType(CellType.road); // Middle Right
 		
-		return straightGrid;
+		return grid;
 	}
 	
-	/**
-	 * TODO Put here a description of what this method does.
-	 * 
-	 * @return
-	 */
 	public TileCell[][] createTetris()
 	{
-		TileCell[][] tetrisGrid = createBlankGrid();
+		TileCell[][] grid = createBlankGrid();
 		
-		tetrisGrid[1][0].setAccessible(true); // Middle Left
-		tetrisGrid[1][1].setAccessible(true); // Middle Middle
-		tetrisGrid[1][2].setAccessible(true); // Middle Right
-		tetrisGrid[2][1].setAccessible(true); // Bottom Middle
+		grid[1][0].setCellType(CellType.road); // Middle Left
+		grid[1][1].setCellType(CellType.road); // Middle Middle
+		grid[1][2].setCellType(CellType.road); // Middle Right
+		grid[2][1].setCellType(CellType.road); // Bottom Middle
 		
-		return tetrisGrid;
+		return grid;
 	}
 	
-	/**
-	 * @return
-	 */
 	public TileCell[][] createBlankGrid()
 	{
-		TileCell[][] toReturn = new TileCell[3][3];
+		TileCell[][] grid = new TileCell[3][3];
 		
 		for (int i = 0; i < 3; i++)
 		{
 			for (int j = 0; j < 3; j++)
 			{
-				toReturn[i][j] = new TileCell(false, false, false);
+				grid[i][j] = new TileCell(CellType.grass);
 			}
 		}
-		return toReturn;
+		return grid;
 	}
 	
 	/**
@@ -238,34 +246,29 @@ public class MapTile
 		this.grid[2][1] = middleLeftEdge;
 	}
 	
-	@Override
-	public String toString()
+	public boolean isSpecialBuilding()
 	{
-		String result = "";
-		
-		result += this.grid[0][0].isAccessible() + " ";
-		result += this.grid[0][1].isAccessible() + " ";
-		result += this.grid[0][2].isAccessible() + "\n";
-		
-		result += this.grid[1][0].isAccessible() + " ";
-		result += this.grid[1][1].isAccessible() + " ";
-		result += this.grid[1][2].isAccessible() + "\n";
-		
-		result += this.grid[2][0].isAccessible() + " ";
-		result += this.grid[2][1].isAccessible() + " ";
-		result += this.grid[2][2].isAccessible() + "\n";
-		
-		return result;
+		return Shape.special.equals(this.shape);
 	}
 	
-	/**
-	 * TODO Put here a description of what this method does.
-	 * 
-	 * @param point
-	 */
+	public Point getTempZombiePos()
+	{
+		return this.tempZombiePos;
+	}
+	
+	public Point getTempBulletPos()
+	{
+		return this.tempBulletPos;
+	}
+	
+	public Point getTempLifePos()
+	{
+		return this.tempLifePos;
+	}
+	
 	public void setTempZombiePos(Point point)
 	{
-		if (point.x >= 0 && point.y >= 0 && point.x <= 2 && point.y <= 2)
+		if (point.x >= 0 && point.y >= 0 && point.x < 3 && point.y < 3)
 		{
 			if (this.grid[point.y][point.x].isAccessible())
 			{
@@ -274,9 +277,26 @@ public class MapTile
 		}
 	}
 	
-	public Point getTempZombiePos()
+	public void setTempBulletPos(Point point)
 	{
-		return this.tempZombiePos;
+		if (point.x >= 0 && point.y >= 0 && point.x < 3 && point.y < 3)
+		{
+			if (this.grid[point.y][point.x].isAccessible())
+			{
+				this.tempBulletPos = point;
+			}
+		}
+	}
+	
+	public void setTempLifePos(Point point)
+	{
+		if (point.x >= 0 && point.y >= 0 && point.x < 3 && point.y < 3)
+		{
+			if (this.grid[point.y][point.x].isAccessible())
+			{
+				this.tempLifePos = point;
+			}
+		}
 	}
 	
 	public void placeTempZombie()
@@ -296,53 +316,6 @@ public class MapTile
 				this.tempZombiePos = new Point(1, 1);
 			}
 		}
-	}
-	
-	public boolean isSpecialBuilding()
-	{
-		return this.shape == Shape.special;
-	}
-	
-	public void setTempBulletPos(Point point)
-	{
-		if (point.x >= 0 && point.y >= 0 && point.x <= 2 && point.y <= 2)
-		{
-			if (this.grid[point.y][point.x].isAccessible())
-			{
-				this.tempBulletPos = point;
-			}
-		}
-	}
-	
-	public void setTempLifePos(Point point)
-	{
-		if (point.x >= 0 && point.y >= 0 && point.x <= 2 && point.y <= 2)
-		{
-			if (this.grid[point.y][point.x].isAccessible())
-			{
-				this.tempLifePos = point;
-			}
-		}
-	}
-	
-	public Point getTempBulletPos()
-	{
-		return this.tempBulletPos;
-	}
-	
-	public Point getTempLifePos()
-	{
-		return this.tempLifePos;
-	}
-	
-	public int getBulletsToPlace()
-	{
-		return this.bulletTokens;
-	}
-	
-	public int getLifeToPlace()
-	{
-		return this.lifeTokens;
 	}
 	
 	public void placeTempBullet()
@@ -381,5 +354,23 @@ public class MapTile
 				this.tempLifePos = new Point(1, 1);
 			}
 		}
+	}
+	
+	@Override
+	public String toString()
+	{
+		String result = "MapTile " + this.shape.toString() + " shape:\n";
+		
+		for (int y = 0; y < 3; y += 1)
+		{
+			result += "[ ";
+			for (int x = 0; x < 3; x += 1)
+			{
+				result += this.grid[y][x].toString() + "\t";
+			}
+			result += "]\n";
+		}
+		
+		return result;
 	}
 }

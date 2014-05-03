@@ -2,22 +2,23 @@ package tests;
 
 import static org.junit.Assert.*;
 import main.*;
+import main.TileCell.*;
 
 import org.junit.*;
 
 public class TileCellTest
 {
 	@Test
-	public void testConstructorForNonAccesibleCell()
+	public void testConstructor()
 	{
-		TileCell cell = new TileCell(false, false, false);
+		TileCell cell = new TileCell(CellType.grass);
 		assertNotNull(cell);
 	}
 	
 	@Test
 	public void testSetLifeToken()
 	{
-		TileCell cell = new TileCell(false, false, false);
+		TileCell cell = new TileCell(CellType.grass);
 		cell.setLifeToken(true);
 		assertTrue(cell.hasLifeToken());
 		
@@ -28,7 +29,7 @@ public class TileCellTest
 	@Test
 	public void testSetBulletToken()
 	{
-		TileCell cell = new TileCell(false, false, false);
+		TileCell cell = new TileCell(CellType.grass);
 		cell.setBulletToken(true);
 		assertTrue(cell.hasBulletToken());
 		
@@ -39,7 +40,7 @@ public class TileCellTest
 	@Test
 	public void testSetZombie()
 	{
-		TileCell cell = new TileCell(false, false, false);
+		TileCell cell = new TileCell(CellType.grass);
 		cell.setZombie(true);
 		assertTrue(cell.hasZombie());
 		

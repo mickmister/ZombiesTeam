@@ -9,6 +9,7 @@ import java.lang.reflect.*;
 import javax.swing.*;
 
 import main.*;
+import main.TileCell.*;
 
 import org.junit.*;
 
@@ -88,9 +89,9 @@ public class PlayerTest
 			Player player = new Player(0);
 			Method method = Player.class.getDeclaredMethod("checkDifferentTileMove", TileCell.class, TileCell.class);
 			method.setAccessible(true);
-			TileCell road = new TileCell(true, false, false);
-			TileCell building = new TileCell(true, true, false);
-			TileCell door = new TileCell(true, true, true);
+			TileCell road = new TileCell(CellType.road);
+			TileCell building = new TileCell(CellType.building);
+			TileCell door = new TileCell(CellType.door);
 			
 			assertEquals(true, method.invoke(player, road, road));
 			assertEquals(false, method.invoke(player, road, building));
@@ -117,10 +118,10 @@ public class PlayerTest
 			Player player = new Player(0);
 			Method method = Player.class.getDeclaredMethod("checkSameTileMove", TileCell.class, TileCell.class);
 			method.setAccessible(true);
-			TileCell grass = new TileCell(false, false, false);
-			TileCell road = new TileCell(true, false, false);
-			TileCell building = new TileCell(true, true, false);
-			TileCell door = new TileCell(true, true, true);
+			TileCell grass = new TileCell(CellType.grass);
+			TileCell road = new TileCell(CellType.road);
+			TileCell building = new TileCell(CellType.building);
+			TileCell door = new TileCell(CellType.door);
 			
 			assertEquals(false, method.invoke(player, grass, grass));
 			// assertEquals(false, method.invoke(player, grass, road));
@@ -150,7 +151,7 @@ public class PlayerTest
 	public void fightZombie()
 	{
 		Player player = new Player(0);
-		TileCell tile = new TileCell(true, false, false);
+		TileCell tile = new TileCell(CellType.road);
 		
 		assertEquals(true, player.fightZombie(tile));
 		assertEquals(0, player.getZombiesCaptured());
@@ -191,23 +192,23 @@ public class PlayerTest
 		Player player = new Player(0);
 		player.setMovesRemaining(5);
 		
-		GameHandler.instance.getMap().getMapTile(5, 5).getCell(1, 0).setAccessible(false);
+		GameHandler.instance.getMap().getMapTile(5, 5).getCell(1, 0).setCellType(CellType.grass);
 		player.tryMoveLeft();
 		assertEquals(1, player.getCellLocation().x);
 		assertEquals(5, player.getMovesRemaining());
 		
-		GameHandler.instance.getMap().getMapTile(5, 5).getCell(1, 0).setAccessible(true);
+		GameHandler.instance.getMap().getMapTile(5, 5).getCell(1, 0).setCellType(CellType.road);
 		player.tryMoveLeft();
 		assertEquals(0, player.getCellLocation().x);
 		assertEquals(4, player.getMovesRemaining());
 		
 		// Now check move to other tile.
-		GameHandler.instance.getMap().getMapTile(5, 4).getCell(1, 2).setAccessible(false);
+		GameHandler.instance.getMap().getMapTile(5, 4).getCell(1, 2).setCellType(CellType.grass);
 		player.tryMoveLeft();
 		assertEquals(0, player.getCellLocation().x);
 		assertEquals(4, player.getMovesRemaining());
 		
-		GameHandler.instance.getMap().getMapTile(5, 4).getCell(1, 2).setAccessible(true);
+		GameHandler.instance.getMap().getMapTile(5, 4).getCell(1, 2).setCellType(CellType.road);
 		player.tryMoveLeft();
 		assertEquals(2, player.getCellLocation().x);
 		assertEquals(3, player.getMovesRemaining());
@@ -220,23 +221,23 @@ public class PlayerTest
 		Player player = new Player(0);
 		player.setMovesRemaining(5);
 		
-		GameHandler.instance.getMap().getMapTile(5, 5).getCell(1, 2).setAccessible(false);
+		GameHandler.instance.getMap().getMapTile(5, 5).getCell(1, 2).setCellType(CellType.grass);
 		player.tryMoveRight();
 		assertEquals(1, player.getCellLocation().x);
 		assertEquals(5, player.getMovesRemaining());
 		
-		GameHandler.instance.getMap().getMapTile(5, 5).getCell(1, 2).setAccessible(true);
+		GameHandler.instance.getMap().getMapTile(5, 5).getCell(1, 2).setCellType(CellType.road);
 		player.tryMoveRight();
 		assertEquals(2, player.getCellLocation().x);
 		assertEquals(4, player.getMovesRemaining());
 		
 		// Now check move to other tile.
-		GameHandler.instance.getMap().getMapTile(5, 6).getCell(1, 0).setAccessible(false);
+		GameHandler.instance.getMap().getMapTile(5, 6).getCell(1, 0).setCellType(CellType.grass);
 		player.tryMoveRight();
 		assertEquals(2, player.getCellLocation().x);
 		assertEquals(4, player.getMovesRemaining());
 		
-		GameHandler.instance.getMap().getMapTile(5, 6).getCell(1, 0).setAccessible(true);
+		GameHandler.instance.getMap().getMapTile(5, 6).getCell(1, 0).setCellType(CellType.road);
 		player.tryMoveRight();
 		assertEquals(0, player.getCellLocation().x);
 		assertEquals(3, player.getMovesRemaining());
@@ -249,23 +250,23 @@ public class PlayerTest
 		Player player = new Player(0);
 		player.setMovesRemaining(5);
 		
-		GameHandler.instance.getMap().getMapTile(5, 5).getCell(0, 1).setAccessible(false);
+		GameHandler.instance.getMap().getMapTile(5, 5).getCell(0, 1).setCellType(CellType.grass);
 		player.tryMoveUp();
 		assertEquals(1, player.getCellLocation().y);
 		assertEquals(5, player.getMovesRemaining());
 		
-		GameHandler.instance.getMap().getMapTile(5, 5).getCell(0, 1).setAccessible(true);
+		GameHandler.instance.getMap().getMapTile(5, 5).getCell(0, 1).setCellType(CellType.road);
 		player.tryMoveUp();
 		assertEquals(0, player.getCellLocation().y);
 		assertEquals(4, player.getMovesRemaining());
 		
 		// Now check move to other tile.
-		GameHandler.instance.getMap().getMapTile(4, 5).getCell(2, 1).setAccessible(false);
+		GameHandler.instance.getMap().getMapTile(4, 5).getCell(2, 1).setCellType(CellType.grass);
 		player.tryMoveUp();
 		assertEquals(0, player.getCellLocation().y);
 		assertEquals(4, player.getMovesRemaining());
 		
-		GameHandler.instance.getMap().getMapTile(4, 5).getCell(2, 1).setAccessible(true);
+		GameHandler.instance.getMap().getMapTile(4, 5).getCell(2, 1).setCellType(CellType.road);
 		player.tryMoveUp();
 		assertEquals(2, player.getCellLocation().y);
 		assertEquals(3, player.getMovesRemaining());
@@ -278,23 +279,23 @@ public class PlayerTest
 		Player player = new Player(0);
 		player.setMovesRemaining(5);
 		
-		GameHandler.instance.getMap().getMapTile(5, 5).getCell(2, 1).setAccessible(false);
+		GameHandler.instance.getMap().getMapTile(5, 5).getCell(2, 1).setCellType(CellType.grass);
 		player.tryMoveDown();
 		assertEquals(1, player.getCellLocation().y);
 		assertEquals(5, player.getMovesRemaining());
 		
-		GameHandler.instance.getMap().getMapTile(5, 5).getCell(2, 1).setAccessible(true);
+		GameHandler.instance.getMap().getMapTile(5, 5).getCell(2, 1).setCellType(CellType.road);
 		player.tryMoveDown();
 		assertEquals(2, player.getCellLocation().y);
 		assertEquals(4, player.getMovesRemaining());
 		
 		// Now check move to other tile.
-		GameHandler.instance.getMap().getMapTile(6, 5).getCell(0, 1).setAccessible(false);
+		GameHandler.instance.getMap().getMapTile(6, 5).getCell(0, 1).setCellType(CellType.grass);
 		player.tryMoveDown();
 		assertEquals(2, player.getCellLocation().y);
 		assertEquals(4, player.getMovesRemaining());
 		
-		GameHandler.instance.getMap().getMapTile(6, 5).getCell(0, 1).setAccessible(true);
+		GameHandler.instance.getMap().getMapTile(6, 5).getCell(0, 1).setCellType(CellType.road);
 		player.tryMoveDown();
 		assertEquals(0, player.getCellLocation().y);
 		assertEquals(3, player.getMovesRemaining());
@@ -336,7 +337,7 @@ public class PlayerTest
 		for (int i = 0; i < 25 - 1; i += 1)
 		{
 			player.setZombieCombatRoll(4);
-			TileCell tileCell = new TileCell(true, false, false);
+			TileCell tileCell = new TileCell(CellType.road);
 			tileCell.setZombie(true);
 			player.fightZombie(tileCell);
 		}

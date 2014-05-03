@@ -11,30 +11,45 @@ import java.util.*;
  */
 public class TileCell
 {
-	private boolean isAccessible;
-	private boolean isBuilding;
-	private boolean isDoor;
-	private boolean hasZombie;
+	public enum CellType
+	{
+		grass, road, building, door
+	}
+	private CellType type;
 	private boolean hasLifeToken;
 	private boolean hasBulletToken;
+	private boolean hasZombie;
 	private boolean hasZombieMoved;
 	private ArrayList<Player> playersOccupying;
 	
-	public TileCell(boolean accessible, boolean building, boolean door)
+	public TileCell(CellType type)
 	{
-		this.isAccessible = accessible;
-		this.isBuilding = building;
-		this.isDoor = door;
-		this.hasZombie = false;
+		this.type = type;
 		this.hasLifeToken = false;
 		this.hasBulletToken = false;
+		this.hasZombie = false;
 		this.hasZombieMoved = false;
 		this.playersOccupying = new ArrayList<Player>();
 	}
 	
 	public boolean isRoad()
 	{
-		return this.isAccessible && !this.isBuilding && !this.isDoor;
+		return CellType.road.equals(this.type);
+	}
+	
+	public boolean isBuilding()
+	{
+		return CellType.building.equals(this.type);
+	}
+	
+	public boolean isDoor()
+	{
+		return CellType.door.equals(this.type);
+	}
+	
+	public boolean isAccessible()
+	{
+		return !CellType.grass.equals(this.type);
 	}
 	
 	public boolean hasLifeToken()
@@ -57,19 +72,9 @@ public class TileCell
 		return this.hasZombieMoved;
 	}
 	
-	public boolean isAccessible()
+	public void setCellType(CellType type)
 	{
-		return this.isAccessible;
-	}
-	
-	public boolean isBuilding()
-	{
-		return this.isBuilding;
-	}
-	
-	public boolean isDoor()
-	{
-		return this.isDoor;
+		this.type = type;
 	}
 	
 	public void setLifeToken(boolean life)
@@ -87,19 +92,9 @@ public class TileCell
 		this.hasZombie = zombie;
 	}
 	
-	public void setAccessible(boolean accessible)
-	{
-		this.isAccessible = accessible;
-	}
-	
 	public void setZombieMoved(boolean moved)
 	{
 		this.hasZombieMoved = moved;
-	}
-	
-	public void removePlayer(Player player)
-	{
-		this.playersOccupying.remove(player);
 	}
 	
 	public void addPlayer(Player player)
@@ -107,8 +102,19 @@ public class TileCell
 		this.playersOccupying.add(player);
 	}
 	
+	public void removePlayer(Player player)
+	{
+		this.playersOccupying.remove(player);
+	}
+	
 	public ArrayList<Player> getPlayersOccupying()
 	{
 		return this.playersOccupying;
+	}
+	
+	@Override
+	public String toString()
+	{
+		return this.type.toString();
 	}
 }

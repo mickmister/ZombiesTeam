@@ -7,6 +7,7 @@ import java.awt.*;
 import main.*;
 import main.GameHandler.GameState;
 import main.MapTile.Shape;
+import main.TileCell.*;
 
 import org.junit.*;
 
@@ -17,6 +18,32 @@ import org.junit.*;
  */
 public class MapTileTest
 {
+	private void assertSameCells(String string, MapTile tile)
+	{
+		String[] numbers = string.split(" ");
+		int i = 0;
+		for (int y = 0; y < 3; y += 1)
+		{
+			for (int x = 0; x < 3; x += 1)
+			{
+				assertEquals(convertNumToType(numbers[i]), tile.getCell(y, x).toString());
+				i += 1;
+			}
+		}
+	}
+	
+	private String convertNumToType(String num)
+	{
+		if (num.equals("0"))
+		{
+			return CellType.grass.toString();
+		}
+		else
+		{
+			return CellType.road.toString();
+		}
+	}
+	
 	@Test
 	public void testTempZombiePos()
 	{
@@ -68,103 +95,84 @@ public class MapTileTest
 	}
 	
 	@Test
-	public void testBlankTileCreation()
+	public void testEmptyTile()
 	{
-		TileCell[][] grid = new MapTile(Shape.empty, null).createBlankGrid();
+		MapTile tile = new MapTile(Shape.empty, null);
+		assertEquals(Shape.empty, tile.getShape());
 		
-		for (TileCell[] element1 : grid)
-		{
-			for (TileCell element2 : element1)
-			{
-				assertFalse(element2.isAccessible());
-			}
-		}
+		assertSameCells("0 0 0 0 0 0 0 0 0", tile);
 		
+		tile.rotateTile();
+		assertSameCells("0 0 0 0 0 0 0 0 0", tile);
 	}
 	
 	@Test
-	public void testCreateQuad()
+	public void testQuadTile()
 	{
-		MapTile mapTile = new MapTile(Shape.quad, null);
-		String quadFormation = "false true false\ntrue true true\nfalse true false\n";
+		MapTile tile = new MapTile(Shape.quad, null);
+		assertEquals(Shape.quad, tile.getShape());
 		
-		assertEquals(quadFormation, mapTile.toString());
+		assertSameCells("0 1 0 1 1 1 0 1 0", tile);
+		
+		tile.rotateTile();
+		assertSameCells("0 1 0 1 1 1 0 1 0", tile);
 	}
 	
 	@Test
-	public void testCreateAndRotateL()
+	public void testLTile()
 	{
-		MapTile mapTile = new MapTile(Shape.L, null);
-		String originalLFormation = "false false false\nfalse true true\nfalse true false\n";
-		String firstRotateLFormation = "false true false\nfalse true true\nfalse false false\n";
-		String secondRotateLFormation = "false true false\ntrue true false\nfalse false false\n";
-		String thirdRotateLFormation = "false false false\ntrue true false\nfalse true false\n";
-		String fourthRotateLFormation = originalLFormation;
+		MapTile tile = new MapTile(Shape.L, null);
+		assertEquals(Shape.L, tile.getShape());
 		
-		assertEquals(originalLFormation, mapTile.toString());
+		assertSameCells("0 0 0 0 1 1 0 1 0", tile);
 		
-		mapTile.rotateTile();
-		assertEquals(firstRotateLFormation, mapTile.toString());
+		tile.rotateTile();
+		assertSameCells("0 1 0 0 1 1 0 0 0", tile);
 		
-		mapTile.rotateTile();
-		assertEquals(secondRotateLFormation, mapTile.toString());
+		tile.rotateTile();
+		assertSameCells("0 1 0 1 1 0 0 0 0", tile);
 		
-		mapTile.rotateTile();
-		assertEquals(thirdRotateLFormation, mapTile.toString());
+		tile.rotateTile();
+		assertSameCells("0 0 0 1 1 0 0 1 0", tile);
 		
-		mapTile.rotateTile();
-		assertEquals(fourthRotateLFormation, mapTile.toString());
-		
+		tile.rotateTile();
+		assertSameCells("0 0 0 0 1 1 0 1 0", tile);
 	}
 	
 	@Test
-	public void testCreateandRotateTetris()
+	public void testTTile()
 	{
-		MapTile mapTile = new MapTile(Shape.T, null);
-		String originalTetrisFormation = "false false false\ntrue true true\nfalse true false\n";
-		String firstRotateTetrisFormation = "false true false\nfalse true true\nfalse true false\n";
-		String secondRotateTetrisFormation = "false true false\ntrue true true\nfalse false false\n";
-		String thirdRotateTetrisFormation = "false true false\ntrue true false\nfalse true false\n";
-		String fourthRotateTetrisFormation = originalTetrisFormation;
+		MapTile tile = new MapTile(Shape.T, null);
+		assertEquals(Shape.T, tile.getShape());
 		
-		assertEquals(originalTetrisFormation, mapTile.toString());
+		assertSameCells("0 0 0 1 1 1 0 1 0", tile);
 		
-		mapTile.rotateTile();
-		assertEquals(firstRotateTetrisFormation, mapTile.toString());
+		tile.rotateTile();
+		assertSameCells("0 1 0 0 1 1 0 1 0", tile);
 		
-		mapTile.rotateTile();
-		assertEquals(secondRotateTetrisFormation, mapTile.toString());
+		tile.rotateTile();
+		assertSameCells("0 1 0 1 1 1 0 0 0", tile);
 		
-		mapTile.rotateTile();
-		assertEquals(thirdRotateTetrisFormation, mapTile.toString());
+		tile.rotateTile();
+		assertSameCells("0 1 0 1 1 0 0 1 0", tile);
 		
-		mapTile.rotateTile();
-		assertEquals(fourthRotateTetrisFormation, mapTile.toString());
+		tile.rotateTile();
+		assertSameCells("0 0 0 1 1 1 0 1 0", tile);
 	}
 	
 	@Test
-	public void testCreateAndRotateStraight()
+	public void testStraightTile()
 	{
-		MapTile mapTile = new MapTile(Shape.straight, null);
-		String originalStraightFormation = "false false false\ntrue true true\nfalse false false\n";
-		String firstRotateStraightFormation = "false true false\nfalse true false\nfalse true false\n";
-		String secondRotateStraightFormation = originalStraightFormation;
-		String thirdRotateStraightFormation = firstRotateStraightFormation;
-		String fourthRotateStraightFormation = originalStraightFormation;
+		MapTile tile = new MapTile(Shape.straight, null);
+		assertEquals(Shape.straight, tile.getShape());
 		
-		assertEquals(originalStraightFormation, mapTile.toString());
+		assertSameCells("0 0 0 1 1 1 0 0 0", tile);
 		
-		mapTile.rotateTile();
-		assertEquals(firstRotateStraightFormation, mapTile.toString());
+		tile.rotateTile();
+		assertSameCells("0 1 0 0 1 0 0 1 0", tile);
 		
-		mapTile.rotateTile();
-		assertEquals(secondRotateStraightFormation, mapTile.toString());
-		
-		mapTile.rotateTile();
-		assertEquals(thirdRotateStraightFormation, mapTile.toString());
-		
-		mapTile.rotateTile();
-		assertEquals(fourthRotateStraightFormation, mapTile.toString());
+		tile.rotateTile();
+		assertSameCells("0 0 0 1 1 1 0 0 0", tile);
 	}
 	
 	@Test
@@ -178,7 +186,6 @@ public class MapTileTest
 		
 		tile.setTempBulletPos(new Point(1, 1));
 		assertEquals(new Point(1, 1), tile.getTempBulletPos());
-		
 	}
 	
 	@Test
@@ -219,7 +226,7 @@ public class MapTileTest
 	}
 	
 	@Test
-	public void lifeTokenPlacementtest()
+	public void lifeTokenPlacementTest()
 	{
 		new GameHandler(2);
 		GameHandler game = GameHandler.instance;
