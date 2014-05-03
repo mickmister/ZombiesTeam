@@ -6,7 +6,7 @@ import javax.swing.*;
 
 import main.*;
 import main.EventCard.PossibleTarget;
-import main.eventCardTypes.BadSenseOfDirection;
+import main.eventCardTypes.*;
 
 public class EventCardButton extends JButton implements DataListener, ActionListener
 {

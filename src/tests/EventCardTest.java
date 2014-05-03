@@ -1,27 +1,16 @@
 package tests;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
+import java.lang.reflect.*;
+import java.util.*;
 
-import main.EventCard;
+import main.*;
 import main.EventCard.PossibleTarget;
-import main.EventCardDeck;
-import main.GameHandler;
 import main.GameHandler.GameState;
-import main.Player;
-import main.eventCardTypes.AdrenalineRush;
-import main.eventCardTypes.BadSenseOfDirection;
-import main.eventCardTypes.Fear;
-import main.eventCardTypes.GainTwoHealthNoMove;
-import main.eventCardTypes.HystericalParalysis;
-import main.eventCardTypes.Shotgun;
-import main.eventCardTypes.UntiedShoe;
+import main.eventCardTypes.*;
 
-import org.junit.Test;
+import org.junit.*;
 
 public class EventCardTest
 {

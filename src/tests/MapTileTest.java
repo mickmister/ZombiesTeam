@@ -7,7 +7,7 @@ import java.awt.*;
 import main.*;
 import main.GameHandler.GameState;
 import main.MapTile.Shape;
-import main.TileCell.*;
+import main.TileCell.CellType;
 
 import org.junit.*;
 

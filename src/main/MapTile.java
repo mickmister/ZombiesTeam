@@ -6,7 +6,7 @@ import java.awt.*;
 
 import javax.swing.*;
 
-import main.TileCell.*;
+import main.TileCell.CellType;
 
 /**
  * A MapTile represents one tile that is placed on the Map. It is a square with 9 sub-blocks

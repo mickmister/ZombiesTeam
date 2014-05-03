@@ -9,7 +9,7 @@ import java.lang.reflect.*;
 import javax.swing.*;
 
 import main.*;
-import main.TileCell.*;
+import main.TileCell.CellType;
 
 import org.junit.*;
 

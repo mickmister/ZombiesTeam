@@ -15,6 +15,7 @@ public class TileCell
 	{
 		grass, road, building, door
 	}
+	
 	private CellType type;
 	private boolean hasLifeToken;
 	private boolean hasBulletToken;

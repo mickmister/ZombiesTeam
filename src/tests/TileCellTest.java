@@ -2,7 +2,7 @@ package tests;
 
 import static org.junit.Assert.*;
 import main.*;
-import main.TileCell.*;
+import main.TileCell.CellType;
 
 import org.junit.*;
 
