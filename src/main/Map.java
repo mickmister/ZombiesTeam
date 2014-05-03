@@ -352,7 +352,18 @@ public class Map
 			for (int y = 0; y < this.SIZE; y += 1)
 			{
 				MapTile tile = this.mapTiles[y][x];
-				if (tile.toString().equals("true true true\ntrue true true\ntrue true true\n"))
+				boolean isHelipad = true;
+				for (int i = 0; i < 3; i += 1)
+				{
+					for (int j = 0; j < 3; j += 1)
+					{
+						if (!tile.getCell(i, j).isRoad())
+						{
+							isHelipad = false;
+						}
+					}
+				}
+				if (isHelipad)
 				{
 					return tile;
 				}
