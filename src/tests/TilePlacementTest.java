@@ -1,5 +1,7 @@
 package tests;
 
+import static org.junit.Assert.*;
+
 import java.awt.*;
 
 import main.*;
@@ -14,6 +16,15 @@ import org.junit.*;
  */
 public class TilePlacementTest
 {
+	@Test
+	public void testPlacementForCornersOfMap()
+	{
+		Map test = new Map();
+		MapTile tile = new MapTile(Shape.quad, null);
+		assertEquals(false, test.checkValidPosition(tile, 0, 0));
+		assertEquals(false, test.checkValidPosition(tile, 10, 10));
+	}
+	
 	// TESTS FOR L
 	@Test(expected = IllegalStateException.class)
 	public void testPlaceTempLTile()

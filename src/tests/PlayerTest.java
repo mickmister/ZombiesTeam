@@ -1,9 +1,12 @@
 package tests;
 
 import static org.junit.Assert.*;
+import gui.*;
 
 import java.awt.*;
 import java.lang.reflect.*;
+
+import javax.swing.*;
 
 import main.*;
 
@@ -66,25 +69,15 @@ public class PlayerTest
 	@Test
 	public void testLoseLifeToken()
 	{
-		try
-		{
-			Player test = new Player(0);
-			Method method = test.getClass().getDeclaredMethod("loseLifeToken");
-			method.setAccessible(true);
-			assertEquals(true, method.invoke(test));
-			assertEquals(2, test.getLifeTokens());
-			assertEquals(true, method.invoke(test));
-			assertEquals(1, test.getLifeTokens());
-			assertEquals(true, method.invoke(test));
-			assertEquals(0, test.getLifeTokens());
-			assertEquals(false, method.invoke(test));
-			assertEquals(3, test.getLifeTokens());
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-			fail(e.getLocalizedMessage());
-		}
+		Player test = new Player(0);
+		assertEquals(true, test.loseLifeToken());
+		assertEquals(2, test.getLifeTokens());
+		assertEquals(true, test.loseLifeToken());
+		assertEquals(1, test.getLifeTokens());
+		assertEquals(true, test.loseLifeToken());
+		assertEquals(0, test.getLifeTokens());
+		assertEquals(false, test.loseLifeToken());
+		assertEquals(3, test.getLifeTokens());
 	}
 	
 	@Test
@@ -174,19 +167,21 @@ public class PlayerTest
 		
 		tile.setZombie(true);
 		player.setZombieCombatRoll(2);
-		if (player.fightZombie(tile))
-		{
-			assertEquals(2, player.getZombiesCaptured());
-			assertEquals(1, player.getBulletTokens());
-			assertEquals(2, player.getLifeTokens());
-		}
-		else
-		{
-			// Lose life token.
-			assertEquals(1, player.getZombiesCaptured());
-			assertEquals(3, player.getBulletTokens());
-			assertEquals(1, player.getLifeTokens());
-		}
+		// Will NOT use bullet tokens and will lose a life token.
+		DialogHandler.defaultReturn = JOptionPane.NO_OPTION;
+		assertEquals(false, player.fightZombie(tile));
+		assertEquals(1, player.getZombiesCaptured());
+		assertEquals(3, player.getBulletTokens());
+		assertEquals(1, player.getLifeTokens());
+		
+		tile.setZombie(true);
+		player.setZombieCombatRoll(2);
+		// Will use bullet tokens to defeat the zombie.
+		DialogHandler.defaultReturn = JOptionPane.YES_OPTION;
+		assertEquals(true, player.fightZombie(tile));
+		assertEquals(2, player.getZombiesCaptured());
+		assertEquals(1, player.getBulletTokens());
+		assertEquals(1, player.getLifeTokens());
 	}
 	
 	@Test
@@ -330,5 +325,41 @@ public class PlayerTest
 		player.drawNewCards();
 		player.setCardPlayed(true);
 		assertTrue(player.checkCardPlayed());
+	}
+	
+	@Test
+	public void testWinConditions()
+	{
+		new GameHandler(2);
+		Player player = GameHandler.instance.getPlayer(0);
+		
+		for (int i = 0; i < 25 - 1; i += 1)
+		{
+			player.setZombieCombatRoll(4);
+			TileCell tileCell = new TileCell(true, false, false);
+			tileCell.setZombie(true);
+			player.fightZombie(tileCell);
+		}
+		
+		new GameHandler(2);
+		player = GameHandler.instance.getPlayer(0);
+		Map map = GameHandler.instance.getMap();
+		int count = 4 * 4 + 12;
+		for (int i = 0; i < count; i += 1)
+		{
+			GameHandler.instance.getTileDeck().getNextCard();
+		}
+		MapTile helipad = GameHandler.instance.getTileDeck().getNextCard();
+		map.addTempTile(helipad);
+		map.setTempPos(new Point(5, 6));
+		map.placeTempTile();
+		for (int x = 0; x < 3; x += 1)
+		{
+			for (int y = 0; y < 3; y += 1)
+			{
+				player.setZombieCombatRoll(6);
+				player.fightZombie(helipad.getCell(y, x));
+			}
+		}
 	}
 }

@@ -24,6 +24,7 @@ public class MapTileDeckTest
 		{
 			assertNotNull(test.getNextCard());
 		}
+		assertNull(test.getNextCard());
 	}
 	
 	@Test

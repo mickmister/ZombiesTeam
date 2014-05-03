@@ -8,6 +8,7 @@ import java.awt.event.*;
 import javax.swing.*;
 
 import main.*;
+import main.GameHandler.GameState;
 import main.MapTile.Shape;
 
 import org.junit.*;
@@ -60,6 +61,17 @@ public class MapTest
 		assertEquals(tile, map.getMapTile(5, 4));
 		assertEquals(null, map.getTempTile());
 		assertEquals(tile, map.getTempZombieTile());
+		
+		map.addTempTile(tile);
+		map.setTempPos(new Point(1, 1));
+		try
+		{
+			map.placeTempTile();
+			fail("Did not throw IllegalStateException");
+		}
+		catch (IllegalStateException e)
+		{
+		}
 	}
 	
 	@Test
@@ -113,21 +125,44 @@ public class MapTest
 		map.placeMovingZombie(new KeyEvent(view, 0, 0, 0, KeyEvent.VK_DOWN, '\0'));
 		assertEquals(10, map.getZombieMovementIndex());
 		
+		map.selectNextZombie();
+		assertEquals(-1, map.getZombieMovementIndex());
+		
 		map.getMapTile(5, 5).getCell(0, 1).setZombie(true);
 		map.selectNextZombie();
 		int previous = map.getZombieMovementIndex();
+		map.placeMovingZombie(new KeyEvent(view, 0, 0, 0, KeyEvent.VK_SPACE, '\0'));
+		assertEquals(previous, map.getZombieMovementIndex());
 		map.placeMovingZombie(new KeyEvent(view, 0, 0, 0, KeyEvent.VK_LEFT, '\0'));
 		assertEquals(previous, map.getZombieMovementIndex());
 		map.placeMovingZombie(new KeyEvent(view, 0, 0, 0, KeyEvent.VK_RIGHT, '\0'));
 		assertEquals(previous, map.getZombieMovementIndex());
+		map.placeMovingZombie(new KeyEvent(view, 0, 0, 0, KeyEvent.VK_UP, '\0'));
+		assertEquals(previous, map.getZombieMovementIndex());
+		
+		map.getMapTile(5, 5).getCell(1, 1).setZombie(true);
+		map.placeMovingZombie(new KeyEvent(view, 0, 0, 0, KeyEvent.VK_DOWN, '\0'));
+		assertEquals(previous, map.getZombieMovementIndex());
+		
+		map.getMapTile(5, 5).getCell(1, 1).setZombie(false);
 		map.placeMovingZombie(new KeyEvent(view, 0, 0, 0, KeyEvent.VK_DOWN, '\0'));
 		assertEquals(previous + 30, map.getZombieMovementIndex());
+		map.placeMovingZombie(new KeyEvent(view, 0, 0, 0, KeyEvent.VK_DOWN, '\0'));
+		assertEquals(previous + 30, map.getZombieMovementIndex());
+		
+		map.getMapTile(5, 5).getCell(1, 1).setZombieMoved(false);
+		GameHandler.instance.getPlayer(0).setMovesRemaining(1);
+		map.placeMovingZombie(new KeyEvent(view, 0, 0, 0, KeyEvent.VK_DOWN, '\0'));
+		assertEquals(previous + 60, map.getZombieMovementIndex());
+		assertEquals(GameState.zombiePlacement, GameHandler.instance.getCurrentState());
 	}
 	
 	@Test
 	public void testGetHelipad()
 	{
 		new GameHandler(2);
+		assertEquals(null, GameHandler.instance.getMap().getHelipad());
+		
 		int count = 4 * 4 + 12;
 		for (int i = 0; i < count; i += 1)
 		{
