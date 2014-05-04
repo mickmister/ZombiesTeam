@@ -1,8 +1,10 @@
 package main;
 
 import gui.*;
+import internationalization.*;
 
 import java.awt.*;
+import java.util.*;
 
 import javax.swing.*;
 
@@ -19,25 +21,58 @@ public class Main
 		DialogHandler.isTesting = false;
 		setWindowsLaF();
 		
-		String[] choices = { "2 players", "3 players", "4 players" };
-		Object result = JOptionPane.showInputDialog(null, "Select the number of players.", "Number of Players", JOptionPane.PLAIN_MESSAGE, null,
-				choices, "2 players");
+		Locale locale = askUserForLanguage();
+		new Messages(locale);
 		
-		int numberOfPlayers = -1;
-		for (int i = 0; i < choices.length; i += 1)
+		int numPlayers = askUserForNumPlayers();
+		
+		new GameHandler(numPlayers);
+		GameHandler.instance.initWindows();
+	}
+	
+	private static Locale askUserForLanguage()
+	{
+		String[] options = new String[] { "English (default)", "Spanish", "French" };
+		int response = JOptionPane.showOptionDialog(null, "Choose a language:", "Language", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE,
+				null, options, options[0]);
+		if (response == 0)
 		{
-			if (choices[i].equals(result))
+			// Locale for English - United States
+			return new Locale("en", "US");
+		}
+		if (response == 1)
+		{
+			// Locale for Spanish - Mexico
+			return new Locale("es", "MX");
+		}
+		if (response == 2)
+		{
+			// Locale for French - France
+			return new Locale("fr", "FR");
+		}
+		System.exit(1);
+		return null;
+	}
+	
+	public static int askUserForNumPlayers()
+	{
+		String[] options = { "2 players", "3 players", "4 players" };
+		Object response = JOptionPane.showInputDialog(null, "Select the number of players:", "Number of Players", JOptionPane.QUESTION_MESSAGE, null,
+				options, "2 players");
+		
+		int numPlayers = -1;
+		for (int i = 0; i < options.length; i += 1)
+		{
+			if (options[i].equals(response))
 			{
-				numberOfPlayers = i + 2;
+				numPlayers = i + 2;
 			}
 		}
-		if (numberOfPlayers == -1)
+		if (numPlayers == -1)
 		{
 			System.exit(1);
 		}
-		
-		new GameHandler(numberOfPlayers);
-		GameHandler.instance.initWindows();
+		return numPlayers;
 	}
 	
 	private static void setWindowsLaF()
