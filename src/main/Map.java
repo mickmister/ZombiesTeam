@@ -1,5 +1,7 @@
 package main;
 
+import internationalization.*;
+
 import java.awt.*;
 import java.awt.event.*;
 
@@ -301,48 +303,48 @@ public class Map
 	{
 		if (!player.isPlayersTurn())
 		{
-			return "Not your turn";
+			return Messages.getString("Map.not_your_turn"); //$NON-NLS-1$
 		}
 		if (GameHandler.instance.getCurrentState().equals(GameState.tilePlacement))
 		{
-			return "Draw and place a map tile";
+			return Messages.getString("Map.tile_placement"); //$NON-NLS-1$
 		}
 		if (GameHandler.instance.getCurrentState().equals(GameState.zombiePlacement))
 		{
 			MapTile tile = GameHandler.instance.getMap().getTempZombieTile();
-			return "Place " + tile.getZombiesToPlace() + " more zombie(s)";
+			return Messages.getString("Map.zombie_placement_prefix") + tile.getZombiesToPlace() + Messages.getString("Map.zombie_placement_postfix"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		if (GameHandler.instance.getCurrentState().equals(GameState.bulletTokenPlacement))
 		{
 			MapTile tile = GameHandler.instance.getMap().getTempBulletTile();
-			return "Place " + tile.getBulletsToPlace() + " more bullet token(s)";
+			return Messages.getString("Map.bullet_placement_prefix") + tile.getBulletsToPlace() + Messages.getString("Map.bullet_placement_postfix"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		if (GameHandler.instance.getCurrentState().equals(GameState.lifeTokenPlacement))
 		{
 			MapTile tile = GameHandler.instance.getMap().getTempBulletTile();
-			return "Place " + tile.getLifeToPlace() + " more life token(s)";
+			return Messages.getString("Map.life_placement_prefix") + tile.getLifeToPlace() + Messages.getString("Map.life_placement_postfix"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		if (GameHandler.instance.getCurrentState().equals(GameState.playerMovementDieRoll))
 		{
-			return "Roll the dice to move";
+			return Messages.getString("Map.player_movement_die_roll"); //$NON-NLS-1$
 		}
 		if (GameHandler.instance.getCurrentState().equals(GameState.playerMovement))
 		{
-			return player.getMovesRemaining() + " move(s) remaining";
+			return player.getMovesRemaining() + Messages.getString("Map.player_movement"); //$NON-NLS-1$
 		}
 		if (GameHandler.instance.getCurrentState().equals(GameState.zombieCombat))
 		{
-			return "Roll the dice to fight";
+			return Messages.getString("Map.zombie_combat"); //$NON-NLS-1$
 		}
 		if (GameHandler.instance.getCurrentState().equals(GameState.zombieMovementDieRoll))
 		{
-			return "Roll the dice to move zombies";
+			return Messages.getString("Map.zombie_movement_die_roll"); //$NON-NLS-1$
 		}
 		if (GameHandler.instance.getCurrentState().equals(GameState.zombieMovement))
 		{
-			return player.getMovesRemaining() + " zombie(s) to move";
+			return player.getMovesRemaining() + Messages.getString("Map.zombie_movement"); //$NON-NLS-1$
 		}
-		return "ERROR: No status defined!";
+		return Messages.getString("Map.error_status"); //$NON-NLS-1$
 	}
 	
 	public MapTile getHelipad()

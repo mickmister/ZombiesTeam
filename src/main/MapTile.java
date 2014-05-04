@@ -1,6 +1,7 @@
 package main;
 
 import gui.*;
+import internationalization.*;
 
 import java.awt.*;
 
@@ -67,7 +68,7 @@ public class MapTile
 				processSpecialString(special);
 				break;
 			default:
-				throw new IllegalArgumentException("Invalid type of shape: " + shape);
+				throw new IllegalArgumentException(Messages.getString("MapTile.invalid_shape_type") + shape); //$NON-NLS-1$
 		}
 	}
 	
@@ -76,7 +77,7 @@ public class MapTile
 		try
 		{
 			this.grid = createBlankGrid();
-			String[] words = string.split(" ");
+			String[] words = string.split(" "); //$NON-NLS-1$
 			for (int y = 0; y < 3; y += 1)
 			{
 				for (int x = 0; x < 3; x += 1)
@@ -111,7 +112,7 @@ public class MapTile
 		catch (NumberFormatException e)
 		{
 			e.printStackTrace();
-			DialogHandler.showMessage(null, "The special string could not be parsed for this MapTile:\n\"" + string + "\"", "Error Parsing",
+			DialogHandler.showMessage(null, Messages.getString("MapTile.could_not_parse_special_string") + string + "\"", Messages.getString("MapTile.error_parsing"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 					JOptionPane.ERROR_MESSAGE);
 		}
 	}
@@ -356,16 +357,16 @@ public class MapTile
 	@Override
 	public String toString()
 	{
-		String result = "MapTile " + this.shape.toString() + " shape:\n";
+		String result = Messages.getString("MapTile.map_tile") + this.shape.toString() + Messages.getString("MapTile.shape"); //$NON-NLS-1$ //$NON-NLS-2$
 		
 		for (int y = 0; y < 3; y += 1)
 		{
-			result += "[ ";
+			result += "[ "; //$NON-NLS-1$
 			for (int x = 0; x < 3; x += 1)
 			{
-				result += this.grid[y][x].toString() + "\t";
+				result += this.grid[y][x].toString() + "\t"; //$NON-NLS-1$
 			}
-			result += "]\n";
+			result += "]\n"; //$NON-NLS-1$
 		}
 		
 		return result;

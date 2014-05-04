@@ -285,7 +285,7 @@ public class GameHandler
 				break;
 		}
 		fireDataChangedEvent(null);
-		System.out.println("Changed state from: " + old.toString() + " -> " + this.currentState.toString());
+		System.out.println("Changed state from: " + old.toString() + " -> " + this.currentState.toString()); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 	
 	public void addDataListener(DataListener listener)
