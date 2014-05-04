@@ -21,24 +21,24 @@ public class ImageManager
 	
 	public ImageManager()
 	{
-		ImageManager.ROAD_TEXTURE = loadImage("Road Texture.png");
-		ImageManager.GRASS_TEXTURE = loadImage("Grass Texture.png");
-		ImageManager.DIRT_TEXTURE = loadImage("Dirt Texture.png");
-		ImageManager.BUILDING_TEXTURE = loadImage("Building Texture.png");
-		ImageManager.DOOR_TEXTURE = loadImage("Door Texture.png");
-		ImageManager.ZOMBIE_PICTURE = loadImage("Zombie Picture.png");
-		ImageManager.HEART_PICTURE = loadImage("Heart Picture.png");
-		ImageManager.BULLET_PICTURE = loadImage("Bullet Picture.png");
-		ImageManager.ZOMBIE_ICON = loadImage("Zombie Icon.png");
-		ImageManager.HEART_ICON = loadImage("Heart Icon.png");
-		ImageManager.BULLET_ICON = loadImage("Bullet Icon.png");
+		ImageManager.ROAD_TEXTURE = loadImage("Road Texture.png"); //$NON-NLS-1$
+		ImageManager.GRASS_TEXTURE = loadImage("Grass Texture.png"); //$NON-NLS-1$
+		ImageManager.DIRT_TEXTURE = loadImage("Dirt Texture.png"); //$NON-NLS-1$
+		ImageManager.BUILDING_TEXTURE = loadImage("Building Texture.png"); //$NON-NLS-1$
+		ImageManager.DOOR_TEXTURE = loadImage("Door Texture.png"); //$NON-NLS-1$
+		ImageManager.ZOMBIE_PICTURE = loadImage("Zombie Picture.png"); //$NON-NLS-1$
+		ImageManager.HEART_PICTURE = loadImage("Heart Picture.png"); //$NON-NLS-1$
+		ImageManager.BULLET_PICTURE = loadImage("Bullet Picture.png"); //$NON-NLS-1$
+		ImageManager.ZOMBIE_ICON = loadImage("Zombie Icon.png"); //$NON-NLS-1$
+		ImageManager.HEART_ICON = loadImage("Heart Icon.png"); //$NON-NLS-1$
+		ImageManager.BULLET_ICON = loadImage("Bullet Icon.png"); //$NON-NLS-1$
 	}
 	
 	private BufferedImage loadImage(String name)
 	{
 		try
 		{
-			String fileName = "../Resources/" + name;
+			String fileName = "../Resources/" + name; //$NON-NLS-1$
 			return ImageIO.read(this.getClass().getResourceAsStream(fileName));
 		}
 		catch (IOException e)

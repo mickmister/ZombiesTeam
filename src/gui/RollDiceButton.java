@@ -1,5 +1,7 @@
 package gui;
 
+import internationalization.*;
+
 import java.awt.event.*;
 
 import javax.swing.*;
@@ -11,7 +13,7 @@ public class RollDiceButton extends JButton implements ActionListener, DataListe
 {
 	public RollDiceButton()
 	{
-		setText("Roll Dice");
+		setText(Messages.getString("RollDiceButton.roll_dice")); //$NON-NLS-1$
 		addActionListener(this);
 		GameHandler.instance.addDataListener(this);
 	}
@@ -27,17 +29,22 @@ public class RollDiceButton extends JButton implements ActionListener, DataListe
 		int result = RollDice.rollDice();
 		if (GameHandler.instance.getCurrentState().equals(GameState.playerMovementDieRoll))
 		{
-			DialogHandler.showMessage(getTopLevelAncestor(), "Your player movement roll was a " + result + "!", "Roll Dice",
+			DialogHandler.showMessage(getTopLevelAncestor(),
+					Messages.getString("RollDiceButton.player_movement_roll") + result + "!", Messages.getString("RollDiceButton.roll_dice"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 					JOptionPane.INFORMATION_MESSAGE);
 		}
 		if (GameHandler.instance.getCurrentState().equals(GameState.zombieMovementDieRoll))
 		{
-			DialogHandler.showMessage(getTopLevelAncestor(), "Your zombie movement roll was a " + result + "!", "Roll Dice",
+			DialogHandler.showMessage(getTopLevelAncestor(),
+					Messages.getString("RollDiceButton.zombie_movement_roll") + result + "!", Messages.getString("RollDiceButton.roll_dice"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 					JOptionPane.INFORMATION_MESSAGE);
 		}
 		if (GameHandler.instance.getCurrentState().equals(GameState.zombieCombat))
 		{
-			DialogHandler.showMessage(getTopLevelAncestor(), "Your combat roll was a " + result + "!", "Roll Dice", JOptionPane.INFORMATION_MESSAGE);
+			DialogHandler
+					.showMessage(
+							getTopLevelAncestor(),
+							Messages.getString("RollDiceButton.zombie_combat_roll") + result + "!", Messages.getString("RollDiceButton.roll_dice"), JOptionPane.INFORMATION_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		}
 		RollDice.rollAction(result);
 	}

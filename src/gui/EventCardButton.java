@@ -1,5 +1,7 @@
 package gui;
 
+import internationalization.*;
+
 import java.awt.event.*;
 
 import javax.swing.*;
@@ -30,7 +32,7 @@ public class EventCardButton extends JButton implements DataListener, ActionList
 		}
 		else
 		{
-			setText("<html><center>" + card.getName() + "<br>" + card.getDescription());
+			setText("<html><center>" + card.getName() + "<br>" + card.getDescription()); //$NON-NLS-1$ //$NON-NLS-2$
 			setEnabled(true);
 		}
 	}
@@ -51,7 +53,8 @@ public class EventCardButton extends JButton implements DataListener, ActionList
 			if (card.getPossibleTarget() == PossibleTarget.Pick)
 			{
 				int numPlayers = GameHandler.instance.getNumberOfPlayers();
-				String[] choicesTotal = { "Player 1", "Player 2", "Player 3", "Player 4" };
+				String[] choicesTotal = {
+						Messages.getString("EventCardButton.player_1"), Messages.getString("EventCardButton.player_2"), Messages.getString("EventCardButton.player_3"), Messages.getString("EventCardButton.player_4") }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 				String[] choices = new String[numPlayers - 1];
 				int j = 0;
 				int turn = GameHandler.instance.getTurn();
@@ -63,8 +66,9 @@ public class EventCardButton extends JButton implements DataListener, ActionList
 						j++;
 					}
 				}
-				Object result = JOptionPane.showInputDialog(getTopLevelAncestor(), "Select the target player.", "Target Player",
-						JOptionPane.PLAIN_MESSAGE, null, choices, "Player 1");
+				Object result = JOptionPane.showInputDialog(getTopLevelAncestor(),
+						Messages.getString("EventCardButton.select_target_player"), Messages.getString("EventCardButton.target_player"), //$NON-NLS-1$ //$NON-NLS-2$
+						JOptionPane.PLAIN_MESSAGE, null, choices, Messages.getString("EventCardButton.player_1")); //$NON-NLS-1$
 				int target = -1;
 				for (int i = 0; i < numPlayers - 1; i += 1)
 				{
@@ -100,9 +104,8 @@ public class EventCardButton extends JButton implements DataListener, ActionList
 		}
 		else
 		{
-			DialogHandler.showMessage(getTopLevelAncestor(),
-					"You have already played an Event Card this turn.\n\nYou must wait until your next turn to play another.",
-					"Cannot Play 2 Event Cards", JOptionPane.WARNING_MESSAGE);
+			DialogHandler.showMessage(getTopLevelAncestor(), Messages.getString("EventCardButton.cannot_play_2_cards_message"), //$NON-NLS-1$
+					Messages.getString("EventCardButton.cannot_play_2_cards_title"), JOptionPane.WARNING_MESSAGE); //$NON-NLS-1$
 		}
 	}
 }

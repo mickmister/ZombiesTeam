@@ -14,6 +14,6 @@ public class IconDisplay extends JLabel
 	
 	public void setNumber(int number)
 	{
-		setText(" " + number);
+		setText(" " + number); //$NON-NLS-1$
 	}
 }

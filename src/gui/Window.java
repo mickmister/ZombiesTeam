@@ -1,5 +1,7 @@
 package gui;
 
+import internationalization.*;
+
 import java.awt.*;
 
 import javax.swing.*;
@@ -17,7 +19,7 @@ public class Window extends JFrame
 		
 		setSize(1600, 900);
 		setLocation(this.number * 50, this.number * 50);
-		setTitle("Zombies!!! (Player " + (this.number + 1) + ")");
+		setTitle(Messages.getString("Window.title_prefix") + (this.number + 1) + Messages.getString("Window.title_postfix")); //$NON-NLS-1$ //$NON-NLS-2$
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setLayout(new BorderLayout());
 		

@@ -1,5 +1,7 @@
 package gui;
 
+import internationalization.*;
+
 import java.awt.event.*;
 
 import javax.swing.*;
@@ -11,7 +13,7 @@ public class MapTileDeckButton extends JButton implements ActionListener, DataLi
 {
 	public MapTileDeckButton()
 	{
-		setText("Map Tile Deck");
+		setText(Messages.getString("MapTileDeckButton.map_tile_deck")); //$NON-NLS-1$
 		addActionListener(this);
 		GameHandler.instance.addDataListener(this);
 	}
@@ -54,15 +56,21 @@ public class MapTileDeckButton extends JButton implements ActionListener, DataLi
 						}
 						else
 						{
-							DialogHandler.showMessage(null, "No available places to put Map Tile, skipping.", "Map Tile",
-									JOptionPane.INFORMATION_MESSAGE);
+							DialogHandler
+									.showMessage(
+											null,
+											Messages.getString("MapTileDeckButton.no_available_places_message"), Messages.getString("MapTileDeckButton.map_tile"), //$NON-NLS-1$ //$NON-NLS-2$
+											JOptionPane.INFORMATION_MESSAGE);
 							GameHandler.instance.nextGameState();
 							GameHandler.instance.nextGameState();
 						}
 					}
 					else
 					{
-						DialogHandler.showMessage(null, "No more Map Tile cards, skipping.", "Map Tile", JOptionPane.INFORMATION_MESSAGE);
+						DialogHandler
+								.showMessage(
+										null,
+										Messages.getString("MapTileDeckButton.no_more_cards_message"), Messages.getString("MapTileDeckButton.map_tile"), JOptionPane.INFORMATION_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
 						GameHandler.instance.nextGameState();
 						GameHandler.instance.nextGameState();
 					}
