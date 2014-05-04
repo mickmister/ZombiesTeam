@@ -8,6 +8,11 @@ public class Messages
 	private static Locale LOCALE;
 	private static ResourceBundle RESOURCE_BUNDLE;
 	
+	static
+	{
+		new Messages(new Locale("en", "US"));
+	}
+	
 	public Messages(Locale locale)
 	{
 		Messages.BUNDLE_NAME = "internationalization.messages"; //$NON-NLS-1$
