@@ -2,6 +2,7 @@ package view;
 
 import gui.*;
 import gui.Window;
+import internationalization.*;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -43,7 +44,7 @@ public class MapView extends JPanel implements Runnable, KeyListener
 			centerScrollPane();
 		}
 		
-		this.graphics.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+		this.graphics.setFont(new Font("Segoe UI", Font.PLAIN, 13)); //$NON-NLS-1$
 		this.graphics.drawImage(ImageManager.DIRT_TEXTURE, 0, 0, null);
 		for (int y = 0; y < this.SIZE; y += 1)
 		{
@@ -66,7 +67,7 @@ public class MapView extends JPanel implements Runnable, KeyListener
 		JViewport viewPort = (JViewport) getParent();
 		Point view = viewPort.getViewPosition();
 		
-		this.graphics.setFont(new Font("Segoe UI", Font.PLAIN, 35));
+		this.graphics.setFont(new Font("Segoe UI", Font.PLAIN, 35)); //$NON-NLS-1$
 		this.graphics.setColor(Color.BLACK);
 		this.graphics.drawString(message, view.x + 22, view.y + 52);
 		this.graphics.setColor(Color.WHITE);
@@ -110,9 +111,9 @@ public class MapView extends JPanel implements Runnable, KeyListener
 	
 	private void displayInvalidLocation()
 	{
-		DialogHandler.showMessage(null, "The selected location is not valid for the given map tile.\n"
-				+ "The tile must be touching at least one other tile,\n" + "all touching roads must connect (and not become blocked),\n"
-				+ "and it may not be placed on top of an existing tile.\n\nTry again.", "Invalid Placement", JOptionPane.WARNING_MESSAGE);
+		DialogHandler.showMessage(null, Messages.getString("MapView.invalid_location_message_1") //$NON-NLS-1$
+				+ Messages.getString("MapView.invalid_location_message_2") + Messages.getString("MapView.invalid_location_message_3") //$NON-NLS-1$ //$NON-NLS-2$
+				+ Messages.getString("MapView.invalid_location_message_4"), Messages.getString("MapView.invalid_location_title"), JOptionPane.WARNING_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 	
 	@Override
