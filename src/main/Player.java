@@ -355,7 +355,8 @@ public class Player
 		this.zombiesCaptured = (int) Math.ceil(this.zombiesCaptured / 2.0);
 		// Go from ZombieCombat to PlayerMovement to continue turn.
 		GameHandler.instance.nextGameState();
-		DialogHandler.showMessage(null, Messages.getString("Player.player_death_message"), Messages.getString("Player.player_death_title"), JOptionPane.INFORMATION_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
+		DialogHandler.showMessage(null,
+				Messages.getString("Player.player_death_message"), Messages.getString("Player.player_death_title"), JOptionPane.INFORMATION_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 	
 	public void resetPlayerLocation()
@@ -402,7 +403,8 @@ public class Player
 	
 	private boolean promptUseBulletTokens()
 	{
-		int result = DialogHandler.showChoice(null, Messages.getString("Player.use_bullet_tokens_message"), Messages.getString("Player.use_bullet_tokens_title"), //$NON-NLS-1$ //$NON-NLS-2$
+		int result = DialogHandler.showChoice(null,
+				Messages.getString("Player.use_bullet_tokens_message"), Messages.getString("Player.use_bullet_tokens_title"), //$NON-NLS-1$ //$NON-NLS-2$
 				JOptionPane.QUESTION_MESSAGE);
 		return result == JOptionPane.YES_OPTION;
 	}

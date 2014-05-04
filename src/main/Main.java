@@ -57,7 +57,8 @@ public class Main
 	public static int askUserForNumPlayers()
 	{
 		String[] options = { Messages.getString("Main.2_players"), Messages.getString("Main.3_players"), Messages.getString("Main.4_players") }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		Object response = JOptionPane.showInputDialog(null, Messages.getString("Main.numPlayers_message"), Messages.getString("Main.numPlayers_title"), JOptionPane.QUESTION_MESSAGE, null, //$NON-NLS-1$ //$NON-NLS-2$
+		Object response = JOptionPane.showInputDialog(null,
+				Messages.getString("Main.numPlayers_message"), Messages.getString("Main.numPlayers_title"), JOptionPane.QUESTION_MESSAGE, null, //$NON-NLS-1$ //$NON-NLS-2$
 				options, Messages.getString("Main.2_players")); //$NON-NLS-1$
 		
 		int numPlayers = -1;

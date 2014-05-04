@@ -112,7 +112,8 @@ public class MapTile
 		catch (NumberFormatException e)
 		{
 			e.printStackTrace();
-			DialogHandler.showMessage(null, Messages.getString("MapTile.could_not_parse_special_string") + string + "\"", Messages.getString("MapTile.error_parsing"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			DialogHandler.showMessage(null,
+					Messages.getString("MapTile.could_not_parse_special_string") + string + "\"", Messages.getString("MapTile.error_parsing"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 					JOptionPane.ERROR_MESSAGE);
 		}
 	}
