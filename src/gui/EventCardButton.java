@@ -10,7 +10,6 @@ import main.eventCardTypes.*;
 
 public class EventCardButton extends JButton implements DataListener, ActionListener
 {
-	
 	private int index;
 	
 	public EventCardButton(int index)

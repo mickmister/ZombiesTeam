@@ -9,13 +9,25 @@ public class RightPanel extends JPanel
 {
 	public RightPanel()
 	{
-		setLayout(new GridLayout(3, 1));
+		setLayout(new BorderLayout());
 		setBorder(new EmptyBorder(10, 10, 0, 10));
-		setPreferredSize(new Dimension(300, 1));
 		
+		JPanel buttons = new JPanel();
+		buttons.setLayout(new GridLayout(3, 1, 0, 10));
+		buttons.setPreferredSize(new Dimension(300, 1));
 		for (int i = 0; i < 3; i += 1)
 		{
-			add(new EventCardButton(i));
+			buttons.add(new EventCardButton(i));
 		}
+		
+		JPanel swaps = new JPanel();
+		swaps.setLayout(new GridLayout(3, 1, 0, 10));
+		for (int i = 0; i < 3; i += 1)
+		{
+			swaps.add(new SwapCardButton(i));
+		}
+		
+		add(buttons, BorderLayout.CENTER);
+		add(swaps, BorderLayout.LINE_END);
 	}
 }

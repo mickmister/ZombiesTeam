@@ -20,7 +20,7 @@ public class BottomPanel extends JPanel implements DataListener
 		this.lifeTokenDisplay = new IconDisplay(ImageManager.HEART_PICTURE);
 		this.bulletTokenDisplay = new IconDisplay(ImageManager.BULLET_PICTURE);
 		this.zombiesDisplay = new IconDisplay(ImageManager.ZOMBIE_PICTURE);
-		setLayout(new GridLayout(1, 6));
+		setLayout(new GridLayout(1, 6, 10, 0));
 		setBorder(new EmptyBorder(10, 10, 10, 10));
 		setPreferredSize(new Dimension(1, 200));
 		
