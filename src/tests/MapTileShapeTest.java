@@ -93,7 +93,23 @@ public class MapTileShapeTest
 	@Test
 	public void testSpecialTile()
 	{
+		// Test giving an invalid "special" string to the Map Tile (including a 4).
 		MapTile tile = new MapTile(Shape.special, "4 0 0 1 1 1 0 0 0 5 6 7");
+		// Since it failed, the following fields should have a default value of 0.
+		assertEquals(0, tile.getZombiesToPlace());
+		assertEquals(0, tile.getLifeToPlace());
+		assertEquals(0, tile.getBulletsToPlace());
+		
+		tile = new MapTile(Shape.special, "0 1 2 0 1 2 0 1 2 7 8 9");
+		assertEquals(7, tile.getZombiesToPlace());
+		assertEquals(8, tile.getLifeToPlace());
+		assertEquals(9, tile.getBulletsToPlace());
+		for (int y = 0; y < 3; y += 1)
+		{
+			assertEquals(false, tile.getCell(y, 0).isAccessible());
+			assertEquals(true, tile.getCell(y, 1).isRoad());
+			assertEquals(true, tile.getCell(y, 2).isBuilding());
+		}
 	}
 	
 	private void assertSameCells(String string, MapTile tile)

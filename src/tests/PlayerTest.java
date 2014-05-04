@@ -334,7 +334,7 @@ public class PlayerTest
 		new GameHandler(2);
 		Player player = GameHandler.instance.getPlayer(0);
 		
-		for (int i = 0; i < 25 - 1; i += 1)
+		for (int i = 0; i < 25; i += 1)
 		{
 			player.setZombieCombatRoll(4);
 			TileCell tileCell = new TileCell(CellType.road);
@@ -354,9 +354,16 @@ public class PlayerTest
 		map.addTempTile(helipad);
 		map.setTempPos(new Point(5, 6));
 		map.placeTempTile();
-		for (int x = 0; x < 3; x += 1)
+		for (int y = 0; y < 3; y += 1)
 		{
-			for (int y = 0; y < 3; y += 1)
+			for (int x = 0; x < 3; x += 1)
+			{
+				helipad.getCell(y, x).setZombie(true);
+			}
+		}
+		for (int y = 0; y < 3; y += 1)
+		{
+			for (int x = 0; x < 3; x += 1)
 			{
 				player.setZombieCombatRoll(6);
 				player.fightZombie(helipad.getCell(y, x));

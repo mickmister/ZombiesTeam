@@ -110,7 +110,7 @@ public class MapTileTest
 	{
 		new GameHandler(2);
 		GameHandler game = GameHandler.instance;
-		MapTile building = new MapTile(Shape.special, "2 3 2 1 1 1 0 0 0" + " " + "0 0 3");
+		MapTile building = new MapTile(Shape.special, "2 3 2 1 1 1 0 0 0" + " " + "0 0 2");
 		// Special tile that has 0 zombies, 0 lifetokens, and 3 bullet tokens.
 		Map map = game.getMap();
 		map.setTempTile(building);
@@ -122,18 +122,18 @@ public class MapTileTest
 		building.setTempBulletPos(new Point(1, 1));
 		building.placeTempBullet();
 		assertEquals(true, building.getCell(1, 1).hasBulletToken());
-		assertEquals(2, building.getBulletsToPlace());
+		assertEquals(1, building.getBulletsToPlace());
 		
 		// Cannot place bullet on top of another bullet token.
 		building.setTempBulletPos(new Point(1, 1));
 		building.placeTempBullet();
-		assertEquals(2, building.getBulletsToPlace());
+		assertEquals(1, building.getBulletsToPlace());
 		
 		// placing a bullet at top left of tile
 		building.setTempBulletPos(new Point(0, 0));
 		building.placeTempBullet();
 		assertEquals(true, building.getCell(0, 0).hasBulletToken());
-		assertEquals(1, building.getBulletsToPlace());
+		assertEquals(0, building.getBulletsToPlace());
 	}
 	
 	@Test
@@ -141,7 +141,7 @@ public class MapTileTest
 	{
 		new GameHandler(2);
 		GameHandler game = GameHandler.instance;
-		MapTile building = new MapTile(Shape.special, "2 3 2 1 1 1 0 0 0" + " " + "0 3 0");
+		MapTile building = new MapTile(Shape.special, "2 3 2 1 1 1 0 0 0" + " " + "0 2 0");
 		// Special tile that has 0 zombies, 3 lifetokens, and 0 bullet tokens.
 		Map map = game.getMap();
 		map.setTempTile(building);
@@ -153,18 +153,18 @@ public class MapTileTest
 		building.setTempLifePos(new Point(1, 1));
 		building.placeTempLife();
 		assertEquals(true, building.getCell(1, 1).hasLifeToken());
-		assertEquals(2, building.getLifeToPlace());
+		assertEquals(1, building.getLifeToPlace());
 		
 		// Cannot place life on top of another life token.
 		building.setTempLifePos(new Point(1, 1));
 		building.placeTempLife();
-		assertEquals(2, building.getLifeToPlace());
+		assertEquals(1, building.getLifeToPlace());
 		
 		// placing a bullet at top left of tile
 		building.setTempLifePos(new Point(0, 0));
 		building.placeTempLife();
 		assertEquals(true, building.getCell(0, 0).hasLifeToken());
-		assertEquals(1, building.getLifeToPlace());
+		assertEquals(0, building.getLifeToPlace());
 	}
 	
 	@Test

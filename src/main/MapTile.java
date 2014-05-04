@@ -66,6 +66,8 @@ public class MapTile
 			case special:
 				processSpecialString(special);
 				break;
+			default:
+				throw new IllegalArgumentException("Invalid type of shape: " + shape);
 		}
 	}
 	

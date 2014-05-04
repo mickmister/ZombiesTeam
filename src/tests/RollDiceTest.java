@@ -1,6 +1,10 @@
 package tests;
 
 import static org.junit.Assert.*;
+import gui.*;
+
+import javax.swing.*;
+
 import main.*;
 import main.GameHandler.GameState;
 
@@ -47,22 +51,41 @@ public class RollDiceTest
 		int roll = RollDice.rollDice();
 		RollDice.rollAction(roll);
 		assertEquals(roll, game.getPlayer(0).getMovesRemaining());
-		// assertEquals(GameState.zombieMovement, game.getCurrentState());
+		assertEquals(GameState.zombieMovement, game.getCurrentState());
 	}
 	
 	@Test
 	public void testRollActionZombieCombat()
 	{
 		GameHandler game = new GameHandler(2);
-		TileCell start = game.getMap().getMapTile(5, 5).getCell(1, 1);
-		start.setZombie(true);
+		TileCell tile = game.getMap().getMapTile(5, 5).getCell(1, 1);
+		tile.setZombie(true);
 		game.nextGameState();
 		game.nextGameState();
 		game.nextGameState();
-		start.setZombie(false);
-		int roll = RollDice.rollDice();
-		RollDice.rollAction(roll);
-		assertEquals(roll, game.getPlayer(0).getZombieCombatRoll());
+		
+		RollDice.rollDice();
+		
+		DialogHandler.defaultReturn = JOptionPane.NO_OPTION;
+		RollDice.rollAction(3);
+		assertEquals(3, game.getPlayer(0).getZombieCombatRoll());
+		assertEquals(GameState.zombieCombat, game.getCurrentState());
+		
+		RollDice.rollAction(4);
+		assertEquals(4, game.getPlayer(0).getZombieCombatRoll());
+		assertEquals(GameState.zombieMovementDieRoll, game.getCurrentState());
+		
+		game = new GameHandler(2);
+		tile = game.getMap().getMapTile(5, 5).getCell(1, 1);
+		tile.setZombie(true);
+		tile.setBulletToken(true);
+		tile.setLifeToken(true);
+		game.nextGameState();
+		game.nextGameState();
+		game.nextGameState();
+		
+		RollDice.rollAction(5);
+		assertEquals(5, game.getPlayer(0).getZombieCombatRoll());
 		assertEquals(GameState.zombieMovementDieRoll, game.getCurrentState());
 	}
 	

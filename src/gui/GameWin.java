@@ -19,6 +19,9 @@ public class GameWin
 			message += "You cleared all zombies from the helipad.";
 		}
 		DialogHandler.showMessage(null, message, "Player " + num + " Wins!", JOptionPane.INFORMATION_MESSAGE);
-		System.exit(0);
+		if (!DialogHandler.isTesting)
+		{
+			System.exit(0);
+		}
 	}
 }
