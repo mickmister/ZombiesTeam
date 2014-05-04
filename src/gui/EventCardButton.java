@@ -38,6 +38,11 @@ public class EventCardButton extends JButton implements DataListener, ActionList
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
+		eventCardClicked();
+	}
+	
+	public void eventCardClicked()
+	{
 		Player player = ((Window) getTopLevelAncestor()).getPlayer();
 		if (!player.checkCardPlayed())
 		{

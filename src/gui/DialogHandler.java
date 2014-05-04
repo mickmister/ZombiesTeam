@@ -20,7 +20,6 @@ public class DialogHandler
 	
 	public static int showChoice(Component comp, String message, String title, int messageType)
 	{
-		
 		if (!DialogHandler.isTesting)
 		{
 			return JOptionPane.showConfirmDialog(comp, message, title, JOptionPane.YES_NO_OPTION, messageType);
@@ -29,7 +28,5 @@ public class DialogHandler
 		{
 			return DialogHandler.defaultReturn;
 		}
-		
 	}
-	
 }

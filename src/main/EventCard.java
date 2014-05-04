@@ -2,7 +2,6 @@ package main;
 
 public abstract class EventCard
 {
-	
 	public enum PossibleTarget
 	{
 		None, Self, Pick

@@ -36,6 +36,11 @@ public class SwapCardButton extends JButton implements DataListener, ActionListe
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
+		swapCardClicked();
+	}
+	
+	public void swapCardClicked()
+	{
 		Player player = ((Window) getTopLevelAncestor()).getPlayer();
 		if (!player.checkCardPlayed())
 		{

@@ -10,7 +10,7 @@ public class GainTwoHealthNoMove extends OneUseCard
 {
 	public GainTwoHealthNoMove()
 	{
-		super(PossibleTarget.Self, "GainTwoHealthNoMove", "Instead of making a movement roll, gain 2 health");
+		super(PossibleTarget.Self, "Gain Two Health No Move", "Instead of making a movement roll, gain 2 health");
 	}
 	
 	@Override
