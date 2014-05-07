@@ -174,7 +174,11 @@ public class GameHandler
 					int didAction = this.eventDeck.doCardAction(player, Fear.class, 0);
 					if (didAction == 0)
 					{
-						this.eventDeck.doCardAction(player, GainTwoHealthNoMove.class, 0);
+						didAction = this.eventDeck.doCardAction(player, GainTwoHealthNoMove.class, 0);
+						if(didAction == 0)
+						{
+							this.eventDeck.doCardAction(player, KeysAreStillIn.class, 0);
+						}
 					}
 				}
 				else if (tile.getBulletsToPlace() == 0)
@@ -198,7 +202,11 @@ public class GameHandler
 					int didAction = this.eventDeck.doCardAction(player, Fear.class, 0);
 					if (didAction == 0)
 					{
-						this.eventDeck.doCardAction(player, GainTwoHealthNoMove.class, 0);
+						didAction = this.eventDeck.doCardAction(player, GainTwoHealthNoMove.class, 0);
+						if(didAction == 0)
+						{
+							this.eventDeck.doCardAction(player, KeysAreStillIn.class, 0);
+						}
 					}
 				}
 				else
@@ -214,7 +222,11 @@ public class GameHandler
 				int didAction = this.eventDeck.doCardAction(player, Fear.class, 0);
 				if (didAction == 0)
 				{
-					this.eventDeck.doCardAction(player, GainTwoHealthNoMove.class, 0);
+					didAction = this.eventDeck.doCardAction(player, GainTwoHealthNoMove.class, 0);
+					if(didAction == 0)
+					{
+						this.eventDeck.doCardAction(player, KeysAreStillIn.class, 0);
+					}
 				}
 				break;
 			case playerMovementDieRoll:

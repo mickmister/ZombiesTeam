@@ -11,6 +11,7 @@ public abstract class EventCard
 	private String description;
 	private Player targetPlayer;
 	private PossibleTarget posTar;
+	private Player activator;
 	
 	public EventCard(PossibleTarget posTar, String name, String description)
 	{
@@ -54,4 +55,13 @@ public abstract class EventCard
 	public abstract int behavior(int num);
 	
 	public abstract void checkRemove();
+
+	public void setActivator(Player player) {
+		this.activator = player;		
+	}
+	
+	public Player getActivator()
+	{
+		return this.activator;
+	}
 }

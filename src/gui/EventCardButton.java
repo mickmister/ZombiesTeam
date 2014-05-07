@@ -86,7 +86,7 @@ public class EventCardButton extends JButton implements DataListener, ActionList
 				}
 				if (target == -1)
 				{
-					target = player.getNumber();
+					target = player.getNumber(); //solve this problem
 				}
 				card.setTargetPlayer(GameHandler.instance.getPlayer(target));
 			}
@@ -98,9 +98,12 @@ public class EventCardButton extends JButton implements DataListener, ActionList
 			{
 				card.setTargetPlayer(null);
 			}
+			card.setActivator(player);
 			GameHandler.instance.getEventDeck().addActiveCard(card);
 			player.setCardPlayed(true);
 			GameHandler.instance.getEventDeck().doCardAction(card.getTargetPlayer(), BadSenseOfDirection.class, player.getNumber());
+			GameHandler.instance.getEventDeck().doCardAction(card.getTargetPlayer(), ButterFingers.class, player.getNumber());
+			
 		}
 		else
 		{

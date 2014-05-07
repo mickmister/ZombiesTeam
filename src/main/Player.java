@@ -318,6 +318,14 @@ public class Player
 		}
 	}
 	
+	public void loseBulletToken()
+	{
+		if(this.bulletTokens > 0)
+		{
+			this.bulletTokens--;
+		}
+	}
+	
 	private void incrementZombiesCaptured()
 	{
 		this.zombiesCaptured += 1;

@@ -15,11 +15,13 @@ public class EventCardDeck
 		this.activeCards = new ArrayList<EventCard>();
 		for (int i = 0; i < 200; i++)
 		{
-			this.deck.add(new AdrenalineRush());
-			this.deck.add(new Shotgun());
-			this.deck.add(new HystericalParalysis());
-			this.deck.add(new GainTwoHealthNoMove());
-			this.deck.add(new UntiedShoe());
+//			this.deck.add(new AdrenalineRush());
+//			this.deck.add(new Shotgun());
+//			this.deck.add(new HystericalParalysis());
+//			this.deck.add(new GainTwoHealthNoMove());
+//			this.deck.add(new UntiedShoe());
+			this.deck.add(new KeysAreStillIn());
+			this.deck.add(new ButterFingers());
 		}
 		
 		Collections.shuffle(this.deck);
@@ -30,6 +32,19 @@ public class EventCardDeck
 		this.activeCards.add(card);
 	}
 	
+	public EventCard removeByActivator(Player activator)
+	{
+		for (EventCard card: this.activeCards)
+		{
+			if(card.getActivator().equals(activator))
+			{
+				removeActiveCard(card);
+				return card;
+			}
+		}
+		return null;
+	}
+
 	public void removeActiveCard(EventCard card)
 	{
 		this.activeCards.remove(card);

@@ -10,7 +10,7 @@ public class RollDice
 		int roll = (int) (Math.random() * 6 + 1);
 		Player player = GameHandler.instance.getPlayer(GameHandler.instance.getTurn());
 		if (GameHandler.instance.getCurrentState() == GameState.playerMovementDieRoll)
-		{
+		{			
 			roll = GameHandler.instance.getEventDeck().doCardAction(player, AdrenalineRush.class, roll);
 			roll = GameHandler.instance.getEventDeck().doCardAction(player, UntiedShoe.class, roll);
 		}
