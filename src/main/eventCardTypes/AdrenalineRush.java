@@ -4,6 +4,8 @@ import gui.*;
 
 import javax.swing.*;
 
+import internationalization.*;
+
 import main.*;
 import main.GameHandler.GameState;
 
@@ -12,7 +14,7 @@ public class AdrenalineRush extends OneUseCard
 	
 	public AdrenalineRush()
 	{
-		super(PossibleTarget.Self, "Adrenaline Rush", "You can move a lot now!");
+		super(PossibleTarget.Self, "Adrenaline Rush", Messages.getString("EventCard.AdrenalinRush.desc"));
 	}
 	
 	@Override
@@ -21,14 +23,14 @@ public class AdrenalineRush extends OneUseCard
 		GameHandler game = GameHandler.instance;
 		if (game.getCurrentState() == GameState.playerMovementDieRoll)
 		{
-			DialogHandler.showMessage(null, "Your movement roll was multiplied by 2 by the Adrenaline Rush card!", getName(),
+			DialogHandler.showMessage(null, Messages.getString("EventCard.AdrenalineRush.move_mult"), getName(),
 					JOptionPane.INFORMATION_MESSAGE);
 			return num * 2;
 		}
 		else
 		// if (game.getCurrentState() == GameState.zombieCombat)
 		{
-			DialogHandler.showMessage(null, "Your combat roll was increased by 2 by the Adrenaline Rush card!", getName(),
+			DialogHandler.showMessage(null, Messages.getString("EventCard.AdrenalineRush.combat_add"), getName(),
 					JOptionPane.INFORMATION_MESSAGE);
 			return num + 2;
 		}

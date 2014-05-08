@@ -4,17 +4,19 @@ import gui.*;
 
 import javax.swing.*;
 
+import internationalization.*;
+
 public class Shotgun extends MultipleUseCard
 {
 	public Shotgun()
 	{
-		super(PossibleTarget.Self, "Shotgun", "Get +1 to your next 3 combat rolls", 3);
+		super(PossibleTarget.Self, "Shotgun", Messages.getString("EventCard.Shotgun.desc"), 3);
 	}
 	
 	@Override
 	public int behavior(int num)
 	{
-		DialogHandler.showMessage(null, "Your combat roll was increased by 1 by the Shotgun card!", getName(), JOptionPane.INFORMATION_MESSAGE);
+		DialogHandler.showMessage(null, Messages.getString("EventCard.Shotgun.combat_add"), getName(), JOptionPane.INFORMATION_MESSAGE);
 		return num + 1;
 	}
 }

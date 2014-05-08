@@ -6,12 +6,14 @@ import javax.swing.*;
 
 import main.*;
 
+import internationalization.*;
+
 public class Fear extends OneUseCard
 {
 	
 	public Fear()
 	{
-		super(PossibleTarget.Pick, "Fear", "Target player may not move by any means during their next turn.");
+		super(PossibleTarget.Pick, "Fear", Messages.getString("EventCard.Fear.desc"));
 		
 	}
 	
@@ -21,7 +23,8 @@ public class Fear extends OneUseCard
 		Player player = getTargetPlayer();
 		player.setMovesRemaining(0);
 		GameHandler.instance.nextGameState();
-		DialogHandler.showMessage(null, "Your movement got skipped", getName(), JOptionPane.WARNING_MESSAGE);
+		DialogHandler.showMessage(null, Messages.getString("EventCard.Fear.skip_move"), getName(), JOptionPane.WARNING_MESSAGE);
+	
 		return 1;
 	}
 	

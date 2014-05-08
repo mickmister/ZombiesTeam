@@ -3,16 +3,18 @@ package main.eventCardTypes;
 import main.GameHandler;
 import main.Player;
 
+import internationalization.*;
+
 public class KeysAreStillIn extends OneUseCard {
 
 	public KeysAreStillIn() {
-		super(PossibleTarget.Self, "The Keys Are Still In It", "Move up to 10 spaces in place of making a movement roll. You must fight zombies as normal.");
+		super(PossibleTarget.Self, "The Keys Are Still In It", Messages.getString("EventCard.KeysAreStillIn.desc"));
 	}
 
 	@Override
 	public int behavior(int num) {
 		Player player = GameHandler.instance.getPlayer(GameHandler.instance.getTurn());
-		player.setMovesRemaining(10000);
+		player.setMovesRemaining(10);
 		GameHandler.instance.nextGameState();
 		return 1;
 	}
