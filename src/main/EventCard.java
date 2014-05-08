@@ -1,5 +1,8 @@
 package main;
 
+import main.MapTileDeck.SpecialNames;
+import main.eventCardTypes.PlayUntilRevoked;
+
 public abstract class EventCard
 {
 	public enum PossibleTarget
@@ -63,5 +66,20 @@ public abstract class EventCard
 	public Player getActivator()
 	{
 		return this.activator;
+	}
+
+	public boolean checkCorrectBuilding(Player player) {
+		SpecialNames buildingName = null;
+		if(this instanceof PlayUntilRevoked)
+		{
+			buildingName = ((PlayUntilRevoked) this).getBuildingName();
+		}
+		else
+		{
+		//	buildingName = ((PlayWhenDiscarded) this).getBuildingName();
+		}
+		SpecialNames currentBuilding = GameHandler.instance.getMap().getMapTile(player.getTileLocation().y, player.getTileLocation().x).getSpecialName();
+
+		return buildingName.equals(currentBuilding);
 	}
 }

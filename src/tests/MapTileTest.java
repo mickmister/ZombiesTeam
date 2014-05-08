@@ -7,6 +7,7 @@ import java.awt.*;
 import main.*;
 import main.GameHandler.GameState;
 import main.MapTile.Shape;
+import main.MapTileDeck.SpecialNames;
 
 import org.junit.*;
 
@@ -20,7 +21,7 @@ public class MapTileTest
 	@Test
 	public void testTempZombiePos()
 	{
-		MapTile test = new MapTile(Shape.quad, null);
+		MapTile test = new MapTile(Shape.quad);
 		
 		assertEquals(null, test.getTempZombiePos());
 		test.setTempZombiePos(new Point(1, 2));
@@ -39,7 +40,7 @@ public class MapTileTest
 	@Test
 	public void testTempBulletPos()
 	{
-		MapTile test = new MapTile(Shape.quad, null);
+		MapTile test = new MapTile(Shape.quad);
 		
 		assertEquals(null, test.getTempBulletPos());
 		test.setTempBulletPos(new Point(1, 2));
@@ -58,7 +59,7 @@ public class MapTileTest
 	@Test
 	public void testTempLifePos()
 	{
-		MapTile test = new MapTile(Shape.quad, null);
+		MapTile test = new MapTile(Shape.quad);
 		
 		assertEquals(null, test.getTempLifePos());
 		test.setTempLifePos(new Point(1, 2));
@@ -78,7 +79,7 @@ public class MapTileTest
 	public void testPlaceTempZombie()
 	{
 		new GameHandler(2);
-		MapTile test = new MapTile(Shape.quad, null);
+		MapTile test = new MapTile(Shape.quad);
 		// MapTile will begin with 4 zombies to place because it is a Quad shape.
 		assertEquals(4, test.getZombiesToPlace());
 		
@@ -110,7 +111,7 @@ public class MapTileTest
 	{
 		new GameHandler(2);
 		GameHandler game = GameHandler.instance;
-		MapTile building = new MapTile(Shape.special, "2 3 2 1 1 1 0 0 0" + " " + "0 0 2");
+		MapTile building = new MapTile(Shape.special, SpecialNames.ArmySurplus, "2 3 2 1 1 1 0 0 0" + " " + "0 0 2");
 		// Special tile that has 0 zombies, 0 lifetokens, and 3 bullet tokens.
 		Map map = game.getMap();
 		map.setTempTile(building);
@@ -141,7 +142,7 @@ public class MapTileTest
 	{
 		new GameHandler(2);
 		GameHandler game = GameHandler.instance;
-		MapTile building = new MapTile(Shape.special, "2 3 2 1 1 1 0 0 0" + " " + "0 2 0");
+		MapTile building = new MapTile(Shape.special, SpecialNames.ArmySurplus, "2 3 2 1 1 1 0 0 0" + " " + "0 2 0");
 		// Special tile that has 0 zombies, 3 lifetokens, and 0 bullet tokens.
 		Map map = game.getMap();
 		map.setTempTile(building);
@@ -170,7 +171,7 @@ public class MapTileTest
 	@Test
 	public void testToString()
 	{
-		MapTile tile = new MapTile(Shape.quad, null);
+		MapTile tile = new MapTile(Shape.quad);
 		String quadString = "MapTile quad shape:\n" + "[ grass\troad\tgrass\t]\n" + "[ road\troad\troad\t]\n" + "[ grass\troad\tgrass\t]\n";
 		assertEquals(quadString, tile.toString());
 	}

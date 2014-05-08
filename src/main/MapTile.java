@@ -7,6 +7,7 @@ import java.awt.*;
 
 import javax.swing.*;
 
+import main.MapTileDeck.SpecialNames;
 import main.TileCell.CellType;
 
 /**
@@ -27,6 +28,7 @@ public class MapTile
 	private Point tempZombiePos;
 	private Point tempBulletPos;
 	private Point tempLifePos;
+	private SpecialNames specialName;
 	
 	public enum Shape
 	{
@@ -36,7 +38,7 @@ public class MapTile
 	// 2D array organized as [row, column].
 	private TileCell[][] grid;
 	
-	public MapTile(Shape shape, String special)
+	public MapTile(Shape shape, SpecialNames name, String specialFormat)
 	{
 		this.shape = shape;
 		this.tempZombiePos = null;
@@ -65,11 +67,22 @@ public class MapTile
 				this.zombiesToPlace = 0;
 				break;
 			case special:
-				processSpecialString(special);
+				this.specialName = name;
+				processSpecialString(specialFormat);
 				break;
 			default:
 				throw new IllegalArgumentException(Messages.getString("MapTile.invalid_shape_type") + shape); //$NON-NLS-1$
 		}
+	}
+	
+	public MapTile(Shape shape)
+	{
+		this(shape, null, null);
+	}
+	
+	public SpecialNames getSpecialName()
+	{
+		return this.specialName;
 	}
 	
 	private void processSpecialString(String string)

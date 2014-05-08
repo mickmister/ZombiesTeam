@@ -25,10 +25,10 @@ public class Map
 		{
 			for (int x = 0; x < this.SIZE; x += 1)
 			{
-				this.mapTiles[y][x] = new MapTile(Shape.empty, null);
+				this.mapTiles[y][x] = new MapTile(Shape.empty);
 			}
 		}
-		this.mapTiles[this.SIZE / 2][this.SIZE / 2] = new MapTile(Shape.quad, null);
+		this.mapTiles[this.SIZE / 2][this.SIZE / 2] = new MapTile(Shape.quad);
 		this.tempTile = null;
 		this.tempZombieTile = null;
 		this.tempBulletTile = null;

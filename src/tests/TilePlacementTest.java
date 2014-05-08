@@ -20,7 +20,7 @@ public class TilePlacementTest
 	public void testPlacementForCornersOfMap()
 	{
 		Map test = new Map();
-		MapTile tile = new MapTile(Shape.quad, null);
+		MapTile tile = new MapTile(Shape.quad);
 		assertEquals(false, test.checkValidPosition(tile, 0, 0));
 		assertEquals(false, test.checkValidPosition(tile, 10, 10));
 	}
@@ -30,7 +30,7 @@ public class TilePlacementTest
 	public void testPlaceTempLTile()
 	{
 		Map testMap = new Map();
-		MapTile testL = new MapTile(Shape.L, null);
+		MapTile testL = new MapTile(Shape.L);
 		testMap.setTempTile(testL);
 		testMap.setTempPos(new Point(6, 5));
 		
@@ -42,14 +42,14 @@ public class TilePlacementTest
 	{
 		// Placing a valid L tile on top of the town square
 		Map testMap = new Map();
-		MapTile testL = new MapTile(Shape.L, null);
+		MapTile testL = new MapTile(Shape.L);
 		testMap.setTempTile(testL);
 		testMap.setTempPos(new Point(5, 4));
 		testMap.placeTempTile();
 		
 		// Testing to make sure we can't place a tile on top of an already
 		// placed tile
-		MapTile testL2 = new MapTile(Shape.L, null);
+		MapTile testL2 = new MapTile(Shape.L);
 		testMap.setTempTile(testL2);
 		testMap.setTempPos(new Point(5, 4));
 		testMap.placeTempTile();
@@ -60,7 +60,7 @@ public class TilePlacementTest
 	{
 		// Placing a tile on top of town square should throw exception
 		Map testMap = new Map();
-		MapTile testL = new MapTile(Shape.L, null);
+		MapTile testL = new MapTile(Shape.L);
 		testMap.setTempTile(testL);
 		testMap.setTempPos(new Point(5, 5));
 		testMap.placeTempTile();
@@ -71,7 +71,7 @@ public class TilePlacementTest
 	public void testPlaceTempStraightTile()
 	{
 		Map testMap = new Map();
-		MapTile testStraight = new MapTile(Shape.straight, null);
+		MapTile testStraight = new MapTile(Shape.straight);
 		testMap.setTempTile(testStraight);
 		testMap.setTempPos(new Point(5, 6));
 		
@@ -83,14 +83,14 @@ public class TilePlacementTest
 	{
 		// Placing a valid straight tile to the right of the town square
 		Map testMap = new Map();
-		MapTile testStraight = new MapTile(Shape.straight, null);
+		MapTile testStraight = new MapTile(Shape.straight);
 		testMap.setTempTile(testStraight);
 		testMap.setTempPos(new Point(6, 5));
 		testMap.placeTempTile();
 		
 		// Testing to make sure we can't place a tile on top of an already
 		// placed tile
-		MapTile testStraight2 = new MapTile(Shape.L, null);
+		MapTile testStraight2 = new MapTile(Shape.L);
 		testMap.setTempTile(testStraight2);
 		testMap.setTempPos(new Point(6, 5));
 		testMap.placeTempTile();
@@ -101,7 +101,7 @@ public class TilePlacementTest
 	{
 		// Placing a tile on top of town square should throw exception
 		Map testMap = new Map();
-		MapTile testStraight = new MapTile(Shape.straight, null);
+		MapTile testStraight = new MapTile(Shape.straight);
 		testMap.setTempTile(testStraight);
 		testMap.setTempPos(new Point(5, 5));
 		testMap.placeTempTile();
@@ -112,7 +112,7 @@ public class TilePlacementTest
 	public void testPlaceTempTetrisTile()
 	{
 		Map testMap = new Map();
-		MapTile testTetr = new MapTile(Shape.T, null);
+		MapTile testTetr = new MapTile(Shape.T);
 		testMap.setTempTile(testTetr);
 		testMap.setTempPos(new Point(5, 6));
 		
@@ -124,14 +124,14 @@ public class TilePlacementTest
 	{
 		// Placing a valid straight tile to the right of the town square
 		Map testMap = new Map();
-		MapTile testTetr = new MapTile(Shape.T, null);
+		MapTile testTetr = new MapTile(Shape.T);
 		testMap.setTempTile(testTetr);
 		testMap.setTempPos(new Point(6, 5));
 		testMap.placeTempTile();
 		
 		// Testing to make sure we can't place a tile on top of an already
 		// placed tile
-		MapTile testTetr2 = new MapTile(Shape.T, null);
+		MapTile testTetr2 = new MapTile(Shape.T);
 		testMap.setTempTile(testTetr2);
 		testMap.setTempPos(new Point(6, 5));
 		testMap.placeTempTile();
@@ -142,7 +142,7 @@ public class TilePlacementTest
 	{
 		// Placing a tile on top of town square should throw exception
 		Map testMap = new Map();
-		MapTile testTetr = new MapTile(Shape.T, null);
+		MapTile testTetr = new MapTile(Shape.T);
 		testMap.setTempTile(testTetr);
 		testMap.setTempPos(new Point(5, 5));
 		testMap.placeTempTile();

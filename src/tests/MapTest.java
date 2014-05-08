@@ -10,6 +10,7 @@ import javax.swing.*;
 import main.*;
 import main.GameHandler.GameState;
 import main.MapTile.Shape;
+import main.MapTileDeck.SpecialNames;
 
 import org.junit.*;
 
@@ -19,7 +20,7 @@ public class MapTest
 	public void testGetAndSetTempTile()
 	{
 		Map map = new Map();
-		MapTile tile = new MapTile(Shape.quad, null);
+		MapTile tile = new MapTile(Shape.quad);
 		assertEquals(null, map.getTempTile());
 		map.setTempTile(tile);
 		assertEquals(tile, map.getTempTile());
@@ -29,7 +30,7 @@ public class MapTest
 	public void testAddTempTile()
 	{
 		Map map = new Map();
-		MapTile tile = new MapTile(Shape.quad, null);
+		MapTile tile = new MapTile(Shape.quad);
 		map.setTempPos(new Point(1, 1));
 		map.addTempTile(tile);
 		assertEquals(tile, map.getTempTile());
@@ -53,7 +54,7 @@ public class MapTest
 	public void testPlaceTempTile()
 	{
 		Map map = new Map();
-		MapTile tile = new MapTile(Shape.quad, null);
+		MapTile tile = new MapTile(Shape.quad);
 		map.addTempTile(tile);
 		map.setTempPos(new Point(4, 5));
 		map.placeTempTile();
@@ -85,7 +86,7 @@ public class MapTest
 		player = GameHandler.instance.getPlayer(0);
 		assertEquals("Draw and place a map tile", map.getCurrentMessage(player));
 		
-		MapTile specialTile = new MapTile(Shape.special, "1 1 1 1 1 1 1 1 1" + " " + "6 2 3");
+		MapTile specialTile = new MapTile(Shape.special, SpecialNames.ArmySurplus, "1 1 1 1 1 1 1 1 1" + " " + "6 2 3");
 		map.addTempTile(specialTile);
 		map.setTempPos(new Point(4, 5));
 		map.placeTempTile();

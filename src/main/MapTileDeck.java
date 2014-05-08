@@ -17,7 +17,7 @@ public class MapTileDeck
 		Collections.shuffle(this.deck);
 		
 		String helipad = "1 1 1 1 1 1 1 1 1" + " " + "9 0 0"; // Helipad //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		this.deck.add(new MapTile(Shape.special, helipad));
+		this.deck.add(new MapTile(Shape.special, SpecialNames.Helipad, helipad));
 	}
 	
 	public MapTile getNextCard()
@@ -36,15 +36,24 @@ public class MapTileDeck
 	{
 		for (int i = 0; i < this.NUM_CARDS; i++)
 		{
-			this.deck.add(new MapTile(Shape.L, null));
-			this.deck.add(new MapTile(Shape.quad, null));
-			this.deck.add(new MapTile(Shape.straight, null));
-			this.deck.add(new MapTile(Shape.T, null));
+//			this.deck.add(new MapTile(Shape.L));
+//			this.deck.add(new MapTile(Shape.quad));
+//			this.deck.add(new MapTile(Shape.straight));
+//			this.deck.add(new MapTile(Shape.T));
+			this.deck.add(new MapTile(Shape.special, SpecialNames.SkateShop, "2 3 2 1 1 1 0 1 0" + " " + "3 0 1"));
 		}
+	}
+	
+	public enum SpecialNames
+	{
+		Hosipital, LawnAndGarden, DrugStore, PoliceStation, HardwareStore, SkateShop, SportingGoods, FloristShop, ToyStore, ArmySurplus, FireStation, GasStation, Helipad
 	}
 	
 	private void addSpecialMapTiles()
 	{
+		SpecialNames[] names = {SpecialNames.Hosipital, SpecialNames.LawnAndGarden, SpecialNames.DrugStore, SpecialNames.PoliceStation,
+				SpecialNames.HardwareStore, SpecialNames.SkateShop, SpecialNames.SportingGoods, SpecialNames.FloristShop, SpecialNames.ToyStore, 
+				SpecialNames.ArmySurplus, SpecialNames.FireStation, SpecialNames.GasStation};
 		String specialTiles = ""; //$NON-NLS-1$
 		specialTiles += "2 2 2 2 3 2 2 1 2" + " " + "8 4 0" + "\n"; // Hospital //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		specialTiles += "2 2 2 2 3 2 2 1 2" + " " + "6 2 3" + "\n"; // Lawn & Garden store //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
@@ -60,9 +69,11 @@ public class MapTileDeck
 		specialTiles += "2 3 2 1 1 1 0 1 0" + " " + "3 1 2" + "\n"; // Gas Station //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		
 		String[] lines = specialTiles.split("\n"); //$NON-NLS-1$
+		int i = 0;
 		for (String line : lines)
 		{
-			this.deck.add(new MapTile(Shape.special, line));
+			this.deck.add(new MapTile(Shape.special, names[i], line));
+			i++;
 		}
 	}
 }

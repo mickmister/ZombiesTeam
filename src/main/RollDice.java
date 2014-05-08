@@ -13,6 +13,7 @@ public class RollDice
 		{			
 			roll = GameHandler.instance.getEventDeck().doCardAction(player, AdrenalineRush.class, roll);
 			roll = GameHandler.instance.getEventDeck().doCardAction(player, UntiedShoe.class, roll);
+			roll = GameHandler.instance.getEventDeck().doCardAction(player, Skateboard.class, roll);
 		}
 		if (GameHandler.instance.getCurrentState() == GameState.zombieCombat)
 		{
