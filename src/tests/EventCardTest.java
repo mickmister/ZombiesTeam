@@ -8,6 +8,7 @@ import java.util.*;
 import main.*;
 import main.EventCard.PossibleTarget;
 import main.GameHandler.GameState;
+import main.MapTileDeck.SpecialNames;
 import main.eventCardTypes.*;
 
 import org.junit.*;
@@ -55,19 +56,19 @@ public class EventCardTest
 		assertEquals(expected2, result);
 	}
 	
-	@Test
-	public void testAdrenalineRushIdentifiers()
-	{
-		new GameHandler(2);
-		GameHandler game = GameHandler.instance;
-		Player player = game.getPlayer(0);
-		AdrenalineRush card = new AdrenalineRush();
-		card.setTargetPlayer(player);
-		assertEquals("Adrenaline Rush", card.getName());
-		assertEquals("You can move a lot now!", card.getDescription());
-		assertEquals(PossibleTarget.Self, card.getPossibleTarget());
-		assertEquals(player, card.getTargetPlayer());
-	}
+//	@Test
+//	public void testAdrenalineRushIdentifiers()
+//	{
+//		new GameHandler(2);
+//		GameHandler game = GameHandler.instance;
+//		Player player = game.getPlayer(0);
+//		AdrenalineRush card = new AdrenalineRush();
+//		card.setTargetPlayer(player);
+//		assertEquals("Adrenaline Rush", card.getName());
+//		assertEquals("You can move a lot now!", card.getDescription());
+//		assertEquals(PossibleTarget.Self, card.getPossibleTarget());
+//		assertEquals(player, card.getTargetPlayer());
+//	}
 	
 	@Test
 	public void testAdrenalineRushAction()
@@ -249,5 +250,71 @@ public class EventCardTest
 		assertEquals(2, player1.getLifeTokens());
 		assertEquals(1, player2.getCellLocation().x);
 		
+	}
+	
+	@Test
+	public void testButterFingers()
+	{
+		new GameHandler(2);
+		GameHandler game = GameHandler.instance;
+		Player player1 = game.getPlayer(0);
+		Player player2 = game.getPlayer(1);
+		ButterFingers card = new ButterFingers();
+		card.setActivator(player1);
+		card.setTargetPlayer(player2);
+		assertEquals(3, player2.getBulletTokens());
+		card.behavior(0);
+		assertEquals(1, player2.getBulletTokens());
+		card.behavior(0);
+		assertEquals(0, player2.getBulletTokens());
+		Shotgun card2 = new Shotgun();
+		card2.setActivator(player2);
+		game.getEventDeck().addActiveCard(card2);
+		assertTrue(game.getEventDeck().activeDeckContains(card2));
+		card.behavior(0);
+		assertFalse(game.getEventDeck().activeDeckContains(card2));		
+	}
+	
+	@Test
+	public void testSkateboard()
+	{
+		new GameHandler(2);
+		Player player = GameHandler.instance.getPlayer(0);
+		Skateboard card = new Skateboard();
+		assertEquals(SpecialNames.SkateShop, card.getBuildingName());
+		card.setActivator(player);
+		card.setTargetPlayer(player);
+		int base = 5;
+		int expected = 7;
+		int result = card.action(base);
+		assertEquals(expected, result);
+	}
+	
+	@Test
+	public void testKeysAreStillIn()
+	{
+		new GameHandler(2);
+		Player player = GameHandler.instance.getPlayer(0);
+		KeysAreStillIn card = new KeysAreStillIn();
+		card.setActivator(player);
+		card.setTargetPlayer(player);
+		GameHandler.instance.nextGameState();//zombie placement
+		assertEquals(1, card.behavior(0));
+		GameHandler.instance.nextGameState();
+		assertEquals(GameState.playerMovement, GameHandler.instance.getCurrentState());
+		assertEquals(10, player.getMovesRemaining());		
+	}
+	
+	@Test
+	public void testFireAxe()
+	{
+		new GameHandler(2);
+		Player player = GameHandler.instance.getPlayer(0);
+		FireAxe card = new FireAxe();
+		card.setActivator(player);
+		card.setTargetPlayer(player);
+		GameHandler.instance.getEventDeck().addActiveCard(card);
+		assertEquals(4, card.action(3));
+		assertTrue(GameHandler.instance.getEventDeck().activeDeckContains(card));
 	}
 }

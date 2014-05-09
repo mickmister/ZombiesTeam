@@ -72,4 +72,8 @@ public class EventCardDeck
 	{
 		return this.deck.remove(0);
 	}
+
+	public boolean activeDeckContains(EventCard card) {
+		return this.activeCards.contains(card);
+	}
 }

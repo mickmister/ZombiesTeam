@@ -36,11 +36,11 @@ public class MapTileDeck
 	{
 		for (int i = 0; i < this.NUM_CARDS; i++)
 		{
-//			this.deck.add(new MapTile(Shape.L));
-//			this.deck.add(new MapTile(Shape.quad));
-//			this.deck.add(new MapTile(Shape.straight));
-//			this.deck.add(new MapTile(Shape.T));
-			this.deck.add(new MapTile(Shape.special, SpecialNames.SkateShop, "2 3 2 1 1 1 0 1 0" + " " + "3 0 1"));
+			this.deck.add(new MapTile(Shape.L));
+			this.deck.add(new MapTile(Shape.quad));
+			this.deck.add(new MapTile(Shape.straight));
+			this.deck.add(new MapTile(Shape.T));
+//			this.deck.add(new MapTile(Shape.special, SpecialNames.SkateShop, "2 3 2 1 1 1 0 1 0" + " " + "3 0 1"));
 		}
 	}
 	
