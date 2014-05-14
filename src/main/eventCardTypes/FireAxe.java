@@ -9,14 +9,14 @@ import main.MapTileDeck.SpecialNames;
 public class FireAxe extends PlayUntilRevoked {
 
 	public FireAxe() {
-		super(PossibleTarget.Self, "Fire Axe", "Play this card in front of you when you are in the Fire Station. Add +1 to all subsequent combat rolls", 
+		super(PossibleTarget.Self, Messages.getString("FireAxe.name"), Messages.getString("FireAxe.desc"),  //$NON-NLS-1$ //$NON-NLS-2$
 				SpecialNames.FireStation);
 	}
 
 	@Override
 	public int behavior(int num) 
 	{
-		DialogHandler.showMessage(null, "Your combat roll got +1'd by your Fire Axe!", this.getName(), JOptionPane.INFORMATION_MESSAGE);
+		DialogHandler.showMessage(null, Messages.getString("FireAxe.message"), this.getName(), JOptionPane.INFORMATION_MESSAGE); //$NON-NLS-1$
 		return num + 1;
 	}
 	

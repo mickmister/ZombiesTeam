@@ -56,19 +56,19 @@ public class EventCardTest
 		assertEquals(expected2, result);
 	}
 	
-//	@Test
-//	public void testAdrenalineRushIdentifiers()
-//	{
-//		new GameHandler(2);
-//		GameHandler game = GameHandler.instance;
-//		Player player = game.getPlayer(0);
-//		AdrenalineRush card = new AdrenalineRush();
-//		card.setTargetPlayer(player);
-//		assertEquals("Adrenaline Rush", card.getName());
-//		assertEquals("You can move a lot now!", card.getDescription());
-//		assertEquals(PossibleTarget.Self, card.getPossibleTarget());
-//		assertEquals(player, card.getTargetPlayer());
-//	}
+	@Test
+	public void testAdrenalineRushIdentifiers()
+	{
+		new GameHandler(2);
+		GameHandler game = GameHandler.instance;
+		Player player = game.getPlayer(0);
+		AdrenalineRush card = new AdrenalineRush();
+		card.setTargetPlayer(player);
+		assertEquals("Adrenaline Rush", card.getName());
+		assertEquals("You can move a lot now!", card.getDescription());
+		assertEquals(PossibleTarget.Self, card.getPossibleTarget());
+		assertEquals(player, card.getTargetPlayer());
+	}
 	
 	@Test
 	public void testAdrenalineRushAction()

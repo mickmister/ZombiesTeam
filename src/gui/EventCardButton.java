@@ -1,6 +1,6 @@
 package gui;
 
-import internationalization.*;
+import internationalization.Messages;
 
 import java.awt.event.*;
 

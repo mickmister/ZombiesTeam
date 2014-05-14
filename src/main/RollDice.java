@@ -19,6 +19,7 @@ public class RollDice
 		{
 			roll = GameHandler.instance.getEventDeck().doCardAction(player, AdrenalineRush.class, roll);
 			roll = GameHandler.instance.getEventDeck().doCardAction(player, Shotgun.class, roll);
+			roll = GameHandler.instance.getEventDeck().doCardAction(player, FireAxe.class, roll);
 		}
 		
 		return roll;

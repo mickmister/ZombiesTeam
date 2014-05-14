@@ -14,7 +14,7 @@ public class AdrenalineRush extends OneUseCard
 	
 	public AdrenalineRush()
 	{
-		super(PossibleTarget.Self, "Adrenaline Rush", Messages.getString("EventCard.AdrenalinRush.desc"));
+		super(PossibleTarget.Self, "Adrenaline Rush", Messages.getString("EventCard.AdrenalineRush.desc"));
 	}
 	
 	@Override

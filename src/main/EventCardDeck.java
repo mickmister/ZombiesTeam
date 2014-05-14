@@ -20,9 +20,10 @@ public class EventCardDeck
 //			this.deck.add(new HystericalParalysis());
 //			this.deck.add(new GainTwoHealthNoMove());
 //			this.deck.add(new UntiedShoe());
-//			this.deck.add(new KeysAreStillIn());
+			this.deck.add(new KeysAreStillIn());
 			this.deck.add(new ButterFingers());
 			this.deck.add(new Skateboard());
+			this.deck.add(new FireAxe());
 		}
 		
 		Collections.shuffle(this.deck);
