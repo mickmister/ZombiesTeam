@@ -1,7 +1,7 @@
 package main;
 
 import main.MapTileDeck.SpecialNames;
-import main.eventCardTypes.PlayUntilRevoked;
+import main.eventCardTypes.*;
 
 public abstract class EventCard
 {
@@ -58,25 +58,27 @@ public abstract class EventCard
 	public abstract int behavior(int num);
 	
 	public abstract void checkRemove();
-
-	public void setActivator(Player player) {
-		this.activator = player;		
+	
+	public void setActivator(Player player)
+	{
+		this.activator = player;
 	}
 	
 	public Player getActivator()
 	{
 		return this.activator;
 	}
-
-	public boolean checkCorrectBuilding(Player player) {
+	
+	public boolean checkCorrectBuilding(Player player)
+	{
 		SpecialNames buildingName = null;
-		if(this instanceof PlayUntilRevoked)
+		if (this instanceof PlayUntilRevoked)
 		{
 			buildingName = ((PlayUntilRevoked) this).getBuildingName();
 		}
 		else
 		{
-		//	buildingName = ((PlayWhenDiscarded) this).getBuildingName();
+			// buildingName = ((PlayWhenDiscarded) this).getBuildingName();
 		}
 		MapTile tile = GameHandler.instance.getMap().getMapTile(player.getTileLocation().y, player.getTileLocation().x);
 		SpecialNames currentBuilding = tile.getSpecialName();

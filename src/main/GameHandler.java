@@ -175,7 +175,7 @@ public class GameHandler
 					if (didAction == 0)
 					{
 						didAction = this.eventDeck.doCardAction(player, GainTwoHealthNoMove.class, 0);
-						if(didAction == 0)
+						if (didAction == 0)
 						{
 							this.eventDeck.doCardAction(player, KeysAreStillIn.class, 0);
 						}
@@ -203,7 +203,7 @@ public class GameHandler
 					if (didAction == 0)
 					{
 						didAction = this.eventDeck.doCardAction(player, GainTwoHealthNoMove.class, 0);
-						if(didAction == 0)
+						if (didAction == 0)
 						{
 							this.eventDeck.doCardAction(player, KeysAreStillIn.class, 0);
 						}
@@ -223,7 +223,7 @@ public class GameHandler
 				if (didAction == 0)
 				{
 					didAction = this.eventDeck.doCardAction(player, GainTwoHealthNoMove.class, 0);
-					if(didAction == 0)
+					if (didAction == 0)
 					{
 						this.eventDeck.doCardAction(player, KeysAreStillIn.class, 0);
 					}

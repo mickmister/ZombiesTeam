@@ -1,21 +1,25 @@
 package main.eventCardTypes;
 
-import java.util.MissingResourceException;
-import java.util.ResourceBundle;
+import java.util.*;
 
-public class Messages {
+public class Messages
+{
 	private static final String BUNDLE_NAME = "internationalization.messages"; //$NON-NLS-1$
-
-	private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle
-			.getBundle(BUNDLE_NAME);
-
-	private Messages() {
+	
+	private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle.getBundle(Messages.BUNDLE_NAME);
+	
+	private Messages()
+	{
 	}
-
-	public static String getString(String key) {
-		try {
-			return RESOURCE_BUNDLE.getString(key);
-		} catch (MissingResourceException e) {
+	
+	public static String getString(String key)
+	{
+		try
+		{
+			return Messages.RESOURCE_BUNDLE.getString(key);
+		}
+		catch (MissingResourceException e)
+		{
 			return '!' + key + '!';
 		}
 	}

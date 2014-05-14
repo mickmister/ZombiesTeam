@@ -6,8 +6,6 @@ import javax.swing.*;
 
 import main.*;
 
-import internationalization.*;
-
 public class Fear extends OneUseCard
 {
 	
@@ -24,7 +22,7 @@ public class Fear extends OneUseCard
 		player.setMovesRemaining(0);
 		GameHandler.instance.nextGameState();
 		DialogHandler.showMessage(null, Messages.getString("EventCard.Fear.skip_move"), getName(), JOptionPane.WARNING_MESSAGE);
-	
+		
 		return 1;
 	}
 	

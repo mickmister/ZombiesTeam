@@ -49,11 +49,12 @@ public class EventCardButton extends JButton implements DataListener, ActionList
 		if (!player.checkCardPlayed())
 		{
 			EventCard card = player.getCardFromHand(this.index);
-			if(card instanceof PlayUntilRevoked) // || card instanceof PlayWhenDiscarded
+			if (card instanceof PlayUntilRevoked) // || card instanceof PlayWhenDiscarded
 			{
-				if(card.checkCorrectBuilding(player))
+				if (card.checkCorrectBuilding(player))
 				{
-					DialogHandler.showMessage(null, "Special building card played successfully!", "Special Building Card", JOptionPane.INFORMATION_MESSAGE);
+					DialogHandler.showMessage(null, "Special building card played successfully!", "Special Building Card",
+							JOptionPane.INFORMATION_MESSAGE);
 				}
 				else
 				{
@@ -99,7 +100,7 @@ public class EventCardButton extends JButton implements DataListener, ActionList
 				}
 				if (target == -1)
 				{
-					if(player.getNumber() == 0)
+					if (player.getNumber() == 0)
 					{
 						target = 1;
 					}
@@ -131,5 +132,5 @@ public class EventCardButton extends JButton implements DataListener, ActionList
 					Messages.getString("EventCardButton.cannot_play_2_cards_title"), JOptionPane.WARNING_MESSAGE); //$NON-NLS-1$
 		}
 	}
-
+	
 }

@@ -6,8 +6,6 @@ import javax.swing.*;
 
 import main.*;
 
-import internationalization.*;
-
 public class HystericalParalysis extends OneUseCard
 {
 	

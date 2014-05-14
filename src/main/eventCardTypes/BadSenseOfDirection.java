@@ -6,8 +6,6 @@ import javax.swing.*;
 
 import main.*;
 
-import internationalization.*;
-
 public class BadSenseOfDirection extends OneUseCard
 {
 	
@@ -19,8 +17,7 @@ public class BadSenseOfDirection extends OneUseCard
 	@Override
 	public int behavior(int num)
 	{
-		DialogHandler
-				.showMessage(null, Messages.getString("EventCard.BadSenseOfDirection.discard_life"), getName(), JOptionPane.INFORMATION_MESSAGE);
+		DialogHandler.showMessage(null, Messages.getString("EventCard.BadSenseOfDirection.discard_life"), getName(), JOptionPane.INFORMATION_MESSAGE);
 		GameHandler.instance.getPlayer(num).loseLifeToken();
 		Player target = getTargetPlayer();
 		target.resetPlayerLocation();

@@ -4,8 +4,6 @@ import gui.*;
 
 import javax.swing.*;
 
-import internationalization.*;
-
 import main.*;
 import main.GameHandler.GameState;
 
@@ -23,15 +21,13 @@ public class AdrenalineRush extends OneUseCard
 		GameHandler game = GameHandler.instance;
 		if (game.getCurrentState() == GameState.playerMovementDieRoll)
 		{
-			DialogHandler.showMessage(null, Messages.getString("EventCard.AdrenalineRush.move_mult"), getName(),
-					JOptionPane.INFORMATION_MESSAGE);
+			DialogHandler.showMessage(null, Messages.getString("EventCard.AdrenalineRush.move_mult"), getName(), JOptionPane.INFORMATION_MESSAGE);
 			return num * 2;
 		}
 		else
 		// if (game.getCurrentState() == GameState.zombieCombat)
 		{
-			DialogHandler.showMessage(null, Messages.getString("EventCard.AdrenalineRush.combat_add"), getName(),
-					JOptionPane.INFORMATION_MESSAGE);
+			DialogHandler.showMessage(null, Messages.getString("EventCard.AdrenalineRush.combat_add"), getName(), JOptionPane.INFORMATION_MESSAGE);
 			return num + 2;
 		}
 	}

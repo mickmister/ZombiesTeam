@@ -4,8 +4,6 @@ import gui.*;
 
 import javax.swing.*;
 
-import internationalization.*;
-
 public class Shotgun extends MultipleUseCard
 {
 	public Shotgun()

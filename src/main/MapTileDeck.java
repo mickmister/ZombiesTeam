@@ -50,9 +50,9 @@ public class MapTileDeck
 	
 	private void addSpecialMapTiles()
 	{
-		SpecialNames[] names = {SpecialNames.Hosipital, SpecialNames.LawnAndGarden, SpecialNames.DrugStore, SpecialNames.PoliceStation,
-				SpecialNames.HardwareStore, SpecialNames.SkateShop, SpecialNames.SportingGoods, SpecialNames.FloristShop, SpecialNames.ToyStore, 
-				SpecialNames.ArmySurplus, SpecialNames.FireStation, SpecialNames.GasStation};
+		SpecialNames[] names = { SpecialNames.Hosipital, SpecialNames.LawnAndGarden, SpecialNames.DrugStore, SpecialNames.PoliceStation,
+				SpecialNames.HardwareStore, SpecialNames.SkateShop, SpecialNames.SportingGoods, SpecialNames.FloristShop, SpecialNames.ToyStore,
+				SpecialNames.ArmySurplus, SpecialNames.FireStation, SpecialNames.GasStation };
 		String specialTiles = ""; //$NON-NLS-1$
 		specialTiles += "2 2 2 2 3 2 2 1 2" + " " + "8 4 0" + "\n"; // Hospital //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		specialTiles += "2 2 2 2 3 2 2 1 2" + " " + "6 2 3" + "\n"; // Lawn & Garden store //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$

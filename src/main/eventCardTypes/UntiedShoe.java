@@ -4,8 +4,6 @@ import gui.*;
 
 import javax.swing.*;
 
-import internationalization.*;
-
 public class UntiedShoe extends OneUseCard
 {
 	
@@ -17,8 +15,7 @@ public class UntiedShoe extends OneUseCard
 	@Override
 	public int behavior(int num)
 	{
-		DialogHandler.showMessage(null, Messages.getString("EventCard.UntiedShoe.roll_cut"), "Untied Shoe",
-				JOptionPane.INFORMATION_MESSAGE);
+		DialogHandler.showMessage(null, Messages.getString("EventCard.UntiedShoe.roll_cut"), "Untied Shoe", JOptionPane.INFORMATION_MESSAGE);
 		return num / 2;
 	}
 	

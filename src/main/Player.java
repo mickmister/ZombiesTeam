@@ -320,7 +320,7 @@ public class Player
 	
 	public void loseBulletToken()
 	{
-		if(this.bulletTokens > 0)
+		if (this.bulletTokens > 0)
 		{
 			this.bulletTokens--;
 		}

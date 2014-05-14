@@ -272,7 +272,7 @@ public class EventCardTest
 		game.getEventDeck().addActiveCard(card2);
 		assertTrue(game.getEventDeck().activeDeckContains(card2));
 		card.behavior(0);
-		assertFalse(game.getEventDeck().activeDeckContains(card2));		
+		assertFalse(game.getEventDeck().activeDeckContains(card2));
 	}
 	
 	@Test
@@ -298,11 +298,11 @@ public class EventCardTest
 		KeysAreStillIn card = new KeysAreStillIn();
 		card.setActivator(player);
 		card.setTargetPlayer(player);
-		GameHandler.instance.nextGameState();//zombie placement
+		GameHandler.instance.nextGameState();// zombie placement
 		assertEquals(1, card.behavior(0));
 		GameHandler.instance.nextGameState();
 		assertEquals(GameState.playerMovement, GameHandler.instance.getCurrentState());
-		assertEquals(10, player.getMovesRemaining());		
+		assertEquals(10, player.getMovesRemaining());
 	}
 	
 	@Test

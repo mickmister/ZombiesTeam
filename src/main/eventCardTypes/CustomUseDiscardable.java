@@ -1,16 +1,15 @@
 package main.eventCardTypes;
 
-import main.EventCard;
-import main.GameHandler;
+import main.*;
 import main.MapTileDeck.SpecialNames;
 
-public abstract class CustomUseDiscardable extends EventCard 
+public abstract class CustomUseDiscardable extends EventCard
 {
-
+	
 	private SpecialNames buildingName;
-
-	public CustomUseDiscardable(PossibleTarget posTar, String name,
-			String description, SpecialNames buildingName) {
+	
+	public CustomUseDiscardable(PossibleTarget posTar, String name, String description, SpecialNames buildingName)
+	{
 		super(posTar, name, description);
 		this.buildingName = buildingName;
 	}
@@ -19,13 +18,12 @@ public abstract class CustomUseDiscardable extends EventCard
 	{
 		return this.buildingName;
 	}
-
+	
 	@Override
 	public abstract int behavior(int num);
 	
-	
 	@Override
-	public void checkRemove() 
+	public void checkRemove()
 	{
 		//
 	}
@@ -41,6 +39,4 @@ public abstract class CustomUseDiscardable extends EventCard
 		GameHandler.instance.getEventDeck().removeDiscardedActiveCard(this);
 	}
 	
-	
-
 }
