@@ -83,6 +83,7 @@ public class Main
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 			UIManager.getDefaults().put("Label.font", new Font("Segoe UI", Font.PLAIN, 50)); //$NON-NLS-1$ //$NON-NLS-2$
 			UIManager.getDefaults().put("Button.font", new Font("Segoe UI", Font.PLAIN, 16)); //$NON-NLS-1$ //$NON-NLS-2$
+			UIManager.getDefaults().put("TitledBorder.font", new Font("Segoe UI", Font.PLAIN, 16)); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e)
 		{

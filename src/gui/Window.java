@@ -18,6 +18,7 @@ public class Window extends JFrame
 		this.number = number;
 		
 		setSize(1600, 900);
+		setExtendedState(Frame.MAXIMIZED_BOTH);
 		setLocation(this.number * 50, this.number * 50);
 		setTitle(Messages.getString("Window.title_prefix") + (this.number + 1) + Messages.getString("Window.title_postfix")); //$NON-NLS-1$ //$NON-NLS-2$
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
