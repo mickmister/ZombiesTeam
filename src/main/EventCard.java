@@ -78,8 +78,11 @@ public abstract class EventCard
 		{
 		//	buildingName = ((PlayWhenDiscarded) this).getBuildingName();
 		}
-		SpecialNames currentBuilding = GameHandler.instance.getMap().getMapTile(player.getTileLocation().y, player.getTileLocation().x).getSpecialName();
-
-		return buildingName.equals(currentBuilding);
+		MapTile tile = GameHandler.instance.getMap().getMapTile(player.getTileLocation().y, player.getTileLocation().x);
+		SpecialNames currentBuilding = tile.getSpecialName();
+		TileCell cell = tile.getCell(player.getCellLocation().y, player.getCellLocation().x);
+		boolean inBuilding = cell.isDoor() || cell.isBuilding();
+		
+		return buildingName.equals(currentBuilding) && inBuilding;
 	}
 }

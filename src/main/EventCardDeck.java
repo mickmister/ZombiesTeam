@@ -8,6 +8,7 @@ public class EventCardDeck
 {
 	private ArrayList<EventCard> deck;
 	private ArrayList<EventCard> activeCards;
+	private ArrayList<EventCard> discardedActiveCards;
 	
 	public EventCardDeck()
 	{
@@ -27,6 +28,16 @@ public class EventCardDeck
 		}
 		
 		Collections.shuffle(this.deck);
+	}
+	
+	public void addDiscardedActiveCard(EventCard card)
+	{
+		this.discardedActiveCards.add(card);
+	}
+	
+	public void removeDiscardedActiveCard(EventCard card)
+	{
+		this.discardedActiveCards.remove(card);
 	}
 	
 	public void addActiveCard(EventCard card)
@@ -66,6 +77,22 @@ public class EventCardDeck
 			}
 		}
 		
+		return num;
+	}
+	
+	public int doDiscardedCardAction(Player p, Class<? extends EventCard> className, int num)
+	{
+		for (EventCard card : this.discardedActiveCards)
+		{
+			if (card.getTargetPlayer() == p)
+			{
+				if (card.getClass() == className)
+				{
+					return card.action(num);
+				}
+				
+			}
+		}
 		return num;
 	}
 	
