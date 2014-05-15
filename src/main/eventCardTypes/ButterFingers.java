@@ -11,7 +11,7 @@ public class ButterFingers extends OneUseCard
 	
 	public ButterFingers()
 	{
-		super(PossibleTarget.Pick, "Butter Fingers", Messages.getString("EventCard.ButterFingers.desc"));
+		super(PossibleTarget.Pick, "Butter Fingers", "Target player must discard a weapon or item in play or up to 2 bullets of your choice.");
 	}
 	
 	@Override
@@ -23,9 +23,9 @@ public class ButterFingers extends OneUseCard
 		if (item != null)
 		{
 			// event card display
-			String message = Messages.getString("EventCard.ButterFingers.card_rem_1") + item.getName()
-					+ Messages.getString("EventCard.ButterFingers.card_rem_2") + (getTargetPlayer().getNumber() + 1)
-					+ Messages.getString("EventCard.ButterFingers.card_rem_3");
+			String message = "The card " + item.getName()
+					+ " was removed from Player " + (getTargetPlayer().getNumber() + 1)
+					+ "'s hand.";
 			DialogHandler.showMessage(null, message, getName(), JOptionPane.INFORMATION_MESSAGE);
 		}
 		else
@@ -42,8 +42,8 @@ public class ButterFingers extends OneUseCard
 			}
 			getTargetPlayer().loseBulletToken();
 			getTargetPlayer().loseBulletToken();
-			String message = numTokens + Messages.getString("EventCard.ButterFingers.token_rem") + (getTargetPlayer().getNumber() + 1)
-					+ Messages.getString("EventCard.ButterFingers.card_rem_3");
+			String message = numTokens + " bullet tokens were removed from Player" + (getTargetPlayer().getNumber() + 1)
+					+ "'s hand.";
 			DialogHandler.showMessage(null, message, getName(), JOptionPane.INFORMATION_MESSAGE);
 		}
 		return 0;

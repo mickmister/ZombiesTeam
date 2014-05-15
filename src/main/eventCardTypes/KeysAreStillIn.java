@@ -7,7 +7,7 @@ public class KeysAreStillIn extends OneUseCard
 	
 	public KeysAreStillIn()
 	{
-		super(PossibleTarget.Self, "The Keys Are Still In It", Messages.getString("EventCard.KeysAreStillIn.desc"));
+		super(PossibleTarget.Self, "The Keys Are Still In It", "Move up to 10 spaces in place of making a movement roll. You must fight zombies as normal.");
 	}
 	
 	@Override
