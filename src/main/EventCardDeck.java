@@ -14,6 +14,8 @@ public class EventCardDeck
 	{
 		this.deck = new ArrayList<EventCard>();
 		this.activeCards = new ArrayList<EventCard>();
+		this.discardedActiveCards = new ArrayList<EventCard>();
+		
 		for (int i = 0; i < 200; i++)
 		{
 			// this.deck.add(new AdrenalineRush());
@@ -73,7 +75,6 @@ public class EventCardDeck
 				{
 					return card.action(num);
 				}
-				
 			}
 		}
 		
@@ -90,15 +91,28 @@ public class EventCardDeck
 				{
 					return card.action(num);
 				}
-				
 			}
 		}
+		
 		return num;
 	}
 	
 	public EventCard getNextCard()
 	{
 		return this.deck.remove(0);
+	}
+	
+	public ArrayList<EventCard> getActiveCardsForPlayer(Player p)
+	{
+		ArrayList<EventCard> result = new ArrayList<EventCard>();
+		for (EventCard card : this.activeCards)
+		{
+			if (card.getActivator() == p)
+			{
+				result.add(card);
+			}
+		}
+		return result;
 	}
 	
 	public boolean activeDeckContains(EventCard card)
