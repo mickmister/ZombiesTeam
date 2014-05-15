@@ -15,7 +15,8 @@ public class FirstAidKit extends SingleUseDiscardable
 	}
 
 	@Override
-	public int behavior(int num) {
+	public int behavior(int num)
+	{
 		DialogHandler.showMessage(null, "Your First Aid Kit has saved you from using a life token!", getName(), JOptionPane.INFORMATION_MESSAGE);
 		return 1;
 	}
