@@ -8,6 +8,8 @@ import java.util.*;
 
 import javax.swing.*;
 
+import main.eventCardTypes.FirstAidKit;
+
 /**
  * This class will hold the given player's status such as life tokens, bullet tokens, and zombies
  * captured.
@@ -306,16 +308,21 @@ public class Player
 	
 	public boolean loseLifeToken()
 	{
-		if (this.lifeTokens > 0)
+		int didAction = GameHandler.instance.getEventDeck().doDiscardedCardAction(this, FirstAidKit.class, 0);
+		if(didAction == 0)
 		{
-			this.lifeTokens--;
-			return true;
+			if (this.lifeTokens > 0)
+			{
+				this.lifeTokens--;
+				return true;
+			}
+			else
+			{
+				resetPlayer();
+				return false;
+			}
 		}
-		else
-		{
-			resetPlayer();
-			return false;
-		}
+		return false;
 	}
 	
 	public void loseBulletToken()
