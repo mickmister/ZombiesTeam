@@ -32,7 +32,7 @@ public class EventCardButton extends JButton implements DataListener, ActionList
 		}
 		else
 		{
-			setText("<html><center>" + card.getName() + "<br>" + card.getDescription()); //$NON-NLS-1$ //$NON-NLS-2$
+			setText("<html><center>" + card.getName() + "<br>-----------------------<br>" + card.getDescription()); //$NON-NLS-1$ //$NON-NLS-2$
 			setEnabled(true);
 		}
 	}
@@ -63,52 +63,9 @@ public class EventCardButton extends JButton implements DataListener, ActionList
 				}
 			}
 			player.removeCardFromHand(this.index);
-			GameHandler.instance.fireDataChangedEvent(null);
 			if (card.getPossibleTarget() == PossibleTarget.Pick)
 			{
-				int numPlayers = GameHandler.instance.getNumberOfPlayers();
-				String[] choicesTotal = {
-						Messages.getString("EventCardButton.player_1"), Messages.getString("EventCardButton.player_2"), Messages.getString("EventCardButton.player_3"), Messages.getString("EventCardButton.player_4") }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-				String[] choices = new String[numPlayers - 1];
-				int j = 0;
-				int turn = GameHandler.instance.getTurn();
-				for (int i = 0; i < numPlayers; i += 1)
-				{
-					if (i != turn)
-					{
-						choices[j] = choicesTotal[i];
-						j++;
-					}
-				}
-				Object result = JOptionPane.showInputDialog(getTopLevelAncestor(),
-						Messages.getString("EventCardButton.select_target_player"), Messages.getString("EventCardButton.target_player"), //$NON-NLS-1$ //$NON-NLS-2$
-						JOptionPane.PLAIN_MESSAGE, null, choices, Messages.getString("EventCardButton.player_1")); //$NON-NLS-1$
-				int target = -1;
-				for (int i = 0; i < numPlayers - 1; i += 1)
-				{
-					if (choices[i].equals(result))
-					{
-						if (i >= turn)
-						{
-							target = i + 1;
-						}
-						else
-						{
-							target = i;
-						}
-					}
-				}
-				if (target == -1)
-				{
-					if (player.getNumber() == 0)
-					{
-						target = 1;
-					}
-					else
-					{
-						target = 0;
-					}
-				}
+				int target = promptUserForTarget(player);
 				card.setTargetPlayer(GameHandler.instance.getPlayer(target));
 			}
 			else if (card.getPossibleTarget() == PossibleTarget.Self)
@@ -124,7 +81,7 @@ public class EventCardButton extends JButton implements DataListener, ActionList
 			player.setCardPlayed(true);
 			GameHandler.instance.getEventDeck().doCardAction(card.getTargetPlayer(), BadSenseOfDirection.class, player.getNumber());
 			GameHandler.instance.getEventDeck().doCardAction(card.getTargetPlayer(), ButterFingers.class, player.getNumber());
-			
+			GameHandler.instance.fireDataChangedEvent(null);
 		}
 		else
 		{
@@ -133,4 +90,52 @@ public class EventCardButton extends JButton implements DataListener, ActionList
 		}
 	}
 	
+	private int promptUserForTarget(Player player)
+	{
+		int numPlayers = GameHandler.instance.getNumberOfPlayers();
+		String[] choicesTotal = {
+				Messages.getString("EventCardButton.player_1"), Messages.getString("EventCardButton.player_2"), Messages.getString("EventCardButton.player_3"), Messages.getString("EventCardButton.player_4") }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+		String[] choices = new String[numPlayers - 1];
+		int j = 0;
+		int turn = GameHandler.instance.getTurn();
+		for (int i = 0; i < numPlayers; i += 1)
+		{
+			if (i != turn)
+			{
+				choices[j] = choicesTotal[i];
+				j++;
+			}
+		}
+		Object result = JOptionPane.showInputDialog(getTopLevelAncestor(),
+				Messages.getString("EventCardButton.select_target_player"), Messages.getString("EventCardButton.target_player"), //$NON-NLS-1$ //$NON-NLS-2$
+				JOptionPane.PLAIN_MESSAGE, null, choices, Messages.getString("EventCardButton.player_1")); //$NON-NLS-1$
+		int target = -1;
+		for (int i = 0; i < numPlayers - 1; i += 1)
+		{
+			if (choices[i].equals(result))
+			{
+				if (i >= turn)
+				{
+					target = i + 1;
+				}
+				else
+				{
+					target = i;
+				}
+			}
+		}
+		if (target == -1)
+		{
+			if (player.getNumber() == 0)
+			{
+				target = 1;
+			}
+			else
+			{
+				target = 0;
+			}
+		}
+		
+		return target;
+	}
 }
