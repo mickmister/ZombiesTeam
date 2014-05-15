@@ -1,14 +1,12 @@
 package gui;
 
-import java.awt.event.*;
 import java.util.*;
 
 import javax.swing.*;
 
 import main.*;
-import main.eventCardTypes.*;
 
-public class DiscardedCardButton extends JButton implements DataListener, ActionListener
+public class DiscardedCardButton extends JButton implements DataListener
 {
 	private int index;
 	
@@ -16,7 +14,7 @@ public class DiscardedCardButton extends JButton implements DataListener, Action
 	{
 		this.index = index;
 		GameHandler.instance.addDataListener(this);
-		addActionListener(this);
+		setEnabled(false);
 	}
 	
 	@Override
@@ -28,26 +26,11 @@ public class DiscardedCardButton extends JButton implements DataListener, Action
 		{
 			EventCard card = cards.get(this.index);
 			setVisible(true);
-			setText("<html><center>DISCARD<br>" + card.getName() + "<br>-----------------------<br>" + card.getDescription()); //$NON-NLS-1$ //$NON-NLS-2$
-			boolean canDiscard = (card instanceof SingleUseDiscardable) || (card instanceof CustomUseDiscardable);
-			setEnabled(canDiscard);
+			setText("<html><center>IN EFFECT<br>" + card.getName() + "<br>-----------------------<br>" + card.getDescription()); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		else
 		{
 			setVisible(false);
 		}
-	}
-	
-	@Override
-	public void actionPerformed(ActionEvent e)
-	{
-		eventCardClicked();
-	}
-	
-	public void eventCardClicked()
-	{
-		Player player = ((Window) getTopLevelAncestor()).getPlayer();
-		EventCard card = GameHandler.instance.getEventDeck().getActiveCardsForPlayer(player).get(this.index);
-		GameHandler.instance.getEventDeck().discard(card);
 	}
 }

@@ -25,18 +25,11 @@ public abstract class CustomUseDiscardable extends EventCard
 	@Override
 	public void checkRemove()
 	{
-		//
-	}
-	
-	public void discard()
-	{
-		GameHandler.instance.getEventDeck().removeActiveCard(this);
-		GameHandler.instance.getEventDeck().addDiscardedActiveCard(this);
+		// Should do nothing.
 	}
 	
 	public void customRemove()
 	{
 		GameHandler.instance.getEventDeck().removeDiscardedActiveCard(this);
 	}
-	
 }

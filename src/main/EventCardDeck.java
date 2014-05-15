@@ -115,6 +115,12 @@ public class EventCardDeck
 		return result;
 	}
 	
+	public void discard(EventCard card)
+	{
+		removeActiveCard(card);
+		addDiscardedActiveCard(card);
+	}
+	
 	public boolean activeDeckContains(EventCard card)
 	{
 		return this.activeCards.contains(card);

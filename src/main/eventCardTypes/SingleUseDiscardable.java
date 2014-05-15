@@ -19,5 +19,4 @@ public abstract class SingleUseDiscardable extends OneUseCard
 	
 	@Override
 	public abstract int behavior(int num);
-	
 }

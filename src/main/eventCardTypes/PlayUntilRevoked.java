@@ -26,5 +26,4 @@ public abstract class PlayUntilRevoked extends EventCard
 	{
 		// stays in play
 	}
-	
 }
