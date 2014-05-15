@@ -285,7 +285,10 @@ public class Player
 			{
 				if (promptUseBulletTokens() == false)
 				{
-					loseLifeToken();
+					if(!checkFirstAidCard())
+					{
+						loseLifeToken();
+					}					
 					return false;
 				}
 				else
@@ -299,30 +302,34 @@ public class Player
 			
 			else
 			{
-				loseLifeToken();
+				if(!checkFirstAidCard())
+				{
+					loseLifeToken();
+				}				
 				return false;
 			}
 		}
 		return true;
 	}
 	
-	public boolean loseLifeToken()
+	private boolean checkFirstAidCard()
 	{
 		int didAction = GameHandler.instance.getEventDeck().doDiscardedCardAction(this, FirstAidKit.class, 0);
-		if(didAction == 0)
+		return didAction == 1;
+	}
+	
+	public boolean loseLifeToken()
+	{
+		if (this.lifeTokens > 0)
 		{
-			if (this.lifeTokens > 0)
-			{
-				this.lifeTokens--;
-				return true;
-			}
-			else
-			{
-				resetPlayer();
-				return false;
-			}
+			this.lifeTokens--;
+			return true;
 		}
-		return false;
+		else
+		{
+			resetPlayer();
+			return false;
+		}
 	}
 	
 	public void loseBulletToken()
@@ -333,7 +340,7 @@ public class Player
 		}
 	}
 	
-	private void incrementZombiesCaptured()
+	public void incrementZombiesCaptured()
 	{
 		this.zombiesCaptured += 1;
 		if (this.zombiesCaptured >= 25)
