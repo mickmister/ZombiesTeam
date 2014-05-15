@@ -1,12 +1,13 @@
 package main;
 
-import gui.*;
-import internationalization.*;
+import gui.DialogHandler;
+import gui.GameWin;
+import internationalization.Messages;
 
-import java.awt.*;
-import java.util.*;
+import java.awt.Point;
+import java.util.ArrayList;
 
-import javax.swing.*;
+import javax.swing.JOptionPane;
 
 import main.eventCardTypes.FirstAidKit;
 
@@ -285,10 +286,10 @@ public class Player
 			{
 				if (promptUseBulletTokens() == false)
 				{
-					if(!checkFirstAidCard())
+					if (!checkFirstAidCard())
 					{
 						loseLifeToken();
-					}					
+					}
 					return false;
 				}
 				else
@@ -302,10 +303,10 @@ public class Player
 			
 			else
 			{
-				if(!checkFirstAidCard())
+				if (!checkFirstAidCard())
 				{
 					loseLifeToken();
-				}				
+				}
 				return false;
 			}
 		}

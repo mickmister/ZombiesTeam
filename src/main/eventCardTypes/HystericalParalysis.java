@@ -1,10 +1,10 @@
 package main.eventCardTypes;
 
-import gui.*;
+import gui.DialogHandler;
 
-import javax.swing.*;
+import javax.swing.JOptionPane;
 
-import main.*;
+import main.GameHandler;
 
 public class HystericalParalysis extends OneUseCard
 {

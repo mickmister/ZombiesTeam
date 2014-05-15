@@ -1,18 +1,22 @@
 package tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Point;
+import java.awt.event.KeyEvent;
 
-import javax.swing.*;
+import javax.swing.JButton;
 
-import main.*;
+import main.GameHandler;
 import main.GameHandler.GameState;
+import main.Map;
+import main.MapTile;
 import main.MapTile.Shape;
 import main.MapTileDeck.SpecialNames;
+import main.Player;
 
-import org.junit.*;
+import org.junit.Test;
 
 public class MapTest
 {

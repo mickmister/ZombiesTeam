@@ -1,8 +1,8 @@
 package gui;
 
-import java.awt.*;
+import java.awt.Component;
 
-import javax.swing.*;
+import javax.swing.JOptionPane;
 
 public class DialogHandler
 {

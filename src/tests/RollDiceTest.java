@@ -1,14 +1,17 @@
 package tests;
 
-import static org.junit.Assert.*;
-import gui.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+import gui.DialogHandler;
 
-import javax.swing.*;
+import javax.swing.JOptionPane;
 
-import main.*;
+import main.GameHandler;
 import main.GameHandler.GameState;
+import main.RollDice;
+import main.TileCell;
 
-import org.junit.*;
+import org.junit.Test;
 
 public class RollDiceTest
 {

@@ -1,13 +1,17 @@
 package gui;
 
-import internationalization.*;
+import internationalization.Messages;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Frame;
 
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+import javax.swing.WindowConstants;
 
-import main.*;
-import view.*;
+import main.GameHandler;
+import main.Player;
+import view.MapView;
 
 public class Window extends JFrame
 {

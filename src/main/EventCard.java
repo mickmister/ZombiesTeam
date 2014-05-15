@@ -1,7 +1,7 @@
 package main;
 
 import main.MapTileDeck.SpecialNames;
-import main.eventCardTypes.*;
+import main.eventCardTypes.PlayUntilRevoked;
 
 public abstract class EventCard
 {

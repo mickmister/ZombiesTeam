@@ -1,8 +1,8 @@
 package main.eventCardTypes;
 
-import gui.*;
+import gui.DialogHandler;
 
-import javax.swing.*;
+import javax.swing.JOptionPane;
 
 import main.MapTileDeck.SpecialNames;
 

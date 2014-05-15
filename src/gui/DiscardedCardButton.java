@@ -1,10 +1,13 @@
 package gui;
 
-import java.util.*;
+import java.util.ArrayList;
 
-import javax.swing.*;
+import javax.swing.JButton;
 
-import main.*;
+import main.DataListener;
+import main.EventCard;
+import main.GameHandler;
+import main.Player;
 
 public class DiscardedCardButton extends JButton implements DataListener
 {

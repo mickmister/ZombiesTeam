@@ -1,12 +1,14 @@
 package main;
 
-import gui.*;
-import internationalization.*;
+import gui.DialogHandler;
+import internationalization.Messages;
 
-import java.awt.*;
-import java.util.*;
+import java.awt.Font;
+import java.util.Locale;
 
-import javax.swing.*;
+import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 public class Main
 {

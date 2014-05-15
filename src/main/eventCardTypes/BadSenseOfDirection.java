@@ -1,10 +1,11 @@
 package main.eventCardTypes;
 
-import gui.*;
+import gui.DialogHandler;
 
-import javax.swing.*;
+import javax.swing.JOptionPane;
 
-import main.*;
+import main.GameHandler;
+import main.Player;
 
 public class BadSenseOfDirection extends OneUseCard
 {
@@ -17,7 +18,8 @@ public class BadSenseOfDirection extends OneUseCard
 	@Override
 	public int behavior(int num)
 	{
-		DialogHandler.showMessage(null, "You discarded one life token, target is now at the town square.", getName(), JOptionPane.INFORMATION_MESSAGE);
+		DialogHandler
+				.showMessage(null, "You discarded one life token, target is now at the town square.", getName(), JOptionPane.INFORMATION_MESSAGE);
 		GameHandler.instance.getPlayer(num).loseLifeToken();
 		Player target = getTargetPlayer();
 		target.resetPlayerLocation();

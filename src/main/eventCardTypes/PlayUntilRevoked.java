@@ -1,6 +1,6 @@
 package main.eventCardTypes;
 
-import main.*;
+import main.EventCard;
 import main.MapTileDeck.SpecialNames;
 
 public abstract class PlayUntilRevoked extends EventCard

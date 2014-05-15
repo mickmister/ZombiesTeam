@@ -1,9 +1,9 @@
 package gui;
 
-import java.awt.image.*;
-import java.io.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
-import javax.imageio.*;
+import javax.imageio.ImageIO;
 
 public class ImageManager
 {

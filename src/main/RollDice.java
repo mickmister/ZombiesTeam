@@ -1,7 +1,12 @@
 package main;
 
 import main.GameHandler.GameState;
-import main.eventCardTypes.*;
+import main.eventCardTypes.AdrenalineRush;
+import main.eventCardTypes.Chainsaw;
+import main.eventCardTypes.FireAxe;
+import main.eventCardTypes.Shotgun;
+import main.eventCardTypes.Skateboard;
+import main.eventCardTypes.UntiedShoe;
 
 public class RollDice
 {

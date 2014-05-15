@@ -1,12 +1,17 @@
 package gui;
 
-import internationalization.*;
+import internationalization.Messages;
 
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
-import main.*;
+import main.DataListener;
+import main.EventCard;
+import main.GameHandler;
+import main.Player;
 
 public class SwapCardButton extends JButton implements DataListener, ActionListener
 {

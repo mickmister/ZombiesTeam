@@ -1,6 +1,6 @@
 package main;
 
-import java.util.*;
+import java.util.ArrayList;
 
 /**
  * A TileCell represents one of the subsections within a MapTile, or one of the nine blocks. A

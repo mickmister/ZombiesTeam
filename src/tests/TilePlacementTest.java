@@ -1,13 +1,14 @@
 package tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
-import java.awt.*;
+import java.awt.Point;
 
-import main.*;
+import main.Map;
+import main.MapTile;
 import main.MapTile.Shape;
 
-import org.junit.*;
+import org.junit.Test;
 
 /**
  * TODO Put here a description of what this class does.

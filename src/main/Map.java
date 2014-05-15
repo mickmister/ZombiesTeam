@@ -1,9 +1,9 @@
 package main;
 
-import internationalization.*;
+import internationalization.Messages;
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Point;
+import java.awt.event.KeyEvent;
 
 import main.GameHandler.GameState;
 import main.MapTile.Shape;

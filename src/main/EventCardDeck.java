@@ -1,8 +1,12 @@
 package main;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
 
-import main.eventCardTypes.*;
+import main.eventCardTypes.ButterFingers;
+import main.eventCardTypes.FireAxe;
+import main.eventCardTypes.KeysAreStillIn;
+import main.eventCardTypes.Skateboard;
 
 public class EventCardDeck
 {

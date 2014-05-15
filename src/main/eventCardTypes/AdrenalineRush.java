@@ -1,10 +1,10 @@
 package main.eventCardTypes;
 
-import gui.*;
+import gui.DialogHandler;
 
-import javax.swing.*;
+import javax.swing.JOptionPane;
 
-import main.*;
+import main.GameHandler;
 import main.GameHandler.GameState;
 
 public class AdrenalineRush extends OneUseCard
@@ -21,13 +21,15 @@ public class AdrenalineRush extends OneUseCard
 		GameHandler game = GameHandler.instance;
 		if (game.getCurrentState() == GameState.playerMovementDieRoll)
 		{
-			DialogHandler.showMessage(null, "Your movement roll was multiplied by 2 by the Adrenaline Rush card!", getName(), JOptionPane.INFORMATION_MESSAGE);
+			DialogHandler.showMessage(null, "Your movement roll was multiplied by 2 by the Adrenaline Rush card!", getName(),
+					JOptionPane.INFORMATION_MESSAGE);
 			return num * 2;
 		}
 		else
 		// if (game.getCurrentState() == GameState.zombieCombat)
 		{
-			DialogHandler.showMessage(null, "Your combat roll was increased by 2 by the Adrenaline Rush card!", getName(), JOptionPane.INFORMATION_MESSAGE);
+			DialogHandler.showMessage(null, "Your combat roll was increased by 2 by the Adrenaline Rush card!", getName(),
+					JOptionPane.INFORMATION_MESSAGE);
 			return num + 2;
 		}
 	}

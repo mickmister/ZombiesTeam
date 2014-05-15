@@ -2,13 +2,20 @@ package gui;
 
 import internationalization.Messages;
 
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
-import main.*;
+import main.DataListener;
+import main.EventCard;
 import main.EventCard.PossibleTarget;
-import main.eventCardTypes.*;
+import main.GameHandler;
+import main.Player;
+import main.eventCardTypes.BadSenseOfDirection;
+import main.eventCardTypes.ButterFingers;
+import main.eventCardTypes.PlayUntilRevoked;
 
 public class EventCardButton extends JButton implements DataListener, ActionListener
 {

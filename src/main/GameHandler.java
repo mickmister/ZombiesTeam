@@ -1,13 +1,16 @@
 package main;
 
-import gui.*;
+import gui.ImageManager;
 import gui.Window;
 
-import java.awt.*;
-import java.util.*;
+import java.awt.Point;
+import java.util.ArrayList;
 
 import main.DataListener.DataChangedEvent;
-import main.eventCardTypes.*;
+import main.eventCardTypes.Fear;
+import main.eventCardTypes.GainTwoHealthNoMove;
+import main.eventCardTypes.HystericalParalysis;
+import main.eventCardTypes.KeysAreStillIn;
 
 public class GameHandler
 {

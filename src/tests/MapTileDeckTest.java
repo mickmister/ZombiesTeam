@@ -1,10 +1,13 @@
 package tests;
 
-import static org.junit.Assert.*;
-import main.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import main.MapTile;
 import main.MapTile.Shape;
+import main.MapTileDeck;
 
-import org.junit.*;
+import org.junit.Test;
 
 public class MapTileDeckTest
 {

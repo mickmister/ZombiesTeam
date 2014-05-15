@@ -1,12 +1,12 @@
 package tests;
 
-import static org.junit.Assert.*;
-import main.*;
+import static org.junit.Assert.assertEquals;
+import main.MapTile;
 import main.MapTile.Shape;
 import main.MapTileDeck.SpecialNames;
 import main.TileCell.CellType;
 
-import org.junit.*;
+import org.junit.Test;
 
 public class MapTileShapeTest
 {

@@ -1,13 +1,15 @@
 package main.eventCardTypes;
 
-import main.*;
+import main.GameHandler;
+import main.Player;
 
 public class KeysAreStillIn extends OneUseCard
 {
 	
 	public KeysAreStillIn()
 	{
-		super(PossibleTarget.Self, "The Keys Are Still In It", "Move up to 10 spaces in place of making a movement roll. You must fight zombies as normal.");
+		super(PossibleTarget.Self, "The Keys Are Still In It",
+				"Move up to 10 spaces in place of making a movement roll. You must fight zombies as normal.");
 	}
 	
 	@Override

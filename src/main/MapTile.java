@@ -1,11 +1,11 @@
 package main;
 
-import gui.*;
-import internationalization.*;
+import gui.DialogHandler;
+import internationalization.Messages;
 
-import java.awt.*;
+import java.awt.Point;
 
-import javax.swing.*;
+import javax.swing.JOptionPane;
 
 import main.MapTileDeck.SpecialNames;
 import main.TileCell.CellType;

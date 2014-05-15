@@ -1,7 +1,7 @@
 package main.eventCardTypes;
 
 import main.MapTileDeck.SpecialNames;
-import main.*;
+import main.Player;
 
 public class LotsOfAmmo extends SingleUseDiscardable
 {

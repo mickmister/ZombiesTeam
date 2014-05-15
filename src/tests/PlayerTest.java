@@ -1,17 +1,25 @@
 package tests;
 
-import static org.junit.Assert.*;
-import gui.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+import gui.DialogHandler;
 
-import java.awt.*;
-import java.lang.reflect.*;
+import java.awt.Point;
+import java.lang.reflect.Method;
 
-import javax.swing.*;
+import javax.swing.JOptionPane;
 
-import main.*;
+import main.EventCard;
+import main.GameHandler;
+import main.Map;
+import main.MapTile;
+import main.Player;
+import main.TileCell;
 import main.TileCell.CellType;
 
-import org.junit.*;
+import org.junit.Test;
 
 public class PlayerTest
 {

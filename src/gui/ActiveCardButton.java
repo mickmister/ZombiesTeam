@@ -1,13 +1,21 @@
 package gui;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.util.*;
+import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
-import main.*;
-import main.eventCardTypes.*;
+import main.DataListener;
+import main.EventCard;
+import main.GameHandler;
+import main.Player;
+import main.TileCell;
+import main.eventCardTypes.CustomUseDiscardable;
+import main.eventCardTypes.Grenade;
+import main.eventCardTypes.SingleUseDiscardable;
 
 public class ActiveCardButton extends JButton implements DataListener, ActionListener
 {
@@ -30,7 +38,7 @@ public class ActiveCardButton extends JButton implements DataListener, ActionLis
 			EventCard card = cards.get(this.index);
 			setVisible(true);
 			setText("<html><center>DISCARD<br>" + card.getName() + "<br>-----------------------<br>" + card.getDescription()); //$NON-NLS-1$ //$NON-NLS-2$
-			boolean canDiscard = (card instanceof SingleUseDiscardable) || (card instanceof CustomUseDiscardable);
+			boolean canDiscard = card instanceof SingleUseDiscardable || card instanceof CustomUseDiscardable;
 			setEnabled(canDiscard);
 		}
 		else
@@ -57,7 +65,7 @@ public class ActiveCardButton extends JButton implements DataListener, ActionLis
 	
 	private boolean checkGrenadeCard(EventCard card, Player player)
 	{
-		if (card instanceof GrenadeCard)
+		if (card instanceof Grenade)
 		{
 			Point t = player.getTileLocation();
 			Point c = player.getCellLocation();
@@ -68,7 +76,8 @@ public class ActiveCardButton extends JButton implements DataListener, ActionLis
 			}
 			else
 			{
-				DialogHandler.showMessage(getTopLevelAncestor(), "You are not inside of a building!", "Cannot Use Card", JOptionPane.WARNING_MESSAGE);
+				DialogHandler.showMessage(getTopLevelAncestor(), "You are not inside of a building!", "Cannot Use Grenade Card",
+						JOptionPane.WARNING_MESSAGE);
 				return false;
 			}
 		}

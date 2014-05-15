@@ -1,6 +1,7 @@
 package main.eventCardTypes;
 
-import main.*;
+import main.EventCard;
+import main.GameHandler;
 
 public abstract class MultipleUseCard extends EventCard
 {

@@ -1,10 +1,10 @@
 package gui;
 
-import internationalization.*;
+import internationalization.Messages;
 
-import javax.swing.*;
+import javax.swing.JOptionPane;
 
-import main.*;
+import main.Player;
 
 public class GameWin
 {

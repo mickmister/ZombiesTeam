@@ -1,8 +1,10 @@
 package gui;
 
-import java.awt.*;
+import java.awt.Image;
 
-import javax.swing.*;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 public class IconDisplay extends JLabel
 {

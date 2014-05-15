@@ -1,10 +1,12 @@
 package tests;
 
-import static org.junit.Assert.*;
-import main.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import main.TileCell;
 import main.TileCell.CellType;
 
-import org.junit.*;
+import org.junit.Test;
 
 public class TileCellTest
 {
