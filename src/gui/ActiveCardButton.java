@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 
@@ -48,6 +49,32 @@ public class ActiveCardButton extends JButton implements DataListener, ActionLis
 	{
 		Player player = ((Window) getTopLevelAncestor()).getPlayer();
 		EventCard card = GameHandler.instance.getEventDeck().getActiveCardsForPlayer(player).get(this.index);
-		GameHandler.instance.getEventDeck().discard(card);
+		if (checkGrenadeCard(card, player))
+		{
+			GameHandler.instance.getEventDeck().discard(card);
+		}
+	}
+	
+	private boolean checkGrenadeCard(EventCard card, Player player)
+	{
+		if (card instanceof GrenadeCard)
+		{
+			Point t = player.getTileLocation();
+			Point c = player.getCellLocation();
+			TileCell cell = GameHandler.instance.getMap().getMapTile(t.y, t.x).getCell(c.y, c.x);
+			if (cell.isBuilding() || cell.isDoor())
+			{
+				return true;
+			}
+			else
+			{
+				DialogHandler.showMessage(getTopLevelAncestor(), "You are not inside of a building!", "Cannot Use Card", JOptionPane.WARNING_MESSAGE);
+				return false;
+			}
+		}
+		else
+		{
+			return true;
+		}
 	}
 }
