@@ -8,11 +8,11 @@ import javax.swing.*;
 import main.*;
 import main.eventCardTypes.*;
 
-public class ActiveCardButton extends JButton implements DataListener, ActionListener
+public class DiscardedCardButton extends JButton implements DataListener, ActionListener
 {
 	private int index;
 	
-	public ActiveCardButton(int index)
+	public DiscardedCardButton(int index)
 	{
 		this.index = index;
 		GameHandler.instance.addDataListener(this);
