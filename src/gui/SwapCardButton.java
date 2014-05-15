@@ -1,6 +1,6 @@
 package gui;
 
-import internationalization.Messages;
+import internationalization.RB;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,7 +20,7 @@ public class SwapCardButton extends JButton implements DataListener, ActionListe
 	public SwapCardButton(int index)
 	{
 		this.index = index;
-		setText(Messages.getString("SwapCardButton.swap")); //$NON-NLS-1$
+		setText(RB.get("SwapCardButton.swap")); //$NON-NLS-1$
 		GameHandler.instance.addDataListener(this);
 		addActionListener(this);
 	}
@@ -56,7 +56,7 @@ public class SwapCardButton extends JButton implements DataListener, ActionListe
 			DialogHandler
 					.showMessage(
 							getTopLevelAncestor(),
-							Messages.getString("SwapCardButton.swapped_message_prefix") + (this.index + 1) + Messages.getString("SwapCardButton.swapped_message_postfix"), Messages.getString("SwapCardButton.swapped_title"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+							RB.get("SwapCardButton.swapped_message_prefix") + (this.index + 1) + RB.get("SwapCardButton.swapped_message_postfix"), RB.get("SwapCardButton.swapped_title"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 							JOptionPane.INFORMATION_MESSAGE);
 			
 			player.drawNewCards();
@@ -65,8 +65,8 @@ public class SwapCardButton extends JButton implements DataListener, ActionListe
 		}
 		else
 		{
-			DialogHandler.showMessage(getTopLevelAncestor(), Messages.getString("SwapCardButton.error_message"), //$NON-NLS-1$
-					Messages.getString("SwapCardButton.error_title"), JOptionPane.WARNING_MESSAGE); //$NON-NLS-1$
+			DialogHandler.showMessage(getTopLevelAncestor(), RB.get("SwapCardButton.error_message"), //$NON-NLS-1$
+					RB.get("SwapCardButton.error_title"), JOptionPane.WARNING_MESSAGE); //$NON-NLS-1$
 		}
 	}
 }

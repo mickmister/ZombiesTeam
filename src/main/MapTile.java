@@ -1,7 +1,7 @@
 package main;
 
 import gui.DialogHandler;
-import internationalization.Messages;
+import internationalization.RB;
 
 import java.awt.Point;
 
@@ -71,7 +71,7 @@ public class MapTile
 				processSpecialString(specialFormat);
 				break;
 			default:
-				throw new IllegalArgumentException(Messages.getString("MapTile.invalid_shape_type") + shape); //$NON-NLS-1$
+				throw new IllegalArgumentException(RB.get("MapTile.invalid_shape_type") + shape); //$NON-NLS-1$
 		}
 	}
 	
@@ -125,8 +125,7 @@ public class MapTile
 		catch (NumberFormatException e)
 		{
 			e.printStackTrace();
-			DialogHandler.showMessage(null,
-					Messages.getString("MapTile.could_not_parse_special_string") + string + "\"", Messages.getString("MapTile.error_parsing"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			DialogHandler.showMessage(null, RB.get("MapTile.could_not_parse_special_string") + string + "\"", RB.get("MapTile.error_parsing"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 					JOptionPane.ERROR_MESSAGE);
 		}
 	}
@@ -371,7 +370,7 @@ public class MapTile
 	@Override
 	public String toString()
 	{
-		String result = Messages.getString("MapTile.map_tile") + this.shape.toString() + Messages.getString("MapTile.shape"); //$NON-NLS-1$ //$NON-NLS-2$
+		String result = RB.get("MapTile.map_tile") + this.shape.toString() + RB.get("MapTile.shape"); //$NON-NLS-1$ //$NON-NLS-2$
 		
 		for (int y = 0; y < 3; y += 1)
 		{

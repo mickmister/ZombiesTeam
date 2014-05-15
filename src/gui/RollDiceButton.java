@@ -1,6 +1,6 @@
 package gui;
 
-import internationalization.Messages;
+import internationalization.RB;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,7 +17,7 @@ public class RollDiceButton extends JButton implements ActionListener, DataListe
 {
 	public RollDiceButton()
 	{
-		setText(Messages.getString("RollDiceButton.roll_dice")); //$NON-NLS-1$
+		setText(RB.get("RollDiceButton.roll_dice")); //$NON-NLS-1$
 		addActionListener(this);
 		GameHandler.instance.addDataListener(this);
 	}
@@ -34,21 +34,19 @@ public class RollDiceButton extends JButton implements ActionListener, DataListe
 		if (GameHandler.instance.getCurrentState().equals(GameState.playerMovementDieRoll))
 		{
 			DialogHandler.showMessage(getTopLevelAncestor(),
-					Messages.getString("RollDiceButton.player_movement_roll") + result + "!", Messages.getString("RollDiceButton.roll_dice"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+					RB.get("RollDiceButton.player_movement_roll") + result + "!", RB.get("RollDiceButton.roll_dice"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 					JOptionPane.INFORMATION_MESSAGE);
 		}
 		if (GameHandler.instance.getCurrentState().equals(GameState.zombieMovementDieRoll))
 		{
 			DialogHandler.showMessage(getTopLevelAncestor(),
-					Messages.getString("RollDiceButton.zombie_movement_roll") + result + "!", Messages.getString("RollDiceButton.roll_dice"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+					RB.get("RollDiceButton.zombie_movement_roll") + result + "!", RB.get("RollDiceButton.roll_dice"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 					JOptionPane.INFORMATION_MESSAGE);
 		}
 		if (GameHandler.instance.getCurrentState().equals(GameState.zombieCombat))
 		{
-			DialogHandler
-					.showMessage(
-							getTopLevelAncestor(),
-							Messages.getString("RollDiceButton.zombie_combat_roll") + result + "!", Messages.getString("RollDiceButton.roll_dice"), JOptionPane.INFORMATION_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			DialogHandler.showMessage(getTopLevelAncestor(),
+					RB.get("RollDiceButton.zombie_combat_roll") + result + "!", RB.get("RollDiceButton.roll_dice"), JOptionPane.INFORMATION_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		}
 		RollDice.rollAction(result);
 	}

@@ -1,6 +1,6 @@
 package gui;
 
-import internationalization.Messages;
+import internationalization.RB;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -92,8 +92,8 @@ public class EventCardButton extends JButton implements DataListener, ActionList
 		}
 		else
 		{
-			DialogHandler.showMessage(getTopLevelAncestor(), Messages.getString("EventCardButton.cannot_play_2_cards_message"), //$NON-NLS-1$
-					Messages.getString("EventCardButton.cannot_play_2_cards_title"), JOptionPane.WARNING_MESSAGE); //$NON-NLS-1$
+			DialogHandler.showMessage(getTopLevelAncestor(), RB.get("EventCardButton.cannot_play_2_cards_message"), //$NON-NLS-1$
+					RB.get("EventCardButton.cannot_play_2_cards_title"), JOptionPane.WARNING_MESSAGE); //$NON-NLS-1$
 		}
 	}
 	
@@ -101,7 +101,7 @@ public class EventCardButton extends JButton implements DataListener, ActionList
 	{
 		int numPlayers = GameHandler.instance.getNumberOfPlayers();
 		String[] choicesTotal = {
-				Messages.getString("EventCardButton.player_1"), Messages.getString("EventCardButton.player_2"), Messages.getString("EventCardButton.player_3"), Messages.getString("EventCardButton.player_4") }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+				RB.get("EventCardButton.player_1"), RB.get("EventCardButton.player_2"), RB.get("EventCardButton.player_3"), RB.get("EventCardButton.player_4") }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		String[] choices = new String[numPlayers - 1];
 		int j = 0;
 		int turn = GameHandler.instance.getTurn();
@@ -114,8 +114,8 @@ public class EventCardButton extends JButton implements DataListener, ActionList
 			}
 		}
 		Object result = JOptionPane.showInputDialog(getTopLevelAncestor(),
-				Messages.getString("EventCardButton.select_target_player"), Messages.getString("EventCardButton.target_player"), //$NON-NLS-1$ //$NON-NLS-2$
-				JOptionPane.PLAIN_MESSAGE, null, choices, Messages.getString("EventCardButton.player_1")); //$NON-NLS-1$
+				RB.get("EventCardButton.select_target_player"), RB.get("EventCardButton.target_player"), //$NON-NLS-1$ //$NON-NLS-2$
+				JOptionPane.PLAIN_MESSAGE, null, choices, RB.get("EventCardButton.player_1")); //$NON-NLS-1$
 		int target = -1;
 		for (int i = 0; i < numPlayers - 1; i += 1)
 		{

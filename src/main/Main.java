@@ -1,7 +1,7 @@
 package main;
 
 import gui.DialogHandler;
-import internationalization.Messages;
+import internationalization.RB;
 
 import java.awt.Font;
 import java.util.Locale;
@@ -24,7 +24,7 @@ public class Main
 		setWindowsLaF();
 		
 		Locale locale = askUserForLanguage();
-		new Messages(locale);
+		new RB(locale);
 		
 		int numPlayers = askUserForNumPlayers();
 		
@@ -58,10 +58,10 @@ public class Main
 	
 	public static int askUserForNumPlayers()
 	{
-		String[] options = { Messages.getString("Main.2_players"), Messages.getString("Main.3_players"), Messages.getString("Main.4_players") }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		String[] options = { RB.get("Main.2_players"), RB.get("Main.3_players"), RB.get("Main.4_players") }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		Object response = JOptionPane.showInputDialog(null,
-				Messages.getString("Main.numPlayers_message"), Messages.getString("Main.numPlayers_title"), JOptionPane.QUESTION_MESSAGE, null, //$NON-NLS-1$ //$NON-NLS-2$
-				options, Messages.getString("Main.2_players")); //$NON-NLS-1$
+				RB.get("Main.numPlayers_message"), RB.get("Main.numPlayers_title"), JOptionPane.QUESTION_MESSAGE, null, //$NON-NLS-1$ //$NON-NLS-2$
+				options, RB.get("Main.2_players")); //$NON-NLS-1$
 		
 		int numPlayers = -1;
 		for (int i = 0; i < options.length; i += 1)

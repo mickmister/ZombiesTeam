@@ -1,6 +1,6 @@
 package gui;
 
-import internationalization.Messages;
+import internationalization.RB;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,7 +17,7 @@ public class MapTileDeckButton extends JButton implements ActionListener, DataLi
 {
 	public MapTileDeckButton()
 	{
-		setText(Messages.getString("MapTileDeckButton.map_tile_deck")); //$NON-NLS-1$
+		setText(RB.get("MapTileDeckButton.map_tile_deck")); //$NON-NLS-1$
 		addActionListener(this);
 		GameHandler.instance.addDataListener(this);
 	}
@@ -60,11 +60,9 @@ public class MapTileDeckButton extends JButton implements ActionListener, DataLi
 						}
 						else
 						{
-							DialogHandler
-									.showMessage(
-											null,
-											Messages.getString("MapTileDeckButton.no_available_places_message"), Messages.getString("MapTileDeckButton.map_tile"), //$NON-NLS-1$ //$NON-NLS-2$
-											JOptionPane.INFORMATION_MESSAGE);
+							DialogHandler.showMessage(null,
+									RB.get("MapTileDeckButton.no_available_places_message"), RB.get("MapTileDeckButton.map_tile"), //$NON-NLS-1$ //$NON-NLS-2$
+									JOptionPane.INFORMATION_MESSAGE);
 							GameHandler.instance.nextGameState();
 							GameHandler.instance.nextGameState();
 						}
@@ -74,7 +72,7 @@ public class MapTileDeckButton extends JButton implements ActionListener, DataLi
 						DialogHandler
 								.showMessage(
 										null,
-										Messages.getString("MapTileDeckButton.no_more_cards_message"), Messages.getString("MapTileDeckButton.map_tile"), JOptionPane.INFORMATION_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
+										RB.get("MapTileDeckButton.no_more_cards_message"), RB.get("MapTileDeckButton.map_tile"), JOptionPane.INFORMATION_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
 						GameHandler.instance.nextGameState();
 						GameHandler.instance.nextGameState();
 					}

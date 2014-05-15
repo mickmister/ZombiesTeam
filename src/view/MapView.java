@@ -3,7 +3,7 @@ package view;
 import gui.DialogHandler;
 import gui.ImageManager;
 import gui.Window;
-import internationalization.Messages;
+import internationalization.RB;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -124,12 +124,9 @@ public class MapView extends JPanel implements Runnable, KeyListener
 	
 	private void displayInvalidLocation()
 	{
-		DialogHandler
-				.showMessage(
-						null,
-						Messages.getString("MapView.invalid_location_message_1") //$NON-NLS-1$
-								+ Messages.getString("MapView.invalid_location_message_2") + Messages.getString("MapView.invalid_location_message_3") //$NON-NLS-1$ //$NON-NLS-2$
-								+ Messages.getString("MapView.invalid_location_message_4"), Messages.getString("MapView.invalid_location_title"), JOptionPane.WARNING_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
+		DialogHandler.showMessage(null, RB.get("MapView.invalid_location_message_1") //$NON-NLS-1$
+				+ RB.get("MapView.invalid_location_message_2") + RB.get("MapView.invalid_location_message_3") //$NON-NLS-1$ //$NON-NLS-2$
+				+ RB.get("MapView.invalid_location_message_4"), RB.get("MapView.invalid_location_title"), JOptionPane.WARNING_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 	
 	@Override

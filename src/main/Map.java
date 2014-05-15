@@ -1,6 +1,6 @@
 package main;
 
-import internationalization.Messages;
+import internationalization.RB;
 
 import java.awt.Point;
 import java.awt.event.KeyEvent;
@@ -303,48 +303,48 @@ public class Map
 	{
 		if (!player.isPlayersTurn())
 		{
-			return Messages.getString("Map.not_your_turn"); //$NON-NLS-1$
+			return RB.get("Map.not_your_turn"); //$NON-NLS-1$
 		}
 		if (GameHandler.instance.getCurrentState().equals(GameState.tilePlacement))
 		{
-			return Messages.getString("Map.tile_placement"); //$NON-NLS-1$
+			return RB.get("Map.tile_placement"); //$NON-NLS-1$
 		}
 		if (GameHandler.instance.getCurrentState().equals(GameState.zombiePlacement))
 		{
 			MapTile tile = GameHandler.instance.getMap().getTempZombieTile();
-			return Messages.getString("Map.zombie_placement_prefix") + tile.getZombiesToPlace() + Messages.getString("Map.zombie_placement_postfix"); //$NON-NLS-1$ //$NON-NLS-2$
+			return RB.get("Map.zombie_placement_prefix") + tile.getZombiesToPlace() + RB.get("Map.zombie_placement_postfix"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		if (GameHandler.instance.getCurrentState().equals(GameState.bulletTokenPlacement))
 		{
 			MapTile tile = GameHandler.instance.getMap().getTempBulletTile();
-			return Messages.getString("Map.bullet_placement_prefix") + tile.getBulletsToPlace() + Messages.getString("Map.bullet_placement_postfix"); //$NON-NLS-1$ //$NON-NLS-2$
+			return RB.get("Map.bullet_placement_prefix") + tile.getBulletsToPlace() + RB.get("Map.bullet_placement_postfix"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		if (GameHandler.instance.getCurrentState().equals(GameState.lifeTokenPlacement))
 		{
 			MapTile tile = GameHandler.instance.getMap().getTempBulletTile();
-			return Messages.getString("Map.life_placement_prefix") + tile.getLifeToPlace() + Messages.getString("Map.life_placement_postfix"); //$NON-NLS-1$ //$NON-NLS-2$
+			return RB.get("Map.life_placement_prefix") + tile.getLifeToPlace() + RB.get("Map.life_placement_postfix"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		if (GameHandler.instance.getCurrentState().equals(GameState.playerMovementDieRoll))
 		{
-			return Messages.getString("Map.player_movement_die_roll"); //$NON-NLS-1$
+			return RB.get("Map.player_movement_die_roll"); //$NON-NLS-1$
 		}
 		if (GameHandler.instance.getCurrentState().equals(GameState.playerMovement))
 		{
-			return player.getMovesRemaining() + Messages.getString("Map.player_movement"); //$NON-NLS-1$
+			return player.getMovesRemaining() + RB.get("Map.player_movement"); //$NON-NLS-1$
 		}
 		if (GameHandler.instance.getCurrentState().equals(GameState.zombieCombat))
 		{
-			return Messages.getString("Map.zombie_combat"); //$NON-NLS-1$
+			return RB.get("Map.zombie_combat"); //$NON-NLS-1$
 		}
 		if (GameHandler.instance.getCurrentState().equals(GameState.zombieMovementDieRoll))
 		{
-			return Messages.getString("Map.zombie_movement_die_roll"); //$NON-NLS-1$
+			return RB.get("Map.zombie_movement_die_roll"); //$NON-NLS-1$
 		}
 		if (GameHandler.instance.getCurrentState().equals(GameState.zombieMovement))
 		{
-			return player.getMovesRemaining() + Messages.getString("Map.zombie_movement"); //$NON-NLS-1$
+			return player.getMovesRemaining() + RB.get("Map.zombie_movement"); //$NON-NLS-1$
 		}
-		return Messages.getString("Map.error_status"); //$NON-NLS-1$
+		return RB.get("Map.error_status"); //$NON-NLS-1$
 	}
 	
 	public MapTile getHelipad()
