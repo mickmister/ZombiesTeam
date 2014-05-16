@@ -29,4 +29,16 @@ public class DialogHandler
 			return DialogHandler.defaultReturn;
 		}
 	}
+	
+	public static Object showListChoice(Component comp, String message, String title, int messageType, Object[] options)
+	{
+		if (!DialogHandler.isTesting)
+		{
+			return JOptionPane.showInputDialog(comp, message, title, messageType, null, options, options[0]);
+		}
+		else
+		{
+			return options[0];
+		}
+	}
 }
