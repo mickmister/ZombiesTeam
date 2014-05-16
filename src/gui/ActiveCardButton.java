@@ -61,6 +61,7 @@ public class ActiveCardButton extends JButton implements DataListener, ActionLis
 		{
 			GameHandler.instance.getEventDeck().discard(card);
 		}
+		GameHandler.instance.fireDataChangedEvent(null);
 	}
 	
 	private boolean checkGrenadeCard(EventCard card, Player player)

@@ -71,7 +71,7 @@ public class RightPanel extends JPanel
 		panel.setLayout(new GridLayout(3, 1, 0, 10));
 		for (int i = 0; i < 3; i += 1)
 		{
-			panel.add(new ActiveCardButton(i));
+			panel.add(new DiscardedCardButton(i));
 		}
 		return panel;
 	}
