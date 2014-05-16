@@ -1,4 +1,4 @@
-package main.eventCardTypes;
+package internationalization;
 
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;

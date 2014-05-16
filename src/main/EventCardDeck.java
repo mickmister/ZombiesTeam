@@ -129,4 +129,10 @@ public class EventCardDeck
 	{
 		return this.activeCards.contains(card);
 	}
+	
+	public boolean discardedDeckContains(EventCard card)
+	{
+		return this.discardedActiveCards.contains(card);
+	}
+	
 }

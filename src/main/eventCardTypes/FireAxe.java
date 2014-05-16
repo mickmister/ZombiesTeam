@@ -1,5 +1,6 @@
 package main.eventCardTypes;
 
+import internationalization.Messages;
 import gui.DialogHandler;
 
 import javax.swing.JOptionPane;

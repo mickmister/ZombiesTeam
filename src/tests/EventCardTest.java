@@ -23,13 +23,16 @@ import main.TileCell.CellType;
 import main.eventCardTypes.AdrenalineRush;
 import main.eventCardTypes.BadSenseOfDirection;
 import main.eventCardTypes.ButterFingers;
+import main.eventCardTypes.Chainsaw;
 import main.eventCardTypes.Fear;
 import main.eventCardTypes.FireAxe;
+import main.eventCardTypes.FirstAidKit;
 import main.eventCardTypes.GainTwoHealthNoMove;
 import main.eventCardTypes.Grenade;
 import main.eventCardTypes.HystericalParalysis;
 import main.eventCardTypes.KeysAreStillIn;
 import main.eventCardTypes.LotsOfAmmo;
+import main.eventCardTypes.MolotovCocktail;
 import main.eventCardTypes.Shotgun;
 import main.eventCardTypes.Skateboard;
 import main.eventCardTypes.UntiedShoe;
@@ -358,9 +361,7 @@ public class EventCardTest
 		player.tryMoveLeft();
 		player.tryMoveLeft();
 		assertEquals(1, card.action(0));
-		assertEquals(8, player.getZombiesCaptured());
-		
-		
+		assertEquals(8, player.getZombiesCaptured());		
 	}
 	
 	private MapTile getZombieBuildingTile()
@@ -383,6 +384,7 @@ public class EventCardTest
 				}
 				hasZombie.set(tile.getRightCell(), false);
 				cellType.set(tile.getRightCell(), CellType.road);
+				cellType.set(tile.getCell(1, 1), CellType.door);
 			}			
 		}
 		catch(Exception e)
@@ -402,8 +404,99 @@ public class EventCardTest
 		assertEquals(SpecialNames.SportingGoods, card.getBuildingName());
 		assertEquals(3, player.getBulletTokens());
 		card.action(0);
-		assertEquals(6,  player.getBulletTokens());
-		
+		assertEquals(6,  player.getBulletTokens());		
+	}
+	
+	@Test
+	public void testChainsaw()
+	{
+		new GameHandler(2);
+		EventCardDeck deck = GameHandler.instance.getEventDeck();
+		Player player = GameHandler.instance.getPlayer(0);
+		Chainsaw card = new Chainsaw();
+		assertEquals(SpecialNames.LawnAndGarden, card.getBuildingName());
+		card.setTargetPlayer(player);
+		deck.addDiscardedActiveCard(card);
+		assertEquals(5, deck.doDiscardedCardAction(player, Chainsaw.class, 3));
+		assertEquals(5, deck.doDiscardedCardAction(player, Chainsaw.class, 3));
+		assertEquals(5, deck.doDiscardedCardAction(player, Chainsaw.class, 3));	//check that it may be done multiple times
+		assertTrue(deck.discardedDeckContains(card));
+		card.customRemove();
+		assertFalse(deck.discardedDeckContains(card));		
+	}
+	
+	@Test
+	public void testMolotovCocktail()
+	{
+		new GameHandler(2);
+		Player player = GameHandler.instance.getPlayer(0);
+		MolotovCocktail card = new MolotovCocktail();
+		card.setTargetPlayer(player);
+		MapTile tile = getZombieBuildingTile();
+		Map map = GameHandler.instance.getMap();
+		map.setTempTile(tile);
+		map.setTempPos(new Point(4, 5));
+		map.placeTempTile();
+		player.tryMoveLeft();
+		player.tryMoveLeft();
+		assertEquals(4, card.action(4));
+		player.tryMoveLeft();
+		assertEquals(6, card.action(4));
+		player.tryMoveLeft();
+		assertEquals(6, card.action(4));		
+	}
+	
+	@Test
+	public void testFirstAidKit()
+	{
+		new GameHandler(2);
+		Player player = GameHandler.instance.getPlayer(0);
+		player.loseBulletToken();
+		FirstAidKit card = new FirstAidKit();
+		card.setTargetPlayer(player);
+		EventCardDeck deck = GameHandler.instance.getEventDeck();
+		deck.addActiveCard(card);
+		TileCell cell = GameHandler.instance.getMap().getMapTile(5, 5).getLeftCell();
+		cell.setZombie(true);
+		GameHandler.instance.nextGameState();
+		GameHandler.instance.nextGameState(); // player movement die roll now
+		assertEquals(3, player.getLifeTokens());
+		player.tryMoveLeft();
+		player.setZombieCombatRoll(1);
+		player.fightZombie(cell);
+		assertEquals(3, player.getLifeTokens());
+	}
+	
+	@Test
+	public void testCorrectBuildings()
+	{
+		//Chainsaw - Lawn and Garden
+		//Fire Axe - Fire Station
+		//Lots of Ammo - Sporting Goods
+		new GameHandler(2);
+		Player player = GameHandler.instance.getPlayer(0);
+		Field buildingName;
+		MapTile tile = GameHandler.instance.getMap().getMapTile(5, 5);
+		Field cellType;
+		try 
+		{
+		cellType = TileCell.class.getDeclaredField("type");		
+		cellType.setAccessible(true);
+		cellType.set(tile.getCell(1, 1), CellType.building);
+		buildingName = MapTile.class.getDeclaredField("specialName");		
+			buildingName.setAccessible(true);
+			buildingName.set(tile, SpecialNames.LawnAndGarden);
+			assertTrue(new Chainsaw().checkCorrectBuilding(player));
+			buildingName.set(tile, SpecialNames.FireStation);
+			assertTrue(new FireAxe().checkCorrectBuilding(player));
+			buildingName.set(tile, SpecialNames.SportingGoods);
+			assertTrue(new LotsOfAmmo().checkCorrectBuilding(player));
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
 		
 	}
+	
 }

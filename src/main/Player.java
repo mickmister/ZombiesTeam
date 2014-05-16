@@ -315,7 +315,7 @@ public class Player
 	
 	private boolean checkFirstAidCard()
 	{
-		int didAction = GameHandler.instance.getEventDeck().doDiscardedCardAction(this, FirstAidKit.class, 0);
+		int didAction = GameHandler.instance.getEventDeck().doCardAction(this, FirstAidKit.class, 0);
 		return didAction == 1;
 	}
 	

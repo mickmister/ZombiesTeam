@@ -4,6 +4,7 @@ import main.GameHandler.GameState;
 import main.eventCardTypes.AdrenalineRush;
 import main.eventCardTypes.Chainsaw;
 import main.eventCardTypes.FireAxe;
+import main.eventCardTypes.MolotovCocktail;
 import main.eventCardTypes.Shotgun;
 import main.eventCardTypes.Skateboard;
 import main.eventCardTypes.UntiedShoe;
@@ -26,6 +27,7 @@ public class RollDice
 			roll = GameHandler.instance.getEventDeck().doCardAction(player, Shotgun.class, roll);
 			roll = GameHandler.instance.getEventDeck().doCardAction(player, FireAxe.class, roll);
 			roll = GameHandler.instance.getEventDeck().doDiscardedCardAction(player, Chainsaw.class, roll);
+			roll = GameHandler.instance.getEventDeck().doDiscardedCardAction(player, MolotovCocktail.class, roll);
 		}
 		return roll;
 	}

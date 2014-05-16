@@ -1,7 +1,9 @@
 package main;
 
 import main.MapTileDeck.SpecialNames;
+import main.eventCardTypes.CustomUseDiscardable;
 import main.eventCardTypes.PlayUntilRevoked;
+import main.eventCardTypes.SingleUseDiscardable;
 
 public abstract class EventCard
 {
@@ -76,9 +78,13 @@ public abstract class EventCard
 		{
 			buildingName = ((PlayUntilRevoked) this).getBuildingName();
 		}
-		else
+		else if(this instanceof SingleUseDiscardable)
 		{
-			// buildingName = ((PlayWhenDiscarded) this).getBuildingName();
+			 buildingName = ((SingleUseDiscardable) this).getBuildingName();
+		}
+		else if(this instanceof CustomUseDiscardable)
+		{
+			buildingName = ((CustomUseDiscardable) this).getBuildingName();
 		}
 		MapTile tile = GameHandler.instance.getMap().getMapTile(player.getTileLocation().y, player.getTileLocation().x);
 		SpecialNames currentBuilding = tile.getSpecialName();
