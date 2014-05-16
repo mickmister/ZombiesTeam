@@ -32,7 +32,7 @@ public class ButterFingers extends OneUseCard
 			if (card.equals(result))
 			{
 				EventCard item = (EventCard) result;
-				GameHandler.instance.getEventDeck().removeDiscardedCard(item);
+				GameHandler.instance.getEventDeck().removeActiveCard(item);
 				String message = "The card " + item.getName() + " was removed from Player " + (getTargetPlayer().getNumber() + 1) + "'s hand.";
 				DialogHandler.showMessage(null, message, getName(), JOptionPane.INFORMATION_MESSAGE);
 				return 0;
