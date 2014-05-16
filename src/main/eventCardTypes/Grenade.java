@@ -40,7 +40,7 @@ public class Grenade extends SingleUseDiscardable
 		{
 			for (int x = 0; x < 3; x++)
 			{
-				if (tile.getCell(y, x).isBuilding() || tile.getCell(y,  x).isDoor())
+				if (tile.getCell(y, x).isBuilding() || tile.getCell(y, x).isDoor())
 				{
 					list.add(tile.getCell(y, x));
 				}

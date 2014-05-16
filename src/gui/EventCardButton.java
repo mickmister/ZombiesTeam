@@ -58,7 +58,7 @@ public class EventCardButton extends JButton implements DataListener, ActionList
 		if (!player.checkCardPlayed())
 		{
 			EventCard card = player.getCardFromHand(this.index);
-			if (card instanceof PlayUntilRevoked || card instanceof SingleUseDiscardable ||card instanceof CustomUseDiscardable)
+			if (card instanceof PlayUntilRevoked || card instanceof SingleUseDiscardable || card instanceof CustomUseDiscardable)
 			{
 				if (card.checkCorrectBuilding(player))
 				{
