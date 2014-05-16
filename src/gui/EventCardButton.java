@@ -15,7 +15,9 @@ import main.GameHandler;
 import main.Player;
 import main.eventCardTypes.BadSenseOfDirection;
 import main.eventCardTypes.ButterFingers;
+import main.eventCardTypes.CustomUseDiscardable;
 import main.eventCardTypes.PlayUntilRevoked;
+import main.eventCardTypes.SingleUseDiscardable;
 
 public class EventCardButton extends JButton implements DataListener, ActionListener
 {
@@ -56,7 +58,7 @@ public class EventCardButton extends JButton implements DataListener, ActionList
 		if (!player.checkCardPlayed())
 		{
 			EventCard card = player.getCardFromHand(this.index);
-			if (card instanceof PlayUntilRevoked) // || card instanceof PlayWhenDiscarded
+			if (card instanceof PlayUntilRevoked || card instanceof SingleUseDiscardable ||card instanceof CustomUseDiscardable)
 			{
 				if (card.checkCorrectBuilding(player))
 				{
