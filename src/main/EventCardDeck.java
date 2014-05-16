@@ -13,13 +13,13 @@ public class EventCardDeck
 {
 	private ArrayList<EventCard> deck;
 	private ArrayList<EventCard> activeCards;
-	private ArrayList<EventCard> discardedActiveCards;
+	private ArrayList<EventCard> discardedCards;
 	
 	public EventCardDeck()
 	{
 		this.deck = new ArrayList<EventCard>();
 		this.activeCards = new ArrayList<EventCard>();
-		this.discardedActiveCards = new ArrayList<EventCard>();
+		this.discardedCards = new ArrayList<EventCard>();
 		
 		for (int i = 0; i < 200; i++)
 		{
@@ -37,22 +37,27 @@ public class EventCardDeck
 		Collections.shuffle(this.deck);
 	}
 	
-	public void addDiscardedActiveCard(EventCard card)
-	{
-		this.discardedActiveCards.add(card);
-	}
-	
-	public void removeDiscardedActiveCard(EventCard card)
-	{
-		this.discardedActiveCards.remove(card);
-	}
-	
 	public void addActiveCard(EventCard card)
 	{
 		this.activeCards.add(card);
 	}
 	
-	public EventCard removeByActivator(Player activator)
+	public void removeActiveCard(EventCard card)
+	{
+		this.activeCards.remove(card);
+	}
+	
+	public void addDiscardedCard(EventCard card)
+	{
+		this.discardedCards.add(card);
+	}
+	
+	public void removeDiscardedCard(EventCard card)
+	{
+		this.discardedCards.remove(card);
+	}
+	
+	public EventCard removeActiveByActivator(Player activator)
 	{
 		for (EventCard card : this.activeCards)
 		{
@@ -65,9 +70,17 @@ public class EventCardDeck
 		return null;
 	}
 	
-	public void removeActiveCard(EventCard card)
+	public EventCard removeDiscardedByActivator(Player activator)
 	{
-		this.activeCards.remove(card);
+		for (EventCard card : this.discardedCards)
+		{
+			if (card.getActivator().equals(activator))
+			{
+				removeDiscardedCard(card);
+				return card;
+			}
+		}
+		return null;
 	}
 	
 	public int doCardAction(Player p, Class<? extends EventCard> className, int num)
@@ -88,7 +101,7 @@ public class EventCardDeck
 	
 	public int doDiscardedCardAction(Player p, Class<? extends EventCard> className, int num)
 	{
-		for (EventCard card : this.discardedActiveCards)
+		for (EventCard card : this.discardedCards)
 		{
 			if (card.getTargetPlayer() == p)
 			{
@@ -123,7 +136,7 @@ public class EventCardDeck
 	public ArrayList<EventCard> getDiscardedCardsForPlayer(Player p)
 	{
 		ArrayList<EventCard> result = new ArrayList<EventCard>();
-		for (EventCard card : this.discardedActiveCards)
+		for (EventCard card : this.discardedCards)
 		{
 			if (card.getActivator() == p)
 			{
@@ -142,7 +155,7 @@ public class EventCardDeck
 		}
 		else
 		{
-			addDiscardedActiveCard(card);
+			addDiscardedCard(card);
 		}
 	}
 	
@@ -153,7 +166,7 @@ public class EventCardDeck
 	
 	public boolean discardedDeckContains(EventCard card)
 	{
-		return this.discardedActiveCards.contains(card);
+		return this.discardedCards.contains(card);
 	}
 	
 }

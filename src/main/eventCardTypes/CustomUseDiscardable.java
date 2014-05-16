@@ -29,6 +29,6 @@ public abstract class CustomUseDiscardable extends EventCard
 	
 	public void customRemove()
 	{
-		GameHandler.instance.getEventDeck().removeDiscardedActiveCard(this);
+		GameHandler.instance.getEventDeck().removeDiscardedCard(this);
 	}
 }

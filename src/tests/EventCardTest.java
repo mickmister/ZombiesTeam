@@ -416,7 +416,7 @@ public class EventCardTest
 		Chainsaw card = new Chainsaw();
 		assertEquals(SpecialNames.LawnAndGarden, card.getBuildingName());
 		card.setTargetPlayer(player);
-		deck.addDiscardedActiveCard(card);
+		deck.addDiscardedCard(card);
 		assertEquals(5, deck.doDiscardedCardAction(player, Chainsaw.class, 3));
 		assertEquals(5, deck.doDiscardedCardAction(player, Chainsaw.class, 3));
 		assertEquals(5, deck.doDiscardedCardAction(player, Chainsaw.class, 3));	//check that it may be done multiple times
