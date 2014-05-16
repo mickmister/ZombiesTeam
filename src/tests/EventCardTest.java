@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.awt.Point;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 
@@ -12,16 +13,23 @@ import main.EventCard.PossibleTarget;
 import main.EventCardDeck;
 import main.GameHandler;
 import main.GameHandler.GameState;
+import main.Map;
+import main.MapTile;
+import main.MapTile.Shape;
 import main.MapTileDeck.SpecialNames;
 import main.Player;
+import main.TileCell;
+import main.TileCell.CellType;
 import main.eventCardTypes.AdrenalineRush;
 import main.eventCardTypes.BadSenseOfDirection;
 import main.eventCardTypes.ButterFingers;
 import main.eventCardTypes.Fear;
 import main.eventCardTypes.FireAxe;
 import main.eventCardTypes.GainTwoHealthNoMove;
+import main.eventCardTypes.Grenade;
 import main.eventCardTypes.HystericalParalysis;
 import main.eventCardTypes.KeysAreStillIn;
+import main.eventCardTypes.LotsOfAmmo;
 import main.eventCardTypes.Shotgun;
 import main.eventCardTypes.Skateboard;
 import main.eventCardTypes.UntiedShoe;
@@ -331,5 +339,71 @@ public class EventCardTest
 		GameHandler.instance.getEventDeck().addActiveCard(card);
 		assertEquals(4, card.action(3));
 		assertTrue(GameHandler.instance.getEventDeck().activeDeckContains(card));
+	}
+	
+	@Test
+	public void testGrenade()
+	{
+		new GameHandler(2);
+		Player player = GameHandler.instance.getPlayer(0);
+		Grenade card = new Grenade();
+		card.setTargetPlayer(player);
+		assertEquals(0, player.getZombiesCaptured());
+		MapTile zombieTile = getZombieBuildingTile();
+		Map map = GameHandler.instance.getMap();
+		map.setTempTile(zombieTile);
+		map.setTempPos(new Point(4, 5));
+		map.placeTempTile();
+		player.tryMoveLeft();
+		player.tryMoveLeft();
+		player.tryMoveLeft();
+		assertEquals(1, card.action(0));
+		assertEquals(8, player.getZombiesCaptured());
+		
+		
+	}
+	
+	private MapTile getZombieBuildingTile()
+	{
+		MapTile tile = new MapTile(Shape.quad);
+		Field cellType;
+		Field hasZombie;
+		try 
+		{
+			cellType = TileCell.class.getDeclaredField("type");		
+			cellType.setAccessible(true);
+			hasZombie = TileCell.class.getDeclaredField("hasZombie");
+			hasZombie.setAccessible(true);
+			for (int y = 0; y < 3; y++)
+			{
+				for (int x = 0; x < 3; x++)
+				{
+					cellType.set(tile.getCell(y, x), CellType.building);
+					hasZombie.set(tile.getCell(y, x), true);
+				}
+				hasZombie.set(tile.getRightCell(), false);
+				cellType.set(tile.getRightCell(), CellType.road);
+			}			
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return tile;		
+	}
+	
+	@Test
+	public void testLotsOfAmmo()
+	{
+		new GameHandler(2);
+		Player player = GameHandler.instance.getPlayer(0);
+		LotsOfAmmo card = new LotsOfAmmo();
+		card.setTargetPlayer(player);
+		assertEquals(SpecialNames.SportingGoods, card.getBuildingName());
+		assertEquals(3, player.getBulletTokens());
+		card.action(0);
+		assertEquals(6,  player.getBulletTokens());
+		
+		
 	}
 }

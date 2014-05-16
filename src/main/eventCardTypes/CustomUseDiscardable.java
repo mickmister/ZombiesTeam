@@ -25,9 +25,7 @@ public abstract class CustomUseDiscardable extends EventCard
 	
 	@Override
 	public void checkRemove()
-	{
-		// Should do nothing.
-	}
+	{} // Should do nothing.
 	
 	public void customRemove()
 	{
