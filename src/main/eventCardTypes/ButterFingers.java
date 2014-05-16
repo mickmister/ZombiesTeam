@@ -1,11 +1,12 @@
 package main.eventCardTypes;
 
+import java.util.ArrayList;
+
 import gui.DialogHandler;
 
 import javax.swing.JOptionPane;
 
 import main.EventCard;
-import main.EventCardDeck;
 import main.GameHandler;
 
 public class ButterFingers extends OneUseCard
@@ -20,32 +21,30 @@ public class ButterFingers extends OneUseCard
 	public int behavior(int num)
 	{
 		// check deck for active cards
-		EventCardDeck deck = GameHandler.instance.getEventDeck();
-		EventCard item = deck.removeByActivator(getTargetPlayer());
-		if (item != null)
+		ArrayList<EventCard> cards = GameHandler.instance.getEventDeck().getActiveCardsForPlayer(getTargetPlayer());
+		ArrayList<Object> choices = new ArrayList<Object>();
+		choices.add("Bullet tokens");
+		choices.addAll(cards);
+		Object result = DialogHandler.showListChoice(null, "Do you want to remove bullet tokens or a discarded event card from the player?", getName(), JOptionPane.QUESTION_MESSAGE, choices.toArray());
+		
+		for (EventCard card : cards)
 		{
-			// event card display
-			String message = "The card " + item.getName() + " was removed from Player " + (getTargetPlayer().getNumber() + 1) + "'s hand.";
-			DialogHandler.showMessage(null, message, getName(), JOptionPane.INFORMATION_MESSAGE);
-		}
-		else
-		{
-			// bullet token operation and display
-			int numTokens;
-			if (getTargetPlayer().getBulletTokens() < 2)
+			if (card.equals(result))
 			{
-				numTokens = getTargetPlayer().getBulletTokens();
+				EventCard item = (EventCard) result;
+				GameHandler.instance.getEventDeck().removeDiscardedCard(item);
+				String message = "The card " + item.getName() + " was removed from Player " + (getTargetPlayer().getNumber() + 1) + "'s hand.";
+				DialogHandler.showMessage(null, message, getName(), JOptionPane.INFORMATION_MESSAGE);
+				return 0;
 			}
-			else
-			{
-				numTokens = 2;
-			}
-			getTargetPlayer().loseBulletToken();
-			getTargetPlayer().loseBulletToken();
-			String message = numTokens + " bullet tokens were removed from Player" + (getTargetPlayer().getNumber() + 1) + "'s hand.";
-			DialogHandler.showMessage(null, message, getName(), JOptionPane.INFORMATION_MESSAGE);
 		}
+		
+		// bullet token operation and display
+		int numTokens = Math.min(2, getTargetPlayer().getBulletTokens());
+		getTargetPlayer().loseBulletToken();
+		getTargetPlayer().loseBulletToken();
+		String message = numTokens + " bullet tokens were removed from Player" + (getTargetPlayer().getNumber() + 1) + "'s hand.";
+		DialogHandler.showMessage(null, message, getName(), JOptionPane.INFORMATION_MESSAGE);
 		return 0;
 	}
-	
 }

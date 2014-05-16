@@ -87,9 +87,9 @@ public class EventCardDeck
 	{
 		for (EventCard card : this.activeCards)
 		{
-			if (card.getTargetPlayer() == p)
+			if (card.getClass() == className)
 			{
-				if (card.getClass() == className)
+				if (card.getTargetPlayer() == p)
 				{
 					return card.action(num);
 				}
@@ -103,9 +103,9 @@ public class EventCardDeck
 	{
 		for (EventCard card : this.discardedCards)
 		{
-			if (card.getTargetPlayer() == p)
+			if (card.getClass() == className)
 			{
-				if (card.getClass() == className)
+				if (card.getTargetPlayer() == p)
 				{
 					return card.action(num);
 				}
@@ -168,5 +168,4 @@ public class EventCardDeck
 	{
 		return this.discardedCards.contains(card);
 	}
-	
 }
