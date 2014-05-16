@@ -24,7 +24,7 @@ public class DiscardedCardButton extends JButton implements DataListener
 	public void dataChanged(DataChangedEvent e)
 	{
 		Player player = ((Window) getTopLevelAncestor()).getPlayer();
-		ArrayList<EventCard> cards = GameHandler.instance.getEventDeck().getActiveCardsForPlayer(player);
+		ArrayList<EventCard> cards = GameHandler.instance.getEventDeck().getDiscardedCardsForPlayer(player);
 		if (cards.size() > this.index)
 		{
 			EventCard card = cards.get(this.index);

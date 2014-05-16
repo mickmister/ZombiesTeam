@@ -6,6 +6,7 @@ import java.util.Collections;
 import main.eventCardTypes.ButterFingers;
 import main.eventCardTypes.FireAxe;
 import main.eventCardTypes.KeysAreStillIn;
+import main.eventCardTypes.SingleUseDiscardable;
 import main.eventCardTypes.Skateboard;
 
 public class EventCardDeck
@@ -119,10 +120,30 @@ public class EventCardDeck
 		return result;
 	}
 	
+	public ArrayList<EventCard> getDiscardedCardsForPlayer(Player p)
+	{
+		ArrayList<EventCard> result = new ArrayList<EventCard>();
+		for (EventCard card : this.discardedActiveCards)
+		{
+			if (card.getActivator() == p)
+			{
+				result.add(card);
+			}
+		}
+		return result;
+	}
+	
 	public void discard(EventCard card)
 	{
 		removeActiveCard(card);
-		addDiscardedActiveCard(card);
+		if (card instanceof SingleUseDiscardable)
+		{
+			card.action(0);
+		}
+		else
+		{
+			addDiscardedActiveCard(card);
+		}
 	}
 	
 	public boolean activeDeckContains(EventCard card)
