@@ -416,7 +416,7 @@ public class EventCardTest
 		Chainsaw card = new Chainsaw();
 		assertEquals(SpecialNames.LawnAndGarden, card.getBuildingName());
 		card.setTargetPlayer(player);
-		deck.addDiscardedCard(card);
+		deck.discard(card);
 		assertEquals(5, deck.doDiscardedCardAction(player, Chainsaw.class, 3));
 		assertEquals(5, deck.doDiscardedCardAction(player, Chainsaw.class, 3));
 		assertEquals(5, deck.doDiscardedCardAction(player, Chainsaw.class, 3));	//check that it may be done multiple times
@@ -480,10 +480,10 @@ public class EventCardTest
 		Field cellType;
 		try 
 		{
-		cellType = TileCell.class.getDeclaredField("type");		
-		cellType.setAccessible(true);
-		cellType.set(tile.getCell(1, 1), CellType.building);
-		buildingName = MapTile.class.getDeclaredField("specialName");		
+			cellType = TileCell.class.getDeclaredField("type");		
+			cellType.setAccessible(true);
+			cellType.set(tile.getCell(1, 1), CellType.building);
+			buildingName = MapTile.class.getDeclaredField("specialName");		
 			buildingName.setAccessible(true);
 			buildingName.set(tile, SpecialNames.LawnAndGarden);
 			assertTrue(new Chainsaw().checkCorrectBuilding(player));
@@ -496,6 +496,23 @@ public class EventCardTest
 		{
 			e.printStackTrace();
 		}
+		
+	}
+	
+	@Test
+	public void testThatCustomDiscardableGetsRemoved()
+	{
+		new GameHandler(2);
+		Player player = GameHandler.instance.getPlayer(0);
+		EventCardDeck deck = GameHandler.instance.getEventDeck();
+		MolotovCocktail card = new MolotovCocktail();
+		card.setTargetPlayer(player);
+		card.setActivator(player);
+		deck.discard(card);
+		assertTrue(deck.discardedDeckContains(card));		
+		GameHandler.instance.nextTurn();
+		assertFalse(deck.discardedDeckContains(card));
+		
 		
 	}
 	

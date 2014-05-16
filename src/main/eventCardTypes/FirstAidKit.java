@@ -4,9 +4,10 @@ import gui.DialogHandler;
 
 import javax.swing.JOptionPane;
 
+import main.GameHandler;
 import main.MapTileDeck.SpecialNames;
 
-public class FirstAidKit extends SingleUseDiscardable
+public class FirstAidKit extends CustomUseDiscardable
 {
 	
 	public FirstAidKit()
@@ -19,6 +20,7 @@ public class FirstAidKit extends SingleUseDiscardable
 	public int behavior(int num)
 	{
 		DialogHandler.showMessage(null, "Your First Aid Kit has saved you from using a life token!", getName(), JOptionPane.INFORMATION_MESSAGE);
+		GameHandler.instance.getEventDeck().removeDiscardedCard(this);
 		return 1;
 	}
 	
