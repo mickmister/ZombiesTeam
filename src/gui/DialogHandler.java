@@ -38,7 +38,7 @@ public class DialogHandler
 		}
 		else
 		{
-			return options[0];
+			return options[DialogHandler.defaultReturn];
 		}
 	}
 }
