@@ -1,8 +1,8 @@
 package main.eventCardTypes;
 
-import java.util.ArrayList;
-
 import gui.DialogHandler;
+
+import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
@@ -25,7 +25,8 @@ public class ButterFingers extends OneUseCard
 		ArrayList<Object> choices = new ArrayList<Object>();
 		choices.add("Bullet tokens");
 		choices.addAll(cards);
-		Object result = DialogHandler.showListChoice(null, "Do you want to remove bullet tokens or a discarded event card from the player?", getName(), JOptionPane.QUESTION_MESSAGE, choices.toArray());
+		Object result = DialogHandler.showListChoice(null, "Do you want to remove bullet tokens or a discarded event card from the player?",
+				getName(), JOptionPane.QUESTION_MESSAGE, choices.toArray());
 		
 		for (EventCard card : cards)
 		{

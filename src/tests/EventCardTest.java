@@ -3,6 +3,7 @@ package tests;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import gui.DialogHandler;
 
 import java.awt.Point;
 import java.lang.reflect.Field;
@@ -288,7 +289,7 @@ public class EventCardTest
 		ButterFingers card = new ButterFingers();
 		card.setActivator(player1);
 		card.setTargetPlayer(player2);
-		assertEquals(3, player2.getBulletTokens());
+		DialogHandler.defaultReturn = 0;
 		card.behavior(0);
 		assertEquals(1, player2.getBulletTokens());
 		card.behavior(0);
@@ -297,6 +298,7 @@ public class EventCardTest
 		card2.setActivator(player2);
 		game.getEventDeck().addActiveCard(card2);
 		assertTrue(game.getEventDeck().activeDeckContains(card2));
+		DialogHandler.defaultReturn = 1;
 		card.behavior(0);
 		assertFalse(game.getEventDeck().activeDeckContains(card2));
 	}
@@ -361,7 +363,7 @@ public class EventCardTest
 		player.tryMoveLeft();
 		player.tryMoveLeft();
 		assertEquals(1, card.action(0));
-		assertEquals(8, player.getZombiesCaptured());		
+		assertEquals(8, player.getZombiesCaptured());
 	}
 	
 	private MapTile getZombieBuildingTile()
@@ -369,9 +371,9 @@ public class EventCardTest
 		MapTile tile = new MapTile(Shape.quad);
 		Field cellType;
 		Field hasZombie;
-		try 
+		try
 		{
-			cellType = TileCell.class.getDeclaredField("type");		
+			cellType = TileCell.class.getDeclaredField("type");
 			cellType.setAccessible(true);
 			hasZombie = TileCell.class.getDeclaredField("hasZombie");
 			hasZombie.setAccessible(true);
@@ -385,13 +387,13 @@ public class EventCardTest
 				hasZombie.set(tile.getRightCell(), false);
 				cellType.set(tile.getRightCell(), CellType.road);
 				cellType.set(tile.getCell(1, 1), CellType.door);
-			}			
+			}
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			e.printStackTrace();
 		}
-		return tile;		
+		return tile;
 	}
 	
 	@Test
@@ -404,7 +406,7 @@ public class EventCardTest
 		assertEquals(SpecialNames.SportingGoods, card.getBuildingName());
 		assertEquals(3, player.getBulletTokens());
 		card.action(0);
-		assertEquals(6,  player.getBulletTokens());		
+		assertEquals(6, player.getBulletTokens());
 	}
 	
 	@Test
@@ -419,10 +421,12 @@ public class EventCardTest
 		deck.discard(card);
 		assertEquals(5, deck.doDiscardedCardAction(player, Chainsaw.class, 3));
 		assertEquals(5, deck.doDiscardedCardAction(player, Chainsaw.class, 3));
-		assertEquals(5, deck.doDiscardedCardAction(player, Chainsaw.class, 3));	//check that it may be done multiple times
+		assertEquals(5, deck.doDiscardedCardAction(player, Chainsaw.class, 3)); // check that it may
+																				// be done multiple
+																				// times
 		assertTrue(deck.discardedDeckContains(card));
 		card.customRemove();
-		assertFalse(deck.discardedDeckContains(card));		
+		assertFalse(deck.discardedDeckContains(card));
 	}
 	
 	@Test
@@ -443,7 +447,7 @@ public class EventCardTest
 		player.tryMoveLeft();
 		assertEquals(6, card.action(4));
 		player.tryMoveLeft();
-		assertEquals(6, card.action(4));		
+		assertEquals(6, card.action(4));
 	}
 	
 	@Test
@@ -470,20 +474,20 @@ public class EventCardTest
 	@Test
 	public void testCorrectBuildings()
 	{
-		//Chainsaw - Lawn and Garden
-		//Fire Axe - Fire Station
-		//Lots of Ammo - Sporting Goods
+		// Chainsaw - Lawn and Garden
+		// Fire Axe - Fire Station
+		// Lots of Ammo - Sporting Goods
 		new GameHandler(2);
 		Player player = GameHandler.instance.getPlayer(0);
 		Field buildingName;
 		MapTile tile = GameHandler.instance.getMap().getMapTile(5, 5);
 		Field cellType;
-		try 
+		try
 		{
-			cellType = TileCell.class.getDeclaredField("type");		
+			cellType = TileCell.class.getDeclaredField("type");
 			cellType.setAccessible(true);
 			cellType.set(tile.getCell(1, 1), CellType.building);
-			buildingName = MapTile.class.getDeclaredField("specialName");		
+			buildingName = MapTile.class.getDeclaredField("specialName");
 			buildingName.setAccessible(true);
 			buildingName.set(tile, SpecialNames.LawnAndGarden);
 			assertTrue(new Chainsaw().checkCorrectBuilding(player));
@@ -492,7 +496,7 @@ public class EventCardTest
 			buildingName.set(tile, SpecialNames.SportingGoods);
 			assertTrue(new LotsOfAmmo().checkCorrectBuilding(player));
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			e.printStackTrace();
 		}
@@ -509,10 +513,9 @@ public class EventCardTest
 		card.setTargetPlayer(player);
 		card.setActivator(player);
 		deck.discard(card);
-		assertTrue(deck.discardedDeckContains(card));		
+		assertTrue(deck.discardedDeckContains(card));
 		GameHandler.instance.nextTurn();
 		assertFalse(deck.discardedDeckContains(card));
-		
 		
 	}
 	

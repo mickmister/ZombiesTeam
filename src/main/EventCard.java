@@ -78,11 +78,11 @@ public abstract class EventCard
 		{
 			buildingName = ((PlayUntilRevoked) this).getBuildingName();
 		}
-		else if(this instanceof SingleUseDiscardable)
+		else if (this instanceof SingleUseDiscardable)
 		{
-			 buildingName = ((SingleUseDiscardable) this).getBuildingName();
+			buildingName = ((SingleUseDiscardable) this).getBuildingName();
 		}
-		else if(this instanceof CustomUseDiscardable)
+		else if (this instanceof CustomUseDiscardable)
 		{
 			buildingName = ((CustomUseDiscardable) this).getBuildingName();
 		}
