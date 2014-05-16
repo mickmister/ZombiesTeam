@@ -22,6 +22,7 @@ import main.Player;
 import main.TileCell;
 import main.TileCell.CellType;
 import main.eventCardTypes.AdrenalineRush;
+import main.eventCardTypes.AllTheMarbles;
 import main.eventCardTypes.BadSenseOfDirection;
 import main.eventCardTypes.ButterFingers;
 import main.eventCardTypes.Chainsaw;
@@ -469,6 +470,36 @@ public class EventCardTest
 		player.setZombieCombatRoll(1);
 		player.fightZombie(cell);
 		assertEquals(3, player.getLifeTokens());
+	}
+	
+	@Test
+	public void testAllTheMarbles()
+	{
+		new GameHandler(2);
+		Player player = GameHandler.instance.getPlayer(0);
+		EventCard card = new AllTheMarbles();
+		card.setActivator(player);
+		GameHandler.instance.getEventDeck().addDiscardedCard(card);
+		
+		//GameHandler.instance.nextGameState();
+		//GameHandler.instance.nextGameState();
+		//GameHandler.instance.nextGameState();
+		//GameHandler.instance.nextGameState();
+		player.setMovesRemaining(5);
+		
+		assertEquals(true, GameHandler.instance.getEventDeck().discardedDeckContains(card));
+		assertEquals(1, card.action(0));
+		assertEquals(0, player.getMovesRemaining());
+		
+		GameHandler.instance.nextTurn();
+		player = GameHandler.instance.getPlayer(1);
+		assertEquals(true, GameHandler.instance.getEventDeck().discardedDeckContains(card));
+		player.setMovesRemaining(5);
+		assertEquals(1, card.action(0));
+		assertEquals(0, player.getMovesRemaining());
+		GameHandler.instance.nextTurn();
+		GameHandler.instance.nextTurn();
+		assertEquals(false, GameHandler.instance.getEventDeck().discardedDeckContains(card));
 	}
 	
 	@Test

@@ -21,6 +21,9 @@ public class AllTheMarbles extends CustomUseDiscardable
 	@Override
 	public int behavior(int num)
 	{
+		GameHandler.instance.getPlayer(GameHandler.instance.getTurn()).setMovesRemaining(0);
+		GameHandler.instance.nextGameState();
+		GameHandler.instance.nextGameState();
 		DialogHandler.showMessage(null, "Zombie movement has been skipped by All the Marbles!", getName(), JOptionPane.INFORMATION_MESSAGE);
 		return 1;
 	}
@@ -37,5 +40,4 @@ public class AllTheMarbles extends CustomUseDiscardable
 			this.visited = true;
 		}
 	}
-	
 }
