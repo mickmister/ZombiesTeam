@@ -37,7 +37,7 @@ public class ActiveCardButton extends JButton implements DataListener, ActionLis
 		{
 			EventCard card = cards.get(this.index);
 			setVisible(true);
-			setText("<html><center>DISCARD<br>" + card.getName() + "<br>-----------------------<br>" + card.getDescription()); //$NON-NLS-1$ //$NON-NLS-2$
+			setText("<html><center>DISCARD:<hr><b>" + card.getName() + "</b><hr>" + card.getDescription()); //$NON-NLS-1$ //$NON-NLS-2$
 			boolean canDiscard = card instanceof SingleUseDiscardable || card instanceof CustomUseDiscardable;
 			setEnabled(canDiscard);
 		}

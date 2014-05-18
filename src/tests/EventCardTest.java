@@ -24,6 +24,7 @@ import main.Player;
 import main.TileCell;
 import main.TileCell.CellType;
 import main.eventCardTypes.AdrenalineRush;
+import main.eventCardTypes.AllTheMarbles;
 import main.eventCardTypes.BadSenseOfDirection;
 import main.eventCardTypes.ButterFingers;
 import main.eventCardTypes.Chainsaw;
@@ -44,7 +45,6 @@ import org.junit.Test;
 
 public class EventCardTest
 {
-	
 	@Test
 	public void testAdrenalineRushMovementBehavior()
 	{
@@ -225,7 +225,6 @@ public class EventCardTest
 		assertEquals(expected1, result);
 		result = card.action(base2);
 		assertEquals(expected2, result);
-		
 	}
 	
 	@Test
@@ -475,6 +474,32 @@ public class EventCardTest
 	}
 	
 	@Test
+	public void testAllTheMarbles()
+	{
+		new GameHandler(2);
+		Player player = GameHandler.instance.getPlayer(0);
+		EventCard card = new AllTheMarbles();
+		card.setActivator(player);
+		GameHandler.instance.getEventDeck().addDiscardedCard(card);
+		
+		player.setMovesRemaining(5);
+		assertEquals(true, GameHandler.instance.getEventDeck().discardedDeckContains(card));
+		assertEquals(1, card.action(0));
+		assertEquals(0, player.getMovesRemaining());
+		
+		GameHandler.instance.nextTurn();
+		player = GameHandler.instance.getPlayer(1);
+		assertEquals(true, GameHandler.instance.getEventDeck().discardedDeckContains(card));
+		
+		player.setMovesRemaining(5);
+		assertEquals(1, card.action(0));
+		assertEquals(0, player.getMovesRemaining());
+		GameHandler.instance.nextTurn();
+		GameHandler.instance.nextTurn();
+		assertEquals(false, GameHandler.instance.getEventDeck().discardedDeckContains(card));
+	}
+	
+	@Test
 	public void testCorrectBuildings()
 	{
 		// Chainsaw - Lawn and Garden
@@ -503,7 +528,6 @@ public class EventCardTest
 		{
 			e.printStackTrace();
 		}
-		
 	}
 	
 	@Test
@@ -519,7 +543,5 @@ public class EventCardTest
 		assertTrue(deck.discardedDeckContains(card));
 		GameHandler.instance.nextTurn();
 		assertFalse(deck.discardedDeckContains(card));
-		
 	}
-	
 }

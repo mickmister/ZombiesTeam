@@ -25,7 +25,7 @@ public class ButterFingers extends OneUseCard
 		ArrayList<Object> choices = new ArrayList<Object>();
 		choices.add("Bullet tokens");
 		choices.addAll(cards);
-		Object result = DialogHandler.showListChoice(null, "Do you want to remove bullet tokens or a discarded event card from the player?",
+		Object result = DialogHandler.showListChoice(null, "Do you want to remove bullet tokens or\na discarded event card from the player?",
 				getName(), JOptionPane.QUESTION_MESSAGE, choices.toArray());
 		
 		for (EventCard card : cards)
@@ -44,7 +44,7 @@ public class ButterFingers extends OneUseCard
 		int numTokens = Math.min(2, getTargetPlayer().getBulletTokens());
 		getTargetPlayer().loseBulletToken();
 		getTargetPlayer().loseBulletToken();
-		String message = numTokens + " bullet tokens were removed from Player" + (getTargetPlayer().getNumber() + 1) + "'s hand.";
+		String message = numTokens + " bullet tokens were removed from Player " + (getTargetPlayer().getNumber() + 1) + "'s hand.";
 		DialogHandler.showMessage(null, message, getName(), JOptionPane.INFORMATION_MESSAGE);
 		return 0;
 	}

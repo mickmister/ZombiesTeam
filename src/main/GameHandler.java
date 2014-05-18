@@ -7,6 +7,7 @@ import java.awt.Point;
 import java.util.ArrayList;
 
 import main.DataListener.DataChangedEvent;
+import main.eventCardTypes.AllTheMarbles;
 import main.eventCardTypes.Fear;
 import main.eventCardTypes.GainTwoHealthNoMove;
 import main.eventCardTypes.HystericalParalysis;
@@ -274,6 +275,7 @@ public class GameHandler
 			case playerMovement:
 				this.currentState = GameState.zombieMovementDieRoll;
 				this.guiStateData.rollDiceButtonEnabled = true;
+				this.eventDeck.doDiscardedCardAction(null, AllTheMarbles.class, 0);
 				break;
 			case zombieMovementDieRoll:
 				this.currentState = GameState.zombieMovement;

@@ -8,6 +8,7 @@ import main.eventCardTypes.FireAxe;
 import main.eventCardTypes.KeysAreStillIn;
 import main.eventCardTypes.SingleUseDiscardable;
 import main.eventCardTypes.Skateboard;
+import main.eventCardTypes.CustomUseDiscardable;
 
 public class EventCardDeck
 {
@@ -57,26 +58,13 @@ public class EventCardDeck
 		this.discardedCards.remove(card);
 	}
 	
-	public EventCard removeActiveByActivator(Player activator)
-	{
-		for (EventCard card : this.activeCards)
-		{
-			if (card.getActivator().equals(activator))
-			{
-				removeActiveCard(card);
-				return card;
-			}
-		}
-		return null;
-	}
-	
 	public EventCard removeDiscardedByActivator(Player activator)
 	{
 		for (EventCard card : this.discardedCards)
 		{
 			if (card.getActivator().equals(activator))
 			{
-				removeDiscardedCard(card);
+				((CustomUseDiscardable) card).customRemove();
 				return card;
 			}
 		}

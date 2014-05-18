@@ -15,6 +15,7 @@ public class ImageManager
 	public static BufferedImage ZOMBIE_PICTURE;
 	public static BufferedImage HEART_PICTURE;
 	public static BufferedImage BULLET_PICTURE;
+	public static BufferedImage DICE_PICTURE;
 	public static BufferedImage ZOMBIE_ICON;
 	public static BufferedImage HEART_ICON;
 	public static BufferedImage BULLET_ICON;
@@ -29,6 +30,7 @@ public class ImageManager
 		ImageManager.ZOMBIE_PICTURE = loadImage("Zombie Picture.png"); //$NON-NLS-1$
 		ImageManager.HEART_PICTURE = loadImage("Heart Picture.png"); //$NON-NLS-1$
 		ImageManager.BULLET_PICTURE = loadImage("Bullet Picture.png"); //$NON-NLS-1$
+		ImageManager.DICE_PICTURE = loadImage("Dice Picture.png"); //$NON-NLS-1$
 		ImageManager.ZOMBIE_ICON = loadImage("Zombie Icon.png"); //$NON-NLS-1$
 		ImageManager.HEART_ICON = loadImage("Heart Icon.png"); //$NON-NLS-1$
 		ImageManager.BULLET_ICON = loadImage("Bullet Icon.png"); //$NON-NLS-1$
