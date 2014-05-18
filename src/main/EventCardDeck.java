@@ -3,7 +3,6 @@ package main;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import main.eventCardTypes.AllTheMarbles;
 import main.eventCardTypes.ButterFingers;
 import main.eventCardTypes.FireAxe;
 import main.eventCardTypes.KeysAreStillIn;
@@ -65,14 +64,7 @@ public class EventCardDeck
 		{
 			if (card.getActivator().equals(activator))
 			{
-				/*if (card instanceof AllTheMarbles)
-				{
-					((AllTheMarbles) card).customRemove();
-				}
-				else
-				{*/
-					((CustomUseDiscardable) card).customRemove();
-				//}
+				((CustomUseDiscardable) card).customRemove();
 				return card;
 			}
 		}

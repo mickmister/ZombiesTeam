@@ -43,7 +43,6 @@ import org.junit.Test;
 
 public class EventCardTest
 {
-	
 	@Test
 	public void testAdrenalineRushMovementBehavior()
 	{
@@ -224,7 +223,6 @@ public class EventCardTest
 		assertEquals(expected1, result);
 		result = card.action(base2);
 		assertEquals(expected2, result);
-		
 	}
 	
 	@Test
@@ -481,12 +479,7 @@ public class EventCardTest
 		card.setActivator(player);
 		GameHandler.instance.getEventDeck().addDiscardedCard(card);
 		
-		//GameHandler.instance.nextGameState();
-		//GameHandler.instance.nextGameState();
-		//GameHandler.instance.nextGameState();
-		//GameHandler.instance.nextGameState();
 		player.setMovesRemaining(5);
-		
 		assertEquals(true, GameHandler.instance.getEventDeck().discardedDeckContains(card));
 		assertEquals(1, card.action(0));
 		assertEquals(0, player.getMovesRemaining());
@@ -494,6 +487,7 @@ public class EventCardTest
 		GameHandler.instance.nextTurn();
 		player = GameHandler.instance.getPlayer(1);
 		assertEquals(true, GameHandler.instance.getEventDeck().discardedDeckContains(card));
+		
 		player.setMovesRemaining(5);
 		assertEquals(1, card.action(0));
 		assertEquals(0, player.getMovesRemaining());
@@ -531,7 +525,6 @@ public class EventCardTest
 		{
 			e.printStackTrace();
 		}
-		
 	}
 	
 	@Test
@@ -547,7 +540,5 @@ public class EventCardTest
 		assertTrue(deck.discardedDeckContains(card));
 		GameHandler.instance.nextTurn();
 		assertFalse(deck.discardedDeckContains(card));
-		
 	}
-	
 }
