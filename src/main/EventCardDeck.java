@@ -57,17 +57,25 @@ public class EventCardDeck
 		this.discardedCards.remove(card);
 	}
 	
-	public EventCard removeDiscardedByActivator(Player activator)
+	public void removeUseForRoundCards(Player activator)
 	{
 		for (EventCard card : this.discardedCards)
 		{
 			if (card.getActivator().equals(activator))
 			{
-				((CustomUseDiscardable) card).customRemove();
-				return card;
+				card.checkRemove();
 			}
 		}
-		return null;
+		for (EventCard card : this.activeCards)
+		{
+			if (card.getActivator().equals(activator))
+			{
+				if (card instanceof UseForRoundCard)
+				{
+					card.checkRemove();
+				}
+			}
+		}
 	}
 	
 	public int doCardAction(Player p, Class<? extends EventCard> className, int num)

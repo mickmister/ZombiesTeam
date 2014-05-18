@@ -144,7 +144,7 @@ public class GameHandler
 	public void nextTurn()
 	{
 		this.players.get(this.turn).drawNewCards();
-		this.eventDeck.removeDiscardedByActivator(this.players.get(this.turn));
+		this.eventDeck.removeUseForRoundCards(this.players.get(this.turn));
 		this.currentState = GameState.tilePlacement;
 		this.turn = (this.turn + 1) % this.numberOfPlayers;
 		this.players.get(this.turn).setCardPlayed(false);
