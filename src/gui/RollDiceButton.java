@@ -5,6 +5,7 @@ import internationalization.RB;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
@@ -17,7 +18,8 @@ public class RollDiceButton extends JButton implements ActionListener, DataListe
 {
 	public RollDiceButton()
 	{
-		setText(RB.get("RollDiceButton.roll_dice")); //$NON-NLS-1$
+		setText("   " + RB.get("RollDiceButton.roll_dice")); //$NON-NLS-1$ //$NON-NLS-2$
+		setIcon(new ImageIcon(ImageManager.DICE_PICTURE));
 		addActionListener(this);
 		GameHandler.instance.addDataListener(this);
 	}
