@@ -4,6 +4,7 @@ import internationalization.RB;
 
 import java.awt.Point;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 import main.GameHandler.GameState;
 import main.MapTile.Shape;
@@ -372,5 +373,21 @@ public class Map
 			}
 		}
 		return null;
+	}
+	
+	public ArrayList<MapTile> getCurrentSpecialBuildings()
+	{
+		ArrayList<MapTile> tiles = new ArrayList<MapTile>();
+		for (int y = 0; y < this.SIZE; y += 1)
+		{
+			for (int x = 0; x < this.SIZE; x += 1)
+			{
+				if (Shape.special.equals(this.mapTiles[y][x].getShape()))
+				{
+					tiles.add(this.mapTiles[y][x]);
+				}
+			}
+		}
+		return tiles;
 	}
 }

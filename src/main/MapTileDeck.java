@@ -1,5 +1,7 @@
 package main;
 
+import internationalization.RB;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -46,7 +48,13 @@ public class MapTileDeck
 	
 	public enum SpecialNames
 	{
-		Hosipital, LawnAndGarden, DrugStore, PoliceStation, HardwareStore, SkateShop, SportingGoods, FloristShop, ToyStore, ArmySurplus, FireStation, GasStation, Helipad
+		Hosipital, LawnAndGarden, DrugStore, PoliceStation, HardwareStore, SkateShop, SportingGoods, FloristShop, ToyStore, ArmySurplus, FireStation, GasStation, Helipad;
+		
+		@Override
+		public String toString()
+		{
+			return RB.get("SpecialNames_" + name()); //$NON-NLS-1$
+		}
 	}
 	
 	private void addSpecialMapTiles()

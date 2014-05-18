@@ -19,7 +19,7 @@ public class MapTileView
 		this.specialName = "";
 		if (Shape.special.equals(this.mapTile.getShape()))
 		{
-			this.specialName = hackFromEnum();
+			this.specialName = this.mapTile.getSpecialName().toString();
 		}
 	}
 	
@@ -46,21 +46,5 @@ public class MapTileView
 		graphics.drawString(this.specialName, xPos * 240 + 10, yPos * 240 + 20);
 		
 		graphics.drawRect(xPos * 240, yPos * 240, 240, 240);
-	}
-	
-	private String hackFromEnum()
-	{
-		char[] name = this.mapTile.getSpecialName().name().toCharArray();
-		String output = "";
-		output += Character.toUpperCase(name[0]);
-		for (int i = 1; i < name.length; i += 1)
-		{
-			if (Character.isUpperCase(name[i]))
-			{
-				output += " ";
-			}
-			output += name[i];
-		}
-		return output;
 	}
 }

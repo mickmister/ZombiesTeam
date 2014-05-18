@@ -3,7 +3,9 @@ package main;
 import gui.DialogHandler;
 import internationalization.RB;
 
+import java.awt.Color;
 import java.awt.Font;
+import java.util.Enumeration;
 import java.util.Locale;
 
 import javax.swing.JOptionPane;
@@ -83,9 +85,24 @@ public class Main
 		try
 		{
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-			UIManager.getDefaults().put("Label.font", new Font("Segoe UI", Font.PLAIN, 50)); //$NON-NLS-1$ //$NON-NLS-2$
-			UIManager.getDefaults().put("Button.font", new Font("Segoe UI", Font.PLAIN, 16)); //$NON-NLS-1$ //$NON-NLS-2$
-			UIManager.getDefaults().put("TitledBorder.font", new Font("Segoe UI", Font.PLAIN, 16)); //$NON-NLS-1$ //$NON-NLS-2$
+			
+			Font font = new Font("Segoe UI", Font.PLAIN, 13);
+			Enumeration<Object> keys = UIManager.getDefaults().keys();
+			while (keys.hasMoreElements())
+			{
+				Object key = keys.nextElement();
+				Object value = UIManager.get(key);
+				if (value != null)
+				{
+					if (value instanceof javax.swing.plaf.FontUIResource)
+					{
+						UIManager.put(key, font);
+					}
+				}
+			}
+			
+			UIManager.getDefaults().put("Label.font", new Font("Segoe UI", Font.PLAIN, 40)); //$NON-NLS-1$ //$NON-NLS-2$
+			UIManager.put("Button.focus", new Color(0, 0, 0, 0));
 		}
 		catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e)
 		{
