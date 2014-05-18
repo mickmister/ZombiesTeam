@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
+import main.eventCardParents.EventCard;
 import main.eventCardTypes.FirstAidKit;
 
 /**

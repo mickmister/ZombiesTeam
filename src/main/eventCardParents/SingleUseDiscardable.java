@@ -1,8 +1,8 @@
-package main.eventCardTypes;
+package main.eventCardParents;
 
 import main.MapTileDeck.SpecialNames;
 
-public abstract class SingleUseDiscardable extends OneUseCard
+public abstract class SingleUseDiscardable extends SingleUseCard
 {
 	private SpecialNames buildingName;
 	

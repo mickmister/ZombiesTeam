@@ -1,12 +1,11 @@
-package main.eventCardTypes;
+package main.eventCardParents;
 
-import main.EventCard;
 import main.GameHandler;
 
-public abstract class OneUseCard extends EventCard
+public abstract class SingleUseCard extends EventCard
 {
 	
-	public OneUseCard(PossibleTarget posTar, String name, String description)
+	public SingleUseCard(PossibleTarget posTar, String name, String description)
 	{
 		super(posTar, name, description);
 	}

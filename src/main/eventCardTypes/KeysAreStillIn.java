@@ -2,8 +2,9 @@ package main.eventCardTypes;
 
 import main.GameHandler;
 import main.Player;
+import main.eventCardParents.SingleUseCard;
 
-public class KeysAreStillIn extends OneUseCard
+public class KeysAreStillIn extends SingleUseCard
 {
 	
 	public KeysAreStillIn()

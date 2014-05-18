@@ -1,9 +1,11 @@
-package main;
+package main.eventCardParents;
 
+import main.GameHandler;
+import main.MapTile;
+import main.MapTileDeck;
+import main.Player;
+import main.TileCell;
 import main.MapTileDeck.SpecialNames;
-import main.eventCardTypes.CustomUseDiscardable;
-import main.eventCardTypes.PlayUntilRevoked;
-import main.eventCardTypes.SingleUseDiscardable;
 
 public abstract class EventCard
 {
@@ -74,9 +76,9 @@ public abstract class EventCard
 	public boolean checkCorrectBuilding(Player player)
 	{
 		SpecialNames buildingName = null;
-		if (this instanceof PlayUntilRevoked)
+		if (this instanceof PlayUntilRevokedCard)
 		{
-			buildingName = ((PlayUntilRevoked) this).getBuildingName();
+			buildingName = ((PlayUntilRevokedCard) this).getBuildingName();
 		}
 		else if (this instanceof SingleUseDiscardable)
 		{

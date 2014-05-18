@@ -5,6 +5,7 @@ import gui.DialogHandler;
 import javax.swing.JOptionPane;
 
 import main.MapTileDeck.SpecialNames;
+import main.eventCardParents.CustomUseDiscardable;
 
 public class Chainsaw extends CustomUseDiscardable
 {

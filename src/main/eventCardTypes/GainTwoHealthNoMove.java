@@ -6,8 +6,9 @@ import javax.swing.JOptionPane;
 
 import main.GameHandler;
 import main.Player;
+import main.eventCardParents.SingleUseCard;
 
-public class GainTwoHealthNoMove extends OneUseCard
+public class GainTwoHealthNoMove extends SingleUseCard
 {
 	public GainTwoHealthNoMove()
 	{

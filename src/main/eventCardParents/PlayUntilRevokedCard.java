@@ -1,13 +1,12 @@
-package main.eventCardTypes;
+package main.eventCardParents;
 
-import main.EventCard;
 import main.MapTileDeck.SpecialNames;
 
-public abstract class PlayUntilRevoked extends EventCard
+public abstract class PlayUntilRevokedCard extends EventCard
 {
 	private SpecialNames buildingName;
 	
-	public PlayUntilRevoked(PossibleTarget posTar, String name, String description, SpecialNames buildingName)
+	public PlayUntilRevokedCard(PossibleTarget posTar, String name, String description, SpecialNames buildingName)
 	{
 		super(posTar, name, description);
 		this.buildingName = buildingName;

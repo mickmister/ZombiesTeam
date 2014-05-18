@@ -4,7 +4,9 @@ import gui.DialogHandler;
 
 import javax.swing.JOptionPane;
 
-public class UntiedShoe extends OneUseCard
+import main.eventCardParents.SingleUseCard;
+
+public class UntiedShoe extends SingleUseCard
 {
 	
 	public UntiedShoe()

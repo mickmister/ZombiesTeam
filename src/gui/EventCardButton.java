@@ -9,17 +9,17 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 import main.DataListener;
-import main.EventCard;
-import main.EventCard.PossibleTarget;
 import main.GameHandler;
 import main.Player;
+import main.eventCardParents.CustomUseDiscardable;
+import main.eventCardParents.EventCard;
+import main.eventCardParents.PlayUntilRevokedCard;
+import main.eventCardParents.SingleUseDiscardable;
+import main.eventCardParents.EventCard.PossibleTarget;
 import main.eventCardTypes.BadSenseOfDirection;
 import main.eventCardTypes.ButterFingers;
 import main.eventCardTypes.CouldntGetAnyWorse;
-import main.eventCardTypes.CustomUseDiscardable;
 import main.eventCardTypes.DontThinkTheyreDead;
-import main.eventCardTypes.PlayUntilRevoked;
-import main.eventCardTypes.SingleUseDiscardable;
 import main.eventCardTypes.SlightMiscalculation;
 
 public class EventCardButton extends JButton implements DataListener, ActionListener
@@ -94,7 +94,7 @@ public class EventCardButton extends JButton implements DataListener, ActionList
 	
 	private boolean checkCorrectBuilding(EventCard card, Player player)
 	{
-		if (card instanceof PlayUntilRevoked || card instanceof SingleUseDiscardable || card instanceof CustomUseDiscardable)
+		if (card instanceof PlayUntilRevokedCard || card instanceof SingleUseDiscardable || card instanceof CustomUseDiscardable)
 		{
 			if (card.checkCorrectBuilding(player))
 			{

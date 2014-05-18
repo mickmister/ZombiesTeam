@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 import main.GameHandler;
 import main.MapTile;
 import main.MapTileDeck.SpecialNames;
+import main.eventCardParents.CustomUseDiscardable;
 import main.TileCell;
 
 public class MolotovCocktail extends CustomUseDiscardable

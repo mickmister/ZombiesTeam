@@ -6,10 +6,11 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
-import main.EventCard;
 import main.GameHandler;
+import main.eventCardParents.EventCard;
+import main.eventCardParents.SingleUseCard;
 
-public class ButterFingers extends OneUseCard
+public class ButterFingers extends SingleUseCard
 {
 	
 	public ButterFingers()

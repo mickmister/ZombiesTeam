@@ -6,8 +6,9 @@ import javax.swing.JOptionPane;
 
 import main.GameHandler;
 import main.Player;
+import main.eventCardParents.SingleUseCard;
 
-public class BadSenseOfDirection extends OneUseCard
+public class BadSenseOfDirection extends SingleUseCard
 {
 	
 	public BadSenseOfDirection()

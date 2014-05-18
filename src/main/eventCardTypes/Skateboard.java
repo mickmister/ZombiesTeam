@@ -5,8 +5,9 @@ import gui.DialogHandler;
 import javax.swing.JOptionPane;
 
 import main.MapTileDeck.SpecialNames;
+import main.eventCardParents.PlayUntilRevokedCard;
 
-public class Skateboard extends PlayUntilRevoked
+public class Skateboard extends PlayUntilRevokedCard
 {
 	
 	public Skateboard()

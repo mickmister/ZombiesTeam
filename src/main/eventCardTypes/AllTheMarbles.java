@@ -6,6 +6,7 @@ import javax.swing.JOptionPane;
 
 import main.GameHandler;
 import main.MapTileDeck.SpecialNames;
+import main.eventCardParents.CustomUseDiscardable;
 
 public class AllTheMarbles extends CustomUseDiscardable
 {

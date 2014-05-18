@@ -3,10 +3,11 @@ package main;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import main.eventCardParents.CustomUseDiscardable;
+import main.eventCardParents.EventCard;
+import main.eventCardParents.SingleUseDiscardable;
 import main.eventCardTypes.BrainCramp;
 import main.eventCardTypes.ButterFingers;
-import main.eventCardTypes.CustomUseDiscardable;
-import main.eventCardTypes.SingleUseDiscardable;
 
 public class EventCardDeck
 {

@@ -6,8 +6,9 @@ import internationalization.RB;
 import javax.swing.JOptionPane;
 
 import main.MapTileDeck.SpecialNames;
+import main.eventCardParents.PlayUntilRevokedCard;
 
-public class FireAxe extends PlayUntilRevoked
+public class FireAxe extends PlayUntilRevokedCard
 {
 	public FireAxe()
 	{

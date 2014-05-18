@@ -6,8 +6,9 @@ import javax.swing.JOptionPane;
 
 import main.GameHandler;
 import main.Player;
+import main.eventCardParents.SingleUseCard;
 
-public class Fear extends OneUseCard
+public class Fear extends SingleUseCard
 {
 	
 	public Fear()

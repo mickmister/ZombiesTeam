@@ -9,9 +9,9 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 import main.DataListener;
-import main.EventCard;
 import main.GameHandler;
 import main.Player;
+import main.eventCardParents.EventCard;
 
 public class SwapCardButton extends JButton implements DataListener, ActionListener
 {

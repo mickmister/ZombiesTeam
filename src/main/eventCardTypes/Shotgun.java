@@ -4,6 +4,8 @@ import gui.DialogHandler;
 
 import javax.swing.JOptionPane;
 
+import main.eventCardParents.MultipleUseCard;
+
 public class Shotgun extends MultipleUseCard
 {
 	public Shotgun()

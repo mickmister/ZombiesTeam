@@ -2,8 +2,9 @@ package main.eventCardTypes;
 
 import gui.DialogHandler;
 import main.MapTile;
+import main.eventCardParents.SingleUseCard;
 
-public class CouldntGetAnyWorse extends OneUseCard
+public class CouldntGetAnyWorse extends SingleUseCard
 {
 	
 	public CouldntGetAnyWorse()

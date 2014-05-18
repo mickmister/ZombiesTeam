@@ -5,8 +5,9 @@ import gui.DialogHandler;
 import javax.swing.JOptionPane;
 
 import main.GameHandler;
+import main.eventCardParents.SingleUseCard;
 
-public class HystericalParalysis extends OneUseCard
+public class HystericalParalysis extends SingleUseCard
 {
 	
 	public HystericalParalysis()

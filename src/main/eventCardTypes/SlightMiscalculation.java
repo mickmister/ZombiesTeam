@@ -2,8 +2,9 @@ package main.eventCardTypes;
 
 import gui.DialogHandler;
 import main.MapTile;
+import main.eventCardParents.SingleUseCard;
 
-public class SlightMiscalculation extends OneUseCard
+public class SlightMiscalculation extends SingleUseCard
 {
 	
 	public SlightMiscalculation()

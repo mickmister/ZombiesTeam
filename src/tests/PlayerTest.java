@@ -11,13 +11,13 @@ import java.lang.reflect.Method;
 
 import javax.swing.JOptionPane;
 
-import main.EventCard;
 import main.GameHandler;
 import main.Map;
 import main.MapTile;
 import main.Player;
 import main.TileCell;
 import main.TileCell.CellType;
+import main.eventCardParents.EventCard;
 
 import org.junit.Test;
 

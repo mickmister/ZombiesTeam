@@ -2,9 +2,10 @@ package main.eventCardTypes;
 
 import javax.swing.JOptionPane;
 
+import main.eventCardParents.SingleUseCard;
 import gui.DialogHandler;
 
-public class BrainCramp extends OneUseCard
+public class BrainCramp extends SingleUseCard
 {
 	public BrainCramp()
 	{

@@ -9,13 +9,13 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 import main.DataListener;
-import main.EventCard;
 import main.GameHandler;
 import main.Player;
 import main.TileCell;
-import main.eventCardTypes.CustomUseDiscardable;
+import main.eventCardParents.CustomUseDiscardable;
+import main.eventCardParents.EventCard;
+import main.eventCardParents.SingleUseDiscardable;
 import main.eventCardTypes.Grenade;
-import main.eventCardTypes.SingleUseDiscardable;
 
 public class ActiveCardButton extends JButton implements DataListener, ActionListener
 {

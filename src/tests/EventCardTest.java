@@ -11,8 +11,6 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
-import main.EventCard;
-import main.EventCard.PossibleTarget;
 import main.EventCardDeck;
 import main.GameHandler;
 import main.GameHandler.GameState;
@@ -23,6 +21,8 @@ import main.MapTileDeck.SpecialNames;
 import main.Player;
 import main.TileCell;
 import main.TileCell.CellType;
+import main.eventCardParents.EventCard;
+import main.eventCardParents.EventCard.PossibleTarget;
 import main.eventCardTypes.AdrenalineRush;
 import main.eventCardTypes.AllTheMarbles;
 import main.eventCardTypes.BadSenseOfDirection;

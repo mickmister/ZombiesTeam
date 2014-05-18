@@ -6,8 +6,9 @@ import javax.swing.JOptionPane;
 
 import main.GameHandler;
 import main.GameHandler.GameState;
+import main.eventCardParents.SingleUseCard;
 
-public class AdrenalineRush extends OneUseCard
+public class AdrenalineRush extends SingleUseCard
 {
 	
 	public AdrenalineRush()

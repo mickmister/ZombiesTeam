@@ -1,6 +1,5 @@
-package main.eventCardTypes;
+package main.eventCardParents;
 
-import main.EventCard;
 import main.GameHandler;
 import main.MapTileDeck.SpecialNames;
 
