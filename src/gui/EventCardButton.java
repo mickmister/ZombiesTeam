@@ -106,7 +106,7 @@ public class EventCardButton extends JButton implements DataListener, ActionList
 				RB.get("EventCardButton.player_1"), RB.get("EventCardButton.player_2"), RB.get("EventCardButton.player_3"), RB.get("EventCardButton.player_4") }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		String[] choices = new String[numPlayers - 1];
 		int j = 0;
-		int turn = GameHandler.instance.getTurn();
+		int turn = ((Window) getTopLevelAncestor()).getPlayer().getNumber();
 		for (int i = 0; i < numPlayers; i += 1)
 		{
 			if (i != turn)
