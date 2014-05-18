@@ -29,7 +29,7 @@ public class DiscardedCardButton extends JButton implements DataListener
 		{
 			EventCard card = cards.get(this.index);
 			setVisible(true);
-			setText("<html><center>IN EFFECT<br>" + card.getName() + "<br>-----------------------<br>" + card.getDescription()); //$NON-NLS-1$ //$NON-NLS-2$
+			setText("<html><center>IN EFFECT:<hr><b>" + card.getName() + "</b><hr>" + card.getDescription()); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		else
 		{

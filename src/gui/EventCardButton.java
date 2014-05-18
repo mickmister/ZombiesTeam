@@ -41,7 +41,7 @@ public class EventCardButton extends JButton implements DataListener, ActionList
 		}
 		else
 		{
-			setText("<html><center>" + card.getName() + "<br>-----------------------<br>" + card.getDescription()); //$NON-NLS-1$ //$NON-NLS-2$
+			setText("<html><center><b>" + card.getName() + "</b><hr>" + card.getDescription()); //$NON-NLS-1$ //$NON-NLS-2$
 			setEnabled(true);
 		}
 	}

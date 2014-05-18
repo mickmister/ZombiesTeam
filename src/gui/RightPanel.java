@@ -14,7 +14,7 @@ public class RightPanel extends JPanel
 	{
 		setLayout(new GridLayout(0, 3, 10, 0));
 		setBorder(new EmptyBorder(10, 10, 0, 10));
-		setPreferredSize(new Dimension(700, 1));
+		setPreferredSize(new Dimension(750, 1));
 		
 		JPanel inHandPanel = new JPanel();
 		inHandPanel.setLayout(new GridLayout(1, 1));
