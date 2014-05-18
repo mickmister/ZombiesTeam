@@ -9,6 +9,8 @@ import java.awt.Point;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import main.EventCard;
 import main.EventCard.PossibleTarget;
 import main.EventCardDeck;
@@ -26,6 +28,7 @@ import main.eventCardTypes.AllTheMarbles;
 import main.eventCardTypes.BadSenseOfDirection;
 import main.eventCardTypes.ButterFingers;
 import main.eventCardTypes.Chainsaw;
+import main.eventCardTypes.DontThinkTheyreDead;
 import main.eventCardTypes.Fear;
 import main.eventCardTypes.FireAxe;
 import main.eventCardTypes.FirstAidKit;
@@ -541,5 +544,82 @@ public class EventCardTest
 		assertTrue(deck.discardedDeckContains(card));
 		GameHandler.instance.nextTurn();
 		assertFalse(deck.discardedDeckContains(card));
+	}
+	
+	@Test
+	public void testDontThinkTheyreDead()
+	{		
+		DialogHandler.defaultReturn = JOptionPane.YES_OPTION;;
+		for(int i = 0; i < 1000; i++)
+		{
+			new GameHandler(2);
+			Player player1 = GameHandler.instance.getPlayer(0);
+			Player player2 = GameHandler.instance.getPlayer(1);
+			DontThinkTheyreDead card = new DontThinkTheyreDead();
+			card.setTargetPlayer(player2);
+			card.setActivator(player1);
+			player2.incrementZombiesCaptured();
+			player2.incrementZombiesCaptured();
+			int bulletTokens = card.getTargetPlayer().getBulletTokens();
+			int lifeTokens = card.getTargetPlayer().getLifeTokens();
+			int numZombies = card.getTargetPlayer().getZombiesCaptured();
+			int rolls = card.behavior(0);
+			int roll1 = rolls % (2 << 16);
+			int roll2 = rolls >> 16;
+			
+			if(roll1 < 4 && roll2 < 4)
+			{
+				int diff = 8 - roll1 - roll2;
+				if(bulletTokens >= diff)
+				{
+					assertEquals(bulletTokens - diff, card.getTargetPlayer().getBulletTokens());
+					assertEquals(lifeTokens, card.getTargetPlayer().getLifeTokens());
+				}
+				else if(bulletTokens >= 4 - roll1)
+				{
+					assertEquals(bulletTokens - (4 - roll1), card.getTargetPlayer().getBulletTokens());
+					assertEquals(lifeTokens - 1, card.getTargetPlayer().getLifeTokens());
+				}
+				else if(bulletTokens >= 4 - roll2)
+				{
+					assertEquals(bulletTokens - (4 - roll2), card.getTargetPlayer().getBulletTokens());
+					assertEquals(lifeTokens - 1, card.getTargetPlayer().getLifeTokens());
+				}
+				else
+				{
+					assertEquals(bulletTokens, card.getTargetPlayer().getBulletTokens());
+					assertEquals(lifeTokens - 2, card.getTargetPlayer().getLifeTokens());
+				}
+			}
+			else if(roll1 < 4)
+			{
+				if(bulletTokens >= 4 - roll1)
+				{
+					assertEquals(bulletTokens - (4 - roll1), card.getTargetPlayer().getBulletTokens());
+				}
+				else
+				{
+					assertEquals(lifeTokens - 1, card.getTargetPlayer().getLifeTokens());
+				}
+			}
+			else if(roll2 < 4)
+			{
+				if(bulletTokens >= 4 - roll2)
+				{
+					System.out.println(roll2);
+					assertEquals(bulletTokens - (4 - roll2), card.getTargetPlayer().getBulletTokens());
+				}
+				else
+				{
+					assertEquals(lifeTokens - 1, card.getTargetPlayer().getLifeTokens());
+				}
+			}
+			else
+			{
+				assertEquals(bulletTokens, card.getTargetPlayer().getBulletTokens());
+				assertEquals(lifeTokens, card.getTargetPlayer().getLifeTokens());
+				assertEquals(numZombies, card.getTargetPlayer().getZombiesCaptured());
+			}			
+		}		
 	}
 }
