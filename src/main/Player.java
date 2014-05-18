@@ -370,6 +370,15 @@ public class Player
 		}
 	}
 	
+	public void decrementZombiesCaptured()
+	{
+		if(this.zombiesCaptured > 0)
+		{
+			this.zombiesCaptured --;
+		}
+		
+	}
+	
 	private void resetPlayer()
 	{
 		resetPlayerLocation();
