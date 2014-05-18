@@ -1,8 +1,12 @@
 package gui;
 
 import java.awt.Component;
+import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
+
+import main.GameHandler;
+import main.MapTile;
 
 public class DialogHandler
 {
@@ -40,5 +44,28 @@ public class DialogHandler
 		{
 			return options[DialogHandler.defaultReturn];
 		}
+	}
+	
+	public static MapTile showBulidingChoice(String title)
+	{
+		ArrayList<MapTile> tiles = GameHandler.instance.getMap().getCurrentSpecialBuildings();
+		ArrayList<String> names = new ArrayList<String>();
+		for (MapTile tile : tiles)
+		{
+			names.add(tile.getSpecialName().toString());
+		}
+		String[] options = (String[]) names.toArray();
+		String choice = (String) DialogHandler.showListChoice(null, "Pick the building to increase zombies.", title, JOptionPane.INFORMATION_MESSAGE, options);
+		
+		MapTile tileChoice = null;
+		for(MapTile tile : tiles)
+		{
+			if(choice.equals(tile.getSpecialName().toString()))
+			{
+				tileChoice = tile;
+				break;
+			}
+		}
+		return tileChoice;
 	}
 }
