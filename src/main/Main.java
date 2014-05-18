@@ -34,7 +34,7 @@ public class Main
 	
 	private static Locale askUserForLanguage()
 	{
-		String[] options = new String[] { "English (default)", "Spanish", "French" }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		String[] options = new String[] { "     English     ", "     Spanish     ", "     French     " }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		int response = JOptionPane.showOptionDialog(null, "Choose a language:", "Language", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, //$NON-NLS-1$ //$NON-NLS-2$
 				null, options, options[0]);
 		if (response == 0)
