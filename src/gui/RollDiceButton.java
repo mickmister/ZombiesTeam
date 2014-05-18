@@ -2,6 +2,7 @@ package gui;
 
 import internationalization.RB;
 
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -18,6 +19,7 @@ public class RollDiceButton extends JButton implements ActionListener, DataListe
 {
 	public RollDiceButton()
 	{
+		setFont(new Font("Segoe UI", Font.PLAIN, 30));
 		setText("   " + RB.get("RollDiceButton.roll_dice")); //$NON-NLS-1$ //$NON-NLS-2$
 		setIcon(new ImageIcon(ImageManager.DICE_PICTURE));
 		addActionListener(this);

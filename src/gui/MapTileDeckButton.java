@@ -2,6 +2,7 @@ package gui;
 
 import internationalization.RB;
 
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -17,6 +18,7 @@ public class MapTileDeckButton extends JButton implements ActionListener, DataLi
 {
 	public MapTileDeckButton()
 	{
+		setFont(new Font("Segoe UI", Font.PLAIN, 30));
 		setText(RB.get("MapTileDeckButton.map_tile_deck")); //$NON-NLS-1$
 		addActionListener(this);
 		GameHandler.instance.addDataListener(this);

@@ -93,4 +93,10 @@ public abstract class EventCard
 		
 		return buildingName.equals(currentBuilding) && inBuilding;
 	}
+	
+	@Override
+	public String toString()
+	{
+		return this.name;
+	}
 }
