@@ -53,7 +53,7 @@ public class MapTileDeck
 		@Override
 		public String toString()
 		{
-			return RB.get("SpecialNames_" + this.name()); //$NON-NLS-1$
+			return RB.get("SpecialNames_" + name()); //$NON-NLS-1$
 		}
 	}
 	
