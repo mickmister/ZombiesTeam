@@ -48,8 +48,7 @@ public class MapTileDeck
 	
 	public enum SpecialNames
 	{
-		Hospital, LawnAndGarden, DrugStore, PoliceStation, HardwareStore, SkateShop,
-		SportingGoods, FloristShop, ToyStore, ArmySurplus, FireStation, GasStation, Helipad;
+		Hospital, LawnAndGarden, DrugStore, PoliceStation, HardwareStore, SkateShop, SportingGoods, FloristShop, ToyStore, ArmySurplus, FireStation, GasStation, Helipad;
 		
 		@Override
 		public String toString()

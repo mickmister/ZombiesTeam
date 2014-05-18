@@ -55,12 +55,13 @@ public class DialogHandler
 			names.add(tile.getSpecialName().toString());
 		}
 		String[] options = (String[]) names.toArray();
-		String choice = (String) DialogHandler.showListChoice(null, "Pick the building to increase zombies.", title, JOptionPane.INFORMATION_MESSAGE, options);
+		String choice = (String) DialogHandler.showListChoice(null, "Pick the building to increase zombies.", title, JOptionPane.INFORMATION_MESSAGE,
+				options);
 		
 		MapTile tileChoice = null;
-		for(MapTile tile : tiles)
+		for (MapTile tile : tiles)
 		{
-			if(choice.equals(tile.getSpecialName().toString()))
+			if (choice.equals(tile.getSpecialName().toString()))
 			{
 				tileChoice = tile;
 				break;

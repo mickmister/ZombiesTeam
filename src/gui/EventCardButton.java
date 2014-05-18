@@ -15,9 +15,11 @@ import main.GameHandler;
 import main.Player;
 import main.eventCardTypes.BadSenseOfDirection;
 import main.eventCardTypes.ButterFingers;
+import main.eventCardTypes.CouldntGetAnyWorse;
 import main.eventCardTypes.CustomUseDiscardable;
 import main.eventCardTypes.PlayUntilRevoked;
 import main.eventCardTypes.SingleUseDiscardable;
+import main.eventCardTypes.SlightMiscalculation;
 
 public class EventCardButton extends JButton implements DataListener, ActionListener
 {
@@ -101,7 +103,8 @@ public class EventCardButton extends JButton implements DataListener, ActionList
 			}
 			else
 			{
-				DialogHandler.showMessage(getTopLevelAncestor(), "Not in correct building for this card.", "Invalid Placement", JOptionPane.WARNING_MESSAGE);
+				DialogHandler.showMessage(getTopLevelAncestor(), "Not in correct building for this card.", "Invalid Placement",
+						JOptionPane.WARNING_MESSAGE);
 				return false;
 			}
 		}
@@ -113,7 +116,8 @@ public class EventCardButton extends JButton implements DataListener, ActionList
 			}
 			else
 			{
-				DialogHandler.showMessage(getTopLevelAncestor(), "There are no special buildings currently on the map!", "Cannot Play Card", JOptionPane.WARNING_MESSAGE);
+				DialogHandler.showMessage(getTopLevelAncestor(), "There are no special buildings currently on the map!", "Cannot Play Card",
+						JOptionPane.WARNING_MESSAGE);
 				return false;
 			}
 		}
