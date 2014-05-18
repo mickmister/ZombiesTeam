@@ -48,7 +48,8 @@ public class MapTileDeck
 	
 	public enum SpecialNames
 	{
-		Hosipital, LawnAndGarden, DrugStore, PoliceStation, HardwareStore, SkateShop, SportingGoods, FloristShop, ToyStore, ArmySurplus, FireStation, GasStation, Helipad;
+		Hospital, LawnAndGarden, DrugStore, PoliceStation, HardwareStore, SkateShop,
+		SportingGoods, FloristShop, ToyStore, ArmySurplus, FireStation, GasStation, Helipad;
 		
 		@Override
 		public String toString()
@@ -59,7 +60,7 @@ public class MapTileDeck
 	
 	private void addSpecialMapTiles()
 	{
-		SpecialNames[] names = { SpecialNames.Hosipital, SpecialNames.LawnAndGarden, SpecialNames.DrugStore, SpecialNames.PoliceStation,
+		SpecialNames[] names = { SpecialNames.Hospital, SpecialNames.LawnAndGarden, SpecialNames.DrugStore, SpecialNames.PoliceStation,
 				SpecialNames.HardwareStore, SpecialNames.SkateShop, SpecialNames.SportingGoods, SpecialNames.FloristShop, SpecialNames.ToyStore,
 				SpecialNames.ArmySurplus, SpecialNames.FireStation, SpecialNames.GasStation };
 		String specialTiles = ""; //$NON-NLS-1$
