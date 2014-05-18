@@ -5,6 +5,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import gui.DialogHandler;
 
+import gui.DialogHandler;
+
 import java.awt.Point;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -300,6 +302,7 @@ public class EventCardTest
 		DialogHandler.defaultReturn = 1;
 		card.behavior(0);
 		assertFalse(game.getEventDeck().activeDeckContains(card2));
+	//	assertEquals(0, player2.getBulletTokens()); //was asserting if card was removed
 	}
 	
 	@Test
