@@ -58,45 +58,72 @@ public class EventCardButton extends JButton implements DataListener, ActionList
 		if (!player.checkCardPlayed())
 		{
 			EventCard card = player.getCardFromHand(this.index);
-			if (card instanceof PlayUntilRevoked || card instanceof SingleUseDiscardable || card instanceof CustomUseDiscardable)
+			if (checkCorrectBuilding(card, player))
 			{
-				if (card.checkCorrectBuilding(player))
+				player.removeCardFromHand(this.index);
+				if (card.getPossibleTarget() == PossibleTarget.Pick)
 				{
-					DialogHandler.showMessage(null, "Special building card played successfully!", "Special Building Card",
-							JOptionPane.INFORMATION_MESSAGE);
+					int target = promptUserForTarget(player);
+					card.setTargetPlayer(GameHandler.instance.getPlayer(target));
+				}
+				else if (card.getPossibleTarget() == PossibleTarget.Self)
+				{
+					card.setTargetPlayer(player);
 				}
 				else
 				{
-					DialogHandler.showMessage(null, "Not in correct building for this card.", "Invalid Placement", JOptionPane.WARNING_MESSAGE);
-					return;
+					card.setTargetPlayer(null);
 				}
+				card.setActivator(player);
+				GameHandler.instance.getEventDeck().addActiveCard(card);
+				player.setCardPlayed(true);
+				
+				activateImmediateCards(card, player);
+				GameHandler.instance.fireDataChangedEvent(null);
 			}
-			player.removeCardFromHand(this.index);
-			if (card.getPossibleTarget() == PossibleTarget.Pick)
-			{
-				int target = promptUserForTarget(player);
-				card.setTargetPlayer(GameHandler.instance.getPlayer(target));
-			}
-			else if (card.getPossibleTarget() == PossibleTarget.Self)
-			{
-				card.setTargetPlayer(player);
-			}
-			else
-			{
-				card.setTargetPlayer(null);
-			}
-			card.setActivator(player);
-			GameHandler.instance.getEventDeck().addActiveCard(card);
-			player.setCardPlayed(true);
-			GameHandler.instance.getEventDeck().doCardAction(card.getTargetPlayer(), BadSenseOfDirection.class, player.getNumber());
-			GameHandler.instance.getEventDeck().doCardAction(card.getTargetPlayer(), ButterFingers.class, player.getNumber());
-			GameHandler.instance.fireDataChangedEvent(null);
 		}
 		else
 		{
 			DialogHandler.showMessage(getTopLevelAncestor(), RB.get("EventCardButton.cannot_play_2_cards_message"), //$NON-NLS-1$
 					RB.get("EventCardButton.cannot_play_2_cards_title"), JOptionPane.WARNING_MESSAGE); //$NON-NLS-1$
 		}
+	}
+	
+	private boolean checkCorrectBuilding(EventCard card, Player player)
+	{
+		if (card instanceof PlayUntilRevoked || card instanceof SingleUseDiscardable || card instanceof CustomUseDiscardable)
+		{
+			if (card.checkCorrectBuilding(player))
+			{
+				DialogHandler.showMessage(getTopLevelAncestor(), "Special building card played successfully!", "Special Building Card",
+						JOptionPane.INFORMATION_MESSAGE);
+				return true;
+			}
+			else
+			{
+				DialogHandler.showMessage(getTopLevelAncestor(), "Not in correct building for this card.", "Invalid Placement", JOptionPane.WARNING_MESSAGE);
+				return false;
+			}
+		}
+		if (card instanceof CouldntGetAnyWorse || card instanceof SlightMiscalculation)
+		{
+			if (GameHandler.instance.getMap().getCurrentSpecialBuildings().size() > 0)
+			{
+				return true;
+			}
+			else
+			{
+				DialogHandler.showMessage(getTopLevelAncestor(), "There are no special buildings currently on the map!", "Cannot Play Card", JOptionPane.WARNING_MESSAGE);
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	private void activateImmediateCards(EventCard card, Player player)
+	{
+		GameHandler.instance.getEventDeck().doCardAction(card.getTargetPlayer(), BadSenseOfDirection.class, player.getNumber());
+		GameHandler.instance.getEventDeck().doCardAction(card.getTargetPlayer(), ButterFingers.class, player.getNumber());
 	}
 	
 	private int promptUserForTarget(Player player)
