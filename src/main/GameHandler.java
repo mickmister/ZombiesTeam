@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import main.DataListener.DataChangedEvent;
 import main.eventCardTypes.AllTheMarbles;
+import main.eventCardTypes.BrainCramp;
 import main.eventCardTypes.Fear;
 import main.eventCardTypes.GainTwoHealthNoMove;
 import main.eventCardTypes.HystericalParalysis;
@@ -256,6 +257,8 @@ public class GameHandler
 					}
 					this.currentState = GameState.playerMovement;
 					this.guiStateData.rollDiceButtonEnabled = false;
+					int modifiedMoves = this.eventDeck.doCardAction(player, BrainCramp.class, player.getMovesRemaining());
+					player.setMovesRemaining(modifiedMoves);
 					if (player.getMovesRemaining() < 1)
 					{
 						// Skip from PlayerMovement -> ZombieMovementDieRoll.

@@ -3,12 +3,10 @@ package main;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import main.eventCardTypes.BrainCramp;
 import main.eventCardTypes.ButterFingers;
 import main.eventCardTypes.CustomUseDiscardable;
-import main.eventCardTypes.FireAxe;
-import main.eventCardTypes.KeysAreStillIn;
 import main.eventCardTypes.SingleUseDiscardable;
-import main.eventCardTypes.Skateboard;
 
 public class EventCardDeck
 {
@@ -29,10 +27,11 @@ public class EventCardDeck
 			// this.deck.add(new HystericalParalysis());
 			// this.deck.add(new GainTwoHealthNoMove());
 			// this.deck.add(new UntiedShoe());
-			this.deck.add(new KeysAreStillIn());
+			//this.deck.add(new KeysAreStillIn());
 			this.deck.add(new ButterFingers());
-			this.deck.add(new Skateboard());
-			this.deck.add(new FireAxe());
+			this.deck.add(new BrainCramp());
+			//this.deck.add(new Skateboard());
+			//this.deck.add(new FireAxe());
 		}
 		
 		Collections.shuffle(this.deck);
