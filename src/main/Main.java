@@ -86,7 +86,7 @@ public class Main
 		{
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 			
-			Font font = new Font("Segoe UI", Font.PLAIN, 13);
+			Font font = new Font("Segoe UI", Font.PLAIN, 13); //$NON-NLS-1$
 			Enumeration<Object> keys = UIManager.getDefaults().keys();
 			while (keys.hasMoreElements())
 			{
@@ -102,7 +102,7 @@ public class Main
 			}
 			
 			UIManager.getDefaults().put("Label.font", new Font("Segoe UI", Font.PLAIN, 40)); //$NON-NLS-1$ //$NON-NLS-2$
-			UIManager.put("Button.focus", new Color(0, 0, 0, 0));
+			UIManager.put("Button.focus", new Color(0, 0, 0, 0)); //$NON-NLS-1$
 		}
 		catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e)
 		{
