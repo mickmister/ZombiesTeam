@@ -3,6 +3,7 @@ package main.eventCardTypes;
 import gui.DialogHandler;
 import internationalization.ECRB;
 import main.MapTile;
+import main.TileCell;
 import main.eventCardParents.SingleUseCard;
 
 public class CouldntGetAnyWorse extends SingleUseCard
@@ -21,9 +22,10 @@ public class CouldntGetAnyWorse extends SingleUseCard
 		{
 			for (int x = 0; x < 3; x++)
 			{
-				if (tileChoice.getCell(y, x).isAccessible() && !tileChoice.getCell(y, x).hasZombie())
+				TileCell cell = tileChoice.getCell(y, x);
+				if ((cell.isDoor() || cell.isBuilding()) && !cell.hasZombie())
 				{
-					tileChoice.getCell(y, x).setZombie(true);
+					cell.setZombie(true);
 				}
 			}
 		}

@@ -56,7 +56,7 @@ public class DialogHandler
 		{
 			names.add(tile.getSpecialName().toString());
 		}
-		String[] options = (String[]) names.toArray();
+		Object[] options = names.toArray();
 		String choice = (String) DialogHandler.showListChoice(comp, RB.get("DialogHandler.show_building_message"), title, //$NON-NLS-1$
 				JOptionPane.INFORMATION_MESSAGE, options);
 		
