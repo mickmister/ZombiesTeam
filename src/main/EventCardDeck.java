@@ -3,9 +3,9 @@ package main;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import main.eventCardParents.CustomUseDiscardable;
 import main.eventCardParents.EventCard;
 import main.eventCardParents.SingleUseDiscardable;
+import main.eventCardParents.UseForRoundCard;
 import main.eventCardTypes.BrainCramp;
 import main.eventCardTypes.ButterFingers;
 
@@ -28,11 +28,11 @@ public class EventCardDeck
 			// this.deck.add(new HystericalParalysis());
 			// this.deck.add(new GainTwoHealthNoMove());
 			// this.deck.add(new UntiedShoe());
-			//this.deck.add(new KeysAreStillIn());
+			// this.deck.add(new KeysAreStillIn());
 			this.deck.add(new ButterFingers());
 			this.deck.add(new BrainCramp());
-			//this.deck.add(new Skateboard());
-			//this.deck.add(new FireAxe());
+			// this.deck.add(new Skateboard());
+			// this.deck.add(new FireAxe());
 		}
 		
 		Collections.shuffle(this.deck);
@@ -58,18 +58,30 @@ public class EventCardDeck
 		this.discardedCards.remove(card);
 	}
 	
-	public void removeUseForRoundCards(Player activator)
+	public void removeUseForRoundCards(Player currentPlayer)
 	{
-		for (EventCard card : this.discardedCards)
+		for (int i = this.discardedCards.size() - 1; i >= 0; i -= 1)
 		{
-			if (card.getActivator().equals(activator))
+			EventCard card = this.discardedCards.get(i);
+			if (card.getTargetPlayer() == null)
 			{
-				card.checkRemove();
+				if (card.getActivator().equals(currentPlayer))
+				{
+					card.checkRemove();
+				}
+			}
+			else
+			{
+				if (card.getTargetPlayer().equals(currentPlayer))
+				{
+					card.checkRemove();
+				}
 			}
 		}
-		for (EventCard card : this.activeCards)
+		for (int i = this.activeCards.size() - 1; i >= 0; i -= 1)
 		{
-			if (card.getActivator().equals(activator))
+			EventCard card = this.activeCards.get(i);
+			if (card.getActivator().equals(currentPlayer))
 			{
 				if (card instanceof UseForRoundCard)
 				{

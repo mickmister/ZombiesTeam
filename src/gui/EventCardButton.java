@@ -13,11 +13,12 @@ import main.GameHandler;
 import main.Player;
 import main.eventCardParents.CustomUseDiscardable;
 import main.eventCardParents.EventCard;
+import main.eventCardParents.EventCard.PossibleTarget;
 import main.eventCardParents.PlayUntilRevokedCard;
 import main.eventCardParents.SingleUseDiscardable;
-import main.eventCardParents.EventCard.PossibleTarget;
 import main.eventCardTypes.BadSenseOfDirection;
 import main.eventCardTypes.ButterFingers;
+import main.eventCardTypes.Claustrophobia;
 import main.eventCardTypes.CouldntGetAnyWorse;
 import main.eventCardTypes.DontThinkTheyreDead;
 import main.eventCardTypes.SlightMiscalculation;
@@ -98,13 +99,15 @@ public class EventCardButton extends JButton implements DataListener, ActionList
 		{
 			if (card.checkCorrectBuilding(player))
 			{
-				DialogHandler.showMessage(getTopLevelAncestor(), "Special building card played successfully!", "Special Building Card",
+				DialogHandler.showMessage(getTopLevelAncestor(),
+						RB.get("EventCardButton.special_building_message"), RB.get("EventCardButton.special_building_title"), //$NON-NLS-1$ //$NON-NLS-2$
 						JOptionPane.INFORMATION_MESSAGE);
 				return true;
 			}
 			else
 			{
-				DialogHandler.showMessage(getTopLevelAncestor(), "Not in correct building for this card.", "Invalid Placement",
+				DialogHandler.showMessage(getTopLevelAncestor(),
+						RB.get("EventCardButton.not_correct_building_message"), RB.get("EventCardButton.not_correct_building_title"), //$NON-NLS-1$ //$NON-NLS-2$
 						JOptionPane.WARNING_MESSAGE);
 				return false;
 			}
@@ -117,7 +120,8 @@ public class EventCardButton extends JButton implements DataListener, ActionList
 			}
 			else
 			{
-				DialogHandler.showMessage(getTopLevelAncestor(), "There are no special buildings currently on the map!", "Cannot Play Card",
+				DialogHandler.showMessage(getTopLevelAncestor(),
+						RB.get("EventCardButton.no_buildings_message"), RB.get("EventCardButton.no_buildings_title"), //$NON-NLS-1$ //$NON-NLS-2$
 						JOptionPane.WARNING_MESSAGE);
 				return false;
 			}
@@ -130,6 +134,7 @@ public class EventCardButton extends JButton implements DataListener, ActionList
 		GameHandler.instance.getEventDeck().doCardAction(card.getTargetPlayer(), BadSenseOfDirection.class, player.getNumber());
 		GameHandler.instance.getEventDeck().doCardAction(card.getTargetPlayer(), ButterFingers.class, player.getNumber());
 		GameHandler.instance.getEventDeck().doCardAction(card.getTargetPlayer(), DontThinkTheyreDead.class, player.getNumber());
+		GameHandler.instance.getEventDeck().doCardAction(card.getTargetPlayer(), Claustrophobia.class, 0);
 	}
 	
 	private int promptUserForTarget(Player player)

@@ -1,17 +1,19 @@
 package main.eventCardTypes;
 
+import gui.DialogHandler;
+import internationalization.ECRB;
+
 import javax.swing.JOptionPane;
 
 import main.eventCardParents.SingleUseCard;
-import gui.DialogHandler;
 
 public class BrainCramp extends SingleUseCard
 {
 	public BrainCramp()
 	{
-		super(PossibleTarget.Pick, "Brain Cramp", "Play when another player begins to move.  You may decide where or if that player moves.");
+		super(PossibleTarget.Pick, ECRB.get("BrainCramp.name"), ECRB.get("BrainCramp.description")); //$NON-NLS-1$ //$NON-NLS-2$
 	}
-
+	
 	@Override
 	public int behavior(int num)
 	{
@@ -20,7 +22,8 @@ public class BrainCramp extends SingleUseCard
 		{
 			choices[i] = i;
 		}
-		int result = (int) DialogHandler.showListChoice(null, "Choose how many spaces player " + (getTargetPlayer().getNumber() + 1) + " can move.\nCan be between 0 and " + num + " (inclusive).", "Brain Cramp", JOptionPane.QUESTION_MESSAGE, choices);
+		int result = (int) DialogHandler.showListChoice(null, ECRB.get("BrainCramp.message_1") + (getTargetPlayer().getNumber() + 1) //$NON-NLS-1$
+				+ ECRB.get("BrainCramp.message_2") + num + ECRB.get("BrainCramp.message_3"), getName(), JOptionPane.QUESTION_MESSAGE, choices); //$NON-NLS-1$ //$NON-NLS-2$ 
 		return result;
 	}
 }

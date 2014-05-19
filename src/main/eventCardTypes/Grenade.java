@@ -1,6 +1,7 @@
 package main.eventCardTypes;
 
 import gui.DialogHandler;
+import internationalization.ECRB;
 
 import java.util.ArrayList;
 
@@ -9,17 +10,16 @@ import javax.swing.JOptionPane;
 import main.GameHandler;
 import main.MapTile;
 import main.MapTileDeck.SpecialNames;
-import main.eventCardParents.SingleUseDiscardable;
 import main.Player;
 import main.TileCell;
+import main.eventCardParents.SingleUseDiscardable;
 
 public class Grenade extends SingleUseDiscardable
 {
 	
 	public Grenade()
 	{
-		super(PossibleTarget.Self, "Grenade", "Play this card in front of you when you are in the Army Surplus Store. Discard this item to kill"
-				+ "all zombies in 1 building on your current tile and add them to your collection. You must also lose 1 health.",
+		super(PossibleTarget.Self, ECRB.get("Grenade.name"), ECRB.get("Grenade.description"), //$NON-NLS-1$ //$NON-NLS-2$
 				SpecialNames.ArmySurplus);
 	}
 	
@@ -29,7 +29,8 @@ public class Grenade extends SingleUseDiscardable
 		Player player = getTargetPlayer();
 		MapTile tile = GameHandler.instance.getMap().getMapTile(player.getTileLocation().y, player.getTileLocation().x);
 		int numZombies = killZombiesInBuilding(tile, player);
-		DialogHandler.showMessage(null, "You killed " + numZombies + " zombies with your Grenade!", getName(), JOptionPane.INFORMATION_MESSAGE);
+		DialogHandler.showMessage(null,
+				ECRB.get("Grenade.message_1") + numZombies + ECRB.get("Grenade.message_2"), getName(), JOptionPane.INFORMATION_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
 		return 1;
 	}
 	

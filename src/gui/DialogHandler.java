@@ -1,5 +1,7 @@
 package gui;
 
+import internationalization.RB;
+
 import java.awt.Component;
 import java.util.ArrayList;
 
@@ -46,7 +48,7 @@ public class DialogHandler
 		}
 	}
 	
-	public static MapTile showBulidingChoice(String title)
+	public static MapTile showBulidingChoice(Component comp, String title)
 	{
 		ArrayList<MapTile> tiles = GameHandler.instance.getMap().getCurrentSpecialBuildings();
 		ArrayList<String> names = new ArrayList<String>();
@@ -55,8 +57,8 @@ public class DialogHandler
 			names.add(tile.getSpecialName().toString());
 		}
 		String[] options = (String[]) names.toArray();
-		String choice = (String) DialogHandler.showListChoice(null, "Pick the building to increase zombies.", title, JOptionPane.INFORMATION_MESSAGE,
-				options);
+		String choice = (String) DialogHandler.showListChoice(comp, RB.get("DialogHandler.show_building_message"), title, //$NON-NLS-1$
+				JOptionPane.INFORMATION_MESSAGE, options);
 		
 		MapTile tileChoice = null;
 		for (MapTile tile : tiles)

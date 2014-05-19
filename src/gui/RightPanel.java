@@ -1,5 +1,7 @@
 package gui;
 
+import internationalization.RB;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -18,17 +20,17 @@ public class RightPanel extends JPanel
 		
 		JPanel inHandPanel = new JPanel();
 		inHandPanel.setLayout(new GridLayout(1, 1));
-		inHandPanel.setBorder(new TitledBorder("Cards in your hand"));
+		inHandPanel.setBorder(new TitledBorder(RB.get("RightPanel.cards_in_your_hand"))); //$NON-NLS-1$
 		inHandPanel.add(createInHandPanel());
 		
 		JPanel activePanel = new JPanel();
 		activePanel.setLayout(new BorderLayout());
-		activePanel.setBorder(new TitledBorder("Active cards"));
+		activePanel.setBorder(new TitledBorder(RB.get("RightPanel.active_cards"))); //$NON-NLS-1$
 		activePanel.add(createActivePanel());
 		
 		JPanel discardedPanel = new JPanel();
 		discardedPanel.setLayout(new BorderLayout());
-		discardedPanel.setBorder(new TitledBorder("Discarded cards in effect"));
+		discardedPanel.setBorder(new TitledBorder(RB.get("RightPanel.discarded_cards"))); //$NON-NLS-1$
 		discardedPanel.add(createDiscardedPanel());
 		
 		add(inHandPanel);

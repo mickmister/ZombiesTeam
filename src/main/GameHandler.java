@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import main.DataListener.DataChangedEvent;
 import main.eventCardTypes.AllTheMarbles;
+import main.eventCardTypes.AlternateFoodSource;
 import main.eventCardTypes.BrainCramp;
 import main.eventCardTypes.Fear;
 import main.eventCardTypes.GainTwoHealthNoMove;
@@ -238,7 +239,8 @@ public class GameHandler
 			case playerMovementDieRoll:
 				TileCell cell = getMap().getMapTile(player.getTileLocation().y, player.getTileLocation().x).getCell(player.getCellLocation().y,
 						player.getCellLocation().x);
-				if (cell.hasZombie())
+				boolean noAlternateFoodSource = this.eventDeck.doCardAction(null, AlternateFoodSource.class, 0) == 0;
+				if (cell.hasZombie() && noAlternateFoodSource)
 				{
 					this.currentState = GameState.zombieCombat;
 					this.guiStateData.rollDiceButtonEnabled = true;

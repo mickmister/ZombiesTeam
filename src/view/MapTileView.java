@@ -16,7 +16,7 @@ public class MapTileView
 	public MapTileView(MapTile tile)
 	{
 		this.mapTile = tile;
-		this.specialName = "";
+		this.specialName = ""; //$NON-NLS-1$
 		if (Shape.special.equals(this.mapTile.getShape()))
 		{
 			this.specialName = this.mapTile.getSpecialName().toString();

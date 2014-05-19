@@ -4,7 +4,6 @@ import main.GameHandler;
 
 public abstract class MultipleUseCard extends EventCard
 {
-	
 	private int maxUses;
 	private int usesExhausted;
 	
@@ -16,18 +15,12 @@ public abstract class MultipleUseCard extends EventCard
 	}
 	
 	@Override
-	public abstract int behavior(int num);
-	
-	@Override
 	public void checkRemove()
 	{
 		this.usesExhausted++;
 		if (this.maxUses == this.usesExhausted)
 		{
-			// remove
 			GameHandler.instance.getEventDeck().removeActiveCard(this);
 		}
-		
 	}
-	
 }

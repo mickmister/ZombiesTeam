@@ -1,11 +1,13 @@
 package main.eventCardTypes;
 
 import gui.DialogHandler;
+import internationalization.ECRB;
+
+import java.awt.Point;
 
 import javax.swing.JOptionPane;
 
 import main.GameHandler;
-import main.Player;
 import main.eventCardParents.SingleUseCard;
 
 public class BadSenseOfDirection extends SingleUseCard
@@ -13,17 +15,15 @@ public class BadSenseOfDirection extends SingleUseCard
 	
 	public BadSenseOfDirection()
 	{
-		super(PossibleTarget.Pick, "Bad Sense of Direction", "Discard one life token, target player will be moved to town square.");
+		super(PossibleTarget.Pick, ECRB.get("BadSenseOfDirection.name"), ECRB.get("BadSenseOfDirection.description")); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 	
 	@Override
 	public int behavior(int num)
 	{
-		DialogHandler
-				.showMessage(null, "You discarded one life token, target is now at the town square.", getName(), JOptionPane.INFORMATION_MESSAGE);
+		DialogHandler.showMessage(null, ECRB.get("BadSenseOfDirection.message"), getName(), JOptionPane.INFORMATION_MESSAGE); //$NON-NLS-1$
 		GameHandler.instance.getPlayer(num).loseLifeToken();
-		Player target = getTargetPlayer();
-		target.resetPlayerLocation();
+		getTargetPlayer().teleport(new Point(5, 5), new Point(1, 1));
 		return 1;
 	}
 	

@@ -1,6 +1,7 @@
 package main.eventCardTypes;
 
 import gui.DialogHandler;
+import internationalization.ECRB;
 
 import javax.swing.JOptionPane;
 
@@ -12,15 +13,15 @@ public class Skateboard extends PlayUntilRevokedCard
 	
 	public Skateboard()
 	{
-		super(PossibleTarget.Self, "Skateboard",
-				"Play this card in front of you when you are in the Skate Shop. You may add +2 to all of your movement rolls.",
+		super(PossibleTarget.Self, ECRB.get("Skateboard.name"), //$NON-NLS-1$
+				ECRB.get("Skateboard.description"), //$NON-NLS-1$
 				SpecialNames.SkateShop);
 	}
 	
 	@Override
 	public int behavior(int num)
 	{
-		DialogHandler.showMessage(null, "You added 2 to your movement roll with your Skateboard! Radical!", getName(),
+		DialogHandler.showMessage(null, ECRB.get("Skateboard.message"), getName(), //$NON-NLS-1$
 				JOptionPane.INFORMATION_MESSAGE);
 		return num + 2;
 	}

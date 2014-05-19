@@ -1,6 +1,7 @@
 package main.eventCardTypes;
 
 import gui.DialogHandler;
+import internationalization.ECRB;
 import main.MapTile;
 import main.eventCardParents.SingleUseCard;
 
@@ -9,14 +10,14 @@ public class SlightMiscalculation extends SingleUseCard
 	
 	public SlightMiscalculation()
 	{
-		super(PossibleTarget.Self, "Slight Miscalculation",
-				"Play on any building. The number of zombies present is doubled, up to all the legal spaces");
+		super(PossibleTarget.Self, ECRB.get("SlightMiscalculation.name"), //$NON-NLS-1$
+				ECRB.get("SlightMiscalculation.description")); //$NON-NLS-1$
 	}
 	
 	@Override
 	public int behavior(int num)
 	{
-		MapTile tileChoice = DialogHandler.showBulidingChoice(getName());
+		MapTile tileChoice = DialogHandler.showBulidingChoice(null, getName());
 		
 		doubleZombiesOnTile(tileChoice);
 		

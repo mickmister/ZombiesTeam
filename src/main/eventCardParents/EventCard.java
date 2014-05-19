@@ -2,10 +2,9 @@ package main.eventCardParents;
 
 import main.GameHandler;
 import main.MapTile;
-import main.MapTileDeck;
+import main.MapTileDeck.SpecialNames;
 import main.Player;
 import main.TileCell;
-import main.MapTileDeck.SpecialNames;
 
 public abstract class EventCard
 {

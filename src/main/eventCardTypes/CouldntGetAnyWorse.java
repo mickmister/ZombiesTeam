@@ -1,6 +1,7 @@
 package main.eventCardTypes;
 
 import gui.DialogHandler;
+import internationalization.ECRB;
 import main.MapTile;
 import main.eventCardParents.SingleUseCard;
 
@@ -9,13 +10,13 @@ public class CouldntGetAnyWorse extends SingleUseCard
 	
 	public CouldntGetAnyWorse()
 	{
-		super(PossibleTarget.Self, "Couldn't Get Any Worse", "Place a zombie on every legal space in a building not already occupied by a zombie.");
+		super(PossibleTarget.Self, ECRB.get("CouldntGetAnyWorse.name"), ECRB.get("CouldntGetAnyWorse.description")); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 	
 	@Override
 	public int behavior(int num)
 	{
-		MapTile tileChoice = DialogHandler.showBulidingChoice(getName());
+		MapTile tileChoice = DialogHandler.showBulidingChoice(null, getName());
 		for (int y = 0; y < 3; y++)
 		{
 			for (int x = 0; x < 3; x++)

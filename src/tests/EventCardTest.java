@@ -420,6 +420,7 @@ public class EventCardTest
 		Player player = GameHandler.instance.getPlayer(0);
 		Chainsaw card = new Chainsaw();
 		assertEquals(SpecialNames.LawnAndGarden, card.getBuildingName());
+		card.setActivator(player);
 		card.setTargetPlayer(player);
 		deck.discard(card);
 		assertEquals(5, deck.doDiscardedCardAction(player, Chainsaw.class, 3));
@@ -428,7 +429,7 @@ public class EventCardTest
 																				// be done multiple
 																				// times
 		assertTrue(deck.discardedDeckContains(card));
-		card.customRemove();
+		GameHandler.instance.getEventDeck().removeUseForRoundCards(player);
 		assertFalse(deck.discardedDeckContains(card));
 	}
 	
@@ -548,9 +549,9 @@ public class EventCardTest
 	
 	@Test
 	public void testDontThinkTheyreDead()
-	{		
-		DialogHandler.defaultReturn = JOptionPane.YES_OPTION;;
-		for(int i = 0; i < 1000; i++)
+	{
+		DialogHandler.defaultReturn = JOptionPane.YES_OPTION;
+		for (int i = 0; i < 1000; i++)
 		{
 			new GameHandler(2);
 			Player player1 = GameHandler.instance.getPlayer(0);
@@ -564,23 +565,23 @@ public class EventCardTest
 			int lifeTokens = card.getTargetPlayer().getLifeTokens();
 			int numZombies = card.getTargetPlayer().getZombiesCaptured();
 			int rolls = card.behavior(0);
-			int roll1 = rolls % (2 << 16);
+			int roll1 = rolls % (2 << 15);
 			int roll2 = rolls >> 16;
 			
-			if(roll1 < 4 && roll2 < 4)
+			if (roll1 < 4 && roll2 < 4)
 			{
 				int diff = 8 - roll1 - roll2;
-				if(bulletTokens >= diff)
+				if (bulletTokens >= diff)
 				{
 					assertEquals(bulletTokens - diff, card.getTargetPlayer().getBulletTokens());
 					assertEquals(lifeTokens, card.getTargetPlayer().getLifeTokens());
 				}
-				else if(bulletTokens >= 4 - roll1)
+				else if (bulletTokens >= 4 - roll1)
 				{
 					assertEquals(bulletTokens - (4 - roll1), card.getTargetPlayer().getBulletTokens());
 					assertEquals(lifeTokens - 1, card.getTargetPlayer().getLifeTokens());
 				}
-				else if(bulletTokens >= 4 - roll2)
+				else if (bulletTokens >= 4 - roll2)
 				{
 					assertEquals(bulletTokens - (4 - roll2), card.getTargetPlayer().getBulletTokens());
 					assertEquals(lifeTokens - 1, card.getTargetPlayer().getLifeTokens());
@@ -591,23 +592,21 @@ public class EventCardTest
 					assertEquals(lifeTokens - 2, card.getTargetPlayer().getLifeTokens());
 				}
 			}
-			else if(roll1 < 4)
+			else if (roll1 < 4)
 			{
-				if(bulletTokens >= 4 - roll1)
+				if (bulletTokens >= 4 - roll1)
 				{
 					assertEquals(bulletTokens - (4 - roll1), card.getTargetPlayer().getBulletTokens());
 				}
 				else
 				{
-					System.out.println("ONE BULLETS: " + card.getTargetPlayer().getBulletTokens() + " LIFE: " + card.getTargetPlayer().getLifeTokens());
 					assertEquals(lifeTokens - 1, card.getTargetPlayer().getLifeTokens());
 				}
 			}
-			else if(roll2 < 4)
+			else if (roll2 < 4)
 			{
-				if(bulletTokens >= 4 - roll2)
+				if (bulletTokens >= 4 - roll2)
 				{
-					System.out.println(roll2);
 					assertEquals(bulletTokens - (4 - roll2), card.getTargetPlayer().getBulletTokens());
 				}
 				else
@@ -620,7 +619,31 @@ public class EventCardTest
 				assertEquals(bulletTokens, card.getTargetPlayer().getBulletTokens());
 				assertEquals(lifeTokens, card.getTargetPlayer().getLifeTokens());
 				assertEquals(numZombies, card.getTargetPlayer().getZombiesCaptured());
-			}			
+			}
 		}		
+		DialogHandler.defaultReturn = JOptionPane.NO_OPTION;
+		for (int i = 0; i < 1000; i++)
+		{
+			new GameHandler(2);
+			Player player1 = GameHandler.instance.getPlayer(0);
+			Player player2 = GameHandler.instance.getPlayer(1);
+			DontThinkTheyreDead card = new DontThinkTheyreDead();
+			card.setTargetPlayer(player2);
+			card.setActivator(player1);
+			player2.incrementZombiesCaptured();
+			player2.incrementZombiesCaptured();
+			int numZombies = card.getTargetPlayer().getZombiesCaptured();
+			int rolls = card.behavior(0);
+			int roll1 = rolls % (2 << 15);
+			int roll2 = rolls >> 16;
+			if(roll1 <= 3 || roll2 <= 3)
+			{
+				assertEquals(numZombies - 2, card.getTargetPlayer().getZombiesCaptured());
+			}
+			else
+			{
+				assertEquals(numZombies, card.getTargetPlayer().getZombiesCaptured());
+			}			
+		}
 	}
 }
