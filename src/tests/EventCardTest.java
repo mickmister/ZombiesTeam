@@ -28,6 +28,7 @@ import main.eventCardTypes.AllTheMarbles;
 import main.eventCardTypes.BadSenseOfDirection;
 import main.eventCardTypes.ButterFingers;
 import main.eventCardTypes.Chainsaw;
+import main.eventCardTypes.CouldntGetAnyWorse;
 import main.eventCardTypes.DontThinkTheyreDead;
 import main.eventCardTypes.Fear;
 import main.eventCardTypes.FireAxe;
@@ -40,6 +41,7 @@ import main.eventCardTypes.LotsOfAmmo;
 import main.eventCardTypes.MolotovCocktail;
 import main.eventCardTypes.Shotgun;
 import main.eventCardTypes.Skateboard;
+import main.eventCardTypes.SlightMiscalculation;
 import main.eventCardTypes.UntiedShoe;
 
 import org.junit.Test;
@@ -645,5 +647,92 @@ public class EventCardTest
 				assertEquals(numZombies, card.getTargetPlayer().getZombiesCaptured());
 			}			
 		}
+	}
+	
+	@Test
+	public void testCouldntGetAnyWorse()
+	{
+		DialogHandler.defaultReturn = 0;
+		new GameHandler(2);
+		MapTile tile = getGenericBuilding();
+		GameHandler.instance.getMap().setTempTile(tile);
+		GameHandler.instance.getMap().setTempPos(new Point(4,5));
+		GameHandler.instance.getMap().placeTempTile();
+		CouldntGetAnyWorse card = new CouldntGetAnyWorse();
+		card.setTargetPlayer(GameHandler.instance.getPlayer(0));
+		card.behavior(0);
+		for(int y = 0; y < 3; y++)
+		{
+			for(int x = 0; x < 3; x++)
+			{
+				TileCell cell = tile.getCell(y, x);
+				if(cell.isDoor() || cell.isBuilding())
+				{
+					assertTrue(cell.hasZombie());
+				}
+			}
+		}		
+	}
+
+	private MapTile getGenericBuilding() 
+	{
+		MapTile tile = new MapTile(Shape.special, SpecialNames.ArmySurplus, "2 3 2 1 1 1 0 0 0" + " " + "2 0 2");
+		for(int y = 0; y < 3; y++)
+		{
+			for(int x = 0; x < 3; x++)
+			{
+				tile.getCell(y, x).setZombie(false);
+			}
+		}		
+		return tile;
+	}
+	
+	@Test
+	public void testSlightMiscalculation()
+	{
+		DialogHandler.defaultReturn = 0;
+		new GameHandler(2);
+		MapTile tile = getGenericBuilding();
+		tile.getCell(1, 0).setZombie(true);
+		tile.getCell(1, 1).setZombie(true);
+		tile.getCell(1, 2).setZombie(true);
+		int initialZombieCount = 3;
+		
+		GameHandler.instance.getMap().setTempTile(tile);
+		GameHandler.instance.getMap().setTempPos(new Point(4,5));
+		GameHandler.instance.getMap().placeTempTile();
+		SlightMiscalculation card = new SlightMiscalculation();
+		card.setTargetPlayer(GameHandler.instance.getPlayer(0));
+		card.behavior(0);
+		
+		int zombieCount = 0;
+		for(int y = 0; y < 3; y++)
+		{
+			for(int x = 0; x < 3; x++)
+			{
+				if(tile.getCell(y, x).hasZombie())
+				{
+					zombieCount++;
+				}
+			}
+		}
+		assertEquals(initialZombieCount * 2, zombieCount);		
+
+		tile.getCell(1, 0).setZombie(false);
+		
+		card.behavior(0);
+		zombieCount = 0;
+		for(int y = 0; y < 3; y++)
+		{
+			for(int x = 0; x < 3; x++)
+			{
+				if(tile.getCell(y, x).hasZombie())
+				{
+					zombieCount++;
+				}
+			}
+		}		
+		assertEquals(initialZombieCount * 2, zombieCount);
+		
 	}
 }
