@@ -26,5 +26,4 @@ public class GainTwoHealthNoMove extends SingleUseCard
 		DialogHandler.showMessage(null, "You played it safe and rested to gain 2 health", getName(), JOptionPane.INFORMATION_MESSAGE);
 		return 1;
 	}
-	
 }

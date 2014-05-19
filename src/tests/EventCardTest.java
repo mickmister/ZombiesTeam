@@ -420,6 +420,7 @@ public class EventCardTest
 		Player player = GameHandler.instance.getPlayer(0);
 		Chainsaw card = new Chainsaw();
 		assertEquals(SpecialNames.LawnAndGarden, card.getBuildingName());
+		card.setActivator(player);
 		card.setTargetPlayer(player);
 		deck.discard(card);
 		assertEquals(5, deck.doDiscardedCardAction(player, Chainsaw.class, 3));
@@ -428,7 +429,7 @@ public class EventCardTest
 																				// be done multiple
 																				// times
 		assertTrue(deck.discardedDeckContains(card));
-		card.customRemove();
+		GameHandler.instance.getEventDeck().removeUseForRoundCards(player);
 		assertFalse(deck.discardedDeckContains(card));
 	}
 	

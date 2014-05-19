@@ -10,11 +10,9 @@ import main.eventCardParents.CustomUseDiscardable;
 
 public class FirstAidKit extends CustomUseDiscardable
 {
-	
 	public FirstAidKit()
 	{
-		super(PossibleTarget.Self, "First Aid Kit", "Play this card when you are in the Hospital. You may discard this item instead"
-				+ "of losing a health token as a result of combat.", SpecialNames.Hospital);
+		super(PossibleTarget.Self, "First Aid Kit", "Play this card when you are in the Hospital. You may discard this item instead of losing a health token as a result of combat.", SpecialNames.Hospital, 1);
 	}
 	
 	@Override
@@ -24,5 +22,4 @@ public class FirstAidKit extends CustomUseDiscardable
 		GameHandler.instance.getEventDeck().removeDiscardedCard(this);
 		return 1;
 	}
-	
 }

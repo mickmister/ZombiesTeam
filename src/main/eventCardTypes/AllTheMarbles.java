@@ -10,13 +10,10 @@ import main.eventCardParents.CustomUseDiscardable;
 
 public class AllTheMarbles extends CustomUseDiscardable
 {
-	private boolean visited;
-	
 	public AllTheMarbles()
 	{
 		super(PossibleTarget.None, "All the Marbles", "Play this card in front of you when you are in the Toy Store."
-				+ " Discard this item to prevent all zombies from moving until after your next turn.", SpecialNames.ToyStore);
-		this.visited = false;
+				+ " Discard this item to prevent all zombies from moving until after your next turn.", SpecialNames.ToyStore, 2);
 	}
 	
 	@Override
@@ -27,18 +24,5 @@ public class AllTheMarbles extends CustomUseDiscardable
 		GameHandler.instance.nextGameState();
 		DialogHandler.showMessage(null, "Zombie movement has been skipped by All the Marbles!", getName(), JOptionPane.INFORMATION_MESSAGE);
 		return 1;
-	}
-	
-	@Override
-	public void customRemove()
-	{
-		if (this.visited)
-		{
-			GameHandler.instance.getEventDeck().removeDiscardedCard(this);
-		}
-		else
-		{
-			this.visited = true;
-		}
 	}
 }

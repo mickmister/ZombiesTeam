@@ -3,9 +3,9 @@ package main;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import main.eventCardParents.CustomUseDiscardable;
 import main.eventCardParents.EventCard;
 import main.eventCardParents.SingleUseDiscardable;
+import main.eventCardParents.UseForRoundCard;
 import main.eventCardTypes.BrainCramp;
 import main.eventCardTypes.ButterFingers;
 
@@ -60,15 +60,17 @@ public class EventCardDeck
 	
 	public void removeUseForRoundCards(Player activator)
 	{
-		for (EventCard card : this.discardedCards)
+		for (int i = this.discardedCards.size() - 1; i >= 0; i -= 1)
 		{
+			EventCard card = this.discardedCards.get(i);
 			if (card.getActivator().equals(activator))
 			{
 				card.checkRemove();
 			}
 		}
-		for (EventCard card : this.activeCards)
+		for (int i = this.activeCards.size() - 1; i >= 0; i -= 1)
 		{
+			EventCard card = this.activeCards.get(i);
 			if (card.getActivator().equals(activator))
 			{
 				if (card instanceof UseForRoundCard)
