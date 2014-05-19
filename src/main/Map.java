@@ -167,7 +167,7 @@ public class Map
 		}
 	}
 	
-	private Point getCellFromIndex()
+	public Point getCellFromIndex()
 	{
 		Point p = getRawCell();
 		int x = p.x % 3;
@@ -175,7 +175,7 @@ public class Map
 		return new Point(x, y);
 	}
 	
-	private Point getTileFromIndex()
+	public Point getTileFromIndex()
 	{
 		Point p = getRawCell();
 		int x = p.x / 3;

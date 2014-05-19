@@ -25,7 +25,9 @@ import main.eventCardParents.EventCard;
 import main.eventCardParents.EventCard.PossibleTarget;
 import main.eventCardTypes.AdrenalineRush;
 import main.eventCardTypes.AllTheMarbles;
+import main.eventCardTypes.AlternateFoodSource;
 import main.eventCardTypes.BadSenseOfDirection;
+import main.eventCardTypes.BrainCramp;
 import main.eventCardTypes.ButterFingers;
 import main.eventCardTypes.Chainsaw;
 import main.eventCardTypes.CouldntGetAnyWorse;
@@ -118,6 +120,28 @@ public class EventCardTest
 		result = card.action(base);
 		assertEquals(expected, result);
 		
+	}
+	
+	@Test
+	public void testAlternateFoodSource()
+	{
+		new GameHandler(2);
+		Player player = GameHandler.instance.getPlayer(0);
+		EventCard card = new AlternateFoodSource();
+		card.setActivator(player);
+		card.setTargetPlayer(null);
+		GameHandler.instance.getEventDeck().addActiveCard(card);
+		assertEquals(1, GameHandler.instance.getEventDeck().doCardAction(null, AlternateFoodSource.class, 0));
+	}
+	
+	@Test
+	public void testBrainCramp()
+	{
+		new GameHandler(2);
+		Player player = GameHandler.instance.getPlayer(0);
+		EventCard card = new BrainCramp();
+		card.setActivator(player);
+		card.setTargetPlayer(player);
 	}
 	
 	@Test
