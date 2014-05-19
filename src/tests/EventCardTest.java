@@ -599,6 +599,7 @@ public class EventCardTest
 				}
 				else
 				{
+					System.out.println("ONE BULLETS: " + card.getTargetPlayer().getBulletTokens() + " LIFE: " + card.getTargetPlayer().getLifeTokens());
 					assertEquals(lifeTokens - 1, card.getTargetPlayer().getLifeTokens());
 				}
 			}

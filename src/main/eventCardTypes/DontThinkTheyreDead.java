@@ -39,7 +39,7 @@ public class DontThinkTheyreDead extends SingleUseCard
 				if(roll1 <= 3)
 				{
 					int diff = 4 - roll1;
-					if(getTargetPlayer().getBulletTokens() >= 4 - roll1)
+					if(getTargetPlayer().getBulletTokens() >= diff)
 					{
 						for(int i = 0; i < diff; i++)
 						{
@@ -54,7 +54,7 @@ public class DontThinkTheyreDead extends SingleUseCard
 				if(roll2 <= 3)
 				{
 					int diff = 4 - roll2;
-					if(getTargetPlayer().getBulletTokens() >= 4 - roll2)
+					if(getTargetPlayer().getBulletTokens() >= diff)
 					{
 						for(int i = 0; i < diff; i++)
 						{
