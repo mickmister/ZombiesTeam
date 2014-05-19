@@ -374,9 +374,9 @@ public class Player
 	
 	public void decrementZombiesCaptured()
 	{
-		if(this.zombiesCaptured > 0)
+		if (this.zombiesCaptured > 0)
 		{
-			this.zombiesCaptured --;
+			this.zombiesCaptured--;
 		}
 		
 	}
@@ -419,7 +419,7 @@ public class Player
 		boolean b = currentCell.isRoad() && targetCell.isBuilding() && !targetCell.isDoor();
 		boolean c = !targetCell.isRoad();
 		boolean d = GameHandler.instance.getEventDeck().doCardAction(this, Claustrophobia.class, 0) == 1;
-		if (a || b || (c && d))
+		if (a || b || c && d)
 		{
 			return false;
 		}

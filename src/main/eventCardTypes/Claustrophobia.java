@@ -16,10 +16,11 @@ public class Claustrophobia extends UseForRoundCard
 	
 	public Claustrophobia()
 	{
-		super(PossibleTarget.Pick, "Claustrophobia", "Target player may not enter any building during their next turn.  If in a building, target player must move out of the building.", 1);
+		super(PossibleTarget.Pick, "Claustrophobia",
+				"Target player may not enter any building during their next turn.  If in a building, target player must move out of the building.", 1);
 		this.hasMovedPlayer = false;
 	}
-
+	
 	@Override
 	public int behavior(int num)
 	{
@@ -39,7 +40,8 @@ public class Claustrophobia extends UseForRoundCard
 						if (newCell.isRoad())
 						{
 							getTargetPlayer().teleport(tileLoc, new Point(x, y));
-							DialogHandler.showMessage(null, "Player " + (getTargetPlayer().getNumber() + 1) + " was moved out of the building they were in.", "Claustrophobia", JOptionPane.INFORMATION_MESSAGE);
+							DialogHandler.showMessage(null, "Player " + (getTargetPlayer().getNumber() + 1)
+									+ " was moved out of the building they were in.", "Claustrophobia", JOptionPane.INFORMATION_MESSAGE);
 							return 1;
 						}
 					}

@@ -1,8 +1,8 @@
 package main.eventCardTypes;
 
-import java.awt.Point;
-
 import gui.DialogHandler;
+
+import java.awt.Point;
 
 import javax.swing.JOptionPane;
 
