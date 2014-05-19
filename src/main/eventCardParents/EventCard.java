@@ -87,6 +87,10 @@ public abstract class EventCard
 		{
 			buildingName = ((CustomUseDiscardable) this).getBuildingName();
 		}
+		else
+		{
+			throw new IllegalArgumentException("Cannot check correct building on EventCard of type: " + this.getClass());
+		}
 		MapTile tile = GameHandler.instance.getMap().getMapTile(player.getTileLocation().y, player.getTileLocation().x);
 		SpecialNames currentBuilding = tile.getSpecialName();
 		TileCell cell = tile.getCell(player.getCellLocation().y, player.getCellLocation().x);

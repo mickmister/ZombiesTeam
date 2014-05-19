@@ -47,14 +47,6 @@ import org.junit.Test;
 public class EventCardTest
 {
 	@Test
-	public void testToString()
-	{
-		EventCard card = new AdrenalineRush();
-		assertEquals(card.getName(), card.toString());
-		assertEquals("Adrenaline Rush", card.toString());
-	}
-	
-	@Test
 	public void testAdrenalineRushMovementBehavior()
 	{
 		new GameHandler(2);
