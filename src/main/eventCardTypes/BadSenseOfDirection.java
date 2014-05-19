@@ -1,11 +1,12 @@
 package main.eventCardTypes;
 
+import java.awt.Point;
+
 import gui.DialogHandler;
 
 import javax.swing.JOptionPane;
 
 import main.GameHandler;
-import main.Player;
 import main.eventCardParents.SingleUseCard;
 
 public class BadSenseOfDirection extends SingleUseCard
@@ -22,8 +23,7 @@ public class BadSenseOfDirection extends SingleUseCard
 		DialogHandler
 				.showMessage(null, "You discarded one life token, target is now at the town square.", getName(), JOptionPane.INFORMATION_MESSAGE);
 		GameHandler.instance.getPlayer(num).loseLifeToken();
-		Player target = getTargetPlayer();
-		target.resetPlayerLocation();
+		getTargetPlayer().teleport(new Point(5, 5), new Point(1, 1));
 		return 1;
 	}
 	

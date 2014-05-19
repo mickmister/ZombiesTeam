@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import main.eventCardParents.EventCard;
+import main.eventCardTypes.Claustrophobia;
 import main.eventCardTypes.FirstAidKit;
 
 /**
@@ -380,25 +381,25 @@ public class Player
 		
 	}
 	
+	public void teleport(Point tileLocation, Point cellLocation)
+	{
+		GameHandler.instance.getMap().getMapTile(this.yTile, this.xTile).getCell(this.yCell, this.xCell).removePlayer(this);
+		this.xTile = tileLocation.x;
+		this.yTile = tileLocation.y;
+		this.xCell = cellLocation.x;
+		this.yCell = cellLocation.y;
+		GameHandler.instance.getMap().getMapTile(this.yTile, this.xTile).getCell(this.yCell, this.xCell).addPlayer(this);
+	}
+	
 	private void resetPlayer()
 	{
-		resetPlayerLocation();
+		teleport(new Point(5, 5), new Point(1, 1));
 		this.bulletTokens = 3;
 		this.lifeTokens = 3;
 		this.zombiesCaptured = (int) Math.ceil(this.zombiesCaptured / 2.0);
 		// Go from ZombieCombat to PlayerMovement to continue turn.
 		GameHandler.instance.nextGameState();
 		DialogHandler.showMessage(null, RB.get("Player.player_death_message"), RB.get("Player.player_death_title"), JOptionPane.INFORMATION_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
-	}
-	
-	public void resetPlayerLocation()
-	{
-		GameHandler.instance.getMap().getMapTile(this.yTile, this.xTile).getCell(this.yCell, this.xCell).removePlayer(this);
-		this.xTile = 5;
-		this.yTile = 5;
-		this.xCell = 1;
-		this.yCell = 1;
-		GameHandler.instance.getMap().getMapTile(this.yTile, this.xTile).getCell(this.yCell, this.xCell).addPlayer(this);
 	}
 	
 	private boolean checkDifferentTileMove(TileCell currentCell, TileCell targetCell)
@@ -416,7 +417,9 @@ public class Player
 	{
 		boolean a = currentCell.isBuilding() && !currentCell.isDoor() && targetCell.isRoad();
 		boolean b = currentCell.isRoad() && targetCell.isBuilding() && !targetCell.isDoor();
-		if (a || b)
+		boolean c = !targetCell.isRoad();
+		boolean d = GameHandler.instance.getEventDeck().doCardAction(this, Claustrophobia.class, 0) == 1;
+		if (a || b || (c && d))
 		{
 			return false;
 		}
