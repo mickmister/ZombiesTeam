@@ -1,6 +1,7 @@
 package main.eventCardTypes;
 
 import gui.DialogHandler;
+import internationalization.ECRB;
 
 import javax.swing.JOptionPane;
 
@@ -12,7 +13,7 @@ public class GainTwoHealthNoMove extends SingleUseCard
 {
 	public GainTwoHealthNoMove()
 	{
-		super(PossibleTarget.Self, "Gain Two Health No Move", "Instead of making a movement roll, gain 2 health");
+		super(PossibleTarget.Self, ECRB.get("GainTwoHealthNoMove.name"), ECRB.get("GainTwoHealthNoMove.description")); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 	
 	@Override
@@ -23,7 +24,7 @@ public class GainTwoHealthNoMove extends SingleUseCard
 		player.addLifeToken();
 		player.addLifeToken();
 		GameHandler.instance.nextGameState();
-		DialogHandler.showMessage(null, "You played it safe and rested to gain 2 health", getName(), JOptionPane.INFORMATION_MESSAGE);
+		DialogHandler.showMessage(null, ECRB.get("GainTwoHealthNoMove.message"), getName(), JOptionPane.INFORMATION_MESSAGE); //$NON-NLS-1$
 		return 1;
 	}
 }

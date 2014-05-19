@@ -1,6 +1,7 @@
 package main.eventCardTypes;
 
 import gui.DialogHandler;
+import internationalization.ECRB;
 
 import javax.swing.JOptionPane;
 
@@ -13,7 +14,7 @@ public class Fear extends SingleUseCard
 	
 	public Fear()
 	{
-		super(PossibleTarget.Pick, "Fear", "Target player may not move by any means during their next turn.");
+		super(PossibleTarget.Pick, ECRB.get("Fear.name"), ECRB.get("Fear.description")); //$NON-NLS-1$ //$NON-NLS-2$
 		
 	}
 	
@@ -23,7 +24,7 @@ public class Fear extends SingleUseCard
 		Player player = getTargetPlayer();
 		player.setMovesRemaining(0);
 		GameHandler.instance.nextGameState();
-		DialogHandler.showMessage(null, "Your movement got skipped", getName(), JOptionPane.WARNING_MESSAGE);
+		DialogHandler.showMessage(null, ECRB.get("Fear.message"), getName(), JOptionPane.WARNING_MESSAGE); //$NON-NLS-1$
 		
 		return 1;
 	}

@@ -1,5 +1,6 @@
 package main.eventCardTypes;
 
+import internationalization.ECRB;
 import main.MapTileDeck.SpecialNames;
 import main.Player;
 import main.eventCardParents.SingleUseDiscardable;
@@ -9,8 +10,8 @@ public class LotsOfAmmo extends SingleUseDiscardable
 	
 	public LotsOfAmmo()
 	{
-		super(PossibleTarget.Self, "Lots of Ammo", "Play this card in front of you when you are in the Sporting Goods Store."
-				+ "Discard this item to gain three additional bullets.", SpecialNames.SportingGoods);
+		super(PossibleTarget.Self, ECRB.get("LotsOfAmmo.name"), ECRB.get("LotsOfAmmo.description") //$NON-NLS-1$ //$NON-NLS-2$
+				+ ECRB.get("LotsOfAmmo.message"), SpecialNames.SportingGoods); //$NON-NLS-1$
 	}
 	
 	@Override

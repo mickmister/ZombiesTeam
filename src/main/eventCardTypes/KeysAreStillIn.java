@@ -1,5 +1,6 @@
 package main.eventCardTypes;
 
+import internationalization.ECRB;
 import main.GameHandler;
 import main.Player;
 import main.eventCardParents.SingleUseCard;
@@ -9,8 +10,8 @@ public class KeysAreStillIn extends SingleUseCard
 	
 	public KeysAreStillIn()
 	{
-		super(PossibleTarget.Self, "The Keys Are Still In It",
-				"Move up to 10 spaces in place of making a movement roll. You must fight zombies as normal.");
+		super(PossibleTarget.Self, ECRB.get("KeysAreStillIn.name"), //$NON-NLS-1$
+				ECRB.get("KeysAreStillIn.description")); //$NON-NLS-1$
 	}
 	
 	@Override

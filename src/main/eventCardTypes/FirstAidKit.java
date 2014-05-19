@@ -1,6 +1,7 @@
 package main.eventCardTypes;
 
 import gui.DialogHandler;
+import internationalization.ECRB;
 
 import javax.swing.JOptionPane;
 
@@ -12,15 +13,15 @@ public class FirstAidKit extends CustomUseDiscardable
 {
 	public FirstAidKit()
 	{
-		super(PossibleTarget.Self, "First Aid Kit",
-				"Play this card when you are in the Hospital. You may discard this item instead of losing a health token as a result of combat.",
+		super(PossibleTarget.Self, ECRB.get("FirstAidKit.name"), //$NON-NLS-1$
+				ECRB.get("FirstAidKit.description"), //$NON-NLS-1$
 				SpecialNames.Hospital, 1);
 	}
 	
 	@Override
 	public int behavior(int num)
 	{
-		DialogHandler.showMessage(null, "Your First Aid Kit has saved you from using a life token!", getName(), JOptionPane.INFORMATION_MESSAGE);
+		DialogHandler.showMessage(null, ECRB.get("FirstAidKit.message"), getName(), JOptionPane.INFORMATION_MESSAGE); //$NON-NLS-1$
 		GameHandler.instance.getEventDeck().removeDiscardedCard(this);
 		return 1;
 	}

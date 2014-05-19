@@ -1,6 +1,7 @@
 package main.eventCardTypes;
 
 import gui.DialogHandler;
+import internationalization.ECRB;
 
 import javax.swing.JOptionPane;
 
@@ -13,7 +14,7 @@ public class AdrenalineRush extends SingleUseCard
 	
 	public AdrenalineRush()
 	{
-		super(PossibleTarget.Self, "Adrenaline Rush", "You can move a lot now!");
+		super(PossibleTarget.Self, ECRB.get("AdrenalineRush.name"), ECRB.get("AdrenalineRush.description")); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 	
 	@Override
@@ -22,14 +23,14 @@ public class AdrenalineRush extends SingleUseCard
 		GameHandler game = GameHandler.instance;
 		if (game.getCurrentState() == GameState.playerMovementDieRoll)
 		{
-			DialogHandler.showMessage(null, "Your movement roll was multiplied by 2 by the Adrenaline Rush card!", getName(),
+			DialogHandler.showMessage(null, ECRB.get("AdrenalineRush.message_a"), getName(), //$NON-NLS-1$
 					JOptionPane.INFORMATION_MESSAGE);
 			return num * 2;
 		}
 		else
 		// if (game.getCurrentState() == GameState.zombieCombat)
 		{
-			DialogHandler.showMessage(null, "Your combat roll was increased by 2 by the Adrenaline Rush card!", getName(),
+			DialogHandler.showMessage(null, ECRB.get("AdrenalineRush.message_b"), getName(), //$NON-NLS-1$
 					JOptionPane.INFORMATION_MESSAGE);
 			return num + 2;
 		}

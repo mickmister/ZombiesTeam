@@ -1,6 +1,7 @@
 package main.eventCardTypes;
 
 import gui.DialogHandler;
+import internationalization.ECRB;
 
 import java.awt.Point;
 
@@ -16,8 +17,8 @@ public class Claustrophobia extends UseForRoundCard
 	
 	public Claustrophobia()
 	{
-		super(PossibleTarget.Pick, "Claustrophobia",
-				"Target player may not enter any building during their next turn.  If in a building, target player must move out of the building.", 1);
+		super(PossibleTarget.Pick, ECRB.get("Claustrophobia.name"), //$NON-NLS-1$
+				ECRB.get("Claustrophobia.description"), 1); //$NON-NLS-1$
 		this.hasMovedPlayer = false;
 	}
 	
@@ -40,8 +41,8 @@ public class Claustrophobia extends UseForRoundCard
 						if (newCell.isRoad())
 						{
 							getTargetPlayer().teleport(tileLoc, new Point(x, y));
-							DialogHandler.showMessage(null, "Player " + (getTargetPlayer().getNumber() + 1)
-									+ " was moved out of the building they were in.", "Claustrophobia", JOptionPane.INFORMATION_MESSAGE);
+							DialogHandler.showMessage(null, ECRB.get("Claustrophobia.message_1") + (getTargetPlayer().getNumber() + 1) //$NON-NLS-1$
+									+ ECRB.get("Claustrophobia.message_2"), getName(), JOptionPane.INFORMATION_MESSAGE); //$NON-NLS-1$ 
 							return 1;
 						}
 					}
