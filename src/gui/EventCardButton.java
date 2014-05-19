@@ -18,6 +18,7 @@ import main.eventCardParents.SingleUseDiscardable;
 import main.eventCardParents.EventCard.PossibleTarget;
 import main.eventCardTypes.BadSenseOfDirection;
 import main.eventCardTypes.ButterFingers;
+import main.eventCardTypes.Claustrophobia;
 import main.eventCardTypes.CouldntGetAnyWorse;
 import main.eventCardTypes.DontThinkTheyreDead;
 import main.eventCardTypes.SlightMiscalculation;
@@ -130,6 +131,7 @@ public class EventCardButton extends JButton implements DataListener, ActionList
 		GameHandler.instance.getEventDeck().doCardAction(card.getTargetPlayer(), BadSenseOfDirection.class, player.getNumber());
 		GameHandler.instance.getEventDeck().doCardAction(card.getTargetPlayer(), ButterFingers.class, player.getNumber());
 		GameHandler.instance.getEventDeck().doCardAction(card.getTargetPlayer(), DontThinkTheyreDead.class, player.getNumber());
+		GameHandler.instance.getEventDeck().doCardAction(card.getTargetPlayer(), Claustrophobia.class, 0);
 	}
 	
 	private int promptUserForTarget(Player player)

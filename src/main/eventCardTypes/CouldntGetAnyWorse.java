@@ -15,7 +15,7 @@ public class CouldntGetAnyWorse extends SingleUseCard
 	@Override
 	public int behavior(int num)
 	{
-		MapTile tileChoice = DialogHandler.showBulidingChoice(getName());
+		MapTile tileChoice = DialogHandler.showBulidingChoice(null, getName());
 		for (int y = 0; y < 3; y++)
 		{
 			for (int x = 0; x < 3; x++)

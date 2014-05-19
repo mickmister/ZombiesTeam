@@ -46,7 +46,7 @@ public class DialogHandler
 		}
 	}
 	
-	public static MapTile showBulidingChoice(String title)
+	public static MapTile showBulidingChoice(Component comp, String title)
 	{
 		ArrayList<MapTile> tiles = GameHandler.instance.getMap().getCurrentSpecialBuildings();
 		ArrayList<String> names = new ArrayList<String>();
@@ -55,7 +55,7 @@ public class DialogHandler
 			names.add(tile.getSpecialName().toString());
 		}
 		String[] options = (String[]) names.toArray();
-		String choice = (String) DialogHandler.showListChoice(null, "Pick the building to increase zombies.", title, JOptionPane.INFORMATION_MESSAGE,
+		String choice = (String) DialogHandler.showListChoice(comp, "Pick the building in which to increase zombies.", title, JOptionPane.INFORMATION_MESSAGE,
 				options);
 		
 		MapTile tileChoice = null;

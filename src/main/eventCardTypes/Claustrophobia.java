@@ -1,6 +1,10 @@
 package main.eventCardTypes;
 
+import gui.DialogHandler;
+
 import java.awt.Point;
+
+import javax.swing.JOptionPane;
 
 import main.GameHandler;
 import main.TileCell;
@@ -35,6 +39,7 @@ public class Claustrophobia extends UseForRoundCard
 						if (newCell.isRoad())
 						{
 							getTargetPlayer().teleport(tileLoc, new Point(x, y));
+							DialogHandler.showMessage(null, "Player " + (getTargetPlayer().getNumber() + 1) + " was moved out of the building they were in.", "Claustrophobia", JOptionPane.INFORMATION_MESSAGE);
 							return 1;
 						}
 					}

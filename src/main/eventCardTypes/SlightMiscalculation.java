@@ -16,7 +16,7 @@ public class SlightMiscalculation extends SingleUseCard
 	@Override
 	public int behavior(int num)
 	{
-		MapTile tileChoice = DialogHandler.showBulidingChoice(getName());
+		MapTile tileChoice = DialogHandler.showBulidingChoice(null, getName());
 		
 		doubleZombiesOnTile(tileChoice);
 		
