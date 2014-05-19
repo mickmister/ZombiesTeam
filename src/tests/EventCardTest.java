@@ -559,7 +559,6 @@ public class EventCardTest
 	public void testDontThinkTheyreDead()
 	{
 		DialogHandler.defaultReturn = JOptionPane.YES_OPTION;
-		;
 		for (int i = 0; i < 1000; i++)
 		{
 			new GameHandler(2);
@@ -574,7 +573,7 @@ public class EventCardTest
 			int lifeTokens = card.getTargetPlayer().getLifeTokens();
 			int numZombies = card.getTargetPlayer().getZombiesCaptured();
 			int rolls = card.behavior(0);
-			int roll1 = rolls % (2 << 16);
+			int roll1 = rolls % (2 << 15);
 			int roll2 = rolls >> 16;
 			
 			if (roll1 < 4 && roll2 < 4)
@@ -616,7 +615,6 @@ public class EventCardTest
 			{
 				if (bulletTokens >= 4 - roll2)
 				{
-					System.out.println(roll2);
 					assertEquals(bulletTokens - (4 - roll2), card.getTargetPlayer().getBulletTokens());
 				}
 				else
@@ -630,6 +628,30 @@ public class EventCardTest
 				assertEquals(lifeTokens, card.getTargetPlayer().getLifeTokens());
 				assertEquals(numZombies, card.getTargetPlayer().getZombiesCaptured());
 			}
+		}		
+		DialogHandler.defaultReturn = JOptionPane.NO_OPTION;
+		for (int i = 0; i < 1000; i++)
+		{
+			new GameHandler(2);
+			Player player1 = GameHandler.instance.getPlayer(0);
+			Player player2 = GameHandler.instance.getPlayer(1);
+			DontThinkTheyreDead card = new DontThinkTheyreDead();
+			card.setTargetPlayer(player2);
+			card.setActivator(player1);
+			player2.incrementZombiesCaptured();
+			player2.incrementZombiesCaptured();
+			int numZombies = card.getTargetPlayer().getZombiesCaptured();
+			int rolls = card.behavior(0);
+			int roll1 = rolls % (2 << 15);
+			int roll2 = rolls >> 16;
+			if(roll1 <= 3 || roll2 <= 3)
+			{
+				assertEquals(numZombies - 2, card.getTargetPlayer().getZombiesCaptured());
+			}
+			else
+			{
+				assertEquals(numZombies, card.getTargetPlayer().getZombiesCaptured());
+			}			
 		}
 	}
 }
