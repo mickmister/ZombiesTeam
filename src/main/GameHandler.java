@@ -14,6 +14,7 @@ import main.eventCardTypes.Fear;
 import main.eventCardTypes.GainTwoHealthNoMove;
 import main.eventCardTypes.HystericalParalysis;
 import main.eventCardTypes.KeysAreStillIn;
+import main.eventCardTypes.ThisIsntSoBad;
 
 public class GameHandler
 {
@@ -150,6 +151,17 @@ public class GameHandler
 		this.turn = (this.turn + 1) % this.numberOfPlayers;
 		this.players.get(this.turn).setCardPlayed(false);
 		this.eventDeck.doCardAction(this.players.get(this.turn), HystericalParalysis.class, 0);
+		this.eventDeck.doCardAction(null, ThisIsntSoBad.class, 0);
+	}
+	
+	public void setTurn(int turn)
+	{
+		this.turn = turn;
+	}
+	
+	public void setGameState(GameState state)
+	{
+		this.currentState = state;
 	}
 	
 	public GameState getCurrentState()
