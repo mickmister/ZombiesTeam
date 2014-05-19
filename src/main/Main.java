@@ -1,6 +1,7 @@
 package main;
 
 import gui.DialogHandler;
+import internationalization.ECRB;
 import internationalization.RB;
 
 import java.awt.Color;
@@ -27,6 +28,7 @@ public class Main
 		
 		Locale locale = askUserForLanguage();
 		new RB(locale);
+		new ECRB(locale);
 		
 		int numPlayers = askUserForNumPlayers();
 		
