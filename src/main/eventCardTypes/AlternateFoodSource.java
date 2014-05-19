@@ -1,13 +1,14 @@
 package main.eventCardTypes;
 
+import internationalization.ECRB;
 import main.eventCardParents.UseForRoundCard;
 
 public class AlternateFoodSource extends UseForRoundCard
 {
 	public AlternateFoodSource()
 	{
-		super(PossibleTarget.None, "Alternate Food Source",
-				"No zombies attack and players may not attack any zombies until the end of your next turn.", 2);
+		super(PossibleTarget.None, ECRB.get("AlternateFoodSource.name"), //$NON-NLS-1$
+				ECRB.get("AlternateFoodSource.description"), 2); //$NON-NLS-1$
 	}
 	
 	@Override

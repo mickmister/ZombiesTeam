@@ -1,6 +1,7 @@
 package main.eventCardTypes;
 
 import gui.DialogHandler;
+import internationalization.ECRB;
 
 import java.util.ArrayList;
 
@@ -15,7 +16,7 @@ public class ButterFingers extends SingleUseCard
 	
 	public ButterFingers()
 	{
-		super(PossibleTarget.Pick, "Butter Fingers", "Target player must discard a weapon or item in play or up to 2 bullets of your choice.");
+		super(PossibleTarget.Pick, ECRB.get("ButterFingers.name"), ECRB.get("ButterFingers.description")); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 	
 	@Override
@@ -24,9 +25,9 @@ public class ButterFingers extends SingleUseCard
 		// check deck for active cards
 		ArrayList<EventCard> cards = GameHandler.instance.getEventDeck().getActiveCardsForPlayer(getTargetPlayer());
 		ArrayList<Object> choices = new ArrayList<Object>();
-		choices.add("Bullet tokens");
+		choices.add(ECRB.get("ButterFingers.option_bullet_tokens")); //$NON-NLS-1$
 		choices.addAll(cards);
-		Object result = DialogHandler.showListChoice(null, "Do you want to remove bullet tokens or\na discarded event card from the player?",
+		Object result = DialogHandler.showListChoice(null, ECRB.get("ButterFingers.option_message"), //$NON-NLS-1$
 				getName(), JOptionPane.QUESTION_MESSAGE, choices.toArray());
 		
 		for (EventCard card : cards)
@@ -35,7 +36,7 @@ public class ButterFingers extends SingleUseCard
 			{
 				EventCard item = (EventCard) result;
 				GameHandler.instance.getEventDeck().removeActiveCard(item);
-				String message = "The card " + item.getName() + " was removed from Player " + (getTargetPlayer().getNumber() + 1) + "'s hand.";
+				String message = ECRB.get("ButterFingers.message_1") + item.getName() + ECRB.get("ButterFingers.message_2") + (getTargetPlayer().getNumber() + 1) + ECRB.get("ButterFingers.message_3"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				DialogHandler.showMessage(null, message, getName(), JOptionPane.INFORMATION_MESSAGE);
 				return 0;
 			}
@@ -45,7 +46,7 @@ public class ButterFingers extends SingleUseCard
 		int numTokens = Math.min(2, getTargetPlayer().getBulletTokens());
 		getTargetPlayer().loseBulletToken();
 		getTargetPlayer().loseBulletToken();
-		String message = numTokens + " bullet tokens were removed from Player " + (getTargetPlayer().getNumber() + 1) + "'s hand.";
+		String message = numTokens + ECRB.get("ButterFingers.message_4") + (getTargetPlayer().getNumber() + 1) + ECRB.get("ButterFingers.message_5"); //$NON-NLS-1$ //$NON-NLS-2$
 		DialogHandler.showMessage(null, message, getName(), JOptionPane.INFORMATION_MESSAGE);
 		return 0;
 	}

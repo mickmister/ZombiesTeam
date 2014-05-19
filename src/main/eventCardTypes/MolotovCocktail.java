@@ -1,6 +1,7 @@
 package main.eventCardTypes;
 
 import gui.DialogHandler;
+import internationalization.ECRB;
 
 import javax.swing.JOptionPane;
 
@@ -14,10 +15,8 @@ public class MolotovCocktail extends CustomUseDiscardable
 {
 	public MolotovCocktail()
 	{
-		super(
-				PossibleTarget.Self,
-				"Molotov Cocktail",
-				"Play this card in front of you when you are in the Gas Station. Discard this item to add +2 to all combat rolls against all zombies in your current building for 1 turn.",
+		super(PossibleTarget.Self, ECRB.get("MolotovCocktail.name"), //$NON-NLS-1$
+				ECRB.get("MolotovCocktail.description"), //$NON-NLS-1$
 				SpecialNames.GasStation, 1);
 	}
 	
@@ -28,7 +27,7 @@ public class MolotovCocktail extends CustomUseDiscardable
 		TileCell cell = tile.getCell(getTargetPlayer().getCellLocation().y, getTargetPlayer().getCellLocation().x);
 		if (cell.isBuilding() || cell.isDoor())
 		{
-			DialogHandler.showMessage(null, "Your Molotov Cocktail increased your combat roll by 2!", getName(), JOptionPane.INFORMATION_MESSAGE);
+			DialogHandler.showMessage(null, ECRB.get("MolotovCocktail.message"), getName(), JOptionPane.INFORMATION_MESSAGE); //$NON-NLS-1$
 			return num + 2;
 		}
 		else

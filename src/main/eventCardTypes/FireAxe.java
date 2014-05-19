@@ -2,6 +2,7 @@ package main.eventCardTypes;
 
 import gui.DialogHandler;
 import internationalization.ECRB;
+
 import javax.swing.JOptionPane;
 
 import main.MapTileDeck.SpecialNames;

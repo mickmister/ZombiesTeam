@@ -1,6 +1,7 @@
 package main.eventCardTypes;
 
 import gui.DialogHandler;
+import internationalization.ECRB;
 import main.MapTile;
 import main.eventCardParents.SingleUseCard;
 
@@ -9,7 +10,7 @@ public class CouldntGetAnyWorse extends SingleUseCard
 	
 	public CouldntGetAnyWorse()
 	{
-		super(PossibleTarget.Self, "Couldn't Get Any Worse", "Place a zombie on every legal space in a building not already occupied by a zombie.");
+		super(PossibleTarget.Self, ECRB.get("CouldntGetAnyWorse.name"), ECRB.get("CouldntGetAnyWorse.description")); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 	
 	@Override
