@@ -58,20 +58,30 @@ public class EventCardDeck
 		this.discardedCards.remove(card);
 	}
 	
-	public void removeUseForRoundCards(Player activator)
+	public void removeUseForRoundCards(Player currentPlayer)
 	{
 		for (int i = this.discardedCards.size() - 1; i >= 0; i -= 1)
 		{
 			EventCard card = this.discardedCards.get(i);
-			if (card.getActivator().equals(activator))
+			if (card.getTargetPlayer() == null)
 			{
-				card.checkRemove();
+				if (card.getActivator().equals(currentPlayer))
+				{
+					card.checkRemove();
+				}
+			}
+			else
+			{
+				if (card.getTargetPlayer().equals(currentPlayer))
+				{
+					card.checkRemove();
+				}
 			}
 		}
 		for (int i = this.activeCards.size() - 1; i >= 0; i -= 1)
 		{
 			EventCard card = this.activeCards.get(i);
-			if (card.getActivator().equals(activator))
+			if (card.getActivator().equals(currentPlayer))
 			{
 				if (card instanceof UseForRoundCard)
 				{
