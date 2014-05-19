@@ -8,6 +8,7 @@ import main.eventCardParents.SingleUseDiscardable;
 import main.eventCardParents.UseForRoundCard;
 import main.eventCardTypes.BrainCramp;
 import main.eventCardTypes.ButterFingers;
+import main.eventCardTypes.ThisIsntSoBad;
 
 public class EventCardDeck
 {
@@ -29,10 +30,11 @@ public class EventCardDeck
 			// this.deck.add(new GainTwoHealthNoMove());
 			// this.deck.add(new UntiedShoe());
 			// this.deck.add(new KeysAreStillIn());
-			this.deck.add(new ButterFingers());
-			this.deck.add(new BrainCramp());
+			// this.deck.add(new ButterFingers());
+			// this.deck.add(new BrainCramp());
 			// this.deck.add(new Skateboard());
 			// this.deck.add(new FireAxe());
+			this.deck.add(new ThisIsntSoBad());
 		}
 		
 		Collections.shuffle(this.deck);

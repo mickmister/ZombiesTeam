@@ -24,6 +24,7 @@ import javax.swing.JViewport;
 import main.GameHandler;
 import main.MapTile;
 import main.Player;
+import main.eventCardTypes.ThisIsntSoBad;
 
 public class MapView extends JPanel implements Runnable, KeyListener
 {
@@ -298,6 +299,11 @@ public class MapView extends JPanel implements Runnable, KeyListener
 	
 	private void handleZombieMovement(KeyEvent e)
 	{
+		if (GameHandler.instance.getEventDeck().doCardAction(null, ThisIsntSoBad.class, 1) == 42)
+		{
+			handleIsntSoBadMovement(e);
+			return;
+		}
 		switch (e.getKeyCode())
 		{
 			case KeyEvent.VK_LEFT:
@@ -315,6 +321,26 @@ public class MapView extends JPanel implements Runnable, KeyListener
 		}
 	}
 	
+	private void handleIsntSoBadMovement(KeyEvent e)
+	{
+		switch (e.getKeyCode())
+		{
+			case KeyEvent.VK_SPACE:
+				GameHandler.instance.getMap().selectNextZombie();
+				break;
+			case KeyEvent.VK_ENTER:
+				GameHandler.instance.getEventDeck().doCardAction(null, ThisIsntSoBad.class, 2);
+				Player player = GameHandler.instance.getPlayer(GameHandler.instance.getTurn());
+				player.setMovesRemaining(player.getMovesRemaining() - 1);
+				if (player.getMovesRemaining() == 0)
+				{
+					GameHandler.instance.getEventDeck().doCardAction(null, ThisIsntSoBad.class, 3);
+				}
+				break;
+		}
+		
+	}
+
 	@Override
 	public void keyReleased(KeyEvent e)
 	{
