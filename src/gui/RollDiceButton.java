@@ -19,7 +19,7 @@ public class RollDiceButton extends JButton implements ActionListener, DataListe
 {
 	public RollDiceButton()
 	{
-		setFont(new Font("Segoe UI", Font.PLAIN, 30));
+		setFont(new Font("Segoe UI", Font.PLAIN, 30)); //$NON-NLS-1$
 		setText("   " + RB.get("RollDiceButton.roll_dice")); //$NON-NLS-1$ //$NON-NLS-2$
 		setIcon(new ImageIcon(ImageManager.DICE_PICTURE));
 		addActionListener(this);

@@ -99,13 +99,15 @@ public class EventCardButton extends JButton implements DataListener, ActionList
 		{
 			if (card.checkCorrectBuilding(player))
 			{
-				DialogHandler.showMessage(getTopLevelAncestor(), "Special building card played successfully!", "Special Building Card",
+				DialogHandler.showMessage(getTopLevelAncestor(),
+						RB.get("EventCardButton.special_building_message"), RB.get("EventCardButton.special_building_title"), //$NON-NLS-1$ //$NON-NLS-2$
 						JOptionPane.INFORMATION_MESSAGE);
 				return true;
 			}
 			else
 			{
-				DialogHandler.showMessage(getTopLevelAncestor(), "Not in correct building for this card.", "Invalid Placement",
+				DialogHandler.showMessage(getTopLevelAncestor(),
+						RB.get("EventCardButton.not_correct_building_message"), RB.get("EventCardButton.not_correct_building_title"), //$NON-NLS-1$ //$NON-NLS-2$
 						JOptionPane.WARNING_MESSAGE);
 				return false;
 			}
@@ -118,7 +120,8 @@ public class EventCardButton extends JButton implements DataListener, ActionList
 			}
 			else
 			{
-				DialogHandler.showMessage(getTopLevelAncestor(), "There are no special buildings currently on the map!", "Cannot Play Card",
+				DialogHandler.showMessage(getTopLevelAncestor(),
+						RB.get("EventCardButton.no_buildings_message"), RB.get("EventCardButton.no_buildings_title"), //$NON-NLS-1$ //$NON-NLS-2$
 						JOptionPane.WARNING_MESSAGE);
 				return false;
 			}

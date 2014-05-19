@@ -18,7 +18,7 @@ public class MapTileDeckButton extends JButton implements ActionListener, DataLi
 {
 	public MapTileDeckButton()
 	{
-		setFont(new Font("Segoe UI", Font.PLAIN, 30));
+		setFont(new Font("Segoe UI", Font.PLAIN, 30)); //$NON-NLS-1$
 		setText(RB.get("MapTileDeckButton.map_tile_deck")); //$NON-NLS-1$
 		addActionListener(this);
 		GameHandler.instance.addDataListener(this);
