@@ -390,4 +390,43 @@ public class Map
 		}
 		return tiles;
 	}
+
+	/**
+	 * 
+	 * @param filterPlayers	makes sure players are not on the tile cells
+	 * @return
+	 */
+	public ArrayList<TileCell> getNonZombiedCells(boolean filterPlayers) 
+	{
+		ArrayList<TileCell> cells = new ArrayList<TileCell>();
+		
+		for(int tileY = 0; tileY < this.SIZE; tileY++)
+		{
+			for(int tileX = 0; tileX < this.SIZE; tileX++)
+			{
+				for(int cellY = 0; cellY < 3; cellY++)
+				{
+					for(int cellX = 0; cellX < 3; cellX++)
+					{
+						TileCell cell = this.getMapTile(tileY, tileX).getCell(cellY, cellX);
+						if(cell.isAccessible() && !cell.hasZombie())
+						{
+							if(filterPlayers)
+							{
+								if(cell.getPlayersOccupying().isEmpty())
+								{
+									cells.add(cell);
+								}
+							}
+							else
+							{
+								cells.add(cell);
+							}
+						}
+					}
+				}
+			}
+		}		
+		return cells;
+	}
 }
