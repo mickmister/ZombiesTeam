@@ -4,9 +4,10 @@ import gui.DialogHandler;
 
 import javax.swing.JOptionPane;
 
+import main.eventCardParents.InstantUseCard;
 import main.eventCardParents.SingleUseCard;
 
-public class DontThinkTheyreDead extends SingleUseCard
+public class DontThinkTheyreDead extends SingleUseCard implements InstantUseCard
 {
 	public DontThinkTheyreDead()
 	{

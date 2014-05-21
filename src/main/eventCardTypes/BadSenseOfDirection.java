@@ -7,12 +7,11 @@ import java.awt.Point;
 
 import javax.swing.JOptionPane;
 
-import main.GameHandler;
+import main.eventCardParents.InstantUseCard;
 import main.eventCardParents.SingleUseCard;
 
-public class BadSenseOfDirection extends SingleUseCard
+public class BadSenseOfDirection extends SingleUseCard implements InstantUseCard
 {
-	
 	public BadSenseOfDirection()
 	{
 		super(PossibleTarget.Pick, ECRB.get("BadSenseOfDirection.name"), ECRB.get("BadSenseOfDirection.description")); //$NON-NLS-1$ //$NON-NLS-2$
@@ -22,9 +21,8 @@ public class BadSenseOfDirection extends SingleUseCard
 	public int behavior(int num)
 	{
 		DialogHandler.showMessage(null, ECRB.get("BadSenseOfDirection.message"), getName(), JOptionPane.INFORMATION_MESSAGE); //$NON-NLS-1$
-		GameHandler.instance.getPlayer(num).loseLifeToken();
+		getActivator().loseLifeToken();
 		getTargetPlayer().teleport(new Point(5, 5), new Point(1, 1));
 		return 1;
 	}
-	
 }

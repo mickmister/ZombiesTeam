@@ -9,9 +9,10 @@ import javax.swing.JOptionPane;
 
 import main.GameHandler;
 import main.eventCardParents.EventCard;
+import main.eventCardParents.InstantUseCard;
 import main.eventCardParents.SingleUseCard;
 
-public class ButterFingers extends SingleUseCard
+public class ButterFingers extends SingleUseCard implements InstantUseCard
 {
 	
 	public ButterFingers()

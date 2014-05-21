@@ -9,9 +9,10 @@ import javax.swing.JOptionPane;
 
 import main.GameHandler;
 import main.TileCell;
+import main.eventCardParents.InstantUseCard;
 import main.eventCardParents.UseForRoundCard;
 
-public class Claustrophobia extends UseForRoundCard
+public class Claustrophobia extends UseForRoundCard implements InstantUseCard
 {
 	private boolean hasMovedPlayer;
 	
