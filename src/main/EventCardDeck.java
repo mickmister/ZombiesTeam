@@ -6,7 +6,32 @@ import java.util.Collections;
 import main.eventCardParents.EventCard;
 import main.eventCardParents.SingleUseDiscardable;
 import main.eventCardParents.UseForRoundCard;
+import main.eventCardTypes.AdrenalineRush;
+import main.eventCardTypes.AllTheMarbles;
+import main.eventCardTypes.AlternateFoodSource;
+import main.eventCardTypes.BadSenseOfDirection;
+import main.eventCardTypes.BrainCramp;
+import main.eventCardTypes.ButterFingers;
+import main.eventCardTypes.Chainsaw;
+import main.eventCardTypes.Claustrophobia;
+import main.eventCardTypes.CouldntGetAnyWorse;
+import main.eventCardTypes.DontThinkTheyreDead;
+import main.eventCardTypes.Fear;
+import main.eventCardTypes.FireAxe;
+import main.eventCardTypes.FirstAidKit;
+import main.eventCardTypes.GainTwoHealthNoMove;
+import main.eventCardTypes.Grenade;
+import main.eventCardTypes.HystericalParalysis;
+import main.eventCardTypes.KeysAreStillIn;
+import main.eventCardTypes.LotsOfAmmo;
+import main.eventCardTypes.MolotovCocktail;
+import main.eventCardTypes.Shotgun;
+import main.eventCardTypes.Skateboard;
+import main.eventCardTypes.SlightMiscalculation;
 import main.eventCardTypes.ThisIsntSoBad;
+import main.eventCardTypes.UntiedShoe;
+import main.eventCardTypes.WereScrewed;
+import main.eventCardTypes.ZombieMaster;
 
 public class EventCardDeck
 {
@@ -22,17 +47,32 @@ public class EventCardDeck
 		
 		for (int i = 0; i < 200; i++)
 		{
-			// this.deck.add(new AdrenalineRush());
-			// this.deck.add(new Shotgun());
-			// this.deck.add(new HystericalParalysis());
-			// this.deck.add(new GainTwoHealthNoMove());
-			// this.deck.add(new UntiedShoe());
-			// this.deck.add(new KeysAreStillIn());
-			// this.deck.add(new ButterFingers());
-			// this.deck.add(new BrainCramp());
-			// this.deck.add(new Skateboard());
-			// this.deck.add(new FireAxe());
-			this.deck.add(new ThisIsntSoBad());
+			this.deck.add(new AdrenalineRush());
+			this.deck.add(new AllTheMarbles());
+			this.deck.add(new AlternateFoodSource());
+			this.deck.add(new BadSenseOfDirection());
+			this.deck.add(new BrainCramp());
+			this.deck.add(new ButterFingers());
+			this.deck.add(new Chainsaw());
+			this.deck.add(new Claustrophobia());
+			this.deck.add(new CouldntGetAnyWorse());
+			this.deck.add(new DontThinkTheyreDead());
+			this.deck.add(new Fear());
+			this.deck.add(new FireAxe());
+			this.deck.add(new FirstAidKit());
+			this.deck.add(new GainTwoHealthNoMove());
+			this.deck.add(new Grenade());
+			this.deck.add(new HystericalParalysis());
+			this.deck.add(new KeysAreStillIn());
+			this.deck.add(new LotsOfAmmo());
+			this.deck.add(new MolotovCocktail());
+			this.deck.add(new Shotgun());
+			this.deck.add(new Skateboard());
+			this.deck.add(new SlightMiscalculation());
+//			this.deck.add(new ThisIsntSoBad());
+			this.deck.add(new UntiedShoe());
+			this.deck.add(new WereScrewed());
+			this.deck.add(new ZombieMaster());
 		}
 		
 		Collections.shuffle(this.deck);
