@@ -1,6 +1,7 @@
 package main.eventCardTypes;
 
 import gui.DialogHandler;
+import internationalization.ECRB;
 
 import javax.swing.JOptionPane;
 
@@ -11,9 +12,8 @@ public class DontThinkTheyreDead extends SingleUseCard implements InstantUseCard
 {
 	public DontThinkTheyreDead()
 	{
-		super(PossibleTarget.Pick, "I Don't Think They're Dead",
-				"Play this card to make target opponent roll two dice. If either die result is 3 or lower,"
-						+ " opponent must return two zombies to the zombie pool. Heart and bullet tokens may be used to modify these rolls.");
+		super(PossibleTarget.Pick, ECRB.get("DontThinkTheyreDead.name"), //$NON-NLS-1$
+				ECRB.get("DontThinkTheyreDead.description")); //$NON-NLS-1$
 	}
 	
 	@Override
@@ -21,19 +21,19 @@ public class DontThinkTheyreDead extends SingleUseCard implements InstantUseCard
 	{
 		int roll1 = (int) (Math.random() * 6 + 1);
 		int roll2 = (int) (Math.random() * 6 + 1);
-		String message = "Player " + (getTargetPlayer().getNumber() + 1) + ", you have rolled two dice to protect your zombies. You first roll: "
-				+ roll1 + ". Your second roll: " + roll2 + ".";
+		String message = ECRB.get("DontThinkTheyreDead.player") + (getTargetPlayer().getNumber() + 1) + ECRB.get("DontThinkTheyreDead.message_1") //$NON-NLS-1$ //$NON-NLS-2$
+				+ roll1 + ECRB.get("DontThinkTheyreDead.message_2") + roll2 + ECRB.get("DontThinkTheyreDead.message_3"); //$NON-NLS-1$ //$NON-NLS-2$
 		DialogHandler.showMessage(null, message, getName(), JOptionPane.INFORMATION_MESSAGE);
 		
 		if (roll1 > 3 && roll2 > 3)
 		{
-			message = "Your dice rolling saved from giving up any zombies!";
-			DialogHandler.showMessage(null, message, "Saved by the dice!", JOptionPane.INFORMATION_MESSAGE);
+			message = ECRB.get("DontThinkTheyreDead.message_4"); //$NON-NLS-1$
+			DialogHandler.showMessage(null, message, ECRB.get("DontThinkTheyreDead.title_1"), JOptionPane.INFORMATION_MESSAGE); //$NON-NLS-1$
 		}
 		else
 		{
-			String choiceMessage = "Do you want to use bullet or life tokens?";
-			boolean choice = DialogHandler.showChoice(null, choiceMessage, "Use Tokens?", JOptionPane.INFORMATION_MESSAGE) == JOptionPane.YES_OPTION;
+			String choiceMessage = ECRB.get("DontThinkTheyreDead.message_5"); //$NON-NLS-1$
+			boolean choice = DialogHandler.showChoice(null, choiceMessage, ECRB.get("DontThinkTheyreDead.title_2"), JOptionPane.INFORMATION_MESSAGE) == JOptionPane.YES_OPTION; //$NON-NLS-1$
 			
 			if (choice)
 			{
@@ -69,13 +69,13 @@ public class DontThinkTheyreDead extends SingleUseCard implements InstantUseCard
 						getTargetPlayer().loseLifeToken();
 					}
 				}
-				message = "Your tokens saved your zombies!";
-				DialogHandler.showMessage(null, message, "Yay Tokens!", JOptionPane.INFORMATION_MESSAGE);
+				message = ECRB.get("DontThinkTheyreDead.message_6"); //$NON-NLS-1$
+				DialogHandler.showMessage(null, message, getName(), JOptionPane.INFORMATION_MESSAGE);
 			}
 			else
 			{
-				message = "You chose to give up your zombies!";
-				DialogHandler.showMessage(null, message, "You lost zombies", JOptionPane.WARNING_MESSAGE);
+				message = ECRB.get("DontThinkTheyreDead.message_7"); //$NON-NLS-1$
+				DialogHandler.showMessage(null, message, getName(), JOptionPane.WARNING_MESSAGE);
 				getTargetPlayer().decrementZombiesCaptured();
 				getTargetPlayer().decrementZombiesCaptured();
 			}

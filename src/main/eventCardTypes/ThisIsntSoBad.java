@@ -1,6 +1,7 @@
 package main.eventCardTypes;
 
 import gui.DialogHandler;
+import internationalization.ECRB;
 
 import java.awt.Point;
 
@@ -13,12 +14,11 @@ import main.eventCardParents.StateChangeCard;
 
 public class ThisIsntSoBad extends StateChangeCard
 {
-	
 	private boolean doneSetUp = false;
 	
 	public ThisIsntSoBad()
 	{
-		super(PossibleTarget.None, "This Isn't So Bad", "Move any 2 zombies in play to a random location on the map.");
+		super(PossibleTarget.None, ECRB.get("ThisIsntSoBad.name"), ECRB.get("ThisIsntSoBad.description")); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 	
 	@Override
@@ -28,25 +28,31 @@ public class ThisIsntSoBad extends StateChangeCard
 		// Set up
 		if (num == 0)
 		{
+			DialogHandler.showMessage(null, "Setting up ThisIsntSoBad card.", getName(), JOptionPane.INFORMATION_MESSAGE); //$NON-NLS-1$
 			game.setGameState(GameState.zombieMovement);
 			setTurn(game.getTurn());
 			game.setTurn(getActivator().getNumber());
 			getActivator().setMovesRemaining(2);
+			DialogHandler
+					.showMessage(
+							null,
+							"Turn: " + game.getTurn() + "\nState: " + game.getCurrentState() + "\nMoves: " + game.getPlayer(game.getTurn()).getMovesRemaining(), getName(), JOptionPane.INFORMATION_MESSAGE); //$NON-NLS-1$
 			this.doneSetUp = true;
-			System.out.println("Setting up Card.");
-			DialogHandler.showMessage(null, "Entering zombie teleportation.", getName(), JOptionPane.INFORMATION_MESSAGE);
 			return 42;
 		}
 		else if (num == 1)
 		{
 			if (this.doneSetUp)
 			{
+				DialogHandler.showMessage(null, "Has set up, returning 42.", getName(), JOptionPane.INFORMATION_MESSAGE); //$NON-NLS-1$
 				return 42;
 			}
+			DialogHandler.showMessage(null, "Has NOT set up, returning 0.", getName(), JOptionPane.INFORMATION_MESSAGE); //$NON-NLS-1$
 			return 0;
 		}
 		else if (num == 2)
 		{
+			DialogHandler.showMessage(null, "Teleporting zombies!", getName(), JOptionPane.INFORMATION_MESSAGE); //$NON-NLS-1$
 			Point tileLocation = game.getMap().getTileFromIndex();
 			Point cellLocation = game.getMap().getCellFromIndex();
 			
@@ -70,10 +76,10 @@ public class ThisIsntSoBad extends StateChangeCard
 		}
 		else
 		{
+			DialogHandler.showMessage(null, "Restoring game state.", getName(), JOptionPane.INFORMATION_MESSAGE); //$NON-NLS-1$
 			game.setGameState(GameState.tilePlacement);
 			game.setTurn(getTurn());
 			return 42;
 		}
 	}
-	
 }

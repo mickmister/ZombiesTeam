@@ -390,35 +390,28 @@ public class Map
 		}
 		return tiles;
 	}
-
+	
 	/**
-	 * 
-	 * @param filterPlayers	makes sure players are not on the tile cells
+	 * @param filterPlayers
+	 *            makes sure players are not on the tile cells
 	 * @return
 	 */
-	public ArrayList<TileCell> getNonZombiedCells(boolean filterPlayers) 
+	public ArrayList<TileCell> getNonZombiedCells(boolean filterPlayers)
 	{
 		ArrayList<TileCell> cells = new ArrayList<TileCell>();
 		
-		for(int tileY = 0; tileY < this.SIZE; tileY++)
+		for (int ty = 0; ty < this.SIZE; ty++)
 		{
-			for(int tileX = 0; tileX < this.SIZE; tileX++)
+			for (int tx = 0; tx < this.SIZE; tx++)
 			{
-				for(int cellY = 0; cellY < 3; cellY++)
+				for (int cy = 0; cy < 3; cy++)
 				{
-					for(int cellX = 0; cellX < 3; cellX++)
+					for (int cx = 0; cx < 3; cx++)
 					{
-						TileCell cell = this.getMapTile(tileY, tileX).getCell(cellY, cellX);
-						if(cell.isAccessible() && !cell.hasZombie())
+						TileCell cell = getMapTile(ty, tx).getCell(cy, cx);
+						if (cell.isAccessible() && !cell.hasZombie())
 						{
-							if(filterPlayers)
-							{
-								if(cell.getPlayersOccupying().isEmpty())
-								{
-									cells.add(cell);
-								}
-							}
-							else
+							if (!filterPlayers || filterPlayers && cell.getPlayersOccupying().isEmpty())
 							{
 								cells.add(cell);
 							}
@@ -426,7 +419,8 @@ public class Map
 					}
 				}
 			}
-		}		
+		}
+		
 		return cells;
 	}
 }

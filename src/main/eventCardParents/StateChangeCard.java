@@ -1,6 +1,6 @@
 package main.eventCardParents;
 
-public abstract class StateChangeCard extends MultipleUseCard
+public abstract class StateChangeCard extends UseForRoundCard
 {
 	private int turn;
 	
