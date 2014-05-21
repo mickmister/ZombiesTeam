@@ -298,6 +298,7 @@ public class EventCardTest
 		Player player2 = game.getPlayer(1);
 		BadSenseOfDirection card = new BadSenseOfDirection();
 		card.setTargetPlayer(player2);
+		card.setActivator(player1);
 		player2.setMovesRemaining(1);
 		player2.tryMoveLeft();
 		assertEquals(0, player2.getCellLocation().x);

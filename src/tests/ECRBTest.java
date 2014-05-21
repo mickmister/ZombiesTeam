@@ -28,7 +28,7 @@ public class ECRBTest
 	public void testSpanishLocale()
 	{
 		new ECRB(new Locale("es", "MX"));
-		assertEquals("All the Marbles", ECRB.get("AllTheMarbles.name"));
+		assertEquals("Todos los Mármoles", ECRB.get("AllTheMarbles.name"));
 		assertEquals("!My_Fake_Key!", ECRB.get("My_Fake_Key"));
 	}
 	
@@ -36,7 +36,7 @@ public class ECRBTest
 	public void testFrenchLocale()
 	{
 		new ECRB(new Locale("fr", "FR"));
-		assertEquals("All the Marbles", ECRB.get("AllTheMarbles.name"));
+		assertEquals("Tous les marbres", ECRB.get("AllTheMarbles.name"));
 		assertEquals("!My_Fake_Key!", ECRB.get("My_Fake_Key"));
 	}
 	
