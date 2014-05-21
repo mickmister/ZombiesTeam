@@ -1,6 +1,7 @@
 package main.eventCardTypes;
 
 import gui.DialogHandler;
+import internationalization.ECRB;
 
 import java.awt.Point;
 
@@ -18,7 +19,7 @@ public class ThisIsntSoBad extends StateChangeCard
 	
 	public ThisIsntSoBad()
 	{
-		super(PossibleTarget.None, "This Isn't So Bad", "Move any 2 zombies in play to a random location on the map.");
+		super(PossibleTarget.None, ECRB.get("ThisIsntSoBad.name"), ECRB.get("ThisIsntSoBad.description")); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 	
 	@Override
@@ -33,8 +34,8 @@ public class ThisIsntSoBad extends StateChangeCard
 			game.setTurn(getActivator().getNumber());
 			getActivator().setMovesRemaining(2);
 			this.doneSetUp = true;
-			System.out.println("Setting up Card.");
-			DialogHandler.showMessage(null, "Entering zombie teleportation.", getName(), JOptionPane.INFORMATION_MESSAGE);
+			System.out.println("Setting up Card."); //$NON-NLS-1$
+			DialogHandler.showMessage(null, "Entering zombie teleportation.", getName(), JOptionPane.INFORMATION_MESSAGE); //$NON-NLS-1$
 			return 42;
 		}
 		else if (num == 1)

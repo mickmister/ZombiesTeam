@@ -776,26 +776,26 @@ public class EventCardTest
 		map.setTempPos(new Point(4, 5));
 		map.placeTempTile();
 		map.setTempTile(tile2);
-		map.setTempPos(new Point (6, 5));
+		map.setTempPos(new Point(6, 5));
 		map.placeTempTile();
 		card.behavior(0);
 		int numZombies = getNumZombies(map);
-		assertEquals(10, numZombies);		
+		assertEquals(10, numZombies);
 	}
 	
 	private int getNumZombies(main.Map map)
-	{	
+	{
 		int numZombies = 0;
-		for(int tileY = 0; tileY < 11; tileY++)
+		for (int tileY = 0; tileY < 11; tileY++)
 		{
-			for(int tileX = 0; tileX < 11; tileX++)
+			for (int tileX = 0; tileX < 11; tileX++)
 			{
-				for(int cellY = 0; cellY < 3; cellY++)
+				for (int cellY = 0; cellY < 3; cellY++)
 				{
-					for(int cellX = 0; cellX < 3; cellX++)
+					for (int cellX = 0; cellX < 3; cellX++)
 					{
 						TileCell cell = map.getMapTile(tileY, tileX).getCell(cellY, cellX);
-						if(cell.hasZombie())
+						if (cell.hasZombie())
 						{
 							numZombies++;
 						}
@@ -820,7 +820,7 @@ public class EventCardTest
 		map.setTempPos(new Point(4, 5));
 		map.placeTempTile();
 		map.setTempTile(tile2);
-		map.setTempPos(new Point (6, 5));
+		map.setTempPos(new Point(6, 5));
 		map.placeTempTile();
 		card.behavior(0);
 		int numZombies = getNumZombies(map);

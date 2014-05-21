@@ -89,7 +89,7 @@ public abstract class EventCard
 		}
 		else
 		{
-			throw new IllegalArgumentException("Cannot check correct building on EventCard of type: " + this.getClass());
+			throw new IllegalArgumentException("Cannot check correct building on EventCard of type: " + this.getClass()); //$NON-NLS-1$
 		}
 		MapTile tile = GameHandler.instance.getMap().getMapTile(player.getTileLocation().y, player.getTileLocation().x);
 		SpecialNames currentBuilding = tile.getSpecialName();

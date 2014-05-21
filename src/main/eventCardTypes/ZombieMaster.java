@@ -1,6 +1,7 @@
 package main.eventCardTypes;
 
 import gui.DialogHandler;
+import internationalization.ECRB;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,12 +16,12 @@ import main.eventCardParents.SingleUseCard;
 
 public class ZombieMaster extends SingleUseCard implements InstantUseCard
 {
-
-	public ZombieMaster() 
+	
+	public ZombieMaster()
 	{
-		super(PossibleTarget.Self, "Zombie Master", "Place 5 zombies on any legal spaces in town not occupied by a player.");		
+		super(PossibleTarget.Self, ECRB.get("ZombieMaster.name"), ECRB.get("ZombieMaster.description")); //$NON-NLS-1$ //$NON-NLS-2$
 	}
-
+	
 	@Override
 	public int behavior(int num)
 	{
@@ -28,15 +29,16 @@ public class ZombieMaster extends SingleUseCard implements InstantUseCard
 		ArrayList<TileCell> cells = map.getNonZombiedCells(true);
 		Collections.shuffle(cells);
 		int i;
-		for(i = 0; i < cells.size(); i++)
+		for (i = 0; i < cells.size(); i++)
 		{
 			cells.get(i).setZombie(true);
-			if(i == 4)
+			if (i == 4)
 			{
 				break;
 			}
 		}
-		DialogHandler.showMessage(null, "You placed " + (i + 1) + " zombies on the board where there are no players!", getName(), JOptionPane.INFORMATION_MESSAGE);
+		DialogHandler.showMessage(null, ECRB.get("ZombieMaster.message_1") + (i + 1) + ECRB.get("ZombieMaster.message_2"), getName(), //$NON-NLS-1$ //$NON-NLS-2$
+				JOptionPane.INFORMATION_MESSAGE);
 		return 1;
 	}
 }
