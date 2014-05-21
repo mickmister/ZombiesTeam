@@ -14,13 +14,10 @@ import main.Player;
 import main.eventCardParents.CustomUseDiscardable;
 import main.eventCardParents.EventCard;
 import main.eventCardParents.EventCard.PossibleTarget;
+import main.eventCardParents.InstantUseCard;
 import main.eventCardParents.PlayUntilRevokedCard;
 import main.eventCardParents.SingleUseDiscardable;
-import main.eventCardTypes.BadSenseOfDirection;
-import main.eventCardTypes.ButterFingers;
-import main.eventCardTypes.Claustrophobia;
 import main.eventCardTypes.CouldntGetAnyWorse;
-import main.eventCardTypes.DontThinkTheyreDead;
 import main.eventCardTypes.SlightMiscalculation;
 
 public class EventCardButton extends JButton implements DataListener, ActionListener
@@ -82,7 +79,10 @@ public class EventCardButton extends JButton implements DataListener, ActionList
 				GameHandler.instance.getEventDeck().addActiveCard(card);
 				player.setCardPlayed(true);
 				
-				activateImmediateCards(card, player);
+				if (card instanceof InstantUseCard)
+				{
+					GameHandler.instance.getEventDeck().doCardAction(card.getTargetPlayer(), card.getClass(), 0);
+				}
 				GameHandler.instance.fireDataChangedEvent(null);
 			}
 		}
@@ -127,14 +127,6 @@ public class EventCardButton extends JButton implements DataListener, ActionList
 			}
 		}
 		return true;
-	}
-	
-	private void activateImmediateCards(EventCard card, Player player)
-	{
-		GameHandler.instance.getEventDeck().doCardAction(card.getTargetPlayer(), BadSenseOfDirection.class, player.getNumber());
-		GameHandler.instance.getEventDeck().doCardAction(card.getTargetPlayer(), ButterFingers.class, player.getNumber());
-		GameHandler.instance.getEventDeck().doCardAction(card.getTargetPlayer(), DontThinkTheyreDead.class, player.getNumber());
-		GameHandler.instance.getEventDeck().doCardAction(card.getTargetPlayer(), Claustrophobia.class, 0);
 	}
 	
 	private int promptUserForTarget(Player player)
