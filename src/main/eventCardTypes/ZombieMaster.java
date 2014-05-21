@@ -10,9 +10,10 @@ import javax.swing.JOptionPane;
 import main.GameHandler;
 import main.Map;
 import main.TileCell;
+import main.eventCardParents.InstantUseCard;
 import main.eventCardParents.SingleUseCard;
 
-public class ZombieMaster extends SingleUseCard
+public class ZombieMaster extends SingleUseCard implements InstantUseCard
 {
 
 	public ZombieMaster() 
