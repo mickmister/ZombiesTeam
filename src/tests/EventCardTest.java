@@ -45,6 +45,8 @@ import main.eventCardTypes.Shotgun;
 import main.eventCardTypes.Skateboard;
 import main.eventCardTypes.SlightMiscalculation;
 import main.eventCardTypes.UntiedShoe;
+import main.eventCardTypes.WereScrewed;
+import main.eventCardTypes.ZombieMaster;
 
 import org.junit.Test;
 
@@ -758,6 +760,71 @@ public class EventCardTest
 			}
 		}
 		assertEquals(initialZombieCount * 2, zombieCount);
-		
+	}
+	
+	@Test
+	public void testWereScrewed()
+	{
+		new GameHandler(2);
+		Map map = GameHandler.instance.getMap();
+		Player player = GameHandler.instance.getPlayer(0);
+		WereScrewed card = new WereScrewed();
+		card.setTargetPlayer(player);
+		MapTile tile1 = new MapTile(Shape.quad);
+		MapTile tile2 = new MapTile(Shape.quad);
+		map.setTempTile(tile1);
+		map.setTempPos(new Point(4, 5));
+		map.placeTempTile();
+		map.setTempTile(tile2);
+		map.setTempPos(new Point (6, 5));
+		map.placeTempTile();
+		card.behavior(0);
+		int numZombies = getNumZombies(map);
+		assertEquals(10, numZombies);		
+	}
+	
+	private int getNumZombies(main.Map map)
+	{	
+		int numZombies = 0;
+		for(int tileY = 0; tileY < 11; tileY++)
+		{
+			for(int tileX = 0; tileX < 11; tileX++)
+			{
+				for(int cellY = 0; cellY < 3; cellY++)
+				{
+					for(int cellX = 0; cellX < 3; cellX++)
+					{
+						TileCell cell = map.getMapTile(tileY, tileX).getCell(cellY, cellX);
+						if(cell.hasZombie())
+						{
+							numZombies++;
+						}
+					}
+				}
+			}
+		}
+		return numZombies;
+	}
+	
+	@Test
+	public void testZombieMaster()
+	{
+		new GameHandler(2);
+		Map map = GameHandler.instance.getMap();
+		Player player = GameHandler.instance.getPlayer(0);
+		ZombieMaster card = new ZombieMaster();
+		card.setTargetPlayer(player);
+		MapTile tile1 = new MapTile(Shape.quad);
+		MapTile tile2 = new MapTile(Shape.quad);
+		map.setTempTile(tile1);
+		map.setTempPos(new Point(4, 5));
+		map.placeTempTile();
+		map.setTempTile(tile2);
+		map.setTempPos(new Point (6, 5));
+		map.placeTempTile();
+		card.behavior(0);
+		int numZombies = getNumZombies(map);
+		assertEquals(5, numZombies);
+		assertFalse(map.getMapTile(5, 5).getCell(1, 1).hasZombie());
 	}
 }
