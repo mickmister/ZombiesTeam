@@ -13,6 +13,8 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
@@ -26,12 +28,11 @@ import main.MapTile;
 import main.Player;
 import main.eventCardTypes.ThisIsntSoBad;
 
-public class MapView extends JPanel implements Runnable, KeyListener
+public class MapView extends JPanel implements Runnable, KeyListener, ComponentListener
 {
 	private final int SIZE = 11;
 	private BufferedImage image;
 	private Graphics2D graphics;
-	private boolean hasBeenCentered;
 	
 	public MapView()
 	{
@@ -42,6 +43,7 @@ public class MapView extends JPanel implements Runnable, KeyListener
 		setPreferredSize(new Dimension(240 * 11, 240 * 11));
 		setFocusable(true);
 		addKeyListener(this);
+		addComponentListener(this);
 		
 		Thread thread = new Thread(this);
 		thread.start();
@@ -52,11 +54,6 @@ public class MapView extends JPanel implements Runnable, KeyListener
 	{
 		requestFocusInWindow();
 		checkScrollPane();
-		if (!this.hasBeenCentered)
-		{
-			this.hasBeenCentered = true;
-			centerScrollPane();
-		}
 		
 		this.graphics.setFont(new Font("Segoe UI", Font.PLAIN, 13)); //$NON-NLS-1$
 		this.graphics.drawImage(ImageManager.DIRT_TEXTURE, 0, 0, null);
@@ -338,7 +335,6 @@ public class MapView extends JPanel implements Runnable, KeyListener
 				}
 				break;
 		}
-		
 	}
 	
 	@Override
@@ -366,5 +362,26 @@ public class MapView extends JPanel implements Runnable, KeyListener
 			default:
 				return new Point(old.x, old.y);
 		}
+	}
+	
+	@Override
+	public void componentResized(ComponentEvent e)
+	{
+		centerScrollPane();
+	}
+	
+	@Override
+	public void componentMoved(ComponentEvent e)
+	{
+	}
+	
+	@Override
+	public void componentShown(ComponentEvent e)
+	{
+	}
+	
+	@Override
+	public void componentHidden(ComponentEvent e)
+	{
 	}
 }
