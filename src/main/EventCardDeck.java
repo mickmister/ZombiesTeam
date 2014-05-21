@@ -6,8 +6,6 @@ import java.util.Collections;
 import main.eventCardParents.EventCard;
 import main.eventCardParents.SingleUseDiscardable;
 import main.eventCardParents.UseForRoundCard;
-import main.eventCardTypes.BrainCramp;
-import main.eventCardTypes.ButterFingers;
 import main.eventCardTypes.ThisIsntSoBad;
 
 public class EventCardDeck

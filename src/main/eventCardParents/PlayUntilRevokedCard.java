@@ -23,6 +23,6 @@ public abstract class PlayUntilRevokedCard extends EventCard
 	@Override
 	public void checkRemove()
 	{
-		// stays in play
+		// Stays in play, do nothing.
 	}
 }

@@ -13,23 +13,23 @@ import main.eventCardParents.StateChangeCard;
 
 public class ThisIsntSoBad extends StateChangeCard
 {
-
+	
 	private boolean doneSetUp = false;
 	
 	public ThisIsntSoBad()
 	{
 		super(PossibleTarget.None, "This Isn't So Bad", "Move any 2 zombies in play to a random location on the map.");
 	}
-
+	
 	@Override
 	public int behavior(int num)
 	{
 		GameHandler game = GameHandler.instance;
-		//Set up
+		// Set up
 		if (num == 0)
 		{
 			game.setGameState(GameState.zombieMovement);
-			this.setTurn(game.getTurn());
+			setTurn(game.getTurn());
 			game.setTurn(getActivator().getNumber());
 			getActivator().setMovesRemaining(2);
 			this.doneSetUp = true;
@@ -71,7 +71,7 @@ public class ThisIsntSoBad extends StateChangeCard
 		else
 		{
 			game.setGameState(GameState.tilePlacement);
-			game.setTurn(this.getTurn());
+			game.setTurn(getTurn());
 			return 42;
 		}
 	}

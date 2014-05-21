@@ -1,14 +1,15 @@
 package tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.awt.Point;
 
 import main.GameHandler;
 import main.MapTile;
-import main.Player;
 import main.MapTile.Shape;
 import main.MapTileDeck.SpecialNames;
+import main.Player;
 import main.eventCardParents.EventCard;
 import main.eventCardTypes.AdrenalineRush;
 import main.eventCardTypes.FireAxe;
@@ -32,11 +33,13 @@ public class EventCardParentsTest
 		player.teleport(new Point(5, 4), new Point(1, 2)); // Should be outside of the Fire Station.
 		assertEquals(false, card.checkCorrectBuilding(player));
 		
-		player.teleport(new Point(5, 4), new Point(1, 1)); // Should be the door of the Fire Station.
+		player.teleport(new Point(5, 4), new Point(1, 1)); // Should be the door of the Fire
+															// Station.
 		assertEquals(true, card.checkCorrectBuilding(player));
 		player.teleport(new Point(5, 4), new Point(0, 0)); // Should be inside of the Fire Station.
 		assertEquals(true, card.checkCorrectBuilding(player));
 	}
+	
 	@Test
 	public void testInvalidCheckCorrectBuilding()
 	{

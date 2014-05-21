@@ -8,7 +8,6 @@ import main.eventCardParents.SingleUseCard;
 
 public class DontThinkTheyreDead extends SingleUseCard
 {
-	
 	public DontThinkTheyreDead()
 	{
 		super(PossibleTarget.Pick, "I Don't Think They're Dead",
@@ -40,8 +39,7 @@ public class DontThinkTheyreDead extends SingleUseCard
 				if (roll1 <= 3)
 				{
 					int diff = 4 - roll1;
-
-
+					
 					if (getTargetPlayer().getBulletTokens() >= diff)
 					{
 						for (int i = 0; i < diff; i++)
@@ -57,8 +55,7 @@ public class DontThinkTheyreDead extends SingleUseCard
 				if (roll2 <= 3)
 				{
 					int diff = 4 - roll2;
-
-
+					
 					if (getTargetPlayer().getBulletTokens() >= diff)
 					{
 						for (int i = 0; i < diff; i++)
@@ -84,5 +81,4 @@ public class DontThinkTheyreDead extends SingleUseCard
 		}
 		return roll1 + (roll2 << 16);
 	}
-	
 }

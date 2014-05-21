@@ -4,7 +4,6 @@ import main.GameHandler;
 
 public abstract class SingleUseCard extends EventCard
 {
-	
 	public SingleUseCard(PossibleTarget posTar, String name, String description)
 	{
 		super(posTar, name, description);
@@ -18,5 +17,4 @@ public abstract class SingleUseCard extends EventCard
 	{
 		GameHandler.instance.getEventDeck().removeActiveCard(this);
 	}
-	
 }

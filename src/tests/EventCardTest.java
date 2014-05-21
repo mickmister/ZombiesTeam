@@ -646,7 +646,7 @@ public class EventCardTest
 				assertEquals(lifeTokens, card.getTargetPlayer().getLifeTokens());
 				assertEquals(numZombies, card.getTargetPlayer().getZombiesCaptured());
 			}
-		}		
+		}
 		DialogHandler.defaultReturn = JOptionPane.NO_OPTION;
 		for (int i = 0; i < 1000; i++)
 		{
@@ -662,14 +662,14 @@ public class EventCardTest
 			int rolls = card.behavior(0);
 			int roll1 = rolls % (2 << 15);
 			int roll2 = rolls >> 16;
-			if(roll1 <= 3 || roll2 <= 3)
+			if (roll1 <= 3 || roll2 <= 3)
 			{
 				assertEquals(numZombies - 2, card.getTargetPlayer().getZombiesCaptured());
 			}
 			else
 			{
 				assertEquals(numZombies, card.getTargetPlayer().getZombiesCaptured());
-			}			
+			}
 		}
 	}
 	
@@ -680,34 +680,34 @@ public class EventCardTest
 		new GameHandler(2);
 		MapTile tile = getGenericBuilding();
 		GameHandler.instance.getMap().setTempTile(tile);
-		GameHandler.instance.getMap().setTempPos(new Point(4,5));
+		GameHandler.instance.getMap().setTempPos(new Point(4, 5));
 		GameHandler.instance.getMap().placeTempTile();
 		CouldntGetAnyWorse card = new CouldntGetAnyWorse();
 		card.setTargetPlayer(GameHandler.instance.getPlayer(0));
 		card.behavior(0);
-		for(int y = 0; y < 3; y++)
+		for (int y = 0; y < 3; y++)
 		{
-			for(int x = 0; x < 3; x++)
+			for (int x = 0; x < 3; x++)
 			{
 				TileCell cell = tile.getCell(y, x);
-				if(cell.isDoor() || cell.isBuilding())
+				if (cell.isDoor() || cell.isBuilding())
 				{
 					assertTrue(cell.hasZombie());
 				}
 			}
-		}		
+		}
 	}
-
-	private MapTile getGenericBuilding() 
+	
+	private MapTile getGenericBuilding()
 	{
 		MapTile tile = new MapTile(Shape.special, SpecialNames.ArmySurplus, "2 3 2 1 1 1 0 0 0" + " " + "2 0 2");
-		for(int y = 0; y < 3; y++)
+		for (int y = 0; y < 3; y++)
 		{
-			for(int x = 0; x < 3; x++)
+			for (int x = 0; x < 3; x++)
 			{
 				tile.getCell(y, x).setZombie(false);
 			}
-		}		
+		}
 		return tile;
 	}
 	
@@ -723,39 +723,39 @@ public class EventCardTest
 		int initialZombieCount = 3;
 		
 		GameHandler.instance.getMap().setTempTile(tile);
-		GameHandler.instance.getMap().setTempPos(new Point(4,5));
+		GameHandler.instance.getMap().setTempPos(new Point(4, 5));
 		GameHandler.instance.getMap().placeTempTile();
 		SlightMiscalculation card = new SlightMiscalculation();
 		card.setTargetPlayer(GameHandler.instance.getPlayer(0));
 		card.behavior(0);
 		
 		int zombieCount = 0;
-		for(int y = 0; y < 3; y++)
+		for (int y = 0; y < 3; y++)
 		{
-			for(int x = 0; x < 3; x++)
+			for (int x = 0; x < 3; x++)
 			{
-				if(tile.getCell(y, x).hasZombie())
+				if (tile.getCell(y, x).hasZombie())
 				{
 					zombieCount++;
 				}
 			}
 		}
-		assertEquals(initialZombieCount * 2, zombieCount);		
-
+		assertEquals(initialZombieCount * 2, zombieCount);
+		
 		tile.getCell(1, 0).setZombie(false);
 		
 		card.behavior(0);
 		zombieCount = 0;
-		for(int y = 0; y < 3; y++)
+		for (int y = 0; y < 3; y++)
 		{
-			for(int x = 0; x < 3; x++)
+			for (int x = 0; x < 3; x++)
 			{
-				if(tile.getCell(y, x).hasZombie())
+				if (tile.getCell(y, x).hasZombie())
 				{
 					zombieCount++;
 				}
 			}
-		}		
+		}
 		assertEquals(initialZombieCount * 2, zombieCount);
 		
 	}

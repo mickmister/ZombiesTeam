@@ -8,7 +8,6 @@ import main.eventCardParents.SingleUseCard;
 
 public class CouldntGetAnyWorse extends SingleUseCard
 {
-	
 	public CouldntGetAnyWorse()
 	{
 		super(PossibleTarget.Self, ECRB.get("CouldntGetAnyWorse.name"), ECRB.get("CouldntGetAnyWorse.description")); //$NON-NLS-1$ //$NON-NLS-2$
@@ -31,5 +30,4 @@ public class CouldntGetAnyWorse extends SingleUseCard
 		}
 		return 1;
 	}
-	
 }

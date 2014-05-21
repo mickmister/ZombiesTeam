@@ -340,7 +340,7 @@ public class MapView extends JPanel implements Runnable, KeyListener
 		}
 		
 	}
-
+	
 	@Override
 	public void keyReleased(KeyEvent e)
 	{
