@@ -15,6 +15,7 @@ import main.eventCardTypes.GainTwoHealthNoMove;
 import main.eventCardTypes.HystericalParalysis;
 import main.eventCardTypes.KeysAreStillIn;
 import main.eventCardTypes.ThisIsntSoBad;
+import main.eventCardTypes.WhereDidEverybodyGo;
 
 public class GameHandler
 {
@@ -150,8 +151,16 @@ public class GameHandler
 		this.currentState = GameState.tilePlacement;
 		this.turn = (this.turn + 1) % this.numberOfPlayers;
 		this.players.get(this.turn).setCardPlayed(false);
-		this.eventDeck.doCardAction(this.players.get(this.turn), HystericalParalysis.class, 0);
-		this.eventDeck.doCardAction(null, ThisIsntSoBad.class, 0);
+		if (this.eventDeck.doCardAction(this.players.get(this.turn), HystericalParalysis.class, 0) == 0)
+		{
+			if (this.eventDeck.doCardAction(null, ThisIsntSoBad.class, 0) == 0)
+			{
+				for (int i = 0; i < this.numberOfPlayers; i += 1)
+				{
+					this.eventDeck.doCardAction(this.players.get(i), WhereDidEverybodyGo.class, 0);
+				}
+			}
+		}
 	}
 	
 	public void setTurn(int turn)

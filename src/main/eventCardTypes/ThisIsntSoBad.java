@@ -44,7 +44,7 @@ public class ThisIsntSoBad extends StateChangeCard
 	
 	private int setUp()
 	{
-		DialogHandler.showMessage(null, "Setting up ThisIsntSoBad card.", getName(), JOptionPane.INFORMATION_MESSAGE); //$NON-NLS-1$
+		DialogHandler.showMessage(null, "It is now player " + (getActivator().getNumber() + 1) + "'s turn to move 2 zombies.", getName(), JOptionPane.INFORMATION_MESSAGE);
 		GameHandler.instance.setGameState(GameState.zombieMovement);
 		setTurn(GameHandler.instance.getTurn());
 		GameHandler.instance.setTurn(getActivator().getNumber());
@@ -53,10 +53,6 @@ public class ThisIsntSoBad extends StateChangeCard
 		GameHandler.instance.getGuiStateData().mapTileDeckButtonEnabled = true;
 		GameHandler.instance.getGuiStateData().rollDiceButtonEnabled = false;
 		GameHandler.instance.fireDataChangedEvent(null);
-		DialogHandler
-				.showMessage(
-						null,
-						"Turn: " + GameHandler.instance.getTurn() + "\nState: " + GameHandler.instance.getCurrentState() + "\nMoves: " + GameHandler.instance.getPlayer(GameHandler.instance.getTurn()).getMovesRemaining(), getName(), JOptionPane.INFORMATION_MESSAGE); //$NON-NLS-1$
 		this.doneSetUp = true;
 		return 42;
 	}
@@ -65,16 +61,16 @@ public class ThisIsntSoBad extends StateChangeCard
 	{
 		if (this.doneSetUp)
 		{
-			DialogHandler.showMessage(null, "Has set up, returning 42.", getName(), JOptionPane.INFORMATION_MESSAGE); //$NON-NLS-1$
 			return 42;
 		}
-		DialogHandler.showMessage(null, "Has NOT set up, returning 0.", getName(), JOptionPane.INFORMATION_MESSAGE); //$NON-NLS-1$
-		return 0;
+		else
+		{
+			return 0;
+		}
 	}
 	
 	private int teleportZombie()
 	{
-		DialogHandler.showMessage(null, "Teleporting zombies!", getName(), JOptionPane.INFORMATION_MESSAGE); //$NON-NLS-1$
 		Point tileLocation = GameHandler.instance.getMap().getTileFromIndex();
 		Point cellLocation = GameHandler.instance.getMap().getCellFromIndex();
 		
@@ -99,7 +95,7 @@ public class ThisIsntSoBad extends StateChangeCard
 	
 	private int restore()
 	{
-		DialogHandler.showMessage(null, "Restoring game state.", getName(), JOptionPane.INFORMATION_MESSAGE); //$NON-NLS-1$
+		DialogHandler.showMessage(null, "Returning to the normal player's turn.", getName(), JOptionPane.INFORMATION_MESSAGE);
 		GameHandler.instance.getMap().setZombieMovementIndex(-1);
 		GameHandler.instance.getGuiStateData().mapTileDeckButtonEnabled = true;
 		GameHandler.instance.getGuiStateData().rollDiceButtonEnabled = false;
