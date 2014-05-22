@@ -310,6 +310,17 @@ public class MapView extends JPanel implements Runnable, KeyListener, ComponentL
 		}
 		if (e.getKeyCode() == KeyEvent.VK_ENTER)
 		{
+			// Test for WhereDidEverybodyGo card.
+			for (int i = 0; i < GameHandler.instance.getNumberOfPlayers(); i += 1)
+			{
+				if (GameHandler.instance.getEventDeck().doCardAction(GameHandler.instance.getPlayer(i), WhereDidEverybodyGo.class, 1) == 42)
+				{
+					if (GameHandler.instance.getEventDeck().doCardAction(GameHandler.instance.getPlayer(i), WhereDidEverybodyGo.class, 2) == 42)
+					{
+						return;
+					}
+				}
+			}
 			GameHandler.instance.nextGameState();
 		}
 	}
