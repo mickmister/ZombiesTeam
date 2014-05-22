@@ -31,6 +31,7 @@ import main.eventCardTypes.SlightMiscalculation;
 import main.eventCardTypes.ThisIsntSoBad;
 import main.eventCardTypes.UntiedShoe;
 import main.eventCardTypes.WereScrewed;
+import main.eventCardTypes.WhereDidEverybodyGo;
 import main.eventCardTypes.ZombieMaster;
 
 public class EventCardDeck
@@ -45,7 +46,7 @@ public class EventCardDeck
 		this.activeCards = new ArrayList<EventCard>();
 		this.discardedCards = new ArrayList<EventCard>();
 		
-		for (int i = 0; i < 10; i++)
+		for (int i = 0; i < 100; i++)
 		{
 			/*this.deck.add(new AdrenalineRush());
 			this.deck.add(new AllTheMarbles());
@@ -71,8 +72,9 @@ public class EventCardDeck
 			this.deck.add(new SlightMiscalculation());*/
 			this.deck.add(new ThisIsntSoBad());
 			/*this.deck.add(new UntiedShoe());
-			this.deck.add(new WereScrewed());
-			this.deck.add(new ZombieMaster());*/
+			this.deck.add(new WereScrewed());*/
+			this.deck.add(new WhereDidEverybodyGo());
+			//this.deck.add(new ZombieMaster());
 		}
 		
 		Collections.shuffle(this.deck);

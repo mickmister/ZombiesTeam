@@ -157,7 +157,10 @@ public class GameHandler
 			{
 				for (int i = 0; i < this.numberOfPlayers; i += 1)
 				{
-					this.eventDeck.doCardAction(this.players.get(i), WhereDidEverybodyGo.class, 0);
+					if (this.eventDeck.doCardAction(this.players.get(i), WhereDidEverybodyGo.class, 0) == 42)
+					{
+						break;
+					}
 				}
 			}
 		}
@@ -284,6 +287,14 @@ public class GameHandler
 					player.setMovesRemaining(modifiedMoves);
 					if (player.getMovesRemaining() < 1)
 					{
+						// Test for WhereDidEverybodyGo card.
+						for (int i = 0; i < this.numberOfPlayers; i += 1)
+						{
+							if (this.eventDeck.doCardAction(this.players.get(i), WhereDidEverybodyGo.class, 2) == 42)
+							{
+								return;
+							}
+						}
 						// Skip from PlayerMovement -> ZombieMovementDieRoll.
 						GameHandler.instance.nextGameState();
 					}
@@ -294,6 +305,14 @@ public class GameHandler
 				this.guiStateData.rollDiceButtonEnabled = false;
 				if (player.getMovesRemaining() < 1)
 				{
+					// Test for WhereDidEverybodyGo card.
+					for (int i = 0; i < this.numberOfPlayers; i += 1)
+					{
+						if (this.eventDeck.doCardAction(this.players.get(i), WhereDidEverybodyGo.class, 2) == 42)
+						{
+							return;
+						}
+					}
 					// Skip from PlayerMovement -> ZombieMovementDieRoll.
 					GameHandler.instance.nextGameState();
 				}

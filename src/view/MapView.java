@@ -27,6 +27,7 @@ import main.GameHandler;
 import main.MapTile;
 import main.Player;
 import main.eventCardTypes.ThisIsntSoBad;
+import main.eventCardTypes.WhereDidEverybodyGo;
 
 public class MapView extends JPanel implements Runnable, KeyListener, ComponentListener
 {
@@ -147,9 +148,18 @@ public class MapView extends JPanel implements Runnable, KeyListener, ComponentL
 	@Override
 	public void keyPressed(KeyEvent e)
 	{
+		boolean skip = false;
+		for (int i = 0; i < GameHandler.instance.getNumberOfPlayers(); i += 1)
+		{
+			if (GameHandler.instance.getEventDeck().doCardAction(GameHandler.instance.getPlayer(i), WhereDidEverybodyGo.class, 1) == 42)
+			{
+				skip = true;
+			}
+		}
+		
 		Window window = (Window) getTopLevelAncestor();
 		Player player = window.getPlayer();
-		if (player.isPlayersTurn())
+		if (player.isPlayersTurn() ^ skip)
 		{
 			switch (GameHandler.instance.getCurrentState())
 			{
@@ -272,6 +282,16 @@ public class MapView extends JPanel implements Runnable, KeyListener, ComponentL
 	{
 		Window window = (Window) getTopLevelAncestor();
 		Player player = window.getPlayer();
+		
+		for (int i = 0; i < GameHandler.instance.getNumberOfPlayers(); i += 1)
+		{
+			if (GameHandler.instance.getEventDeck().doCardAction(GameHandler.instance.getPlayer(i), WhereDidEverybodyGo.class, 1) == 42)
+			{
+				player = GameHandler.instance.getPlayer(GameHandler.instance.getTurn());
+				break;
+			}
+		}
+		
 		if (e.getKeyCode() == KeyEvent.VK_LEFT)
 		{
 			player.tryMoveLeft();
@@ -298,7 +318,7 @@ public class MapView extends JPanel implements Runnable, KeyListener, ComponentL
 	{
 		if (GameHandler.instance.getEventDeck().doCardAction(null, ThisIsntSoBad.class, 1) == 42)
 		{
-			handleIsntSoBadMovement(e);
+			handleThisIsntSoBadMovement(e);
 			return;
 		}
 		switch (e.getKeyCode())
@@ -318,7 +338,7 @@ public class MapView extends JPanel implements Runnable, KeyListener, ComponentL
 		}
 	}
 	
-	private void handleIsntSoBadMovement(KeyEvent e)
+	private void handleThisIsntSoBadMovement(KeyEvent e)
 	{
 		switch (e.getKeyCode())
 		{

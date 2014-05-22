@@ -14,11 +14,12 @@ import main.eventCardParents.StateChangeCard;
 
 public class ThisIsntSoBad extends StateChangeCard
 {
-	private boolean doneSetUp = false;
+	private boolean isSetUp;
 	
 	public ThisIsntSoBad()
 	{
 		super(PossibleTarget.None, ECRB.get("ThisIsntSoBad.name"), ECRB.get("ThisIsntSoBad.description")); //$NON-NLS-1$ //$NON-NLS-2$
+		this.isSetUp = false;
 	}
 	
 	@Override
@@ -45,21 +46,21 @@ public class ThisIsntSoBad extends StateChangeCard
 	private int setUp()
 	{
 		DialogHandler.showMessage(null, "It is now player " + (getActivator().getNumber() + 1) + "'s turn to move 2 zombies.", getName(), JOptionPane.INFORMATION_MESSAGE);
-		GameHandler.instance.setGameState(GameState.zombieMovement);
 		setTurn(GameHandler.instance.getTurn());
-		GameHandler.instance.setTurn(getActivator().getNumber());
 		getActivator().setMovesRemaining(2);
+		GameHandler.instance.setGameState(GameState.zombieMovement);
+		GameHandler.instance.setTurn(getActivator().getNumber());
 		GameHandler.instance.getMap().selectNextZombie();
-		GameHandler.instance.getGuiStateData().mapTileDeckButtonEnabled = true;
+		GameHandler.instance.getGuiStateData().mapTileDeckButtonEnabled = false;
 		GameHandler.instance.getGuiStateData().rollDiceButtonEnabled = false;
 		GameHandler.instance.fireDataChangedEvent(null);
-		this.doneSetUp = true;
+		this.isSetUp = true;
 		return 42;
 	}
 	
 	private int isActive()
 	{
-		if (this.doneSetUp)
+		if (this.isSetUp)
 		{
 			return 42;
 		}
