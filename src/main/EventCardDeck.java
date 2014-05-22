@@ -45,9 +45,9 @@ public class EventCardDeck
 		this.activeCards = new ArrayList<EventCard>();
 		this.discardedCards = new ArrayList<EventCard>();
 		
-		for (int i = 0; i < 200; i++)
+		for (int i = 0; i < 10; i++)
 		{
-			this.deck.add(new AdrenalineRush());
+			/*this.deck.add(new AdrenalineRush());
 			this.deck.add(new AllTheMarbles());
 			this.deck.add(new AlternateFoodSource());
 			this.deck.add(new BadSenseOfDirection());
@@ -68,11 +68,11 @@ public class EventCardDeck
 			this.deck.add(new MolotovCocktail());
 			this.deck.add(new Shotgun());
 			this.deck.add(new Skateboard());
-			this.deck.add(new SlightMiscalculation());
-//			this.deck.add(new ThisIsntSoBad());
-			this.deck.add(new UntiedShoe());
+			this.deck.add(new SlightMiscalculation());*/
+			this.deck.add(new ThisIsntSoBad());
+			/*this.deck.add(new UntiedShoe());
 			this.deck.add(new WereScrewed());
-			this.deck.add(new ZombieMaster());
+			this.deck.add(new ZombieMaster());*/
 		}
 		
 		Collections.shuffle(this.deck);

@@ -24,62 +24,89 @@ public class ThisIsntSoBad extends StateChangeCard
 	@Override
 	public int behavior(int num)
 	{
-		GameHandler game = GameHandler.instance;
-		// Set up
 		if (num == 0)
 		{
-			DialogHandler.showMessage(null, "Setting up ThisIsntSoBad card.", getName(), JOptionPane.INFORMATION_MESSAGE); //$NON-NLS-1$
-			game.setGameState(GameState.zombieMovement);
-			setTurn(game.getTurn());
-			game.setTurn(getActivator().getNumber());
-			getActivator().setMovesRemaining(2);
-			DialogHandler
-					.showMessage(
-							null,
-							"Turn: " + game.getTurn() + "\nState: " + game.getCurrentState() + "\nMoves: " + game.getPlayer(game.getTurn()).getMovesRemaining(), getName(), JOptionPane.INFORMATION_MESSAGE); //$NON-NLS-1$
-			this.doneSetUp = true;
-			return 42;
+			return setUp();
 		}
 		else if (num == 1)
 		{
-			if (this.doneSetUp)
-			{
-				DialogHandler.showMessage(null, "Has set up, returning 42.", getName(), JOptionPane.INFORMATION_MESSAGE); //$NON-NLS-1$
-				return 42;
-			}
-			DialogHandler.showMessage(null, "Has NOT set up, returning 0.", getName(), JOptionPane.INFORMATION_MESSAGE); //$NON-NLS-1$
-			return 0;
+			return isActive();
 		}
 		else if (num == 2)
 		{
-			DialogHandler.showMessage(null, "Teleporting zombies!", getName(), JOptionPane.INFORMATION_MESSAGE); //$NON-NLS-1$
-			Point tileLocation = game.getMap().getTileFromIndex();
-			Point cellLocation = game.getMap().getCellFromIndex();
-			
-			TileCell currentCell = game.getMap().getMapTile(tileLocation.y, tileLocation.x).getCell(cellLocation.y, cellLocation.x);
-			currentCell.setZombie(false);
-			while (true)
-			{
-				int randomIndex = (int) (Math.random() * 10 * 10 * 3 * 3);
-				game.getMap().setZombieMovementIndex(randomIndex);
-				
-				Point newTileLocation = game.getMap().getTileFromIndex();
-				Point newCellLocation = game.getMap().getCellFromIndex();
-				
-				TileCell newCell = game.getMap().getMapTile(newTileLocation.y, newTileLocation.x).getCell(newCellLocation.y, newCellLocation.x);
-				if (!newCell.hasZombie() && newCell.isAccessible())
-				{
-					newCell.setZombie(true);
-					return 42;
-				}
-			}
+			return teleportZombie();
 		}
 		else
 		{
-			DialogHandler.showMessage(null, "Restoring game state.", getName(), JOptionPane.INFORMATION_MESSAGE); //$NON-NLS-1$
-			game.setGameState(GameState.tilePlacement);
-			game.setTurn(getTurn());
+			return restore();
+		}
+	}
+	
+	private int setUp()
+	{
+		DialogHandler.showMessage(null, "Setting up ThisIsntSoBad card.", getName(), JOptionPane.INFORMATION_MESSAGE); //$NON-NLS-1$
+		GameHandler.instance.setGameState(GameState.zombieMovement);
+		setTurn(GameHandler.instance.getTurn());
+		GameHandler.instance.setTurn(getActivator().getNumber());
+		getActivator().setMovesRemaining(2);
+		GameHandler.instance.getMap().selectNextZombie();
+		GameHandler.instance.getGuiStateData().mapTileDeckButtonEnabled = true;
+		GameHandler.instance.getGuiStateData().rollDiceButtonEnabled = false;
+		GameHandler.instance.fireDataChangedEvent(null);
+		DialogHandler
+				.showMessage(
+						null,
+						"Turn: " + GameHandler.instance.getTurn() + "\nState: " + GameHandler.instance.getCurrentState() + "\nMoves: " + GameHandler.instance.getPlayer(GameHandler.instance.getTurn()).getMovesRemaining(), getName(), JOptionPane.INFORMATION_MESSAGE); //$NON-NLS-1$
+		this.doneSetUp = true;
+		return 42;
+	}
+	
+	private int isActive()
+	{
+		if (this.doneSetUp)
+		{
+			DialogHandler.showMessage(null, "Has set up, returning 42.", getName(), JOptionPane.INFORMATION_MESSAGE); //$NON-NLS-1$
 			return 42;
 		}
+		DialogHandler.showMessage(null, "Has NOT set up, returning 0.", getName(), JOptionPane.INFORMATION_MESSAGE); //$NON-NLS-1$
+		return 0;
+	}
+	
+	private int teleportZombie()
+	{
+		DialogHandler.showMessage(null, "Teleporting zombies!", getName(), JOptionPane.INFORMATION_MESSAGE); //$NON-NLS-1$
+		Point tileLocation = GameHandler.instance.getMap().getTileFromIndex();
+		Point cellLocation = GameHandler.instance.getMap().getCellFromIndex();
+		
+		TileCell currentCell = GameHandler.instance.getMap().getMapTile(tileLocation.y, tileLocation.x).getCell(cellLocation.y, cellLocation.x);
+		currentCell.setZombie(false);
+		while (true)
+		{
+			int randomIndex = (int) (Math.random() * 10 * 10 * 3 * 3);
+			GameHandler.instance.getMap().setZombieMovementIndex(randomIndex);
+			
+			Point newTileLocation = GameHandler.instance.getMap().getTileFromIndex();
+			Point newCellLocation = GameHandler.instance.getMap().getCellFromIndex();
+			
+			TileCell newCell = GameHandler.instance.getMap().getMapTile(newTileLocation.y, newTileLocation.x).getCell(newCellLocation.y, newCellLocation.x);
+			if (!newCell.hasZombie() && newCell.isAccessible())
+			{
+				newCell.setZombie(true);
+				return 42;
+			}
+		}
+	}
+	
+	private int restore()
+	{
+		DialogHandler.showMessage(null, "Restoring game state.", getName(), JOptionPane.INFORMATION_MESSAGE); //$NON-NLS-1$
+		GameHandler.instance.getMap().setZombieMovementIndex(-1);
+		GameHandler.instance.getGuiStateData().mapTileDeckButtonEnabled = true;
+		GameHandler.instance.getGuiStateData().rollDiceButtonEnabled = false;
+		GameHandler.instance.setGameState(GameState.tilePlacement);
+		GameHandler.instance.setTurn(getTurn());
+		checkRemove();
+		GameHandler.instance.fireDataChangedEvent(null);
+		return 42;
 	}
 }
