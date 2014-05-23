@@ -1,6 +1,7 @@
 package main.eventCardTypes;
 
 import gui.DialogHandler;
+import internationalization.ECRB;
 
 import javax.swing.JOptionPane;
 
@@ -14,10 +15,10 @@ public class WhereDidEverybodyGo extends StateChangeCard
 	
 	public WhereDidEverybodyGo()
 	{
-		super(PossibleTarget.Pick, "Where Did Everybody Go?", "Play this card at any time to move target opponent 5 spaces.  All zombies encountered must be fought as normal.");
+		super(PossibleTarget.Pick, ECRB.get("WhereDidEverybodyGo.name"), ECRB.get("WhereDidEverybodyGo.description")); //$NON-NLS-1$ //$NON-NLS-2$
 		this.isSetUp = false;
 	}
-
+	
 	@Override
 	public int behavior(int num)
 	{
@@ -37,7 +38,10 @@ public class WhereDidEverybodyGo extends StateChangeCard
 	
 	private int setUp()
 	{
-		DialogHandler.showMessage(null, "It is now player " + (getActivator().getNumber() + 1) + "'s turn to move player " + (getTargetPlayer().getNumber() + 1) + " five spaces.", getName(), JOptionPane.INFORMATION_MESSAGE);
+		DialogHandler
+				.showMessage(
+						null,
+						ECRB.get("WhereDidEverybodyGo.message_1") + (getActivator().getNumber() + 1) + ECRB.get("WhereDidEverybodyGo.message_2") + (getTargetPlayer().getNumber() + 1) + ECRB.get("WhereDidEverybodyGo.message_3"), getName(), JOptionPane.INFORMATION_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		setTurn(GameHandler.instance.getTurn());
 		getTargetPlayer().setMovesRemaining(5);
 		GameHandler.instance.getGuiStateData().mapTileDeckButtonEnabled = false;
@@ -63,7 +67,7 @@ public class WhereDidEverybodyGo extends StateChangeCard
 	
 	private int restore()
 	{
-		DialogHandler.showMessage(null, "Returning to the normal player's turn.", getName(), JOptionPane.INFORMATION_MESSAGE);
+		DialogHandler.showMessage(null, ECRB.get("WhereDidEverybodyGo.message_4"), getName(), JOptionPane.INFORMATION_MESSAGE); //$NON-NLS-1$
 		GameHandler.instance.getGuiStateData().mapTileDeckButtonEnabled = true;
 		GameHandler.instance.getGuiStateData().rollDiceButtonEnabled = false;
 		GameHandler.instance.setGameState(GameState.tilePlacement);

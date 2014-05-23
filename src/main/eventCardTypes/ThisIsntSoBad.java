@@ -45,7 +45,10 @@ public class ThisIsntSoBad extends StateChangeCard
 	
 	private int setUp()
 	{
-		DialogHandler.showMessage(null, "It is now player " + (getActivator().getNumber() + 1) + "'s turn to move 2 zombies.", getName(), JOptionPane.INFORMATION_MESSAGE);
+		DialogHandler
+				.showMessage(
+						null,
+						ECRB.get("ThisIsntSoBad.message_1") + (getActivator().getNumber() + 1) + ECRB.get("ThisIsntSoBad.message_2"), getName(), JOptionPane.INFORMATION_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
 		setTurn(GameHandler.instance.getTurn());
 		getActivator().setMovesRemaining(2);
 		GameHandler.instance.setGameState(GameState.zombieMovement);
@@ -85,7 +88,8 @@ public class ThisIsntSoBad extends StateChangeCard
 			Point newTileLocation = GameHandler.instance.getMap().getTileFromIndex();
 			Point newCellLocation = GameHandler.instance.getMap().getCellFromIndex();
 			
-			TileCell newCell = GameHandler.instance.getMap().getMapTile(newTileLocation.y, newTileLocation.x).getCell(newCellLocation.y, newCellLocation.x);
+			TileCell newCell = GameHandler.instance.getMap().getMapTile(newTileLocation.y, newTileLocation.x)
+					.getCell(newCellLocation.y, newCellLocation.x);
 			if (!newCell.hasZombie() && newCell.isAccessible())
 			{
 				newCell.setZombie(true);
@@ -96,7 +100,7 @@ public class ThisIsntSoBad extends StateChangeCard
 	
 	private int restore()
 	{
-		DialogHandler.showMessage(null, "Returning to the normal player's turn.", getName(), JOptionPane.INFORMATION_MESSAGE);
+		DialogHandler.showMessage(null, ECRB.get("ThisIsntSoBad.message_3"), getName(), JOptionPane.INFORMATION_MESSAGE); //$NON-NLS-1$
 		GameHandler.instance.getMap().setZombieMovementIndex(-1);
 		GameHandler.instance.getGuiStateData().mapTileDeckButtonEnabled = true;
 		GameHandler.instance.getGuiStateData().rollDiceButtonEnabled = false;
