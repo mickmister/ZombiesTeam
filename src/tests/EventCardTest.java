@@ -44,8 +44,10 @@ import main.eventCardTypes.MolotovCocktail;
 import main.eventCardTypes.Shotgun;
 import main.eventCardTypes.Skateboard;
 import main.eventCardTypes.SlightMiscalculation;
+import main.eventCardTypes.ThisIsntSoBad;
 import main.eventCardTypes.UntiedShoe;
 import main.eventCardTypes.WereScrewed;
+import main.eventCardTypes.WhereDidEverybodyGo;
 import main.eventCardTypes.ZombieMaster;
 
 import org.junit.Test;
@@ -826,5 +828,51 @@ public class EventCardTest
 		int numZombies = getNumZombies(map);
 		assertEquals(5, numZombies);
 		assertFalse(map.getMapTile(5, 5).getCell(1, 1).hasZombie());
+	}
+	
+	@Test
+	public void testThisIsntSoBad()
+	{
+		new GameHandler(2);
+		Map map = GameHandler.instance.getMap();
+		Player player = GameHandler.instance.getPlayer(0);
+		ThisIsntSoBad card = new ThisIsntSoBad();
+		card.setActivator(player);
+		MapTile tile = new MapTile(Shape.quad);
+		map.setTempTile(tile);
+		map.setTempPos(new Point(4, 5));
+		map.placeTempTile();
+		map.getMapTile(4, 5).getCell(1,1).setZombie(true);
+		map.getMapTile(4, 5).getCell(0,1).setZombie(true);
+		
+		assertEquals(0, card.behavior(1));
+		assertEquals(42, card.behavior(0));
+		assertEquals(42, card.behavior(1));
+		map.setZombieMovementIndex(406);
+		assertEquals(42, card.behavior(2));
+		assertTrue(map.getMapTile(map.getTileFromIndex().y, 
+				map.getTileFromIndex().x).getCell(map.getCellFromIndex().y, 
+						map.getCellFromIndex().x).hasZombie());
+		map.setZombieMovementIndex(376);
+		assertEquals(42, card.behavior(2));
+		assertTrue(map.getMapTile(map.getTileFromIndex().y, 
+				map.getTileFromIndex().x).getCell(map.getCellFromIndex().y, 
+						map.getCellFromIndex().x).hasZombie());
+		card.behavior(3);
+		assertEquals(GameState.tilePlacement, GameHandler.instance.getCurrentState());
+	}
+	
+	@Test
+	public void testWhereDidEverybodyGo()
+	{
+		new GameHandler(2);
+		Map map = GameHandler.instance.getMap();
+		Player player = GameHandler.instance.getPlayer(0);
+		WhereDidEverybodyGo card = new WhereDidEverybodyGo();
+		card.setActivator(player);
+		card.setTargetPlayer(GameHandler.instance.getPlayer(1));
+		card.behavior(0);
+		card.behavior(1);
+		card.behavior(2);
 	}
 }
