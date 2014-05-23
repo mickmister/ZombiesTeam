@@ -842,22 +842,20 @@ public class EventCardTest
 		map.setTempTile(tile);
 		map.setTempPos(new Point(4, 5));
 		map.placeTempTile();
-		map.getMapTile(4, 5).getCell(1,1).setZombie(true);
-		map.getMapTile(4, 5).getCell(0,1).setZombie(true);
+		map.getMapTile(4, 5).getCell(1, 1).setZombie(true);
+		map.getMapTile(4, 5).getCell(0, 1).setZombie(true);
 		
 		assertEquals(0, card.behavior(1));
 		assertEquals(42, card.behavior(0));
 		assertEquals(42, card.behavior(1));
 		map.setZombieMovementIndex(406);
 		assertEquals(42, card.behavior(2));
-		assertTrue(map.getMapTile(map.getTileFromIndex().y, 
-				map.getTileFromIndex().x).getCell(map.getCellFromIndex().y, 
-						map.getCellFromIndex().x).hasZombie());
+		assertTrue(map.getMapTile(map.getTileFromIndex().y, map.getTileFromIndex().x).getCell(map.getCellFromIndex().y, map.getCellFromIndex().x)
+				.hasZombie());
 		map.setZombieMovementIndex(376);
 		assertEquals(42, card.behavior(2));
-		assertTrue(map.getMapTile(map.getTileFromIndex().y, 
-				map.getTileFromIndex().x).getCell(map.getCellFromIndex().y, 
-						map.getCellFromIndex().x).hasZombie());
+		assertTrue(map.getMapTile(map.getTileFromIndex().y, map.getTileFromIndex().x).getCell(map.getCellFromIndex().y, map.getCellFromIndex().x)
+				.hasZombie());
 		card.behavior(3);
 		assertEquals(GameState.tilePlacement, GameHandler.instance.getCurrentState());
 	}
